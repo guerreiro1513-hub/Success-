@@ -15,19 +15,36 @@ keyframe aprovado — assim o produto não muda de forma entre as cenas.
 Este parágrafo é **colado em todos os prompts, sem alteração**. É ele que impede a
 carne de virar outro produto entre as cenas.
 
-> ⚠️ Os campos entre `{{ }}` só podem ser preenchidos depois de assistir ao vídeo de
-> referência. Enquanto estiverem em branco, **nenhuma geração deve ser disparada** — gerar
-> com o produto errado desperdiça crédito e quebra a regra "não transforme o produto em outro produto".
+✅ **Preenchido** a partir de `referencias/ref-4-picanha.jpg` — ver `docs/00-analise-produto.md`.
 
 ```
-PRODUCT LOCK: {{CORTE}} — {{FORMATO_E_ESPESSURA}}.
-Surface: {{DESCRICAO_CROSTA}}. Fat cap: {{GORDURA}}.
-Interior when cut: {{PONTO_E_COR_INTERIOR}}.
-Seasoning visible on surface: {{TEMPERO}}.
-Serving vessel: {{APRESENTACAO}}.
-This exact product must appear identical in every frame — same cut, same thickness,
-same char pattern density, same fat distribution, same seasoning.
+PRODUCT LOCK: Whole Brazilian picanha (top sirloin cap), 4-5cm thick, natural triangular
+shape, fat cap left fully intact.
+Surface: dark mahogany-brown seared crust, coarse rock salt visible on it, irregular char
+marks from an open charcoal grill, glossy with rendered fat.
+Fat cap: continuous 1-1.5cm white-to-golden layer along the curved outer edge, crisped and
+lightly blistered outside, never trimmed off.
+Interior when cut: medium-rare, warm rose-pink from edge to edge, thin brown-grey band only
+directly under the crust, visible muscle grain, juices beading on the cut face.
+Seasoning visible: coarse sea salt only. No herbs, no marinade, no sauce, no pepper crust.
+Serving vessel: thick varnished reddish-brown hardwood carving board with a wide bevelled edge.
+Tools when in frame: long carving knife and two-prong carving fork, dark wooden handles.
+Hands when in frame: black food-service gloves, dark apron.
+This exact product must appear identical in every frame — same cut, same thickness, same
+char density, same fat cap, same seasoning.
 ```
+
+### PRODUCT LOCK B — cena da brasa (só S2)
+Baseado em `referencias/ref-1-grelha.png` e `ref-2-costela.jpg`.
+
+```
+SECONDARY PRODUCT: beef ribs and glazed cuts resting on a large steel wire-mesh grill frame,
+deep amber-red glossy glazed surface, dark char in places, live embers and small flames below.
+Same charcoal universe, same warm light source. No wooden skewers in frame.
+```
+
+> **Luvas pretas são obrigatórias** em toda cena com mão. É o que o cliente já usa, e é a
+> defesa mais eficaz contra o erro clássico de mão deformada na geração por IA.
 
 ---
 

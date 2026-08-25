@@ -13,21 +13,20 @@ para ser gerado com **Kairogen** (imagem, vídeo, áudio) e finalizado no **Hype
 
 | Etapa | Estado |
 |-------|--------|
-| 1 · Análise do produto | ⛔ **Bloqueada** — vídeo de referência não chegou |
+| 1 · Análise do produto | ✅ **Concluída** — 4 fotos de referência recebidas |
 | 2 · Planejamento | ✅ **Concluída** — este repositório |
 | 3 · Geração | ⛔ **Bloqueada** — conta Kairogen com 0 créditos |
 | 4 · Montagem | ⏳ depende da 3 |
 | 5 · Refino | ⏳ depende da 4 |
 | 6 · Finalização | ⏳ depende da 5 |
 
-### Bloqueio 1 — vídeo de referência ausente
-O briefing menciona um vídeo anexado, mas ele não chegou nesta sessão: o diretório de
-anexos (`/mnt/attach`) está vazio e não há arquivo de mídia acessível. O widget de upload
-do Kairogen já foi aberto no chat — basta enviar o vídeo por lá.
+### ✅ Referências recebidas
+4 fotos do produto real em `referencias/`. O **PRODUCT LOCK** está preenchido
+(`docs/02-keyframes-prompts.md`) e a análise do produto documentada em
+`docs/00-analise-produto.md`.
 
-Sem ele, os campos `{{ }}` do **PRODUCT LOCK** (`docs/02-keyframes-prompts.md`) não podem
-ser preenchidos, e gerar sem eles violaria a regra do briefing de não transformar o produto
-em outro produto.
+**Protagonista definido: a picanha**, com a costela e as carnes da grelha compondo o
+universo da brasa em S2.
 
 ### Bloqueio 2 — 0 créditos
 A conta está no plano FREE com 0 créditos. Qualquer `generate_image` / `generate_video`
@@ -40,6 +39,7 @@ falha. Orçamento recomendado: **70 créditos** (~R$ 12,25) — detalhamento em
 
 | Arquivo | Conteúdo |
 |---------|----------|
+| [`docs/00-analise-produto.md`](docs/00-analise-produto.md) | Análise das referências, identidade da marca, decisão de protagonista |
 | [`docs/01-storyboard.md`](docs/01-storyboard.md) | Shot list com timecodes, direção cena a cena, versão 12s |
 | [`docs/02-keyframes-prompts.md`](docs/02-keyframes-prompts.md) | PRODUCT LOCK + 6 prompts de imagem + critério de aprovação |
 | [`docs/03-video-prompts.md`](docs/03-video-prompts.md) | 5 prompts image-to-video, parâmetros de modelo, checklist |
@@ -71,7 +71,7 @@ falha. Orçamento recomendado: **70 créditos** (~R$ 12,25) — detalhamento em
 
 ## Como retomar
 
-1. Enviar o vídeo de referência pelo widget de upload do Kairogen
-2. Preencher o PRODUCT LOCK em `docs/02-keyframes-prompts.md`
-3. Adicionar créditos na conta Kairogen (recomendado: 70)
+1. ~~Referências~~ ✅ recebidas
+2. ~~PRODUCT LOCK~~ ✅ preenchido
+3. Adicionar créditos na conta Kairogen
 4. Executar a ETAPA 3 na ordem descrita em `docs/06-custos-e-pipeline.md`
