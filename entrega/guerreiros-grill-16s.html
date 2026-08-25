@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Guerreiros Grill — 16s</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@600&display=swap" rel="stylesheet">
+<style>
+  :root{ --warm-white:#F5EFE6; --rule:#C9752A; --sub:#E8DCC8; }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#000;color:var(--warm-white);font-family:Archivo,system-ui,sans-serif;
+       display:flex;align-items:center;justify-content:center;min-height:100vh;overflow:hidden}
+  #stage{position:relative;width:min(100vw,calc(100vh*9/16));aspect-ratio:9/16;
+         background:#000;overflow:hidden;box-shadow:0 0 80px rgba(0,0,0,.9)}
+  video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0}
+  video.on{opacity:1}
+
+  /* grading: laranja contido, pretos profundos */
+  #grade{position:absolute;inset:0;pointer-events:none;
+         box-shadow:inset 0 0 140px rgba(0,0,0,.55);
+         background:radial-gradient(ellipse at 50% 55%,rgba(0,0,0,0) 55%,rgba(0,0,0,.35) 100%)}
+
+  #line{position:absolute;left:12%;right:12%;bottom:250px;text-align:center;
+        font-family:Anton,Impact,sans-serif;font-size:clamp(24px,5.4vw,54px);
+        letter-spacing:.09em;color:var(--warm-white);
+        text-shadow:0 4px 24px rgba(0,0,0,.75);
+        opacity:0;transform:translateY(12px);transition:opacity .25s ease,transform .25s ease}
+  #line.on{opacity:1;transform:translateY(0)}
+
+  #end{position:absolute;inset:0;display:flex;flex-direction:column;
+       align-items:center;justify-content:center;padding-bottom:8%;
+       opacity:0;transform:scale(1.02);
+       transition:opacity .4s cubic-bezier(.2,.7,.3,1),transform .4s cubic-bezier(.2,.7,.3,1)}
+  #end.on{opacity:1;transform:scale(1)}
+  #end img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  #endinner{position:relative;text-align:center;width:100%}
+  #brand{font-family:Anton,Impact,sans-serif;font-size:clamp(30px,7.6vw,76px);
+         letter-spacing:.05em;line-height:1;color:var(--warm-white);
+         text-shadow:0 6px 30px rgba(0,0,0,.8)}
+  #rule{height:1px;background:var(--rule);opacity:.6;margin:5% auto 4%;width:23%}
+  #sub{font-size:clamp(11px,2.3vw,22px);letter-spacing:.14em;color:var(--sub);
+       text-shadow:0 3px 16px rgba(0,0,0,.8)}
+
+  #play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+        background:rgba(0,0,0,.72);cursor:pointer;z-index:20;flex-direction:column;gap:18px}
+  #play span{font-family:Anton,Impact,sans-serif;font-size:20px;letter-spacing:.16em}
+  #play small{font-size:12px;opacity:.6;letter-spacing:.05em;max-width:70%;text-align:center;line-height:1.5}
+  #tri{width:0;height:0;border-left:34px solid var(--warm-white);
+       border-top:21px solid transparent;border-bottom:21px solid transparent;margin-left:8px}
+  #bar{position:absolute;left:0;bottom:0;height:2px;background:var(--rule);width:0;z-index:15}
+  #err{position:absolute;left:0;right:0;bottom:14px;text-align:center;font-size:11px;color:#ff9a7a;z-index:30}
+</style>
+</head>
+<body>
+<div id="stage">
+  <video id="v0" playsinline muted preload="auto" src="https://cdn.kairogen.ai/gallery/videos/6a8caaa9baf3b3e2d5d25379/44b70eef-a39b-4ffe-aed8-b406f08cd203.mp4"></video>
+  <video id="v1" playsinline muted preload="auto" src="https://cdn.kairogen.ai/gallery/videos/6a8caaa9baf3b3e2d5d25379/34e0b010-3a06-4693-898a-a29d1629abe2.mp4"></video>
+  <video id="v2" playsinline muted preload="auto" src="https://cdn.kairogen.ai/gallery/videos/6a8caaa9baf3b3e2d5d25379/8d07fe04-37ea-47d8-8f78-b0706ad0c70a.mp4"></video>
+  <video id="v3" playsinline muted preload="auto" src="https://cdn.kairogen.ai/gallery/videos/6a8caaa9baf3b3e2d5d25379/ef2bd0e4-2d64-4b27-968d-1734b5184d29.mp4"></video>
+  <video id="v4" playsinline muted preload="auto" src="https://cdn.kairogen.ai/gallery/videos/6a8caaa9baf3b3e2d5d25379/6237c044-3562-438d-aaad-8080cf5a089c.mp4"></video>
+
+  <div id="grade"></div>
+  <div id="line">CHURRASCO DE VERDADE.</div>
+
+  <div id="end">
+    <img src="https://cdn.kairogen.ai/gallery/images/6a8caaa9baf3b3e2d5d25379/bb2f0dc5-60a4-41b0-9986-ca9173473f6e.jpg" alt="">
+    <div id="endinner">
+      <div id="brand">GUERREIROS GRILL</div>
+      <div id="rule"></div>
+      <div id="sub">CHURRASCO RAIZ · SÁB &amp; DOM</div>
+    </div>
+  </div>
+
+  <div id="bar"></div>
+  <div id="play"><div id="tri"></div><span>GUERREIROS GRILL</span>
+    <small>16s · 9:16 · com som<br>precisa de internet (mídia no CDN do Kairogen)</small></div>
+  <div id="err"></div>
+</div>
+
+<script>
+const TOTAL = 16.0;
+// início de cada clipe na timeline (segundos)
+const CUTS = [
+  {el:'v0', at:0.0,  until:2.2},
+  {el:'v1', at:2.2,  until:5.2},
+  {el:'v2', at:5.2,  until:8.6},
+  {el:'v3', at:8.6,  until:12.0},
+  {el:'v4', at:12.0, until:14.4}
+];
+const A = {
+  music : {url:'https://cdn.kairogen.ai/audio-generations/6a8caaa9baf3b3e2d5d25379/6a8df21d3293516e6be5b52d/music.mp3',      at:0.0,  vol:.34, loop:false},
+  ember : {url:'https://cdn.kairogen.ai/audio-generations/6a8caaa9baf3b3e2d5d25379/6a8e18f9925ed2ad9bf91abd/sound-effect.mp3', at:0.0,  vol:.20, loop:true},
+  sizzle: {url:'https://cdn.kairogen.ai/audio-generations/6a8caaa9baf3b3e2d5d25379/6a8e190f3293516e6be67d76/sound-effect.mp3', at:0.0,  vol:.46, loop:true, stop:12.0},
+  flare : {url:'https://cdn.kairogen.ai/audio-generations/6a8caaa9baf3b3e2d5d25379/6a8e191c3293516e6be67df9/sound-effect.mp3', at:3.4,  vol:.5},
+  knife : {url:'https://cdn.kairogen.ai/audio-generations/6a8caaa9baf3b3e2d5d25379/6a8e190a3293516e6be67d38/sound-effect.mp3', at:9.15, vol:1.0},
+  hit   : {url:'https://cdn.kairogen.ai/audio-generations/6a8caaa9baf3b3e2d5d25379/6a8e19193293516e6be67dcc/sound-effect.mp3', at:14.4, vol:.85}
+};
+
+const $ = id => document.getElementById(id);
+const el = {}, aud = {};
+CUTS.forEach(c => el[c.el] = $(c.el));
+for (const k in A){
+  const a = new Audio(A[k].url);
+  a.preload='auto'; a.volume=A[k].vol; a.loop=!!A[k].loop; a.crossOrigin='anonymous';
+  aud[k]=a;
+}
+
+let t0=null, raf=null, cur=-1, fired={};
+
+function frame(ts){
+  if(t0===null) t0=ts;
+  const t=(ts-t0)/1000;
+  $('bar').style.width = Math.min(t/TOTAL,1)*100 + '%';
+
+  // clipes
+  let idx=-1;
+  for(let i=0;i<CUTS.length;i++) if(t>=CUTS[i].at && t<CUTS[i].until) idx=i;
+  if(idx!==cur){
+    CUTS.forEach(c=>el[c.el].classList.remove('on'));
+    if(idx>=0){
+      const c=CUTS[idx], v=el[c.el];
+      v.classList.add('on');
+      try{ v.currentTime=0; v.play().catch(()=>{}); }catch(e){}
+    }
+    cur=idx;
+  }
+
+  // texto
+  $('line').classList.toggle('on', t>=5.6 && t<6.9);
+
+  // end card
+  $('end').classList.toggle('on', t>=14.4);
+
+  // áudio por gatilho
+  for(const k in A){
+    const s=A[k];
+    if(!fired[k] && t>=s.at){ fired[k]=true; aud[k].currentTime=0; aud[k].play().catch(()=>{}); }
+    if(s.stop && t>=s.stop && !aud[k].paused) aud[k].pause();
+  }
+  // ducking da trilha no corte da faca
+  if(t>=9.0 && t<9.7) aud.music.volume = 0.20;
+  else if(t>=9.7)     aud.music.volume = 0.34;
+
+  if(t<TOTAL) raf=requestAnimationFrame(frame);
+  else finish();
+}
+
+function finish(){
+  cancelAnimationFrame(raf);
+  for(const k in aud) aud[k].pause();
+  CUTS.forEach(c=>el[c.el].pause());
+  const p=$('play'); p.style.display='flex';
+  p.querySelector('span').textContent='VER DE NOVO';
+}
+
+$('play').addEventListener('click', ()=>{
+  $('play').style.display='none';
+  $('end').classList.remove('on'); $('line').classList.remove('on');
+  t0=null; cur=-1; fired={};
+  for(const k in aud){ aud[k].pause(); aud[k].currentTime=0; aud[k].volume=A[k].vol; }
+  raf=requestAnimationFrame(frame);
+});
+
+window.addEventListener('error', e=>{
+  if(e.target && (e.target.tagName==='VIDEO'||e.target.tagName==='IMG'))
+    $('err').textContent='Falha ao carregar mídia — verifique a conexão.';
+}, true);
+</script>
+</body>
+</html>
