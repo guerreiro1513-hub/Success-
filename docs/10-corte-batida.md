@@ -89,3 +89,53 @@ O plano da tesoura que ocupava a posição 9 foi trocado pelo rack de frangos
 (A @ 3,20) para não repetir a mesma cena no mesmo filme. O texto desceu para 1,5s,
 acompanhando o novo ponto de entrada do frango. A grade de 120 BPM segue intacta:
 12,00s cravados.
+
+
+---
+
+## Revisão da repetição
+
+Feedback do cliente: *"essa parte do último vídeo está ruim, está se repetindo muito"*.
+
+### O erro
+
+Seis dos dezesseis cortes vinham do vídeo C. Pior: os seis são a **mesma imagem** —
+grelha de arame vista de cima com carne glaceada. Ângulos parecidos, cor parecida,
+textura parecida. Em doze segundos isso lê como repetição, mesmo com corte rápido.
+
+### A correção
+
+C caiu de **6 cortes para 2**, escolhidos por serem os dois mais diferentes entre si:
+a labareda e os espetos. Os quatro que saíram foram substituídos por material de A e
+B que estava sobrando sem uso.
+
+**Distribuição final: A×6, B×8, C×2.**
+
+| # | TC | Dur | Cena | Fonte |
+|---|----|-----|------|-------|
+| 01 | 00,0 | 1,0 | Tesoura rasgando o frango | B @ 24,20 |
+| 02 | 01,0 | 0,5 | **FOGO** | C @ 8,20 |
+| 03 | 01,5 | 0,5 | Frango dourado | A @ 2,10 |
+| 04 | 02,0 | 0,5 | Grelha de costelas vista de cima | B @ 13,50 |
+| 05 | 02,5 | 0,5 | Peça glaceada com bacon | A @ 7,10 |
+| 06 | 03,0 | 1,0 | Corte da carne, luva preta | B @ 18,35 |
+| 07 | 04,0 | 0,5 | Braço entrando no fogo | A @ 15,00 |
+| 08 | 04,5 | 0,5 | **Maionese com o adesivo da marca** | B @ 11,30 |
+| 09 | 05,0 | 1,0 | Equipe tirando peça da grelha | B @ 20,55 |
+| 10 | 06,0 | 0,5 | Rack de frangos no defumador | A @ 3,20 |
+| 11 | 06,5 | 0,5 | Espetos | C @ 11,25 |
+| 12 | 07,0 | 1,0 | **O defumador na calçada, com fumaça** | B @ 3,40 |
+| 13 | 08,0 | 0,5 | Frangos na brasa | A @ 10,50 |
+| 14 | 08,5 | 0,5 | Fatias na tábua | B @ 19,30 |
+| 15 | 09,0 | 0,5 | **Atendente de chapéu com a bandeja** | B @ 7,80 |
+| 16 | 09,5 | 0,5 | Garfo trinchante na carne | A @ 0,40 |
+| 17 | 10,0 | 2,0 | End card | — |
+
+### Ajuste de exposição
+
+Dois planos novos vinham muito mais claros que o resto — a peça glaceada (brilho 155)
+e o atendente com a bandeja (129), contra uma média de 60 nos demais. Sem correção
+piscariam no meio do clipe. Ambos receberam `brightness=-0,055` para casar com a
+sequência.
+
+A grade de 120 BPM segue intacta: 12,00s exatos.
