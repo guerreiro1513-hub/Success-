@@ -175,3 +175,41 @@ A informação chegou por áudio e voltou embolada duas vezes — "quinze cesta"
 "quem te cessa" eram a mesma frase mal transcrita. Como dia e horário de
 funcionamento num anúncio são caros de errar, o texto foi confirmado com o cliente
 antes de renderizar, em vez de deduzido.
+
+
+---
+
+## Remoção do plano de fogo
+
+Feedback do cliente: *"essa parte do fogo é muito ruim, deixa sem o fogo em cima"*.
+
+### Verificação antes de agir
+
+Antes de creditar o defeito ao tratamento, comparei o mesmo frame na **fonte crua**
+e no **render**. São idênticos: o borrão está na filmagem original. Naquele trecho a
+câmera passa rápido e a tela de arame da grelha vira um rastro melado, com aparência
+de travamento. A crítica procede, e o problema não era corrigível por grade ou
+nitidez — o plano em si é ruim.
+
+### A troca
+
+Corte 2 (0,5s): saiu `C @ 8,20` (fogo) e entrou `B @ 15,20` — a peça sendo posta na
+tábua, com o avental da marca à vista. Escolhido por medição de nitidez entre cinco
+candidatos, comparando o desvio-padrão de um filtro de bordas:
+
+| Candidato | Nitidez |
+|-----------|---------|
+| Fachada da loja | 68 |
+| **Rotisserie** | 42 |
+| Mão com carne | 41 |
+| Equipe na grelha | 41 |
+| **Peça na tábua** (escolhido) | 34 |
+
+A fachada era a mais nítida, mas é plano aberto e pouco apetitoso para a segunda
+posição, logo depois do hook. A peça na tábua tem ação, comida em primeiro plano e a
+marca no avental.
+
+**O vídeo C caiu para um único corte** no filme inteiro — os espetos. Some com a
+repetição apontada antes e com o plano ruim de agora.
+
+Grade de 120 BPM intacta: 12,00s exatos.
