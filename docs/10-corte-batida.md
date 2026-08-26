@@ -213,3 +213,45 @@ marca no avental.
 repetição apontada antes e com o plano ruim de agora.
 
 Grade de 120 BPM intacta: 12,00s exatos.
+
+
+---
+
+## Saída completa do vídeo C
+
+Segunda reclamação de plano travado, no segundo 7 — de novo um corte do vídeo C.
+
+### O padrão
+
+As duas queixas de "travado" caíram nos dois únicos cortes que restavam do vídeo C.
+Não é coincidência: naquele material a câmera varre rápido sobre a tela de arame da
+grelha, e o padrão repetitivo do arame com movimento rápido produz um rastro melado.
+É limitação da filmagem, não do tratamento — já confirmado antes comparando fonte e
+render lado a lado.
+
+**Conclusão: o vídeo C saiu inteiro do filme.** Sobrou material suficiente em A e B.
+
+### A troca
+
+Corte 11 (0,5s): saiu `C @ 11,25` (espetos) e entrou `B @ 0,70` — a fachada com o
+toldo "Espetos e Churrasco" e o defumador na calçada.
+
+Escolhido por nitidez entre quatro candidatos:
+
+| Candidato | Nitidez |
+|-----------|---------|
+| **Fachada** (escolhido) | 68 |
+| Rotisserie | 42 |
+| Peça no ar sobre a grelha | 41 |
+| Carne na tábua | 36 |
+
+Além de ser o mais nítido por larga margem, é o único plano do filme que mostra o
+ponto físico — o que sustenta a informação de endereço no end card. Fica logo antes
+do defumador, formando um par natural: a fachada e o fogo que está nela.
+
+### Varredura de nitidez do filme inteiro
+
+Medida em todos os dezesseis cortes. Dois ficam abaixo de 30: a maionese (4,7s) e o
+garfo na carne (9,2s). Ambos são close com profundidade de campo rasa — o fundo
+desfocado derruba a métrica, mas o assunto está nítido. É desfoque de lente, não
+rastro de movimento. Mantidos.
