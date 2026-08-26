@@ -84,3 +84,42 @@ laranja. Vinheta leve e leve nitidez.
    `st=5.9` nunca disparava. Corrigido com `-loop 1 -framerate 30`.
 
 Ambos verificados por amostragem de frames no arquivo final.
+
+---
+
+## Versões adicionais (custo zero de crédito)
+
+Montadas só com ffmpeg em cima da filmagem do cliente. Nenhuma geração nova.
+
+### `entrega/guerreiros-grill-REAL-22s.mp4` — 21,7s
+Versão longa, com o material que ficou de fora do corte de 14s.
+
+| # | TC | Dur | Cena | Fonte |
+|---|----|-----|------|-------|
+| 1 | 00,0 | 1,7s | Hook — frango dourado | A @ 1,90 |
+| 2 | 01,7 | 1,8s | Fachada — toldo "Espetos e Churrasco" | B @ 0,30 |
+| 3 | 03,5 | 2,0s | O defumador com fumaça | B @ 3,20 |
+| 4 | 05,5 | 2,0s | Equipe tirando a peça da grelha | B @ 20,40 |
+| 5 | 07,5 | 2,2s | Fartura — a grelha lotada de cima | B @ 13,40 |
+| 6 | 09,7 | 1,8s | Peça glaceada nos espetos **+ legenda** | A @ 7,00 |
+| 7 | 11,5 | 1,8s | Frangos na brasa | A @ 10,40 |
+| 8 | 13,3 | 1,6s | Maionese com o adesivo da marca | B @ 11,00 |
+| 9 | 14,9 | 2,2s | Corte — carne fatiada na tábua | B @ 18,20 |
+| 10 | 17,1 | 2,2s | Serviço — tesoura no frango | B @ 24,00 |
+| 11 | 19,3 | 2,4s | End card | — |
+
+**Legenda:** `CHURRASCO DE VERDADE.` de 09,9 a 11,4.
+
+### `entrega/guerreiros-grill-REAL-14s-sem-texto.mp4` — 14,13s
+O corte de 14s sem nenhuma legenda. Só imagem, som e end card.
+
+### Defeito corrigido nesta rodada
+O corte da "equipe" (B @ 7,60) derivava, dentro dos 2 segundos, para os potes de
+maionese — repetindo o assunto do corte 8. Trocado por B @ 20,40, onde a equipe
+levanta uma peça da grelha com vapor subindo. Verificado por amostragem de frame.
+
+### Ainda não incorporado
+A trilha instrumental gerada no Kairogen **não entrou** nestas versões: o arquivo
+está no CDN, que a política de rede deste ambiente bloqueia. O áudio destes cortes
+é o som original das filmagens. Para somar a trilha por baixo, é montar no CapCut
+com o `music.mp3` da galeria.
