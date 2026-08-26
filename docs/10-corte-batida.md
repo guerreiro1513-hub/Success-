@@ -139,3 +139,39 @@ piscariam no meio do clipe. Ambos receberam `brightness=-0,055` para casar com a
 sequência.
 
 A grade de 120 BPM segue intacta: 12,00s exatos.
+
+
+---
+
+## End card com as informações do negócio
+
+O cliente pediu para acrescentar o funcionamento, com uma hierarquia clara:
+o principal em evidência e a unidade Florais entre parênteses.
+
+```
+              [LOGO]
+            ─────────
+     CHURRASCO NO ROLETE          62px  bold   #FFFCF6
+    SÁB E DOM · 10H ÀS 14H        52px  bold   #F5E1BE
+     (QUINTA E SEXTA TAMBÉM       34px  regular #BAB0A0
+       NA UNIDADE FLORAIS)
+       @GUERREIROSGRILL           30px  bold   #968D7E
+```
+
+A hierarquia é feita por **três eixos ao mesmo tempo** — corpo, peso e luminância.
+As duas primeiras linhas são bold e claras; a informação do Florais é regular, menor
+e mais apagada, dentro de parênteses. Lida em meio segundo, o olho pega
+"churrasco no rolete, sábado e domingo" e só depois o resto.
+
+### Ajuste de tempo
+
+Quatro linhas não se leem em 2 segundos. O end card subiu para **2,5s**, e para não
+quebrar a grade de 120 BPM o plano do defumador (corte 12) desceu de 1,0s para 0,5s.
+Total segue em **12,00s exatos**, 24 batidas.
+
+### Nota sobre a transcrição
+
+A informação chegou por áudio e voltou embolada duas vezes — "quinze cesta" e
+"quem te cessa" eram a mesma frase mal transcrita. Como dia e horário de
+funcionamento num anúncio são caros de errar, o texto foi confirmado com o cliente
+antes de renderizar, em vez de deduzido.
