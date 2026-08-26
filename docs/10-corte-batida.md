@@ -49,3 +49,43 @@ A música entra por cima no CapCut sem brigar.
 O zoom punch por `crop` animado gerava dimensões ímpares e o libx264 rejeitava com
 `Invalid argument`, sem escrever nada no arquivo. Trocado por `scale` animado com
 `trunc(...)*2` forçando dimensões pares, seguido de `crop` fixo em 1080×1920.
+
+
+---
+
+## Revisão do começo
+
+Feedback do cliente: *"esse começo ficou ruim demais"*.
+
+### O que estava errado
+
+O hook original era o fogo num **recorte fechado** (594×1056) e em **slow-motion 1,62×**.
+Dois erros somados:
+
+1. **Ilegível.** O recorte apertado transformava a cena em mistura escura de tela de
+   grelha e espeto. A chama ficava pequena no alto e não se entendia o que era.
+   Brilho médio de 57 contra 66 do plano de comida.
+2. **Slow-motion contradizia o formato.** Um clipe de batida abre no impacto. Começar
+   devagar e acelerar depois derrubava a energia justo no primeiro segundo.
+
+### A correção, em duas etapas
+
+Primeiro abri o enquadramento do fogo e tirei o slow-motion. Melhorou, mas o
+diagnóstico real era outro: **fogo é dramático e abstrato**. Num quadro de celular,
+em meio segundo, comida óbvia vence drama abstrato.
+
+Novo começo:
+
+| TC | Dur | Cena | Fonte |
+|----|-----|------|-------|
+| 00,0 | 1,0s | **Tesoura rasgando o frango assado**, luva preta, logo do avental à vista | B @ 24,20 |
+| 01,0 | 0,5s | **FOGO** — agora acento, em enquadramento aberto e velocidade normal | C @ 8,20 |
+| 01,5 | 0,5s | Frango dourado em close + texto | A @ 2,10 |
+
+O plano de abertura junta ação humana, comida reconhecível e a marca no avental —
+os três em brilho 62, contra os 57 do fogo fechado.
+
+O plano da tesoura que ocupava a posição 9 foi trocado pelo rack de frangos
+(A @ 3,20) para não repetir a mesma cena no mesmo filme. O texto desceu para 1,5s,
+acompanhando o novo ponto de entrada do frango. A grade de 120 BPM segue intacta:
+12,00s cravados.
