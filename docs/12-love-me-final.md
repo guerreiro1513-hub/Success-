@@ -114,3 +114,44 @@ faixa: o "oh ba-baby" subindo e **estourando no drop** em 25,10 s, que fecha o v
 ## Controle de qualidade
 768 frames: **0** frames pretos indevidos, **0** moles, **0** saltos de exposição.
 Abertura 40,5–55,4 de brilho, maior salto 5,1. Pico −0,4 dB, sem clipe.
+
+---
+
+# Revisão 4 — 24,5 s (versão final)
+
+`entrega/guerreiros-grill-LOVEME-24s.mp4` — 1080×1920 · 30 fps · 24,50 s
+
+## Legenda da abertura — fonte trocada e o estouro corrigido
+O texto vazava pelas laterais. A causa: largura de 97% do quadro **multiplicada**
+por um crescimento de escala (1,045) e por um pop de entrada (1,14) — na entrada
+cada linha chegava a 110% da largura do quadro e era cortada.
+
+| | antes | agora |
+|---|---|---|
+| fonte | Liberation Sans Bold condensada 0,90 | **DejaVu Sans Bold**, largura natural |
+| largura alvo | 97% | 88% |
+| crescimento | 1,045 | 1,012 |
+| pop de entrada | 1,14 | 1,05 |
+| margem lateral medida | **0 px (cortava)** | **≥10 px, nunca toca a borda** |
+
+O build agora falha sozinho se qualquer frame encostar na borda (`assert mn>8 and mx<1072`).
+
+## Final — sem o Instagram
+A cartela do Instagram saiu. No lugar, a **logo Guerreiro's Grill segura na tela**
+com um push lento de 5,5% ao longo de 3,3 s, e a frase falada toca em cima dela.
+
+| Tempo | O que acontece | Nível |
+|---|---|---|
+| 19,0–21,1 | fala 1, música de cama por baixo | −12,9 dB |
+| 21,35–21,75 | respiro | −30,0 dB |
+| 21,80–22,65 | **a frase**, sobre a logo | **−7,9 dB** |
+| 22,80–24,10 | música volta | −17,2 dB |
+| 24,15–24,48 | **o drop fecha o vídeo** | −13,3 dB |
+
+## Controle de qualidade
+735 frames: 0 frames pretos indevidos, 0 moles, 0 saltos de exposição.
+Pico −0,4 dB, sem clipe.
+
+Nota de método: a tabela de níveis da revisão 3 subestimava trechos que continham
+silêncio digital, porque fazia média de decibéis em vez de média de potência.
+Corrigido — os números acima são RMS no domínio de potência.
