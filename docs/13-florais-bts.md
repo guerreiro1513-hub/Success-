@@ -120,3 +120,23 @@ Bloco final reposicionado de y=1288 para **y=1170**: a base do texto agora fica 
 ## Controle de qualidade
 468 frames: 0 frames pretos, 0 moles, 0 saltos de exposição fora de corte.
 Tinta do texto x=106..975 (margens de 105 px), base y=1561. Verificado por script.
+
+---
+
+# Revisão 2 — troca dos dois planos fracos
+
+Identifiquei os planos pelos prints comparando assinatura de cor contra os 468
+frames renderizados (o primeiro bateu com distância 1,9 — casamento exato).
+
+| Tempo | Antes | Depois |
+|---|---|---|
+| 8,7–9,3 s | F1 @18,10 — soprador e rua, **sem comida nenhuma** | **F4 @0,30** — tábua cheia de costela, faca e sal |
+| 12,9–13,8 s | F1 @18,90 — grelha com **poucas peças**, malha vazia | **F4 @16,10** — tábua cheia, mãos cortando |
+
+Não precisei importar material de outro local: varri o resto do F1 e **todos os
+trechos não usados dele são grelha vazia** — aquele vídeo já tinha dado o que tinha.
+O F4 tinha duas tomadas densas que eu não havia aproveitado. As duas são do próprio
+Florais, mesma rua, mesma tenda, mesma equipe.
+
+Áudio sincronizado dos dois planos refeito junto. Grade de 100 BPM intacta.
+468 frames, 0 problemas, brilho 52,9–90,6.
