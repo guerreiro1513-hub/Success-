@@ -74,3 +74,49 @@ F5 estava chapado e com névoa, levou contraste 1,26 e rolloff mais forte.
 ## Controle de qualidade
 468 frames: 0 frames pretos, 0 moles, 0 saltos de exposição fora de corte.
 Brilho por plano 48,7–90,6. Pico de áudio −0,7 dB, sem clipe.
+
+---
+
+# Revisão 1 — animação de texto e fecho
+
+## O que estava errado
+Duas coisas, e as duas procediam:
+
+1. **O texto não tinha animação.** Um pop de escala de 3 frames e pronto. Ficava
+   parado 1,9 s — pouco até para ler.
+2. **O fecho estava mal feito.** A logo entrava num fade seco. Pior: o asset
+   `logo_crop.jpg` é um recorte de frame de vídeo, ou seja, **tem fundo escuro
+   texturizado junto**. Colado por cima do plano, virava uma caixa preta.
+
+## Brasão recortado
+Extraí o brasão do fundo fotográfico com OpenCV: limiar no contorno branco do
+escudo, fechamento morfológico para unir o anel, preenchimento do contorno,
+dilatação de 5 px e feather. Resultado em `referencias/logo-brasao-recortado.png`
+(607×551 RGBA, 73,6% de cobertura). Agora o escudo assenta no vídeo sem caixa.
+
+## Animação do gancho — 0,27 s a 2,60 s (2,33 s)
+| Frame | O que acontece |
+|---|---|
+| 9–22 | "É ASSIM QUE COMEÇA" **revela da esquerda para a direita** (wipe com borda suave, ease out-cubic), subindo 22 px |
+| 24–38 | "O DOMINGO" **entra em impacto**: escala 1,28 → 1,00 com overshoot (out-back) |
+| 24–31 | desfoque de movimento 6 px → 0 na entrada do impacto |
+| 36–46 | **régua vermelha desenha** da esquerda para a direita sob "O DOMINGO" |
+| 9–70 | deriva contínua de subida (0,26 px/frame) — nada fica estático |
+| 70–81 | saída: sobe 58 px com ease in-cubic + fade |
+
+## Fecho — 13,4 s a 15,6 s
+| Frame | O que acontece |
+|---|---|
+| 402–418 | **scrim** em degradê sobe do rodapé (0 → 198 de alfa a partir de 50% da altura) |
+| 408–426 | **brasão entra** com escala 1,30 → 1,00 (out-back) e desfoque 5 px → 0 |
+| 426–437 | **régua vermelha desenha do centro para fora** |
+| 432–445 | **FLORAIS** revela em wipe |
+| 442–456 | **@GUERREIROSGRILL** entra em fade |
+| 402–468 | deriva de subida contínua |
+
+Bloco final reposicionado de y=1288 para **y=1170**: a base do texto agora fica em
+**y=1561**, dentro da zona segura do Reels (a interface do Instagram cobre o rodapé).
+
+## Controle de qualidade
+468 frames: 0 frames pretos, 0 moles, 0 saltos de exposição fora de corte.
+Tinta do texto x=106..975 (margens de 105 px), base y=1561. Verificado por script.
