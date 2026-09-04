@@ -140,3 +140,24 @@ Florais, mesma rua, mesma tenda, mesma equipe.
 
 Áudio sincronizado dos dois planos refeito junto. Grade de 100 BPM intacta.
 468 frames, 0 problemas, brilho 52,9–90,6.
+
+---
+
+# Variante SEXTA
+
+`entrega/guerreiros-florais-BTS-SEXTA-15s.mp4` — mesma montagem, só o texto do gancho.
+
+Em uma linha só, "UMA SEXTA NO FLORAIS" (20 caracteres) cairia para ~70 px de altura
+de caixa contra os 150 px de "O DOMINGO" — perderia todo o impacto. Reestruturei em
+três níveis, mantendo a hierarquia:
+
+```
+É ASSIM QUE COMEÇA     apoio, revela em wipe      f9-22
+UMA SEXTA              impacto, overshoot + blur  f24-38
+NO FLORAIS             local, wipe                f34-47
+                       régua vermelha desenha     f45-56
+```
+
+Cortes, grade de 100 BPM, cor, áudio e fecho: idênticos. Tinta x=138..942
+(margens de 138 px), base y=1561 — dentro da zona segura do Reels.
+Régua vermelha conferida no render: 5.515 px em y=1295..1303.
