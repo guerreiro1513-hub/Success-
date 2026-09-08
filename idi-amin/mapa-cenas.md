@@ -47,8 +47,42 @@ primeira da seguinte.
 | 33 | 38,7s | 19:40,2 | 20:18,9 | 256 reféns e tripulantes sob controle; Israel não cede e envia comando de elite; noite de 3 de julho, a operação. **Material de ficção — ver alerta abaixo** |
 | 34 | 44,5s | 20:18,9 | 21:03,4 | 101 dos 105 reféns libertados; os sete sequestradores e 20 soldados ugandeses mortos; um soldado israelense morto. **Arquivo real da chegada dos reféns e das recepções** |
 | 35 | 28,8s | 21:03,4 | 21:32,1 | **Dora Bloch**, 74 anos, britânico-israelense, internada num hospital de Kampala, arrancada da cama e morta por ordem do regime — confirmado por relatórios britânicos divulgados décadas depois. **Primeira página de jornal israelense sobre o caso** |
+| 36 | 55,1s | 21:32,1 | 22:27,2 | **Cartela "APOIADORES SE AFASTAM"**; fim dos anos 70, o regime chega ao nível mais sombrio; em 1977 ordena a execução do **arcebispo Janani Luwum** e do ministro do interior **Charles Oboth-Ofumbi**; isolamento internacional após Entebbe. **Fotografia de Luwum ao lado de Amin** |
+| 37 | 35,3s | 22:27,2 | 23:02,5 | Britânicos rompem relações diplomáticas com Uganda; ele se autoproclama "conquistador do Império Britânico"; a lista de honrarias autoatribuídas. **Amin de braços erguidos, P&B** e **em continência de quepe** |
+| 38 | 36,8s | 23:02,5 | 23:39,3 | O título completo na tela; explicação de que VC, DSO, MC e CBE são condecorações militares britânicas que ele se deu. **Entrevista de Amin de terno, gesticulando, P&B** |
+| 39 | 57,0s (só 12,3s legíveis) | 23:39,3 | 24:36,3 | **ARQUIVO TRUNCADO.** Nos 12,3s visíveis: explicação da Victoria Cross e menção à Commonwealth de 56 nações. Faltam 44,7s |
 
-**Total recebido:** 21:32,1 de 1:34:47 (35 partes de 54).
+**Total recebido:** 24:36,3 de 1:34:47 (39 partes de 54), com 56s ilegíveis.
+
+## ARQUIVOS A REENVIAR
+
+Verificação de integridade em todos os 39 arquivos (duração declarada no
+cabeçalho versus duração que realmente decodifica):
+
+| Parte | Cabeçalho | Decodifica | Perda |
+|---|---|---|---|
+| 12 | 36,39s | 25,16s | 11,2s |
+| 39 | 57,03s | 12,30s | 44,7s |
+
+As outras 37 estão íntegras. A parte 12 também é a que tem três notificações de
+WhatsApp — vale regravar do documentário em vez de reenviar o mesmo arquivo.
+
+## RECOMENDAÇÃO — incluir Janani Luwum no bloco B3
+
+O bloco da repressão está escrito de forma abstrata ("opositores, jornalistas e
+religiosos desapareciam"). O documentário entrega algo melhor: **um nome**.
+
+Em 1977 o regime matou o arcebispo anglicano **Janani Luwum**, a principal
+autoridade religiosa do país, junto com dois ministros. É um caso documentado,
+sem controvérsia, e existe **fotografia real de Luwum ao lado de Amin** na parte
+36 — os dois lado a lado, o arcebispo de terno claro, Amin fardado.
+
+Uma vítima com nome e rosto explica a repressão melhor do que qualquer número.
+E o plano dos dois juntos é o freeze ideal do bloco: quem manda e quem morre,
+no mesmo enquadramento.
+
+**Ajuste no roteiro do B3:** trocar a frase genérica por Luwum, mantendo a faixa
+estimada de mortos como contexto, não como manchete.
 
 ## ALERTA GRAVE — o documentário ilustra Entebbe com ficção e com o evento errado
 
@@ -246,6 +280,7 @@ Preferir sempre o arquivo real; se faltar, usar plano do apresentador.
 
 ## Pendências
 
-- Faltam as partes 36 em diante. Ainda não apareceram: o arcebispo Janani Luwum (1977), a guerra com a Tanzânia (1978-79), a queda e o exílio.
+- Faltam as partes 40 em diante. Ainda não apareceram: a guerra com a Tanzânia (1978-79), a queda e o exílio.
+- Reenviar as partes 12 e 39, truncadas.
 - Média real das partes: 33,3s. 54 partes dariam ~30min de um vídeo de 1:34:47 —
   confirmar se a gravação cobre o documentário inteiro ou só o primeiro terço.
