@@ -37,8 +37,43 @@ primeira da seguinte.
 | 23 | 39,8s | 13:14,6 | 13:54,4 | 1972, tensões com a Tanzânia; pede dinheiro e armas a Israel e é recusado; procura **Kadafi, da Líbia**, que atende; como retaliação ordena a expulsão de 500 israelenses e cerca de 50 mil asiáticos |
 | 24 | 38,0s | 13:54,4 | 14:32,4 | Consequências: israelenses tocavam grandes obras de infraestrutura, a comunidade asiática controlava boa parte do comércio e das plantações; **Uganda mergulha em crise econômica profunda**; arquivo colorido de rua com kombi e policiais; rua de Kampala em P&B |
 | 25 | 44,2s | 14:32,4 | 15:16,6 | **Cartela "NASCE UM TIRANO"**; meados dos anos 70, governante errático, repressivo e corrupto; paranoia — trocava auxiliares, itinerários, veículos e locais de dormir; passou a comprar lealdade |
+| 26 | 34,2s | 15:16,6 | 15:50,8 | Compra de lealdade: importados, eletrônicos, carros, promoções rápidas; entrega aos aliados dos negócios da comunidade asiática expulsa; dezenas de milhares de mortos sob sua supervisão. **Amin de braços erguidos diante da multidão** e **carregado pela multidão**. Notificação de bateria a 20% nos ~4s iniciais |
+| 27 | 26,6s | 15:50,8 | 16:17,4 | Vítimas de perseguição étnica, disputas políticas e interesses financeiros; início dos **rumores macabros**. **Arquivo de tanques T-55** e de Amin em desfile com oficiais |
+| 28 | 39,1s | 16:17,4 | 16:56,5 | Rumores: crocodilos, a fala de 76 sobre carne humana. O apresentador **freia e relativiza**: "muitas coisas ditas a respeito dessa pessoa podem não ser verdades". **Retrato de quepe vermelho, close, fundo desfocado** |
+| 29 | 38,7s | 16:56,5 | 17:35,2 | **Fontes oficiais não possuem qualquer evidência** de canibalismo; alegações vindas de desertores e exilados, **nunca verificadas por investigadores**. Arquivo de Amin fardado comendo, close P&B |
+| 30 | 46,4s | 17:35,2 | 18:21,5 | Entrevista de 77: perguntado diretamente, respondeu com ironia; ele brincava para confundir. Sobre as origens da brutalidade, as explicações variam. **Amin na tribuna da ONU** e **batendo continência, P&B** |
 
-**Total recebido:** 15:16,6 de 1:34:47 (25 partes de 54).
+**Total recebido:** 18:21,5 de 1:34:47 (30 partes de 54).
+
+## DECISÃO EDITORIAL — cortar o trecho dos rumores
+
+As partes 27 a 30 são quase dois minutos dedicados a rumores sobre Amin:
+canibalismo, cabeças em freezer, crocodilos, afogamento de 4.000 pessoas no
+Nilo. **Nada disso entra no nosso corte.**
+
+O motivo não é delicadeza, é precisão. O próprio documentário desmonta o
+material: diz que fontes oficiais não possuem qualquer evidência, que as
+alegações vieram de desertores e exilados, que investigadores nunca as
+verificaram, e que o próprio Amin respondia a essas perguntas com ironia para
+confundir. O apresentador chega a interromper a sequência com "calma lá".
+
+O briefing manda omitir na dúvida e não sensacionalizar. Um vídeo de cinco
+minutos que gastasse tempo com lenda em vez de com a expulsão de 1972 e a
+guerra com a Tanzânia seria pior como história e pior como informação.
+
+**O que aproveitamos dessas partes é só imagem**, sob narração nossa sobre
+fatos verificáveis: os tanques da parte 27, a tribuna da ONU da parte 30, o
+retrato em close da parte 28, e os planos de multidão da parte 26.
+
+## Planos de multidão — material para o B2 e o B5
+
+| Parte | Segundo na parte | Plano |
+|---|---|---|
+| 26 | ~24s a ~30s | Amin de braços erguidos, multidão ao fundo, P&B |
+| 26 | ~31s a ~34s | Amin carregado pela multidão em festa |
+| 27 | ~0s a ~4s | Multidão cercando Amin, colorido |
+| 30 | ~38s a ~42s | Amin na tribuna da ONU, plano geral |
+| 27 | ~18s a ~22s | Tanques T-55 em movimento |
 
 ## Aviso de conteúdo
 
@@ -170,6 +205,6 @@ Preferir sempre o arquivo real; se faltar, usar plano do apresentador.
 
 ## Pendências
 
-- Faltam as partes 26 em diante.
+- Faltam as partes 31 em diante. Ainda não apareceram: Entebbe (1976), o arcebispo Janani Luwum (1977), a guerra com a Tanzânia (1978-79), a queda e o exílio.
 - Média real das partes: 33,3s. 54 partes dariam ~30min de um vídeo de 1:34:47 —
   confirmar se a gravação cobre o documentário inteiro ou só o primeiro terço.
