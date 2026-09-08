@@ -1,5 +1,5 @@
 # APRESENTAÇÃO — CUNHA e DAVI
-### Vídeo: `idi_amin_analise_documentario_4_5min.mp4` (4:52)
+### Vídeo: `idi_amin_analise_documentario_4_5min.mp4` (5:20)
 
 O vídeo narra sozinho. **Sete vezes ele para num cartão de tela cheia**, com a
 data centralizada, sem legenda nenhuma e a música subindo. Esse cartão é o
@@ -18,13 +18,13 @@ Cunha abre e fecha. **Quem não está falando opera o vídeo** — combinem ante
 
 | | Tempo |
 |---|---|
-| Vídeo | 4:52 |
+| Vídeo | 5:20 |
 | As 7 falas | ~2:20 |
-| **Apresentação inteira** | **~7:10** |
+| **Apresentação inteira** | **~7:40** |
 
 ---
 
-## ⏸ PAUSA 1 — cartão aos **0:23** — CUNHA
+## ⏸ PAUSA 1 — cartão aos **0:28** — CUNHA
 ### COMO UM MILITAR TOMOU UGANDA?
 
 > Antes de responder, um número pra vocês guardarem: as estimativas de mortos no
@@ -34,7 +34,7 @@ Cunha abre e fecha. **Quem não está falando opera o vídeo** — combinem ante
 
 ---
 
-## ⏸ PAUSA 2 — cartão aos **1:37** — DAVI
+## ⏸ PAUSA 2 — cartão aos **1:44** — DAVI
 ### 1964 — A ALIANÇA
 
 > Duas ironias aqui. A primeira: quem formou o Idi Amin foi o exército do país que
@@ -44,7 +44,7 @@ Cunha abre e fecha. **Quem não está falando opera o vídeo** — combinem ante
 
 ---
 
-## ⏸ PAUSA 3 — cartão aos **2:17** — CUNHA
+## ⏸ PAUSA 3 — cartão aos **2:25** — CUNHA
 ### 25 DE JANEIRO DE 1971
 
 > Presta atenção na ordem dos fatos, porque é a lição da apresentação inteira:
@@ -55,7 +55,7 @@ Cunha abre e fecha. **Quem não está falando opera o vídeo** — combinem ante
 
 ---
 
-## ⏸ PAUSA 4 — cartão aos **2:58** — DAVI
+## ⏸ PAUSA 4 — cartão aos **3:07** — DAVI
 ### 1972 — A EXPULSÃO
 
 > Essa é a decisão que quebrou Uganda de vez. Cinquenta mil pessoas, muitas
@@ -65,7 +65,7 @@ Cunha abre e fecha. **Quem não está falando opera o vídeo** — combinem ante
 
 ---
 
-## ⏸ PAUSA 5 — cartão aos **3:35** — CUNHA
+## ⏸ PAUSA 5 — cartão aos **3:51** — CUNHA
 ### 1977 — O ARCEBISPO LUWUM
 
 > Aquele expurgo tinha alvo étnico: sobrou principalmente para os Acholi e os
@@ -75,7 +75,7 @@ Cunha abre e fecha. **Quem não está falando opera o vídeo** — combinem ante
 
 ---
 
-## ⏸ PAUSA 6 — cartão aos **4:17** — DAVI
+## ⏸ PAUSA 6 — cartão aos **4:34** — DAVI
 ### 11 DE ABRIL DE 1979
 
 > Duas coisas derrubaram ele, e as duas foram culpa dele mesmo. Uma: em 78 os
@@ -85,7 +85,7 @@ Cunha abre e fecha. **Quem não está falando opera o vídeo** — combinem ante
 
 ---
 
-## ⏸ PAUSA 7 — cartão final aos **4:48** — CUNHA
+## ⏸ PAUSA 7 — cartão final aos **5:12** — CUNHA
 ### O PODER QUE PARECIA ABSOLUTO TAMBÉM TINHA UM FIM.
 
 > Ele fugiu, viveu o resto da vida na Arábia Saudita e morreu em 2003 sem nunca
