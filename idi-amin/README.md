@@ -1,25 +1,27 @@
 # IDI AMIN — análise documental comentada (4:56)
 
-Roteiro de execução para um vídeo no formato
-**CENA → PAUSA → EXPLICAÇÃO → CONTINUA**, a partir do documentário
-`https://youtu.be/7Vwu9WulkT8`.
+Vídeo de 4:55 para apresentação ao vivo, com o roteiro do que falar em cada uma
+das 8 pausas. Fonte: **"Idi Amín: O maior ditador da África"**, canal
+**@fatosdesconhecidos** (27:14), gravado em tela e dividido em 44 partes.
 
 ## Status honesto
 
-| Item | Estado |
+| Arquivo | Para quê |
 |---|---|
-| Roteiro, narração, textos de tela, sound design | ✅ pronto — `roteiro-analise.md` |
-| Passo a passo de montagem no CapCut | ✅ pronto — `montagem-capcut.md` |
-| Timestamps do documentário original | ⛔ **você preenche** — veja abaixo |
-| Corte / render / MP4 final | ⛔ feito por você no CapCut |
+| **`apresentacao-roteiro.md`** | **O principal.** Vídeo de 4:55 + as 8 falas de pausa para apresentar ao vivo |
+| `mapa-cenas.md` | O documentário inteiro mapeado, parte por parte, com o que não pode ser usado |
+| `montagem-capcut.md` | Passo a passo de montagem no CapCut |
+| `roteiro-analise.md` | Versão alternativa, com narração gravada por cima em vez de fala ao vivo |
 
-### Por que os timestamps estão em branco
+O corte e o render são feitos por você no CapCut.
 
-Esta sessão não tem acesso ao YouTube nem ferramenta de vídeo instalada, e eu não
-assisto vídeo por link. Inventar minutagem do documentário seria chutar. Em vez
-disso, cada bloco do roteiro traz **o que procurar** — descrição da cena e do frame
-de pausa. Assista ao documentário uma vez com o roteiro aberto e anote os
-timestamps na coluna vazia. Leva cerca de 20 minutos.
+### Como os trechos foram escolhidos
+
+As 44 partes da gravação foram convertidas em grades de frames e lidas uma a uma.
+As legendas em português estão queimadas na imagem, então a narração do
+documentário pôde ser lida direto dos frames. Todas as marcações são
+**parte N · segundo X**, com precisão de cerca de 3 segundos — ajuste o corte de
+ouvido, no fim de cada frase.
 
 ### Direito autoral
 
