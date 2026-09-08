@@ -32,8 +32,43 @@ primeira da seguinte.
 | 18 | 31,8s | 9:53,6 | 10:25,4 | Tanques atacam o palácio do kabaka; ele deixa o país; **25 DE JANEIRO DE 1971 — Obote volta de conferência em Singapura e Amin toma o poder**; Amin sentado com documento; retrato de alto contraste com quepe |
 | 19 | 48,0s | 10:25,4 | 11:13,5 | Obote derrubado e exilado pelo homem a quem dera tanto poder; **cartela "HOMEM DO POVO?"**; a chegada de Amin foi recebida com entusiasmo por boa parte dos ugandenses; **multidões celebrando nas ruas com música e dança** |
 | 20 | 39,4s | 11:13,5 | 11:52,9 | Postura descontraída e imagem de líder próximo; **Amin com Kissinger/autoridades ocidentais**; **fotos de casamento** — esposas de grupos étnicos diferentes; repatriação do corpo do kabaka como reparação simbólica |
+| 21 | 46,1s | 11:52,9 | 12:39,0 | Medidas populares iniciais: abolição da polícia secreta de Obote e anistia a presos políticos; **cartela "REINADO BRUTAL"**; por trás da fachada, criou os próprios esquadrões da morte; **Amin discursando na ONU** |
+| 22 | 35,6s | 12:39,0 | 13:14,6 | Expurgo de 5 a 6 mil militares, em maioria das etnias Acholi e Lango, ligadas ao governo anterior. **CONTÉM IMAGEM DE EXECUÇÃO — não usar.** 3 notificações de WhatsApp |
+| 23 | 39,8s | 13:14,6 | 13:54,4 | 1972, tensões com a Tanzânia; pede dinheiro e armas a Israel e é recusado; procura **Kadafi, da Líbia**, que atende; como retaliação ordena a expulsão de 500 israelenses e cerca de 50 mil asiáticos |
+| 24 | 38,0s | 13:54,4 | 14:32,4 | Consequências: israelenses tocavam grandes obras de infraestrutura, a comunidade asiática controlava boa parte do comércio e das plantações; **Uganda mergulha em crise econômica profunda**; arquivo colorido de rua com kombi e policiais; rua de Kampala em P&B |
+| 25 | 44,2s | 14:32,4 | 15:16,6 | **Cartela "NASCE UM TIRANO"**; meados dos anos 70, governante errático, repressivo e corrupto; paranoia — trocava auxiliares, itinerários, veículos e locais de dormir; passou a comprar lealdade |
 
-**Total recebido:** 11:52,9 de 1:34:47 (20 partes de 54). Sem notificações neste lote.
+**Total recebido:** 15:16,6 de 1:34:47 (25 partes de 54).
+
+## Aviso de conteúdo
+
+A parte 22 tem imagem de execução (soldados e corpo no chão), por volta dos
+segundos 6 a 12. O briefing pede sem cenas gráficas — **não usar esse trecho**.
+O bloco B3 se resolve sem ele: o expurgo é explicado pela narração sobre planos
+do aparato militar, que sobram nas partes 15, 17 e 21.
+
+## Créditos de arquivo visíveis no próprio documentário
+
+Em dois momentos aparece no rodapé a fonte do material usado:
+- Parte 22, último frame: canal "FORGOTTEN HISTORY"
+- Parte 24, ~26s: canal "HORA NA GUERRA"
+
+Ou seja, o documentário do Rafael Cerqueira é ele próprio uma compilação de
+acervo de terceiros com narração original por cima — o mesmo formato que a
+gente vai fazer. Isso não autoriza reuso, mas mostra que o acervo histórico
+circula em várias fontes.
+
+## Blocos B3, B4 e B6 — material localizado
+
+| Bloco | Parte | Segundo na parte | Plano |
+|---|---|---|---|
+| B3 repressão | 21 | ~28s a ~34s | Amin discursando na tribuna da ONU |
+| B3 repressão | 21 | ~14s a ~20s | Retrato duro, quepe, fundo claro |
+| B4 expulsão | 23 | ~26s a ~34s | Kadafi em close e na tribuna da ONU |
+| B4 expulsão | 24 | ~20s a ~26s | Rua de Uganda, kombi e policiais, colorido |
+| B4 expulsão | 24 | ~27s a ~31s | Rua de Kampala movimentada, P&B |
+| B6 colapso | 24 | ~27s a ~33s | Mesma rua — serve de "antes" e "depois" |
+| B6 colapso | 25 | ~0s a ~6s | Retrato de quepe com cartela "NASCE UM TIRANO" |
 
 ## BLOCOS FECHADOS — já dá para cortar
 
@@ -79,6 +114,7 @@ morrera no exílio em Londres em 1969).
 |---|---|---|
 | 8 | ~5s finais | "Fam Zasso Spencer" |
 | 12 | do ~15s ao fim | "ASSADORES GUERREIROS GRILL", "Fam Zasso Spencer", "Equipe GUERREIROS GRILL" (3 pop-ups) |
+| 22 | do ~8s ao ~20s | "Equipe GUERREIROS GRILL / ~Gabrielly" (3 pop-ups) |
 
 A parte 12 perde mais da metade dos frames. O arquivo histórico dela (tropas
 coloniais, Quênia) está nos primeiros ~14s, que estão limpos.
@@ -134,6 +170,6 @@ Preferir sempre o arquivo real; se faltar, usar plano do apresentador.
 
 ## Pendências
 
-- Faltam as partes 21 em diante.
+- Faltam as partes 26 em diante.
 - Média real das partes: 33,3s. 54 partes dariam ~30min de um vídeo de 1:34:47 —
   confirmar se a gravação cobre o documentário inteiro ou só o primeiro terço.
