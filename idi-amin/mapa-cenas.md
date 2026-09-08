@@ -22,14 +22,46 @@ primeira da seguinte.
 | 8 | 33,8s | 3:43,8 | 4:17,6 | Infância instável, pais separados, mudança com a mãe para a cidade; escola muçulmana abandonada cedo, só até a 4ª série; 1,93 m, domínio do suaíli; **retratos fortes de Amin fardado** |
 | 9 | 36,3s | 4:17,6 | 4:53,9 | Perfil "ideal" para o projeto colonial britânico; **arquivo P&B de tropas coloniais em combate**; Amin de quepe em formatura militar; ingresso no exército britânico em 1946, Uganda ainda protetorado |
 | 10 | 39,3s | 4:53,9 | 5:33,2 | Destaque entre os recrutas; **piscina/natação**, rugby; **fotos de boxe** — campeão meio-pesado de Uganda em 1951, cinturão por 9 anos; promoção a cabo em 1949 |
+| 11 | 38,4s | 5:33,2 | 6:11,6 | **Cartela "EXPERIÊNCIA MILITAR"**; Amin batendo continência; **retrato icônico de braço estendido, fardado, com medalhas**; nos anos 1950 servia aos britânicos, ao contrário do discurso anti-imperialista posterior |
+| 12 | 36,4s | 6:11,6 | 6:48,0 | Arquivo de tropas coloniais; combate à revolta no Quênia e operações na Somália; reputação de soldado implacável, subida na hierarquia. **PARTE MUITO COMPROMETIDA — 4 notificações de WhatsApp** |
+| 13 | 39,8s | 6:48,0 | 7:27,7 | Patente de Efendi, a mais alta disponível a ugandeses; em 1962 o posto mais alto entre africanos nas Forças Armadas; **entrada de MILTON OBOTE com cartela de nome**; missão contra ladrões de gado |
+| 14 | 40,0s | 7:27,7 | 8:07,8 | Cartela "atrocidades BRUTAIS"; corpos exumados no Quênia, vítimas torturadas; britânicos decidem não processá-lo às vésperas da independência (9 de outubro de 1962); **arquivo de Amin em desfile com oficiais** |
+| 15 | 34,8s | 8:07,8 | 8:42,5 | Treinamento no Reino Unido como prêmio; aliança com Obote em 1964, expansão do exército e contrabando; **arquivo de desfile militar em Uganda**; **entrevista do Kabaka de Buganda** |
 
-**Total recebido:** 5:33,2 de 1:34:47 (10 partes de 54).
+**Total recebido:** 8:42,5 de 1:34:47 (15 partes de 54). Média por parte: 34,8s.
+
+## ERRO FACTUAL DO DOCUMENTÁRIO — corrigir na narração
+
+Na parte 15 a legenda diz "rei Moteza I de Buganda". O kabaka de Buganda em
+conflito com Obote nos anos 1960, deposto no ataque ao palácio em 1966, foi
+**Mutesa II** (Sir Edward Mutesa), não Mutesa I — este reinou no século XIX e
+morreu em 1884. A narração do nosso corte diz Mutesa II.
+
+## Contaminação por notificação — partes a evitar
+
+| Parte | Onde | Conteúdo do pop-up |
+|---|---|---|
+| 8 | ~5s finais | "Fam Zasso Spencer" |
+| 12 | do ~15s ao fim | "ASSADORES GUERREIROS GRILL", "Fam Zasso Spencer", "Equipe GUERREIROS GRILL" (3 pop-ups) |
+
+A parte 12 perde mais da metade dos frames. O arquivo histórico dela (tropas
+coloniais, Quênia) está nos primeiros ~14s, que estão limpos.
+
+## Bloco B2 (ascensão e golpe) — material já localizado
+
+| Parte | Segundo dentro da parte | Plano |
+|---|---|---|
+| 13 | ~17s a ~21s | Retrato de Milton Obote + cartela de nome |
+| 15 | ~28s a ~35s | Kabaka de Buganda em entrevista, P&B |
+| 15 | ~18s a ~26s | Desfile militar em Uganda, tropas em bloco |
+| 11 | ~15s a ~22s | Amin de braço estendido apontando, medalhas — plano mais forte do lote |
+| 14 | ~9s a ~14s | Amin em continência caminhando com oficiais |
 
 ## Achados que afetam a edição
 
-**1 · Notificação de WhatsApp na parte 8.** Nos ~5s finais aparece um pop-up
-("Fabrício Guerreiro / Fam Zasso Spencer"). Esses frames estão inutilizáveis e
-expõem conversa pessoal. Não usar. Se for regravar algo, ativar o Não Perturbe.
+**1 · Notificações de WhatsApp queimadas na gravação.** Ver tabela acima. Os
+frames afetados estão inutilizáveis e expõem conversas pessoais e de trabalho.
+Se for regravar, ativar o Não Perturbe antes.
 
 **2 · O documentário mistura três tipos de imagem.** Arquivo histórico real
 (tropas coloniais, boxe, retratos de Amin), b-roll contemporâneo (dançarinos
@@ -66,6 +98,6 @@ Preferir sempre o arquivo real; se faltar, usar plano do apresentador.
 
 ## Pendências
 
-- Faltam as partes 11 em diante.
+- Faltam as partes 16 em diante.
 - Média real das partes: 33,3s. 54 partes dariam ~30min de um vídeo de 1:34:47 —
   confirmar se a gravação cobre o documentário inteiro ou só o primeiro terço.
