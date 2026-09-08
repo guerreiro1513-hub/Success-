@@ -1,7 +1,7 @@
 # MAPA DE CENAS — gravação em partes
 
-Fonte: documentário "Idi Amin Dada — The Dictator the World Turned into a Legend"
-(Rafael Cerqueira, 1:34:47), gravado em tela pelo cliente e dividido em partes.
+Fonte: documentário **"Idi Amín: O maior ditador da África"**, canal
+**@fatosdesconhecidos** (27:14), gravado em tela pelo cliente e dividido em 44 partes.
 Legendas em português queimadas na imagem — a transcrição sai da leitura dos frames.
 
 **Método:** cada parte é convertida em contact sheet (1 frame a cada 2,5s) e lida
@@ -50,9 +50,33 @@ primeira da seguinte.
 | 36 | 55,1s | 21:32,1 | 22:27,2 | **Cartela "APOIADORES SE AFASTAM"**; fim dos anos 70, o regime chega ao nível mais sombrio; em 1977 ordena a execução do **arcebispo Janani Luwum** e do ministro do interior **Charles Oboth-Ofumbi**; isolamento internacional após Entebbe. **Fotografia de Luwum ao lado de Amin** |
 | 37 | 35,3s | 22:27,2 | 23:02,5 | Britânicos rompem relações diplomáticas com Uganda; ele se autoproclama "conquistador do Império Britânico"; a lista de honrarias autoatribuídas. **Amin de braços erguidos, P&B** e **em continência de quepe** |
 | 38 | 36,8s | 23:02,5 | 23:39,3 | O título completo na tela; explicação de que VC, DSO, MC e CBE são condecorações militares britânicas que ele se deu. **Entrevista de Amin de terno, gesticulando, P&B** |
-| 39 | 57,0s (só 12,3s legíveis) | 23:39,3 | 24:36,3 | **ARQUIVO TRUNCADO.** Nos 12,3s visíveis: explicação da Victoria Cross e menção à Commonwealth de 56 nações. Faltam 44,7s |
+| 39 | 57,0s (só 12,3s legíveis) | 23:39,3 | 24:36,3 | **ARQUIVO TRUNCADO.** Nos 12,3s visíveis: explicação da Victoria Cross e menção à Commonwealth de 56 nações |
+| 40 | 39,3s | 24:36,3 | 25:15,6 | Em 78 os EUA, responsáveis por 1/3 das compras de café, cortam o comércio com o regime; fome e miséria; oposição cresce dentro e fora; milhares fogem; tropas amotinadas atravessam para a Tanzânia; **outubro de 78, Amin ordena a invasão do território tanzaniano** |
+| 41 | 31,9s | 25:15,6 | 25:47,5 | A ofensiva sai pela culatra: a Tanzânia repele e lança contraofensiva devastadora; **11 de abril de 1979, tropas tanzanianas ao lado de exilados ugandenses tomam Kampala**. **Arquivo colorido de tropas tanzanianas marchando**, soldados capturados, multidão em festa |
+| 42 | 40,0s | 25:47,5 | 26:27,5 | **Cartela "EXÍLIO E MORTE"**; deixa para trás um país arruinado; refúgio pela amizade com Kadafi, primeiro na Líbia, com quatro esposas e mais de 30 filhos |
+| 43 | 40,0s | 26:27,5 | 27:07,5 | A família se estabelece em **Jidá, Arábia Saudita**; em 1989 tenta voltar à África com passaporte falso, rumo a Kinshasa; sem resultado político, volta ao anonimato; **fim em 16 de agosto de 2003**, falência múltipla de órgãos |
+| 44 | 33,9s | 27:07,5 | 27:41,4 | Família decide desligar os aparelhos; **obituário do Los Angeles Times na tela**; balanço final: devastação econômica, instabilidade social e até meio milhão de mortos; o apelido que o perseguiu até o túmulo. **Amin de braços erguidos, P&B — plano final** |
 
-**Total recebido:** 24:36,3 de 1:34:47 (39 partes de 54), com 56s ilegíveis.
+**GRAVAÇÃO COMPLETA:** 44 partes, do início ao fim do documentário.
+
+## A FONTE, IDENTIFICADA
+
+Na parte 42, por volta do segundo 10, a interface do YouTube aparece sobre o
+vídeo com título e barra de progresso legíveis:
+
+> **"Idi Amín: O maior ditador da África…" — canal @fatosdesconhecidos — 25:35 / 27:14**
+
+**Não é o vídeo do Rafael Cerqueira** (1:34:47), como eu havia suposto pelo
+apresentador. É outro documentário, de 27:14. A conta fecha: 44 partes de ~35s.
+
+**Consequência prática:** creditar @fatosdesconhecidos, não Rafael Cerqueira.
+
+## Nota sobre a minutagem
+
+A soma das partes dá 27:41, contra os 27:14 reais — cerca de 25s de folga,
+vinda de pequenas sobreposições entre as partes e do cabeçalho inflado da parte
+39. **Por isso todas as marcações deste documento são em "parte N, segundo X"**,
+nunca em tempo do documentário. É assim que você vai trabalhar no CapCut.
 
 ## ARQUIVOS A REENVIAR
 
@@ -280,7 +304,6 @@ Preferir sempre o arquivo real; se faltar, usar plano do apresentador.
 
 ## Pendências
 
-- Faltam as partes 40 em diante. Ainda não apareceram: a guerra com a Tanzânia (1978-79), a queda e o exílio.
-- Reenviar as partes 12 e 39, truncadas.
+- Gravação completa. Só as partes 12 e 39 continuam truncadas — reenviar se o material delas for necessário (o roteiro final não depende de nenhuma das duas).
 - Média real das partes: 33,3s. 54 partes dariam ~30min de um vídeo de 1:34:47 —
   confirmar se a gravação cobre o documentário inteiro ou só o primeiro terço.
