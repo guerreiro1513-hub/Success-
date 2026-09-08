@@ -42,8 +42,49 @@ primeira da seguinte.
 | 28 | 39,1s | 16:17,4 | 16:56,5 | Rumores: crocodilos, a fala de 76 sobre carne humana. O apresentador **freia e relativiza**: "muitas coisas ditas a respeito dessa pessoa podem não ser verdades". **Retrato de quepe vermelho, close, fundo desfocado** |
 | 29 | 38,7s | 16:56,5 | 17:35,2 | **Fontes oficiais não possuem qualquer evidência** de canibalismo; alegações vindas de desertores e exilados, **nunca verificadas por investigadores**. Arquivo de Amin fardado comendo, close P&B |
 | 30 | 46,4s | 17:35,2 | 18:21,5 | Entrevista de 77: perguntado diretamente, respondeu com ironia; ele brincava para confundir. Sobre as origens da brutalidade, as explicações variam. **Amin na tribuna da ONU** e **batendo continência, P&B** |
+| 31 | 41,4s | 18:21,5 | 19:02,9 | Médico israelense declara a jornal de Tel Aviv que Amin teria sífilis avançada (**fonte única — não usar**); projeção internacional: eleito presidente da Organização da Unidade Africana em 1975, promovido a marechal de campo pelos próprios oficiais, e em 77 países africanos bloqueiam resolução da ONU sobre direitos humanos. **Arquivo do plenário da OUA** |
+| 32 | 37,3s | 19:02,9 | 19:40,2 | **Cartela "TERROR NO AEROPORTO DE ENTEBBE"**; fim de junho de 76; apoio a sequestradores de um voo da Air France que saíra de Tel Aviv para Paris; autoriza o pouso em Entebbe e fornece tropas e suprimentos. **Exterior do terminal de Entebbe** |
+| 33 | 38,7s | 19:40,2 | 20:18,9 | 256 reféns e tripulantes sob controle; Israel não cede e envia comando de elite; noite de 3 de julho, a operação. **Material de ficção — ver alerta abaixo** |
+| 34 | 44,5s | 20:18,9 | 21:03,4 | 101 dos 105 reféns libertados; os sete sequestradores e 20 soldados ugandeses mortos; um soldado israelense morto. **Arquivo real da chegada dos reféns e das recepções** |
+| 35 | 28,8s | 21:03,4 | 21:32,1 | **Dora Bloch**, 74 anos, britânico-israelense, internada num hospital de Kampala, arrancada da cama e morta por ordem do regime — confirmado por relatórios britânicos divulgados décadas depois. **Primeira página de jornal israelense sobre o caso** |
 
-**Total recebido:** 18:21,5 de 1:34:47 (30 partes de 54).
+**Total recebido:** 21:32,1 de 1:34:47 (35 partes de 54).
+
+## ALERTA GRAVE — o documentário ilustra Entebbe com ficção e com o evento errado
+
+Os créditos que o próprio documentário exibe no rodapé denunciam a origem do
+material da sequência de Entebbe:
+
+| Parte | Crédito no rodapé | O que é de verdade |
+|---|---|---|
+| 33 | "Raid on Entebbe (1976) — 20th Century Fox Television" | Telefilme americano. Encenação, não arquivo |
+| 34 | "Mivtsa Yonatan (1977) — Noah Films" | Longa israelense sobre a operação. Encenação |
+| 33 | "Air France 8969 hijack" | **Sequestro do voo 8969, em Argel, em dezembro de 1994** — outro sequestro, outro avião, dezoito anos depois de Entebbe |
+
+Os dois primeiros são dramatização passando por arquivo. O terceiro é pior: é
+**um acontecimento completamente diferente** usado para ilustrar Entebbe.
+
+**Nada desse material entra no nosso corte.** Se entrasse, a gente estaria
+apresentando cena de filme e um sequestro de 1994 como se fossem imagens reais
+de 1976 — exatamente o que o briefing proíbe.
+
+### O que É aproveitável de Entebbe
+
+| Parte | Segundo na parte | Plano | Por quê |
+|---|---|---|---|
+| 32 | ~0s a ~6s | Exterior do terminal de Entebbe | Local real, imagem atual e honesta |
+| 34 | ~24s a ~34s | Chegada dos reféns, recepção, apertos de mão, P&B | Arquivo jornalístico legítimo |
+| 35 | ~8s a ~18s | Primeira página de jornal israelense sobre Dora Bloch | Documento real |
+
+Com esses três a sequência de Entebbe se conta em 12 segundos, que é tudo o que
+ela cabe num vídeo de cinco minutos. A função dela no roteiro é ser o começo do
+declínio: a humilhação internacional que marca a virada.
+
+## Também não entra: a sífilis
+
+A parte 31 traz a declaração de um médico israelense a um jornal de Tel Aviv de
+que Amin teria sífilis em estágio avançado com danos cerebrais irreversíveis.
+É diagnóstico à distância, de fonte única, publicado em jornal. Fora.
 
 ## DECISÃO EDITORIAL — cortar o trecho dos rumores
 
@@ -205,6 +246,6 @@ Preferir sempre o arquivo real; se faltar, usar plano do apresentador.
 
 ## Pendências
 
-- Faltam as partes 31 em diante. Ainda não apareceram: Entebbe (1976), o arcebispo Janani Luwum (1977), a guerra com a Tanzânia (1978-79), a queda e o exílio.
+- Faltam as partes 36 em diante. Ainda não apareceram: o arcebispo Janani Luwum (1977), a guerra com a Tanzânia (1978-79), a queda e o exílio.
 - Média real das partes: 33,3s. 54 partes dariam ~30min de um vídeo de 1:34:47 —
   confirmar se a gravação cobre o documentário inteiro ou só o primeiro terço.
