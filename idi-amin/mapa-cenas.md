@@ -27,15 +27,51 @@ primeira da seguinte.
 | 13 | 39,8s | 6:48,0 | 7:27,7 | Patente de Efendi, a mais alta disponível a ugandeses; em 1962 o posto mais alto entre africanos nas Forças Armadas; **entrada de MILTON OBOTE com cartela de nome**; missão contra ladrões de gado |
 | 14 | 40,0s | 7:27,7 | 8:07,8 | Cartela "atrocidades BRUTAIS"; corpos exumados no Quênia, vítimas torturadas; britânicos decidem não processá-lo às vésperas da independência (9 de outubro de 1962); **arquivo de Amin em desfile com oficiais** |
 | 15 | 34,8s | 8:07,8 | 8:42,5 | Treinamento no Reino Unido como prêmio; aliança com Obote em 1964, expansão do exército e contrabando; **arquivo de desfile militar em Uganda**; **entrevista do Kabaka de Buganda** |
+| 16 | 34,9s | 8:42,5 | 9:17,4 | Kabaka manda investigar as negociações; Obote cria a própria comissão; **cartela "BRAÇO DIREITO DE OBOTE"**; Amin promovido a major em 1963 e coronel em 1964 |
+| 17 | 36,2s | 9:17,4 | 9:53,6 | Parlamento acusa Amin de apropriação de 350 mil em ouro e marfim vindos de guerrilheiros do Congo; Obote prende os cinco ministros, **suspende a Constituição e se nomeia presidente**; dois dias depois põe Amin no comando de toda a força militar e policial; **Amin discursando ao microfone sob a bandeira** |
+| 18 | 31,8s | 9:53,6 | 10:25,4 | Tanques atacam o palácio do kabaka; ele deixa o país; **25 DE JANEIRO DE 1971 — Obote volta de conferência em Singapura e Amin toma o poder**; Amin sentado com documento; retrato de alto contraste com quepe |
+| 19 | 48,0s | 10:25,4 | 11:13,5 | Obote derrubado e exilado pelo homem a quem dera tanto poder; **cartela "HOMEM DO POVO?"**; a chegada de Amin foi recebida com entusiasmo por boa parte dos ugandenses; **multidões celebrando nas ruas com música e dança** |
+| 20 | 39,4s | 11:13,5 | 11:52,9 | Postura descontraída e imagem de líder próximo; **Amin com Kissinger/autoridades ocidentais**; **fotos de casamento** — esposas de grupos étnicos diferentes; repatriação do corpo do kabaka como reparação simbólica |
 
-**Total recebido:** 8:42,5 de 1:34:47 (15 partes de 54). Média por parte: 34,8s.
+**Total recebido:** 11:52,9 de 1:34:47 (20 partes de 54). Sem notificações neste lote.
+
+## BLOCOS FECHADOS — já dá para cortar
+
+**B0 (hook), B1 (quem era) e B2 (ascensão e golpe) estão com material completo.**
+
+### B2 — sequência do golpe, na ordem de montagem
+
+| Ordem | Parte | Segundo na parte | Plano | Função |
+|---|---|---|---|---|
+| 1 | 17 | ~26s a ~31s | Amin discursando ao microfone sob a bandeira | abre o bloco |
+| 2 | 13 | ~17s a ~21s | Retrato de Obote com cartela de nome | apresenta o antagonista |
+| 3 | 17 | ~0s a ~8s | Amin fardado em entrevista (escândalo do ouro) | a ruptura |
+| 4 | 18 | ~0s a ~4s | Tanques no palácio do kabaka | a escalada |
+| 5 | 18 | ~20s a ~26s | Amin sentado com o documento do golpe | **FREEZE — cartela 1971** |
+| 6 | 19 | ~44s a ~48s | Multidões celebrando nas ruas | fecha o bloco |
+
+O plano 5 é o frame de pausa do bloco: Amin sentado, imóvel, com o documento ao
+lado. É o instante exato em que o poder muda de mãos.
+
+### Candidatos a freeze do hook (B0)
+
+| Parte | Segundo | Plano |
+|---|---|---|
+| 11 | ~15s a ~22s | Amin de braço estendido apontando, coberto de medalhas |
+| 18 | ~28s a ~32s | Retrato de alto contraste, quepe, olhar duro |
+| 3 | ~8s a ~13s | Retrato de quepe vermelho sobre fundo verde |
+
+Recomendo o da parte 11: é o plano com mais autoridade e mais espaço negativo à
+esquerda para a cartela de texto.
 
 ## ERRO FACTUAL DO DOCUMENTÁRIO — corrigir na narração
 
 Na parte 15 a legenda diz "rei Moteza I de Buganda". O kabaka de Buganda em
 conflito com Obote nos anos 1960, deposto no ataque ao palácio em 1966, foi
 **Mutesa II** (Sir Edward Mutesa), não Mutesa I — este reinou no século XIX e
-morreu em 1884. A narração do nosso corte diz Mutesa II.
+morreu em 1884. A narração do nosso corte diz Mutesa II. O erro se repete na
+parte 18 (palácio) e na parte 20 (repatriação do corpo, em 1971 — Mutesa II
+morrera no exílio em Londres em 1969).
 
 ## Contaminação por notificação — partes a evitar
 
@@ -98,6 +134,6 @@ Preferir sempre o arquivo real; se faltar, usar plano do apresentador.
 
 ## Pendências
 
-- Faltam as partes 16 em diante.
+- Faltam as partes 21 em diante.
 - Média real das partes: 33,3s. 54 partes dariam ~30min de um vídeo de 1:34:47 —
   confirmar se a gravação cobre o documentário inteiro ou só o primeiro terço.
