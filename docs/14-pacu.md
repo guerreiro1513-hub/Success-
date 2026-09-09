@@ -1,6 +1,9 @@
 # GUERREIRO'S GRILL — anúncio do PACU (20,4 s)
 
-`entrega/guerreiros-PACU-20s.mp4` — 1080×1920 · 9:16 (SAR 1:1) · H.264 · 30 fps · AAC · 20,40 s
+`entrega/guerreiros-PACU-20s.mp4` — 1080×1920 · 9:16 (SAR 1:1) · H.264 · 30 fps · AAC · 20,40 s · 21 MB
+
+Exportado a 8,2 Mbps (CRF 22, preset slow). O primeiro export saiu com 32 MB e
+estourava o limite de 30 MB do envio; o Instagram recomprime de qualquer forma.
 
 ## O material e a decisão central
 Os três vídeos são a **mesma cena à noite**, sob luz amarela forte. As **duas fotos**
