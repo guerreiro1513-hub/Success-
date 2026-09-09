@@ -71,3 +71,55 @@ Nenhuma alegação de "melhor", "maior" ou "imperdível".
 612 frames: 0 frames pretos, 0 moles, 0 saltos de exposição fora de corte.
 Brilho 61,7–107,1. Tinta do texto x=118..962, base y=1575 (zona segura do Reels).
 SAR forçado para 1:1 — as fotos são 1450×2576 e geravam pixel não-quadrado.
+
+---
+
+# Revisão 1 — texto por letra, foto em movimento, variedade com o Video A
+
+## 1. Tipografia — animação por letra
+A referência que você mandou é um tutorial de presets de texto do CapCut
+("Letras Aleatórias", "Subida aleatória", "Crescer", "Estremecer"). O que eu tinha
+animava a **linha inteira**; agora cada **letra** anima sozinha.
+
+Motor novo (`mkpktext2.py`), por caractere:
+- **entrada em cascata** — cada letra entra com atraso de 2 frames em relação à anterior
+- **letras aleatórias** — nos primeiros ~5 frames a letra mostra um caractere sorteado
+  antes de assentar no certo ("RH" → "PACU")
+- **subida com overshoot** — sobe 38 px e escala 1,55 → 1,00 com ease out-back
+- **jitter horizontal** por letra (±9 px) que assenta em zero, com semente fixa
+  (determinístico entre frames, não treme sozinho)
+- **rastro fantasma** — duas cópias acima em 22% e 10% de alfa durante a entrada
+- **saída em cascata invertida** — as letras caem e somem da última para a primeira
+
+## 2. As fotos agora têm gesto, e entregam pro vídeo
+Como você sugeriu: a foto **entra em zoom in**, e **na hora do texto dá o zoom out
+e corta pro vídeo**.
+
+| Plano | Movimento |
+|---|---|
+| 0,0–1,2 s | foto, escala 1,05 → 2,25 (**zoom in**) |
+| 2,1–3,6 s | foto, escala 2,25 → 1,02 (**zoom out**) — assenta exatamente quando "PACU" para de embaralhar |
+| 3,6 s | **corta pro vídeo** |
+
+É um gesto só atravessando o corte. As outras duas aparições de foto viraram vídeo:
+o plano do "SERVE ATÉ 8 PESSOAS" agora é o P2 com o peixe inteiro **e a galera em
+volta**, que sustenta melhor a mensagem do que uma foto parada.
+
+Sobraram 3 momentos de foto (era 5): abre, revela e fecha.
+
+## 3. Variedade com o Video A
+O bloco do churrasco agora é liderado pelo Video A (1080×1920 nativo, o de maior
+resolução do acervo):
+
+| Tempo | Plano |
+|---|---|
+| 13,5 | frango dourado, close |
+| 14,1 | braço levantando a costela contra o céu |
+| 14,7 | costela com bacon no espeto |
+| 15,3 | fogo na brasa (Florais) |
+| 15,9 | frangos na grelha com a rua atrás |
+| 16,5 | carne na tábua (Florais) |
+
+## Controle de qualidade
+612 frames, 0 frames pretos, 0 moles, 0 saltos de exposição fora de corte.
+Tinta do texto x=148..932, base y=1562. SAR 1:1. 22 MB.
