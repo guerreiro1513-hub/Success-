@@ -1,4 +1,4 @@
-# APRESENTAÇÃO — CUNHA e DAVI
+# APRESENTAÇÃO — CUNHA, DAVI, EMILIO, JÚLIA, GEISEL e NICOLE
 ### Vídeo: `idi_amin_analise_documentario_4_5min.mp4` (5:20)
 
 O vídeo narra sozinho. **Sete vezes ele para num cartão de tela cheia**, com a
@@ -10,19 +10,29 @@ informação nova, é pra pegar o trecho que passou e destrinchar com as própri
 palavras, pra quem está assistindo entender o que viu. Se a narração passou
 rápido por cima de alguma coisa, é aí que vocês seguram e explicam.
 
-## Divisão
+## Divisão — 7 pausas, 6 apresentadores
 
-| | Pausas | Total falado |
+| Quem | Pausa | Observação |
 |---|---|---|
-| **CUNHA** | 1 · 3 · 5 · 7 | ~1:20 |
-| **DAVI** | 2 · 4 · 6 | ~1:00 |
+| **CUNHA** | 1 | abre |
+| **DAVI** | 2 | a fala mais longa |
+| **EMILIO** | 3 | a mais importante da apresentação |
+| **JÚLIA** | 4 | |
+| **GEISEL** | 5 e 7 | duas falas, e fecha |
+| **NICOLE** | 6 | |
 
-Cunha abre e fecha. **Quem não está falando opera o vídeo** — combinem antes.
+Cunha abre, Geisel fecha. Geisel tem duas porque são sete pausas para seis
+pessoas — as dele estão separadas pela fala da Nicole, então ele não fala duas
+vezes seguidas.
+
+**Uma pessoa fixa opera o vídeo** do começo ao fim. Com seis, não dá pra ficar
+passando o notebook de mão em mão.
 
 | | Tempo |
 |---|---|
 | Vídeo | 5:20 |
 | As 7 falas | ~2:20 |
+| Média por pessoa | ~20s (Geisel ~45s) |
 | **Apresentação inteira** | **~7:40** |
 
 ---
@@ -65,7 +75,7 @@ Cunha abre e fecha. **Quem não está falando opera o vídeo** — combinem ante
 
 ---
 
-## ⏸ PAUSA 3 — cartão aos **2:25** — CUNHA
+## ⏸ PAUSA 3 — cartão aos **2:25** — EMILIO
 ### 25 DE JANEIRO DE 1971
 **Explicando a ordem dos fatos até o golpe**
 
@@ -85,7 +95,7 @@ Cunha abre e fecha. **Quem não está falando opera o vídeo** — combinem ante
 
 ---
 
-## ⏸ PAUSA 4 — cartão aos **3:07** — DAVI
+## ⏸ PAUSA 4 — cartão aos **3:07** — JÚLIA
 ### 1972 — A EXPULSÃO
 **Explicando o que foi a expulsão e por que quebrou o país**
 
@@ -103,7 +113,7 @@ Cunha abre e fecha. **Quem não está falando opera o vídeo** — combinem ante
 
 ---
 
-## ⏸ PAUSA 5 — cartão aos **3:51** — CUNHA
+## ⏸ PAUSA 5 — cartão aos **3:51** — GEISEL
 ### 1977 — O ARCEBISPO LUWUM
 **Explicando a repressão que acabou de passar**
 
@@ -121,7 +131,7 @@ Cunha abre e fecha. **Quem não está falando opera o vídeo** — combinem ante
 
 ---
 
-## ⏸ PAUSA 6 — cartão aos **4:34** — DAVI
+## ⏸ PAUSA 6 — cartão aos **4:34** — NICOLE
 ### 11 DE ABRIL DE 1979
 **Explicando por que o regime caiu**
 
@@ -140,7 +150,7 @@ Cunha abre e fecha. **Quem não está falando opera o vídeo** — combinem ante
 
 ---
 
-## ⏸ PAUSA 7 — cartão final aos **5:12** — CUNHA
+## ⏸ PAUSA 7 — cartão final aos **5:12** — GEISEL
 ### O PODER QUE PARECIA ABSOLUTO TAMBÉM TINHA UM FIM.
 **Explicando o fecho**
 
@@ -170,8 +180,9 @@ pausem quando a segunda linha terminar.
 - **Não leiam.** Leiam duas vezes antes e falem com as próprias palavras. O que
   precisa sair certo são as datas: 1946, 1962, 1964, 1971, 1972, 1977, 1979, 2003.
 - **Esperem um segundo depois de pausar** antes de começar a falar.
-- **Se um travar**, o outro dá play e assume a próxima.
-- **Curto de tempo?** Cortem as pausas 2 e 5. Ficam 5 falas e uns 6:30.
+- **Fiquem em pé na ordem das falas.** Assim ninguém precisa procurar de quem é a vez.
+- **Se alguém travar**, quem opera o vídeo dá play e a próxima pessoa assume.
+- **Curto de tempo?** Não cortem pausa, senão alguém fica sem falar. Encurtem as falas 2 e 5, que são as mais longas.
 - **Nada aqui é informação extra.** Tudo o que está nessas falas apareceu na
   tela ou foi dito pela narração. Se alguém perguntar de onde veio, está no
   vídeo.

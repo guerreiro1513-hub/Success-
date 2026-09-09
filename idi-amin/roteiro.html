@@ -1,0 +1,439 @@
+<title>Roteiro do Idi Amin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@500;700&display=swap">
+
+<style>
+:root{
+  --ground:#F6F2E9;
+  --surface:#FFFFFF;
+  --sunk:#EFE9DC;
+  --ink:#191713;
+  --muted:#6E665A;
+  --rule:#DFD6C4;
+  --gold:#9A6B05;
+  --gold-soft:#F2E4BE;
+  --teal:#1F6A5F;
+  --teal-soft:#D9EBE6;
+  --c-cunha:#9A6B05;  --b-cunha:#F2E4BE;
+  --c-davi:#1F6A5F;   --b-davi:#D9EBE6;
+  --c-emilio:#9B4A21; --b-emilio:#F6DFD1;
+  --c-julia:#7A3A6B;  --b-julia:#EFDCEA;
+  --c-geisel:#33548A; --b-geisel:#DAE3F4;
+  --c-nicole:#55651B; --b-nicole:#E5EBC9;
+  --shadow:0 1px 2px rgba(25,23,19,.06), 0 8px 24px -16px rgba(25,23,19,.28);
+
+  --f-display:"Archivo Black","Arial Black",Impact,sans-serif;
+  --f-body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,monospace;
+
+  --wrap:44rem;
+  --step:clamp(1.05rem,.98rem + .3vw,1.19rem);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#100F0E;
+    --surface:#1A1817;
+    --sunk:#161413;
+    --ink:#F3EFE6;
+    --muted:#9C9488;
+    --rule:#2E2A26;
+    --gold:#E9BB44;
+    --gold-soft:#3A2E12;
+    --teal:#66C2B2;
+    --teal-soft:#12312C;
+    --c-cunha:#E9BB44;  --b-cunha:#3A2E12;
+    --c-davi:#66C2B2;   --b-davi:#12312C;
+    --c-emilio:#E08A5B; --b-emilio:#3A2216;
+    --c-julia:#D08FC2;  --b-julia:#331A2C;
+    --c-geisel:#8FB2E8; --b-geisel:#182740;
+    --c-nicole:#B9CC63; --b-nicole:#262D10;
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 30px -18px rgba(0,0,0,.9);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#100F0E;
+  --surface:#1A1817;
+  --sunk:#161413;
+  --ink:#F3EFE6;
+  --muted:#9C9488;
+  --rule:#2E2A26;
+  --gold:#E9BB44;
+  --gold-soft:#3A2E12;
+  --teal:#66C2B2;
+  --teal-soft:#12312C;
+  --c-cunha:#E9BB44;  --b-cunha:#3A2E12;
+  --c-davi:#66C2B2;   --b-davi:#12312C;
+  --c-emilio:#E08A5B; --b-emilio:#3A2216;
+  --c-julia:#D08FC2;  --b-julia:#331A2C;
+  --c-geisel:#8FB2E8; --b-geisel:#182740;
+  --c-nicole:#B9CC63; --b-nicole:#262D10;
+  --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 30px -18px rgba(0,0,0,.9);
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--ground);
+  color:var(--ink);
+  font-family:var(--f-body);
+  font-size:var(--step);
+  line-height:1.62;
+  -webkit-text-size-adjust:100%;
+}
+.page{max-width:var(--wrap);margin:0 auto;padding:2.2rem 1.15rem 5rem;display:flex;flex-direction:column;gap:2.6rem}
+
+/* ---------- topo ---------- */
+.eyebrow{
+  font-family:var(--f-mono);font-size:.7rem;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
+  display:flex;flex-wrap:wrap;gap:.55rem;align-items:center;
+}
+.eyebrow b{color:var(--gold);font-weight:700}
+h1{
+  font-family:var(--f-display);font-weight:400;
+  font-size:clamp(2rem,1.3rem + 3.4vw,3.15rem);
+  line-height:.98;letter-spacing:-.02em;text-wrap:balance;
+  margin:.7rem 0 0;
+}
+h1 em{font-style:normal;color:var(--gold);display:block}
+.lead{margin:1.1rem 0 0;color:var(--muted);max-width:34rem}
+.lead strong{color:var(--ink);font-weight:600}
+
+.facts{
+  margin-top:1.6rem;display:grid;gap:0;
+  grid-template-columns:repeat(auto-fit,minmax(7.5rem,1fr));
+  border:1px solid var(--rule);border-radius:3px;overflow:hidden;background:var(--surface);
+}
+.facts div{padding:.7rem .85rem;border-right:1px solid var(--rule)}
+.facts div:last-child{border-right:0}
+.facts dt{font-family:var(--f-mono);font-size:.63rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);font-weight:700}
+.facts dd{margin:.2rem 0 0;font-family:var(--f-mono);font-weight:700;font-size:1.05rem;
+  font-variant-numeric:tabular-nums}
+
+/* ---------- divisao ---------- */
+.dupla{display:grid;gap:.7rem;grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr))}
+.quem{
+  border:1px solid var(--rule);border-radius:3px;padding:.85rem .95rem;background:var(--surface);
+  display:flex;flex-direction:column;gap:.3rem;
+}
+[data-who="cunha"] {--who:var(--c-cunha); --who-bg:var(--b-cunha)}
+[data-who="davi"]  {--who:var(--c-davi);  --who-bg:var(--b-davi)}
+[data-who="emilio"]{--who:var(--c-emilio);--who-bg:var(--b-emilio)}
+[data-who="julia"] {--who:var(--c-julia); --who-bg:var(--b-julia)}
+[data-who="geisel"]{--who:var(--c-geisel);--who-bg:var(--b-geisel)}
+[data-who="nicole"]{--who:var(--c-nicole);--who-bg:var(--b-nicole)}
+.quem{border-left:4px solid var(--who)}
+.quem b{font-family:var(--f-display);font-size:1.1rem;letter-spacing:.01em;color:var(--who)}
+.quem span{font-family:var(--f-mono);font-size:.82rem;color:var(--muted);font-weight:500}
+
+/* ---------- avisos ---------- */
+.aviso{
+  background:var(--sunk);border:1px solid var(--rule);border-radius:3px;
+  padding:1rem 1.1rem;display:flex;flex-direction:column;gap:.55rem;
+}
+.aviso p{margin:0}
+.aviso p:first-child{font-family:var(--f-mono);font-size:.68rem;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+
+/* ---------- cartelas ---------- */
+.cues{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:1.1rem}
+.cue{
+  background:var(--surface);border:1px solid var(--rule);border-radius:3px;
+  box-shadow:var(--shadow);overflow:hidden;
+}
+.cue{border-top:3px solid var(--who)}
+.cue.done{opacity:.5}
+
+.cue-top{
+  display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;
+  padding:.8rem 1.05rem;border-bottom:1px solid var(--rule);background:var(--sunk);
+}
+.tempo{
+  font-family:var(--f-mono);font-weight:700;font-size:1.32rem;
+  font-variant-numeric:tabular-nums;letter-spacing:-.02em;
+}
+.n{font-family:var(--f-mono);font-size:.66rem;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted)}
+.chip{
+  margin-left:auto;font-family:var(--f-mono);font-size:.72rem;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;padding:.28rem .6rem;border-radius:2px;
+}
+.chip{background:var(--who-bg);color:var(--who)}
+
+.cue-body{padding:1.05rem 1.05rem 1.15rem;display:flex;flex-direction:column;gap:.85rem}
+.cartela{
+  font-family:var(--f-display);font-weight:400;margin:0;
+  font-size:clamp(1.15rem,1rem + .8vw,1.5rem);line-height:1.12;
+  letter-spacing:-.01em;text-wrap:balance;
+}
+.oque{
+  margin:0;font-family:var(--f-mono);font-size:.72rem;font-weight:500;
+  letter-spacing:.06em;color:var(--muted);text-transform:uppercase;
+}
+.fala{margin:0;padding:0 0 0 1rem;border-left:2px solid var(--rule);
+  display:flex;flex-direction:column;gap:.75rem}
+.fala p{margin:0}
+.fala{border-left-color:var(--who)}
+
+.feito{
+  display:flex;align-items:center;gap:.5rem;font-family:var(--f-mono);
+  font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+  cursor:pointer;user-select:none;padding-top:.15rem;
+}
+.feito input{width:1rem;height:1rem;accent-color:var(--gold);cursor:pointer;margin:0}
+
+/* ---------- tabela extras ---------- */
+h2.sec{
+  font-family:var(--f-display);font-weight:400;margin:0 0 .35rem;
+  font-size:clamp(1.3rem,1.1rem + 1vw,1.7rem);line-height:1.05;letter-spacing:-.01em;
+}
+.sec-lead{margin:0 0 1rem;color:var(--muted)}
+.scroll{overflow-x:auto;border:1px solid var(--rule);border-radius:3px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:31rem;font-size:.94rem}
+th,td{text-align:left;padding:.65rem .85rem;border-bottom:1px solid var(--rule);vertical-align:top}
+tbody tr:last-child td{border-bottom:0}
+th{font-family:var(--f-mono);font-size:.63rem;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);background:var(--sunk)}
+td.t{font-family:var(--f-mono);font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+td.frase{font-family:var(--f-display);color:var(--gold);font-size:.86rem;
+  letter-spacing:.01em;white-space:nowrap}
+
+/* ---------- listas ---------- */
+ul.notas{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.7rem}
+ul.notas li{padding-left:1.15rem;position:relative}
+ul.notas li::before{content:"";position:absolute;left:0;top:.62em;
+  width:.42rem;height:.42rem;background:var(--gold);border-radius:50%}
+ul.notas b{font-weight:600}
+
+footer{border-top:1px solid var(--rule);padding-top:1.2rem;color:var(--muted);font-size:.9rem}
+footer a{color:var(--gold)}
+
+/* ---------- modo palco ---------- */
+.palco-btn{
+  position:sticky;top:.7rem;align-self:flex-end;z-index:5;
+  font-family:var(--f-mono);font-size:.7rem;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;padding:.55rem .85rem;border-radius:2px;cursor:pointer;
+  background:var(--ink);color:var(--ground);border:0;
+}
+.palco-btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+body.palco .hide-palco{display:none}
+body.palco{--step:clamp(1.2rem,1.05rem + .8vw,1.5rem)}
+body.palco .cue-body{padding:1.2rem 1.1rem 1.3rem}
+
+@media (max-width:32rem){
+  .dupla{grid-template-columns:1fr}
+  .facts{grid-template-columns:1fr 1fr}
+  .facts div:nth-child(2n){border-right:0}
+  .facts div:nth-child(-n+2){border-bottom:1px solid var(--rule)}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="page">
+
+  <button class="palco-btn" id="palco" type="button">Modo palco</button>
+
+  <header>
+    <p class="eyebrow"><span>Apresentação</span><span>·</span><b>5:20 de vídeo</b><span>·</span><span>6 apresentadores</span></p>
+    <h1>Sete pausas<em>seis vozes</em></h1>
+    <p class="lead">Seis apresentadores, sete pausas. O vídeo narra sozinho. Sete vezes ele para num cartão de tela cheia, com a data centralizada, sem legenda e a música subindo. <strong>Esse cartão é o sinal: é ali que vocês pausam e falam.</strong></p>
+
+    <dl class="facts">
+      <div><dt>Vídeo</dt><dd>5:20</dd></div>
+      <div><dt>Falas</dt><dd>7</dd></div>
+      <div><dt>Apresentação</dt><dd>~7:40</dd></div>
+      <div><dt>Cada um</dt><dd>~20s</dd></div>
+    </dl>
+  </header>
+
+  <section class="aviso hide-palco">
+    <p>O que falar</p>
+    <p>A fala é pra <strong>explicar o que acabou de acontecer na tela</strong>. Não é pra trazer informação nova. É pegar o trecho que passou e destrinchar com as próprias palavras, pra quem está assistindo entender o que viu.</p>
+    <p>Tudo o que está escrito aqui apareceu no vídeo ou foi dito pela narração. Se alguém perguntar de onde veio, está lá.</p>
+  </section>
+
+  <section class="dupla hide-palco">
+    <div class="quem" data-who="cunha"><b>Cunha</b><span>pausa 1</span><span>abre</span></div>
+    <div class="quem" data-who="davi"><b>Davi</b><span>pausa 2</span><span>a mais longa</span></div>
+    <div class="quem" data-who="emilio"><b>Emilio</b><span>pausa 3</span><span>a mais importante</span></div>
+    <div class="quem" data-who="julia"><b>Júlia</b><span>pausa 4</span></div>
+    <div class="quem" data-who="geisel"><b>Geisel</b><span>pausas 5 e 7</span><span>duas falas, fecha</span></div>
+    <div class="quem" data-who="nicole"><b>Nicole</b><span>pausa 6</span></div>
+  </section>
+
+  <ol class="cues">
+
+    <li class="cue" data-who="cunha">
+      <div class="cue-top"><span class="tempo">0:28</span><span class="n">Pausa 1</span><span class="chip">Cunha</span></div>
+      <div class="cue-body">
+        <h2 class="cartela">Como um militar tomou Uganda?</h2>
+        <p class="oque">Explicando o começo do vídeo</p>
+        <div class="fala">
+          <p>Então: esse homem que vocês viram é Idi Amin. Ele tomou o poder em Uganda em 1971 e ficou oito anos governando. Quando caiu, deixou o país arruinado.</p>
+          <p>E repara nas imagens do começo: ele está sendo carregado pela multidão. Não é alguém que chegou sozinho nem que chegou odiado — tem um monte de gente ali comemorando.</p>
+          <p>A pergunta que está na tela é essa: como um militar chegou a esse ponto? É o que a próxima parte responde.</p>
+        </div>
+        <label class="feito"><input type="checkbox" data-cue="1"> feito</label>
+      </div>
+    </li>
+
+    <li class="cue" data-who="davi">
+      <div class="cue-top"><span class="tempo">1:44</span><span class="n">Pausa 2</span><span class="chip">Davi</span></div>
+      <div class="cue-body">
+        <h2 class="cartela">1964 — A aliança</h2>
+        <p class="oque">Explicando a formação dele e a subida</p>
+        <div class="fala">
+          <p>Duas coisas passaram aí. A primeira é de onde ele veio: nasceu no noroeste de Uganda por volta de 1925, filho de agricultor, largou a escola na quarta série. O que abriu porta pra ele foi o tamanho, quase dois metros. Quem recrutou foi o exército colonial britânico, em 1946, quando Uganda ainda era protetorado. Ou seja: ele se formou dentro do exército de quem colonizava o país, e serviu reprimindo revoltas de africanos no Quênia. Foi campeão de boxe por nove anos e, na independência, em 1962, era um dos dois únicos ugandenses com posto de oficial.</p>
+          <p>A segunda é a parte do Obote, que é o outro homem que apareceu na tela. Ele e o Amin não eram inimigos, eram sócios. Foi o Obote que promoveu o Amin até o comando do exército, e em 64 os dois montaram aquela aliança de expansão militar e contrabando. Em 66, quando o parlamento acusou o Amin de desviar ouro e marfim do Congo, o Obote não entregou ele: prendeu os ministros que acusavam, rasgou a Constituição e se declarou presidente.</p>
+        </div>
+        <label class="feito"><input type="checkbox" data-cue="2"> feito</label>
+      </div>
+    </li>
+
+    <li class="cue" data-who="emilio">
+      <div class="cue-top"><span class="tempo">2:25</span><span class="n">Pausa 3</span><span class="chip">Emilio</span></div>
+      <div class="cue-body">
+        <h2 class="cartela">25 de janeiro de 1971</h2>
+        <p class="oque">Explicando a ordem dos fatos até o golpe</p>
+        <div class="fala">
+          <p>Essa parte é a mais importante da apresentação, então vale repetir devagar a ordem em que as coisas aconteceram.</p>
+          <p>Dois dias depois de rasgar a Constituição, o Obote entregou ao Amin o comando de toda a força militar e policial do país. Meses depois, mandou tanques atacarem o palácio do rei de Buganda.</p>
+          <p>Quer dizer: quando o golpe veio, em 25 de janeiro de 1971, com o Obote fora do país, as regras já estavam destruídas — e não foi o Amin quem destruiu. Ele pegou o país já sem freio nenhum.</p>
+          <p>E olha o final do trecho: boa parte da população foi pra rua comemorar o golpe.</p>
+        </div>
+        <label class="feito"><input type="checkbox" data-cue="3"> feito</label>
+      </div>
+    </li>
+
+    <li class="cue" data-who="julia">
+      <div class="cue-top"><span class="tempo">3:07</span><span class="n">Pausa 4</span><span class="chip">Júlia</span></div>
+      <div class="cue-body">
+        <h2 class="cartela">1972 — A expulsão</h2>
+        <p class="oque">Explicando o que foi a expulsão e por que quebrou o país</p>
+        <div class="fala">
+          <p>O que aconteceu aí foi o seguinte. Em 72 o Amin pediu dinheiro e armas pra Israel, foi recusado, rompeu com o país e se aproximou da Líbia do Kadafi.</p>
+          <p>Só que a retaliação não caiu em quem recusou: caiu em quem morava em Uganda. Ele deu noventa dias pra comunidade asiática deixar o território. Umas cinquenta mil pessoas saíram levando quase nada.</p>
+          <p>E o motivo de isso quebrar o país é o que a narração falou rápido: era essa comunidade que sustentava o comércio e as plantações. Os negócios foram entregues a apoiadores dele, que não sabiam tocar aquilo, e em pouco tempo começou a faltar comida.</p>
+        </div>
+        <label class="feito"><input type="checkbox" data-cue="4"> feito</label>
+      </div>
+    </li>
+
+    <li class="cue" data-who="geisel">
+      <div class="cue-top"><span class="tempo">3:51</span><span class="n">Pausa 5</span><span class="chip">Geisel</span></div>
+      <div class="cue-body">
+        <h2 class="cartela">1977 — O arcebispo Luwum</h2>
+        <p class="oque">Explicando a repressão que acabou de passar</p>
+        <div class="fala">
+          <p>Essa parte mostrou o que estava por trás da fachada. O Amin montou os próprios esquadrões da morte, e entre cinco e seis mil soldados foram executados.</p>
+          <p>E não era aleatório: quase todos eram das etnias Acholi e Lango, que eram os povos ligados ao Obote, o governo anterior. Ou seja, ele estava limpando de dentro do próprio exército quem podia virar contra ele.</p>
+          <p>Aí a repressão saiu do exército. Em 1977 o regime mandou matar o arcebispo Janani Luwum, que era a maior autoridade religiosa do país. É isso que está escrito no cartão. E o que o vídeo conclui é: quando um governo chega a matar o arcebispo, não sobrou nenhuma instituição capaz de segurar ele.</p>
+        </div>
+        <label class="feito"><input type="checkbox" data-cue="5"> feito</label>
+      </div>
+    </li>
+
+    <li class="cue" data-who="nicole">
+      <div class="cue-top"><span class="tempo">4:34</span><span class="n">Pausa 6</span><span class="chip">Nicole</span></div>
+      <div class="cue-body">
+        <h2 class="cartela">11 de abril de 1979</h2>
+        <p class="oque">Explicando por que o regime caiu</p>
+        <div class="fala">
+          <p>Essa parte tem duas metades. A primeira é o personagem: enquanto o país afundava, ele se deu a presidência vitalícia e um monte de condecoração britânica que ele nunca recebeu de verdade. Aquelas medalhas que aparecem no peito dele são isso.</p>
+          <p>A segunda é a conta chegando. Em 78 os Estados Unidos cortaram a compra de café, que era um terço de tudo que Uganda exportava. Sem dinheiro e sem apoio, ele apostou tudo numa invasão ao norte da Tanzânia.</p>
+          <p>Deu errado: a Tanzânia contra-atacou junto com exilados ugandenses, e o exército do Amin não resistiu. E o motivo é o que ele mesmo fez — o exército estava corroído pelos próprios expurgos que a gente viu na parte anterior.</p>
+        </div>
+        <label class="feito"><input type="checkbox" data-cue="6"> feito</label>
+      </div>
+    </li>
+
+    <li class="cue" data-who="geisel">
+      <div class="cue-top"><span class="tempo">5:12</span><span class="n">Pausa 7 · final</span><span class="chip">Geisel</span></div>
+      <div class="cue-body">
+        <h2 class="cartela">O poder que parecia absoluto também tinha um fim.</h2>
+        <p class="oque">Explicando o fecho</p>
+        <div class="fala">
+          <p>Pra fechar: ele fugiu, viveu exilado na Arábia Saudita e morreu em 2003 sem nunca ter sido julgado. Uganda levou anos pra se reerguer.</p>
+          <p>E o vídeo termina voltando pro começo de propósito. Aquele homem carregado pela multidão nas primeiras imagens é o mesmo homem dessa história inteira. O povo comemorou a chegada dele.</p>
+          <p>É por isso que se estuda esse período: reconhecer o fim de uma ditadura é fácil, todo mundo reconhece. O difícil é reconhecer o começo.</p>
+        </div>
+        <label class="feito"><input type="checkbox" data-cue="7"> feito</label>
+      </div>
+    </li>
+
+  </ol>
+
+  <section class="aviso hide-palco">
+    <p>O cartão final</p>
+    <p>Esse último não é uma data. O plano entra em câmera lenta, a música sobe e a frase aparece em duas linhas, uma de cada vez, com um filete dourado entre elas. Leva uns 5 segundos pra se formar inteira. <strong>Pausem quando a segunda linha terminar.</strong> Depois da fala, deixem o fade correr em silêncio.</p>
+  </section>
+
+  <section class="hide-palco">
+    <h2 class="sec">Como apresentar</h2>
+    <ul class="notas">
+      <li><b>O cartão é o aviso.</b> Quando a tela congelar com a data no meio e a música subir, é a deixa. Vocês têm 5 segundos de cartão pra apertar o pause sem correria.</li>
+      <li><b>Não leiam.</b> Leiam duas vezes antes e falem com as próprias palavras. O que precisa sair certo são as datas: 1946, 1962, 1964, 1971, 1972, 1977, 1979, 2003.</li>
+      <li><b>Esperem um segundo depois de pausar</b> antes de começar a falar.</li>
+      <li><b>Uma pessoa fixa opera o vídeo.</b> Com seis, não dá pra ficar passando o notebook de mão em mão. Escolham quem dá play e pause do começo ao fim.</li>
+      <li><b>Fiquem na ordem, em pé, na sequência das falas.</b> Assim ninguém precisa procurar de quem é a vez.</li>
+      <li><b>Se um travar</b>, o outro dá play e assume a próxima.</li>
+      <li><b>Curto de tempo?</b> Não cortem pausa, senão alguém fica sem falar. Encurtem as falas 2 e 5, que são as mais longas.</li>
+    </ul>
+  </section>
+
+  <section class="hide-palco">
+    <h2 class="sec">Pausas extras, se sobrar tempo</h2>
+    <p class="sec-lead">O documentário tem cinco frases grandes centralizadas. Nesses trechos o vídeo fica sem legenda nossa, só o áudio e a frase na tela. Dá pra pausar, ler a frase em voz alta e dizer o que ela resume.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Tempo</th><th>Frase na tela</th><th>O que ela resume</th></tr></thead>
+        <tbody>
+          <tr><td class="t">0:24</td><td class="frase">Experiência militar</td><td>os anos dele dentro do exército britânico</td></tr>
+          <tr><td class="t">1:27</td><td class="frase">Braço direito de Obote</td><td>a posição dele no governo que ele depois derrubou</td></tr>
+          <tr><td class="t">1:56</td><td class="frase">Homem do povo?</td><td>a recepção que ele teve quando tomou o poder</td></tr>
+          <tr><td class="t">3:13</td><td class="frase">Reinado brutal</td><td>a virada da fachada para os esquadrões da morte</td></tr>
+          <tr><td class="t">4:40</td><td class="frase">Exílio e morte</td><td>o fim dele na Arábia Saudita, sem julgamento</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="hide-palco">
+    <h2 class="sec">Se perguntarem sobre canibalismo</h2>
+    <p class="sec-lead" style="max-width:34rem">Alguém vai perguntar, porque é a lenda mais famosa sobre ele. Resposta honesta: <strong>nunca houve evidência.</strong> O documentário que serviu de base diz que a história veio de desertores e exilados e que investigadores nunca confirmaram. Ficou de fora de propósito. O que ele fez de comprovado já basta.</p>
+  </section>
+
+  <footer class="hide-palco">
+    Vídeo: <code>idi_amin_analise_documentario_4_5min.mp4</code> · 5:20 · 1920×1080.<br>
+    Imagens do canal <b>@fatosdesconhecidos</b> no YouTube. Narração e legendas do vídeo são nossas.
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var body=document.body, btn=document.getElementById("palco");
+  btn.addEventListener("click",function(){
+    var on=body.classList.toggle("palco");
+    btn.textContent=on?"Sair do modo palco":"Modo palco";
+  });
+  var boxes=document.querySelectorAll(".feito input");
+  function save(){
+    try{
+      var v=[];boxes.forEach(function(b){if(b.checked)v.push(b.dataset.cue)});
+      localStorage.setItem("idiamin-feitos",v.join(","));
+    }catch(e){}
+  }
+  try{
+    var s=(localStorage.getItem("idiamin-feitos")||"").split(",");
+    boxes.forEach(function(b){ if(s.indexOf(b.dataset.cue)>-1){b.checked=true;} });
+  }catch(e){}
+  boxes.forEach(function(b){
+    b.closest(".cue").classList.toggle("done",b.checked);
+    b.addEventListener("change",function(){
+      b.closest(".cue").classList.toggle("done",b.checked); save();
+    });
+  });
+})();
+</script>
