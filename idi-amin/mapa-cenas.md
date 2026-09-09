@@ -71,6 +71,34 @@ apresentador. É outro documentário, de 27:14. A conta fecha: 44 partes de ~35s
 
 **Consequência prática:** creditar @fatosdesconhecidos, não Rafael Cerqueira.
 
+## Trechos inutilizáveis descobertos na revisão final
+
+| Parte | Segundo | Problema |
+|---|---|---|
+| 42 | ~2s a ~6,5s | notificação "Proteja Seu Sono" no topo |
+| 42 | ~9s a ~11,7s | interface do YouTube aberta sobre o vídeo (título, controles, legenda da fonte) |
+| 42 | ~14s e ~22s | quadros pretos de transição |
+| 43 | 0s a 11s e 16s a 40s | apresentador em quadro — só o arquivo de 11,4s a 16s serve |
+| 44 | a partir de ~25s | apresentador em quadro |
+
+Sobra de parte 42: **0s–1,9s**, **7s–9s**, **11,7s–14s** e **15,4s–21,4s** (cartela
+EXÍLIO E MORTE). Sobra de parte 44: **0,4s–24,3s**, em três blocos sem repetição.
+
+## As cinco frases grandes do documentário no corte final
+
+Nesses intervalos a legenda nossa some e volta assim que a frase sai da tela.
+
+| Tempo no corte | Frase |
+|---|---|
+| 0:24,5 – 0:28,2 | EXPERIÊNCIA MILITAR |
+| 1:27,7 – 1:32,4 | BRAÇO DIREITO DE OBOTE |
+| 1:56,8 – 2:00,7 | HOMEM DO POVO? |
+| 3:13,9 – 3:17,7 | REINADO BRUTAL |
+| 4:40,6 – 4:46,0 | EXÍLIO E MORTE |
+
+As cenas 5 e 8 foram remontadas para que cada uma dessas frases caia sobre a
+narração que fala do mesmo assunto, em vez de engolir uma informação nova.
+
 ## Nota sobre a minutagem
 
 A soma das partes dá 27:41, contra os 27:14 reais — cerca de 25s de folga,

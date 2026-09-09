@@ -96,6 +96,11 @@ Cunha abre e fecha. **Quem não está falando opera o vídeo** — combinem ante
 
 *(Depois dessa fala, deixem o fade correr em silêncio.)*
 
+O cartão final não é mais uma data: o último plano entra em câmera lenta, a
+música sobe e a frase aparece em duas linhas, uma de cada vez, com um filete
+dourado entre elas. A frase inteira leva cerca de 5 segundos para se formar —
+pausem quando a segunda linha terminar.
+
 ---
 
 ## COMO APRESENTAR
@@ -107,6 +112,20 @@ Cunha abre e fecha. **Quem não está falando opera o vídeo** — combinem ante
 - **Esperem um segundo depois de pausar** antes de começar a falar.
 - **Se um travar**, o outro dá play e assume a próxima.
 - **Curto de tempo?** Cortem as pausas 2 e 5. Ficam 5 falas e uns 6:30.
+
+## PAUSAS EXTRAS (opcionais)
+
+O próprio documentário tem cinco frases grandes centralizadas. Nesses trechos o
+vídeo fica **sem legenda nossa**, só com o áudio e a frase na tela. Servem como
+pausa curta se vocês quiserem esticar a apresentação.
+
+| Tempo | Frase na tela | Ganho se pausar |
+|---|---|---|
+| 0:24 | EXPERIÊNCIA MILITAR | quem treinou o Amin foi o exército britânico |
+| 1:27 | BRAÇO DIREITO DE OBOTE | ele era o homem de confiança de quem depois derrubou |
+| 1:56 | HOMEM DO POVO? | a pergunta que o vídeo inteiro responde |
+| 3:13 | REINADO BRUTAL | é aqui que a fachada cai |
+| 4:40 | EXÍLIO E MORTE | morreu sem julgamento nenhum |
 
 ### Se perguntarem sobre canibalismo
 Alguém vai perguntar, porque é a lenda mais famosa sobre ele. Resposta honesta:
