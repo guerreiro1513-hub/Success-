@@ -267,3 +267,54 @@ por palavra da referência #3.
 - #3 (714e565b): **legenda palavra a palavra** sincronizada com a fala.
 - #4 (a935f483): reenvio do material de churrasco (md5 diferente, mesmo conteúdo,
   14,38 s / 720×1280 / 60 fps) — já está no acervo.
+
+---
+
+# Revisão 5 — quatro correções
+
+## 1. Legendas cortadas ("SEMAN", "GR") — bug meu
+Quando desacelerei o texto na revisão 3 (2,0 → 2,6 frames por letra), quebrei as
+frases longas: o atraso era **fixo por letra**, então quanto mais letras, mais tempo
+para entrar — e o bloco acabava antes.
+
+Medido: **4 das 7 linhas nunca terminavam de aparecer.**
+
+| Linha | letras | precisava | tinha |
+|---|---|---|---|
+| PACU | 4 | 23,8 fr | 103 fr (44 sobrando) |
+| SEU FIM DE SEMANA | 17 | 57,6 fr | 72 fr (**faltavam 21**) |
+| SÁBADO E DOMINGO | 16 | 55,0 fr | 80 fr (**faltavam 10**) |
+| @GUERREIROSGRILL | 16 | 25,5 fr | 14 fr (**faltavam 11**) |
+
+Agora o atraso é **adaptativo**: um orçamento fixo de entrada dividido pelo número de
+letras. Toda linha entra na mesma janela, tenha 4 ou 27 caracteres. O build testa
+isso antes de renderizar e falha se alguma não couber.
+
+Tempo parado na tela, já verificado: 1,63 s / 1,33 s / 1,23 s / 1,63 s / 1,20 s.
+
+## 2. O zoom da abertura não estava no peixe
+O corte era **centralizado**. Só que nesses planos o peixe ocupa a faixa de 35% a 70%
+da altura e **acima dele só tem pernas e rua** — então o zoom ampliava justamente as
+pessoas.
+
+Reescrevi o recorte para mirar um ponto: passo a posição do peixe (px, py) e o script
+calcula o deslocamento do crop. Os 16 planos do pacu agora enquadram o peixe e a
+tábua, sem transeuntes.
+
+## 3. Texto no plano errado
+"FAROFA, TOMATE E CEBOLA / SÁBADO E DOMINGO" caía em f398–478, e o bloco do churrasco
+começa em f405 — a informação do peixe aparecia **em cima da costela com bacon**.
+
+Agora cada mensagem está presa à sua seção:
+
+| Mensagem | Frames | Sobre |
+|---|---|---|
+| TEM NOVIDADE | 6–96 | peixe |
+| AGORA TEM · PACU | 102–192 | peixe |
+| ASSADO E · RECHEADO | 198–290 | peixe |
+| COM FAROFA, TOMATE E CEBOLA · 2,2 KG | 296–400 | peixe (acaba antes de f405) |
+| E TEM MAIS · O CHURRASCO DE SEMPRE | 417–508 | churrasco |
+| brasão · SÁBADO E DOMINGO · @guerreirosgrill | 552–612 | peixe |
+
+## 4. Sem pessoas
+Todos os enquadramentos do pacu foram refeitos com o alvo no peixe.
