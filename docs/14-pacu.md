@@ -123,3 +123,47 @@ resolução do acervo):
 ## Controle de qualidade
 612 frames, 0 frames pretos, 0 moles, 0 saltos de exposição fora de corte.
 Tinta do texto x=148..932, base y=1562. SAR 1:1. 22 MB.
+
+---
+
+# Revisão 2 — trilha, saturação e fim das fotos
+
+## Fotos removidas
+Os 22 planos agora são **só vídeo**. Os quatro que eram foto viraram:
+gancho `P1@12,55` com zoom in 1,30→2,05 · revelação `P2@6,80` com zoom out 2,00→1,02
+(assenta no "PACU") · tamanho `P3@17,10` · fecho `P1@17,50`.
+
+## Trilha — original, feita aqui
+Você pediu música viral. **Não tenho como usar uma faixa viral licenciada**, e não
+vou baixar de fonte não oficial. O que fiz foi **sintetizar uma trilha original**
+(`entrega/trilha-original-100bpm.wav`, gerada em `mkbeat.py`): 100 BPM, lá menor,
+progressão Am–F–C–G, com kick, sub, clap, hi-hats, pluck e riser.
+
+Ela é construída em cima da **mesma grade dos cortes**: drop em 2,1 s (onde entra a
+revelação) e lift em 13,5 s (onde vira pro churrasco). Como todos os cortes já estão
+em múltiplos de 9 frames a 100 BPM, se você trocar por um áudio em alta do Instagram
+os cortes continuam batendo.
+
+Mixagem: trilha na frente, som natural (faca, gente, grelha) a 0,42 por baixo como
+textura. Média −16,6 dB, pico −0,3 dB.
+
+## Saturação — e o erro que eu cometi no caminho
+Primeira tentativa: saturação 1,32 + bloom nas altas. **Ficou roxo.** Medi e o desvio
+magenta foi a **+37,9** (o grau anterior estava em −4,3).
+
+Investiguei e a culpa **não era da saturação, era do bloom**: o brilho que eu somava
+nas altas desequilibrava o verde. Tirei o bloom e busquei a mesma riqueza por **curva
+em S** (que não mexe em matiz) mais unsharp mais forte, e compensei o azul de 0,735
+para 0,830.
+
+| | magenta | saturação | R/B |
+|---|---|---|---|
+| entregue antes | −4,3 | 92 | 1,66 |
+| tentativa com bloom | **+37,9** ❌ | 160 | 1,55 |
+| **agora** | **−0,4** ✅ | **153** | 1,97 |
+
+Saturação subiu 66% sem nenhum desvio de cor.
+
+## Controle de qualidade
+610 frames, 0 pretos, 0 moles, 0 saltos de exposição fora de corte.
+Brilho 42,3–104,0. SAR 1:1. 22 MB.
