@@ -385,3 +385,25 @@ Custo: 2 imagens x 6 + 2 vídeos x 23 = 58 créditos. Restam 568.
 
 Os arquivos ficam na CDN da Kairogen, que está bloqueada pela política de saída
 deste ambiente, então a montagem depende do Emilio baixar e reenviar.
+
+### Versão final do giro — 4K, 10 s
+
+Pedido: *"eu quero o melhor vídeo possível"*.
+
+`generation_id` `6aa298931c568e82b1fcbaff`, Kling V3.0 Pro, 4K, 10 s, 9:16,
+sem áudio, 202 créditos. Restam 366.
+
+Por que 4K e 10 s: o reel sai em 1080, mas partir de 4K permite recortar e
+aproximar sem perder nitidez e a redução para 1080 fica mais limpa. Com 10 s dá
+para escolher os 3,6 s de melhor giro em vez de aceitar o que veio.
+
+O prompt trava tomada única, sem corte, câmera fixa, velocidade constante, e
+proíbe explicitamente o peixe de ganhar vida, que é o artefato clássico desses
+modelos com animal.
+
+### Montagem pronta para quando o arquivo chegar
+
+`rot_swap.sh` troca os 108 primeiros quadros (3,60 s = k01+k02+k03) pelo giro,
+em três movimentos: 36 quadros de aproximação lenta, 27 de sustentação, 45 de
+afastamento. Como o total de quadros não muda, a linha do tempo dos textos e a
+mixagem de áudio continuam idênticas. Uso: `bash rot_swap.sh <arquivo.mp4>`.
