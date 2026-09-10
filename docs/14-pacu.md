@@ -167,3 +167,51 @@ Saturação subiu 66% sem nenhum desvio de cor.
 ## Controle de qualidade
 610 frames, 0 pretos, 0 moles, 0 saltos de exposição fora de corte.
 Brilho 42,3–104,0. SAR 1:1. 22 MB.
+
+---
+
+# Revisão 3 — texto legível, trilha gaúcha
+
+## O texto estava "escrevendo errado"
+Era o efeito de **letras aleatórias** que eu tinha posto (o preset "Letras
+Aleatórias" da referência): nos primeiros frames cada letra mostrava um caractere
+sorteado antes de assentar. Numa peça com informação real — data, "serve até 8
+pessoas" — isso lê como **erro de digitação**, não como efeito. Removido.
+
+Ficou a entrada em cascata por letra, que é o que dá vida sem comprometer a leitura.
+E tudo mais devagar:
+
+| | antes | agora |
+|---|---|---|
+| atraso entre letras | 2,0 frames | 2,6 |
+| entrada | 13 frames | 16 |
+| saída | 12 frames | 18 |
+
+Tempo de leitura de cada mensagem:
+
+| Mensagem | antes | agora |
+|---|---|---|
+| TEM NOVIDADE | 1,80 s | 1,90 s |
+| AGORA TEM / PACU | 2,80 s | **3,43 s** |
+| AOS SÁBADOS / E DOMINGOS | 2,80 s | **3,20 s** |
+| SERVE ATÉ / 8 PESSOAS | 2,20 s | **2,60 s** |
+| MAIS UMA OPÇÃO / FIM DE SEMANA | 2,10 s | **2,40 s** |
+
+## Trilha gaúcha
+`entrega/trilha-gaucha-100bpm.wav` — sintetizada aqui (`mkgaucha.py`), original.
+Sol maior, progressão G–D–Em–C, baixo em oom-pah (baixo no 1 e 3, acorde no 2 e 4),
+acordeão com vibrato de 5,2 Hz, rim e vassourinha.
+
+Começa baixa e **sobe 3,7 dB quando entra o churrasco**, como você pediu:
+
+| Trecho | Nível |
+|---|---|
+| 0–2 s intro | −24,7 dB |
+| 2–13,5 s pacu | −21,0 dB |
+| 13,5–20,4 s **churrasco** | **−17,3 dB** |
+
+Continua a 100 BPM, na mesma grade dos cortes.
+
+## Falta a narração
+O áudio da voz do pai dele ainda não chegou. A mixagem já está montada para receber:
+é só somar a faixa de voz e abaixar a trilha por baixo dela.
