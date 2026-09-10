@@ -318,3 +318,50 @@ Agora cada mensagem está presa à sua seção:
 
 ## 4. Sem pessoas
 Todos os enquadramentos do pacu foram refeitos com o alvo no peixe.
+
+## Revisão 6 — desfoque graduado no fundo (entregue)
+
+Pedido: *"não quero pessoas áreas, foca só no peixe"*.
+
+Não dá para apagar as pessoas do vídeo original, mas dá para tirá-las de foco.
+Foi criada uma máscara vertical (`mask_top.png`): desfoque total até 13% da
+altura, transição, e nitidez total a partir de 37%. Ela entra num `maskedmerge`
+entre a imagem nítida e uma cópia desfocada, então o topo do quadro (chão,
+pernas, gente passando) vira fundo e o peixe fica sendo a única coisa em foco.
+
+Arquivo: `entrega/guerreiros-PACU-20s.mp4` — 20,40 s, 1080x1920, 30 fps, 22,2 MB.
+
+## Revisão 7 — peixe girando no preto (em andamento)
+
+Pedido: *"colocar só a tábua e o peixe num ambiente todo preto com ele girando"*,
+igual ao TikTok de referência (@stevenwommack): foto do produto → Nano Banana Pro
+→ Kling image-to-video → produto flutuando e girando.
+
+### Tentativa local (descartada)
+Recortei a tábua da foto `ce0c183a` com um polígono (`iso2.py`) e montei um
+"turntable" falso por homografia (`turn.py`): rotação de ±11° em torno do eixo
+vertical, brilho especular varrendo, sombra de contato, vinheta.
+
+Não funciona. A tábua sai do enquadramento da foto original em baixo e à
+esquerda, então a silhueta recortada tem bordas retas. Ao girar, essas bordas
+aparecem e a coisa lê como uma *fotografia girando*, não como um objeto
+flutuando. Fica registrado como beco sem saída.
+
+### Caminho por IA (o certo)
+Duas imagens geradas no Nano Banana Pro, 9:16, 2K, 6 créditos cada:
+
+| Take | generation_id | Resultado |
+|---|---|---|
+| 1 | `6aa28e42f1cceba1ca3d9a4b` | Iluminação e fundo ótimos, mas o modelo inventou outro peixe (corpo comprido tipo carpa). Descartado: anunciar com peixe que não é o nosso é propaganda enganosa. |
+| 2 | `6aa28ff85999e91302a5349c` | Fiel. Corpo alto e arredondado, focinho curto, olho grande, cabeça escura, cortes verticais profundos com a carne dourada. Tábua de madeira, preto absoluto. |
+
+O que fez diferença no take 2 foi descrever a *forma* do pacu no prompt, não só
+pedir "peixe assado".
+
+### Bloqueio de rede
+`cdn.kairogen.ai` está barrado pela política de saída deste ambiente
+(CONNECT 403). As imagens e vídeos ficam na CDN e não descem para cá, então o
+plano de fundo (Kling v3.0 Pro, 23 créditos, 5 s) roda no servidor mas o arquivo
+precisa ser baixado pelo Emilio e reenviado para entrar na montagem.
+
+Créditos: 620 restantes.
