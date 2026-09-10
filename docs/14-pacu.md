@@ -365,3 +365,23 @@ plano de fundo (Kling v3.0 Pro, 23 créditos, 5 s) roda no servidor mas o arquiv
 precisa ser baixado pelo Emilio e reenviado para entrar na montagem.
 
 Créditos: 620 restantes.
+
+### Giro gerado (Kling V3.0 Pro, 1080p, 5 s, 9:16, sem áudio)
+
+O prompt do tutorial aparece na tela do vídeo de referência:
+*"ultra realistic floating 3D ad of this matcha latte drink, add some elements
+related to the product like, ice cubes."* Repeti a fórmula com o pacu.
+
+| Versão | Imagem base | Vídeo |
+|---|---|---|
+| Elementos flutuando | `6aa295c7936cd074743577d3` | `6aa2962e5999e91302a549a7` |
+| Giro limpo | `6aa28ff85999e91302a5349c` | `6aa2959ff1cceba1ca3db317` |
+
+Na versão com elementos, orbitam em volta do peixe: farofa, tomate em cubos,
+cebola picada, salsinha, sal grosso, brasas e um fio de fumaça. É a que casa com
+a referência.
+
+Custo: 2 imagens x 6 + 2 vídeos x 23 = 58 créditos. Restam 568.
+
+Os arquivos ficam na CDN da Kairogen, que está bloqueada pela política de saída
+deste ambiente, então a montagem depende do Emilio baixar e reenviar.
