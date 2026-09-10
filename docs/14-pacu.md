@@ -215,3 +215,55 @@ Continua a 100 BPM, na mesma grade dos cortes.
 ## Falta a narração
 O áudio da voz do pai dele ainda não chegou. A mixagem já está montada para receber:
 é só somar a faixa de voz e abaixar a trilha por baixo dela.
+
+---
+
+# Revisão 4 — narração do pai e informação real do produto
+
+## A informação veio do card
+O primeiro vídeo é o card oficial do Guerreiro's Grill. Li a informação direto dos
+frames — é bem mais específica do que eu tinha:
+
+**PACU ASSADO RECHEADO · DE 2,2 KG · FAROFA + TOMATE + CEBOLA · SÁBADO E DOMINGO ·
+aceita encomenda**
+
+O texto na tela agora carrega isso:
+
+| Tempo | Mensagem |
+|---|---|
+| 0,3–2,2 | TEM NOVIDADE |
+| 2,4–5,8 | AGORA TEM · **PACU** |
+| 6,2–9,4 | ASSADO E · **RECHEADO** |
+| 9,7–12,9 | PACU DE · **2,2 KG** |
+| 13,3–15,9 | FAROFA, TOMATE E CEBOLA · **SÁBADO E DOMINGO** |
+| 16,2–18,6 | MAIS UMA OPÇÃO PRO · **SEU FIM DE SEMANA** |
+
+## Narração
+A voz do pai (19,78 s) entra por cima dos 20,40 s de vídeo — encaixe quase exato.
+Limpei com filtro passa-alta em 95 Hz, redução de ruído e compressor 3:1.
+
+Mixagem em três estágios:
+
+| Trecho | Trilha | Por quê |
+|---|---|---|
+| 0–13,5 s | 0,26 | por baixo da narração |
+| 13,5–17,9 s | 0,46 | sobe no churrasco, mas ainda sob a voz |
+| 17,9–20,4 s | 0,95 | a fala acaba, a trilha abre |
+
+Média −15,2 dB, pico −1,0 dB.
+
+## Limitação declarada
+**Não consigo transcrever áudio** — não há reconhecimento de fala neste ambiente.
+Consigo medir o envelope da fala (detectei 6 grupos de energia), mas não sei as
+palavras. Por isso o texto na tela está ancorado nos **blocos do produto**, não
+sincronizado com as frases dele.
+
+Se o texto do que ele fala for enviado por escrito, dá para fazer a legenda palavra
+por palavra da referência #3.
+
+## Referências recebidas
+- #2 (3435102c): tutorial de **texto atrás do sujeito** — mesmo efeito já feito no
+  reel do Florais, com recorte por GrabCut.
+- #3 (714e565b): **legenda palavra a palavra** sincronizada com a fala.
+- #4 (a935f483): reenvio do material de churrasco (md5 diferente, mesmo conteúdo,
+  14,38 s / 720×1280 / 60 fps) — já está no acervo.
