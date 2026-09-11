@@ -560,3 +560,26 @@ harmônicos acima de 3,8 kHz, um segundo compressor suave, e um eco curtíssimo 
 Até 13 s o mix fica 0,5 a 0,7 dB acima da voz sozinha, ou seja, não há música
 audível competindo. De 14 s em diante sobe para 1,4 a 2,6 dB, que é a banda
 entrando e crescendo até o fim.
+
+## Revisão 13 — música do Emilio na parte da carne
+
+Ele mandou uma música de referência e pediu para tirar a voz do pai quando
+começa a carne e pôr a música no lugar.
+
+- Voz: nível cheio até 13,60 s, esvanece em 0,30 s e fica muda de 13,90 s até o
+  fim.
+- Bordão grave: some em 13,40 s.
+- Música dele: entra em 13,55 s com 0,35 s de abertura, cheia a partir de 14,0 s,
+  fecha com 0,45 s de saída no fim.
+
+O trecho usado começa em **64,54 s** da gravação dele. Medi o andamento por
+autocorrelação do envelope de ataques: **90 BPM**, tempo de 0,667 s, e os
+ataques em 56,54 / 57,21 / 57,87 / 58,55 confirmam. 64,54 é uma cabeça de
+compasso contada a partir dali, e cai dentro do trecho de maior energia da
+música, entre 60 e 72 s.
+
+Os cortes da carne andam em 100 BPM, 18 quadros por clipe. A música anda em 90.
+Não estiquei para encaixar: os 11% de aceleração que fariam bater são audíveis
+numa música cantada, e são só 6,5 s de vídeo. Se ele quiser travado, dá para
+recortar aqueles clipes para 20 quadros, mas isso mexe na linha do tempo dos
+textos.
