@@ -524,3 +524,39 @@ Medido: o mix inteiro fica só 1,3 a 2,5 dB acima da voz sozinha, ou seja, a voz
 manda no áudio.
 
 Arquivos: `entrega/guerreiros-PACU-20s.mp4` e `entrega/mix-pacu-com-narracao.wav`.
+
+## Revisão 12 — trilha só na carne, voz com presença
+
+Reclamações: a trilha rodando por trás o tempo todo soava estranha, o gaúcho
+tinha que entrar quando começa a carne, e a voz estava sem graça.
+
+### Trilha (`mkgaucha2.py`)
+Duas seções em vez de um loop contínuo:
+
+- **0 a 13,90 s** — só um bordão grave em Sol (49 Hz + 98 Hz + 196 Hz) a 0,055
+  de amplitude e uma nota de baixo a cada 2,4 s. Praticamente inaudível. A
+  primeira metade do anúncio passa a ser a voz e o som do churrasco.
+- **13,90 s em diante** — vanerão de verdade: baixo em oom-pah, acordeão nos
+  contratempos, melodia por cima, aro e vassoura marcando. Entra com uma
+  vassourada 0,62 s antes do corte, para a banda chegar junto com a carne.
+
+O oom-pah anda em 200 BPM (0,30 s por tempo) sobre a grade de corte de 100 BPM.
+Dobrar o tempo dá energia de vanerão sem sair do compasso dos cortes.
+
+O acordeão foi refeito com **três palhetas por nota**, desafinadas em ±7 cents.
+O batimento entre elas é o som de musette. A versão anterior empilhava harmônicos
+de um oscilador só e por isso soava a órgão, que era a "música estranha".
+
+### Voz
+As pausas foram cortadas a 62% em vez de 50%, o que deixou espaço para acelerar
+8,75% em vez de 5,6%. Fala mais rápida, pausa mais viva.
+
+Cadeia: −3 dB em 200 Hz, +1,5 dB em 900 Hz, **+4 dB em 3,8 kHz** para a presença,
++2,5 dB de brilho acima de 9 kHz, de-esser, compressor 4:1, `aexciter` gerando
+harmônicos acima de 3,8 kHz, um segundo compressor suave, e um eco curtíssimo de
+26 ms a 11% para tirar o som de gravação seca de celular. Fecha em −13,5 LUFS.
+
+### Medição
+Até 13 s o mix fica 0,5 a 0,7 dB acima da voz sozinha, ou seja, não há música
+audível competindo. De 14 s em diante sobe para 1,4 a 2,6 dB, que é a banda
+entrando e crescendo até o fim.
