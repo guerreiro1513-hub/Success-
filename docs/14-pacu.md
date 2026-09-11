@@ -434,3 +434,47 @@ Não dá. O 4K original ficou na CDN. O arquivo que chegou é 1074x1920, já
 reencodado pelo CapCut, e ampliar isso para 3840 só interpola, não devolve
 detalhe. O reel do Instagram e do TikTok é entregue em 1080x1920 de qualquer
 jeito, então a entrega sai na resolução nativa.
+
+## Revisão 9 — cor dos clipes reais do peixe
+
+Reclamação: *"tá uma merda a cena do pacu"*, falando dos vídeos que ele mandou
+primeiro, não do giro.
+
+Medi o original. A luz da noite era laranja-sódio pesada:
+
+| Faixa | R | G | B | amarelo |
+|---|---|---|---|---|
+| sombra | 37 | 34 | 21 | +14 |
+| meio | 144 | 97 | 30 | +91 |
+| alta | 214 | 175 | 85 | +110 |
+
+A correção antiga só mexia nos médios (`b` 0,5→0,830 com a curva voltando a
+1/1 no branco), então a carne clara, que vive no topo da faixa, continuava
+amarelo-mostarda.
+
+A nova levanta o azul na faixa toda e **segura o verde** em vez de levantá-lo.
+Levantar o verde junto com o azul aproximava R de G e dava aquele amarelo-limão.
+Segurando o verde, sobra separação entre vermelho e verde (+42 nas altas) e o
+peixe lê dourado. Saturação caiu de 1,22 para 0,98, porque com o desvio de cor
+corrigido a 1,22 voltava a estourar o amarelo.
+
+Entrou também `hqdn3d=4:3:6:4.5` antes das curvas. O levante de azul nas
+sombras multiplica por quase 4 o ruído daquele canal, e sem o denoise a tábua
+ficava suja de ruído colorido.
+
+O desfoque de fundo passou a usar `mask_top2.png`, a versão rasa: desfoque
+total só até 5% da altura e nitidez total a partir de 15,5%. A anterior pegava
+o peixe, que começa por volta de 19% do quadro.
+
+## Revisão 10 — reenquadramento do giro
+
+O giro estava com o peixe pequeno no alto e um terço do quadro preto e morto
+embaixo, e a legenda caía em cima da tábua.
+
+Novo enquadramento: 2,80 s do clipe esticados para 3,60 s, ampliação de 1,12 e
+recorte deslocado para cima (`crop=1080:1920:65:192` sobre 1210x2150). O peixe
+passa a ocupar de 11% a 67% da altura, então a faixa da legenda, que começa por
+volta de 70%, fica limpa. A janela de 2,80 s é o trecho em que o rabo ainda não
+encosta na borda direita do quadro original.
+
+Arquivo: `entrega/guerreiros-PACU-20s.mp4` — 20,40 s, 1080x1920, 21,3 MB.
