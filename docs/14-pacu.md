@@ -478,3 +478,49 @@ volta de 70%, fica limpa. A janela de 2,80 s é o trecho em que o rabo ainda nã
 encosta na borda direita do quadro original.
 
 Arquivo: `entrega/guerreiros-PACU-20s.mp4` — 20,40 s, 1080x1920, 21,3 MB.
+
+## Revisão 11 — narração do pai (entregue)
+
+Gravação recebida: 24,54 s, 9 frases, 18,26 s de fala e 5,18 s de pausa.
+
+Ele improvisou, então o texto não bate frase a frase com o roteiro. Não há
+reconhecimento de fala neste ambiente, então o encaixe não pode ser feito por
+palavra. O que dá para medir é energia, e é por aí que o corte foi feito.
+
+### Encaixe
+As 9 frases foram detectadas por envelope de energia (janela de 20 ms, limiar a
+34% entre o piso e o pico). As **pausas** foram reduzidas à metade e a fala foi
+mantida intacta. Isso levou os 23,44 s originais para 20,91 s. Depois,
+`atempo=1,056` fecha em 19,80 s, que é o espaço entre 0,35 s e 20,15 s do
+anúncio. Os 5,6% de aceleração não mudam o timbre e dão um pouco mais de
+energia à leitura, que é o que um anúncio pede.
+
+Onde cada frase caiu:
+
+| Frase | Na gravação dele | No anúncio |
+|---|---|---|
+| 1 | 0,00 – 3,72 | 0,35 – 3,99 |
+| 2 | 4,32 – 8,12 | 4,16 – 7,87 |
+| 3 | 9,00 – 10,24 | 8,17 – 9,46 |
+| 4 | 10,76 – 12,84 | 9,59 – 11,67 |
+| 5 | 13,34 – 15,90 | 11,80 – 14,34 |
+| 6 | 16,50 – 17,16 | 14,51 – 15,25 |
+| 7 | 17,50 – 18,38 | 15,29 – 16,24 |
+| 8 | 19,52 – 22,02 | 16,67 – 19,15 |
+| 9 | 22,62 – 23,44 | 19,32 – 20,21 |
+
+### Tratamento da voz
+Corte grave em 85 Hz, redução de ruído, de-esser, −2 dB em 180 Hz para tirar o
+abafado do peito, +2,5 dB em 2,6 kHz para a dicção, compressor 3:1 e
+normalização a −15 LUFS.
+
+### Mixagem
+A trilha gaúcha entra a 0,42 e sobe para 0,72 a partir de 13,5 s. Ela é abaixada
+automaticamente pela voz com `sidechaincompress` (limiar 0,035, razão 9, ataque
+10 ms, soltura 320 ms), então a música cai sozinha quando ele fala e volta nas
+respiradas e no fim. O mix fecha em −14 LUFS com limitador em −1 dBTP.
+
+Medido: o mix inteiro fica só 1,3 a 2,5 dB acima da voz sozinha, ou seja, a voz
+manda no áudio.
+
+Arquivos: `entrega/guerreiros-PACU-20s.mp4` e `entrega/mix-pacu-com-narracao.wav`.
