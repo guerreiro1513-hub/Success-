@@ -407,3 +407,30 @@ modelos com animal.
 em três movimentos: 36 quadros de aproximação lenta, 27 de sustentação, 45 de
 afastamento. Como o total de quadros não muda, a linha do tempo dos textos e a
 mixagem de áudio continuam idênticas. Uso: `bash rot_swap.sh <arquivo.mp4>`.
+
+## Revisão 8 — abertura com o peixe girando (entregue)
+
+O giro chegou pelas mãos do Emilio: o arquivo do Kairogen não descia para este
+ambiente (CDN bloqueada, e o botão de download do celular só devolvia a página
+de verificação do Vercel com 32 KB). Ele exportou pelo CapCut e mandou aqui.
+
+Arquivo recebido: 10,07 s, 1074x1920, HEVC, 30 fps, 11,3 Mbps, 14 MB.
+
+Os 108 primeiros quadros do anúncio (3,60 s) passam a ser o giro, em **uma
+tomada só**. Antes eram três cortes (k01, k02, k03). Como o giro já tem
+movimento próprio, cortar ali só atrapalhava, então os três blocos recebem
+pedaços contínuos do mesmo clipe com um único push-in de 1,020 a 1,240 sem
+reset entre eles. A contagem de quadros não muda, então os textos e a mixagem
+continuam nos mesmos lugares.
+
+O "TEM NOVIDADE" agora entra sobre o peixe flutuando no preto, e aos 3,60 s o
+corte entrega o produto real com "AGORA TEM PACU".
+
+Arquivo: `entrega/guerreiros-PACU-20s.mp4` — 20,40 s, 1080x1920, 30 fps,
+yuv420p, 21,5 MB.
+
+### Sobre 4K
+Não dá. O 4K original ficou na CDN. O arquivo que chegou é 1074x1920, já
+reencodado pelo CapCut, e ampliar isso para 3840 só interpola, não devolve
+detalhe. O reel do Instagram e do TikTok é entregue em 1080x1920 de qualquer
+jeito, então a entrega sai na resolução nativa.
