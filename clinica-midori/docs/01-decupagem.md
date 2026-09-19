@@ -1,54 +1,67 @@
-# 01 · Decupagem do corte base
+# 01 · Decupagem do corte v2
 
-Grade de 0,6s (100 BPM). **Toda duração é múltipla de 0,6s** — é isso que
-mantém a trilha sincronizada quando um plano for trocado.
+Grade de **0,3s** (meio tempo a 100 BPM). Toda duração é múltipla disso — é o
+que mantém a trilha sincronizada quando um plano for trocado.
+Corte seco em tudo, como a referência. Nenhum dissolve.
 
-## Corte ESTRUTURA — 29,4s
+## Corte ESTRUTURA — 39,0s · 21 planos
 
 | TC | # | Seção | Plano | Fonte | In | Dur | Tratamento |
 |---|---|---|---|---|---|---|---|
-| 0,0 | S01 | ABERTURA | A clínica | recepção | 2,40 | 1,8 | pan chegando na placa · push 1,03× |
-| 1,8 | S02 | IDENTIDADE | Recepção | recepção | 6,20 | 1,8 | placa assentada · push 1,05× |
-| 3,6 | S03 | AMBIENTE | Espera | lounge TV | 1,00 | 1,8 | plano que respira · push 1,02× |
-| 5,4 | S04 | AMBIENTE | Conforto | lounge TV | 4,60 | 1,8 | tilt revelando a poltrona |
-| 7,2 | S05 | AMBIENTE | Circulação | lounge copa | 4,60 | 1,8 | **corte casado por movimento com S04** |
-| 9,0 | S06 | DETALHE | Cortesia | lounge copa | 11,90 | 1,2 | close · push 1,12× · ritmo sobe |
-| 10,2 | **P01** | — | **EQUIPE / PROFISSIONAIS** | — | — | 1,8 | ⬛ a gravar · dissolve 6f na entrada |
-| 12,0 | S07 | CLÍNICO | Consultório | consultório 1 | 0,15 | 1,2 | entrada na sala · passagem sonora |
-| 13,2 | S08 | CLÍNICO | Cadeira | consultório 2 | 0,60 | 1,8 | push 1,03× |
-| 15,0 | S09 | DETALHE | Instrumental | consultório 1 | 5,00 | 1,8 | **speed ramp 1,0× → 0,7×** (o único) |
-| 16,8 | **P02** | — | **PROCEDIMENTO** | — | — | 2,4 | ⬛ a gravar |
-| 19,2 | **P03** | — | **ENTREVISTA** | — | — | 3,6 | ⬛ a gravar · trilha abre espaço aqui |
-| 22,8 | S10 | RESPIRO | Luz | consultório 2 | 4,60 | 1,8 | dissolve 6f na saída da entrevista |
-| 24,6 | **P04** | — | **SORRISO / PACIENTE** | — | — | 1,8 | ⬛ a gravar |
-| 26,4 | S11 | MARCA | Assinatura | recepção | 8,40 | 3,0 | slow 0,73× · dissolve 8f · CTA |
+| 0.0 | P00 | PLACEHOLDER | ⬛ FACHADA | — | — | 3.0 | — |
+| 3.0 | S01 | ABERTURA | A PLACA | RECEPCAO | 2.4 | 2.1 | push 1.03× |
+| 5.1 | S02 | ENTRADA | RECEPCAO | RECEPCAO | 0.15 | 1.8 | push 1.02× |
+| 6.9 | S03 | PONTUACAO | DETALHE | LOUNGE_COPA | 12.2 | 0.6 | push 1.14× |
+| 7.5 | P01 | ENTREVISTA | ⬛ ENTREVISTA / BLOCO 1 | — | — | 2.4 | — |
+| 9.9 | S04 | AMBIENTE | ESPERA | LOUNGE_TV | 1.0 | 1.2 | push 1.03× |
+| 11.1 | S05 | IDENTIDADE | A MARCA NA PAREDE | RECEPCAO | 4.8 | 1.8 | push 1.04× |
+| 12.9 | P02 | ENTREVISTA | ⬛ ENTREVISTA / BLOCO 2 | — | — | 2.1 | — |
+| 15.0 | P03 | PLACEHOLDER | ⬛ PROCEDIMENTO | — | — | 1.2 | — |
+| 16.2 | P04 | ENTREVISTA | ⬛ ENTREVISTA / BLOCO 3 | — | — | 0.9 | — |
+| 17.1 | S06 | AMBIENTE | CONFORTO | LOUNGE_TV | 4.6 | 0.9 | — |
+| 18.0 | S07 | CLINICO | CONSULTORIO | CONSULTORIO1 | 0.15 | 3.0 | push 1.05× |
+| 21.0 | P05 | ENTREVISTA | ⬛ ENTREVISTA / BLOCO 4 | — | — | 1.8 | — |
+| 22.8 | P06 | PLACEHOLDER | ⬛ SORRISO / PACIENTE | — | — | 2.1 | — |
+| 24.9 | P07 | PLACEHOLDER | ⬛ EQUIPE | — | — | 2.4 | — |
+| 27.3 | S08 | PONTUACAO | PASSAGEM | CONSULTORIO2 | 0.6 | 0.9 | — |
+| 28.2 | S09 | DETALHE | ORGANIZACAO | LOUNGE_COPA | 8.0 | 1.5 | push 1.06× |
+| 29.7 | S10 | DETALHE | INSTRUMENTAL | CONSULTORIO1 | 5.0 | 1.8 | speed ramp 1.0×→0.7× |
+| 31.5 | S11 | CLINICO | SALA | CONSULTORIO2 | 4.6 | 1.2 | push 1.03× |
+| 32.7 | P08 | ENTREVISTA | ⬛ ENTREVISTA / BLOCO 5 | — | — | 3.3 | — |
+| 36.0 | S12 | MARCA | ASSINATURA | RECEPCAO | 8.4 | 3.0 | slow 0.73× · push 1.03× · CTA |
+⬛ = slot a gravar. São **9 de 21** — a referência é movida por entrevista e
+gente trabalhando, e esse material ainda não existe.
 
-## Corte LIMPO — 19,8s
+## Corte LIMPO — 19,8s · 12 planos
 
-Os mesmos planos sem P01–P04. A assinatura passa de 26,4s para **16,8s**, e a
-trilha é remontada tirando 9,6s do miolo (exatos 4 compassos, de fronteira a
-fronteira) — o impacto da marca continua caindo em cima do corte.
+Os mesmos planos reais, sem os slots. A assinatura sai de 36,0s para 16,8s, e
+a trilha é remontada tirando 19,2s do miolo (exatos 8 compassos, de fronteira
+a fronteira) — o impacto da marca continua caindo em cima do corte.
+
+Ritmo medido no MP4 final:
+`2,1 · 1,8 · 0,6 · 1,2 · 1,8 · 0,9 · 3,0 · 0,9 · 1,5 · 1,8 · 1,2 · 3,0`
+mediana 1,65s · desvio 0,74 (referência: 1,90s · ~0,67)
 
 ## Por que cada plano está onde está
 
-- **S01 abre com a câmera já em movimento chegando na placa.** Não existe
-  plano de estabelecimento neutro; o primeiro frame já diz "clínica odontológica
-  profissional". Não tem fachada no material gravado — a recepção faz esse papel.
-- **S04 → S05 é o corte que sustenta o vídeo.** Os dois são pan pra direita na
-  mesma velocidade, em salas diferentes. O olho lê como um movimento só.
-  Quase todo o material tem pan pra direita; isso foi usado de propósito.
-- **S06 e S07 têm 1,2s**, contra 1,8s dos outros. É onde o ritmo acelera,
-  entrando no bloco clínico. Depois volta a respirar.
-- **S09 é o único speed ramp**, fechando no instrumental. Efeito usado uma vez
-  vale; usado cinco vezes vira template.
-- **S11 em slow 0,73×** sobre a placa física. Não tem logo digital sobreposta —
-  a placa na parede é mais forte que um PNG.
+- **P00 abre com 3,0s de fachada.** A referência abre com 3,0s parados no
+  plano externo. É o tempo longo e confiante que estabelece que o lugar existe.
+  Sem fachada gravada, o corte limpo começa direto na placa.
+- **S03 tem 0,6s.** Pontuação. A referência usa um plano de 0,47s exatamente
+  nessa posição, antes de entrar na primeira fala.
+- **P04 (entrevista bloco 3) tem 0,9s.** Retorno curto à entrevista pra quebrar
+  o ritmo — a referência faz isso com 0,87s.
+- **S07 tem 3,0s.** O plano longo do bloco clínico. Depois de seis cortes
+  curtos, o filme precisa respirar.
+- **S09 era a parede do logo e virou o armário de vidro da copa.** A marca
+  aparecia 4 vezes em 20 segundos. Agora aparece 3: abertura, beat de marca,
+  assinatura.
+- **S10 é o único speed ramp** do filme, fechando no instrumental.
+- **S12 em slow 0,73×** sobre a placa física. Sem logo digital sobreposta.
 
 ## O que foi descartado e por quê
 
-- **0–1,0s do lounge TV**: a TV está no meio de uma transição e o quadro fica
-  rosa. Entra só em 1,00s, com a imagem já assentada.
-- **Miolo escuro do lounge copa (7,5–11s)**: subexposto e com bagunça visível
-  (garrafas, post-its). Ficou só o trecho mais claro e o close da copa.
-- **Últimos 2s de todos os 5 arquivos**: tarja do CapCut. Os clipes em
+- **0–1,0s do lounge TV:** a TV está trocando de imagem e o quadro fica rosa.
+- **Miolo escuro do lounge copa (9,5–12s):** subexposto e com bagunça visível.
+- **Últimos 2s de todos os 5 arquivos:** tarja do CapCut. Os clipes em
   `02_CLINIC_FOOTAGE/` já estão cortados sem ela.

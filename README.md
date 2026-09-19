@@ -83,5 +83,7 @@ falha. Orçamento recomendado: **70 créditos** (~R$ 12,25) — detalhamento em
 Corte base a partir de 5 gravações da clínica. Ver
 [`clinica-midori/README.md`](clinica-midori/README.md).
 
-**Estado:** corte base v1 entregue em dois cortes (estrutura 29,4s e limpo 19,8s).
-Pendente: vídeo de referência, entrevista, equipe, procedimento, sorriso e fachada.
+**Estado:** corte v2 decupado da referência — dois cortes (estrutura 39,0s e
+limpo 19,8s). Cor e ritmo calibrados por medição contra a referência.
+Pendente de gravação: entrevista (5 soundbites), fachada, procedimento,
+sorriso e equipe.

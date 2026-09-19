@@ -7,7 +7,7 @@ Saida: 05_SOUND_DESIGN/ambiencia.wav e transicoes.wav (48k estereo, 30.6s).
 """
 import numpy as np, os, subprocess, wave
 
-SR, DUR = 48000, 30.6
+SR, DUR = 48000, 46.2
 N = int(SR * DUR)
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SAIDA = os.path.join(RAIZ, "05_SOUND_DESIGN")
@@ -65,7 +65,7 @@ def passagem(t0, dur=0.9, g=0.13, seed=3):
     tr[1, i0:i0+m] += y[:m] * g * 1.00
 
 # tempos por versao: (entrada do bloco clinico, entrada da assinatura)
-VERSOES = {"estrutura": (12.0, 26.4), "limpo": (10.2, 16.8)}
+VERSOES = {"estrutura": (18.0, 36.0), "limpo": (8.4, 16.8)}
 for nome, (t_clin, t_marca) in VERSOES.items():
     tr[:] = 0
     passagem(t_clin, 0.85, 0.11, seed=3)

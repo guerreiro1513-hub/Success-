@@ -1,48 +1,260 @@
 {
   "projeto": "Clinica Midori — Reel institucional 9:16",
-  "versao": "base-v1",
-  "formato": { "w": 1080, "h": 1920, "fps": 30 },
-  "musica": { "bpm": 100, "beat_s": 0.6, "compasso_s": 2.4 },
-  "nota_grade": "Toda duracao de corte e multipla de 0.6s (1 beat a 100 BPM). Ao trocar um clipe, mantenha o campo 'dur' para nao quebrar a sincronia com a trilha.",
-
-  "fontes": {
-    "RECEPCAO":     { "arquivo": "02_CLINIC_FOOTAGE/01_recepcao-logo-midori.mov",   "dur_util": 10.66, "grade": "colorbalance=rm=-0.040:gm=-0.010:bm=0.050:rh=-0.020:bh=0.030,eq=brightness=0.020" },
-    "LOUNGE_TV":    { "arquivo": "02_CLINIC_FOOTAGE/02_lounge-tv-poltrona.mov",     "dur_util": 8.96,  "grade": "colorbalance=rm=-0.015:bm=0.030,eq=brightness=0.030:saturation=1.05" },
-    "LOUNGE_COPA":  { "arquivo": "02_CLINIC_FOOTAGE/03_lounge-copa-cafe.mov",       "dur_util": 15.09, "grade": "colorbalance=rm=-0.030:bm=0.045,eq=brightness=0.070:contrast=1.08" },
-    "CONSULTORIO1": { "arquivo": "02_CLINIC_FOOTAGE/04_consultorio-01-janela.mov",  "dur_util": 6.86,  "grade": "colorbalance=rm=0.050:gm=-0.030:bm=-0.025:bs=0.020,eq=brightness=0.035:contrast=1.05" },
-    "CONSULTORIO2": { "arquivo": "02_CLINIC_FOOTAGE/05_consultorio-02-bancada.mov", "dur_util": 6.79,  "grade": "colorbalance=rm=0.045:gm=-0.025:bm=-0.030,eq=brightness=0.030" }
+  "versao": "ref-v2",
+  "formato": {
+    "w": 1080,
+    "h": 1920,
+    "fps": 30
   },
-
-  "show_look": "eq=contrast=1.04:saturation=1.12:gamma=1.03,curves=master='0/0.010 0.25/0.262 0.5/0.535 0.75/0.79 1/1',unsharp=5:5:0.35:5:5:0.0,vignette=PI/5.4",
-
+  "musica": {
+    "bpm": 100,
+    "beat_s": 0.6,
+    "grade_s": 0.3,
+    "compasso_s": 2.4,
+    "impacto_marca_s": 36.0
+  },
+  "dissolves": false,
+  "nota_ritmo": "A referencia nao tem ritmo metrico: mediana 1,90s mas com planos de 0,47s ate 3,0s. Aqui as duracoes variam na mesma faixa, presas a uma grade de 0,3s (meio tempo a 100 BPM) pra trilha continuar batendo. Ao trocar um plano, mantenha a duracao multipla de 0,3s.",
+  "nota_estrutura": "A entrevista e a ESPINHA, nao uma secao: volta 5 vezes, com B-roll por cima da fala. Foi assim que a referencia foi montada.",
+  "fontes": {
+    "RECEPCAO": {
+      "arquivo": "02_CLINIC_FOOTAGE/01_recepcao-logo-midori.mov",
+      "dur_util": 10.66,
+      "grade": "colorchannelmixer=rr=0.8942:gg=1.0210:bb=1.3557"
+    },
+    "LOUNGE_TV": {
+      "arquivo": "02_CLINIC_FOOTAGE/02_lounge-tv-poltrona.mov",
+      "dur_util": 8.96,
+      "grade": "colorchannelmixer=rr=1.0629:gg=0.9800:bb=1.0260"
+    },
+    "LOUNGE_COPA": {
+      "arquivo": "02_CLINIC_FOOTAGE/03_lounge-copa-cafe.mov",
+      "dur_util": 15.09,
+      "grade": "colorchannelmixer=rr=0.9423:gg=1.0004:bb=1.2696"
+    },
+    "CONSULTORIO1": {
+      "arquivo": "02_CLINIC_FOOTAGE/04_consultorio-01-janela.mov",
+      "dur_util": 6.86,
+      "grade": "colorchannelmixer=rr=1.0441:gg=0.9840:bb=1.0382"
+    },
+    "CONSULTORIO2": {
+      "arquivo": "02_CLINIC_FOOTAGE/05_consultorio-02-bancada.mov",
+      "dur_util": 6.79,
+      "grade": "colorchannelmixer=rr=1.0315:gg=0.9858:bb=1.0574"
+    }
+  },
+  "show_look": "eq=contrast=1.18:brightness=0.070:saturation=0.70:gamma=1.09,curves=master='0/0.026 0.25/0.248 0.5/0.528 0.75/0.815 1/1',colorbalance=rs=-0.125:bs=0.145:rm=-0.05:bm=0.05:rh=0.025:bh=-0.025,unsharp=5:5:0.30:5:5:0.0,vignette=PI/6.2",
   "timeline": [
-    { "id": "S01", "secao": "ABERTURA",        "rotulo": "A CLINICA",            "fonte": "RECEPCAO",     "in": 2.40, "dur": 1.8, "estab": true,  "push": 1.03, "nota": "pan chegando na logo — estabelece a clinica no primeiro frame" },
-    { "id": "S02", "secao": "IDENTIDADE",      "rotulo": "RECEPCAO",             "fonte": "RECEPCAO",     "in": 6.20, "dur": 1.8, "estab": true,  "push": 1.05, "nota": "logo assentada, push lento" },
-    { "id": "S03", "secao": "AMBIENTE",        "rotulo": "ESPERA",               "fonte": "LOUNGE_TV",    "in": 1.00, "dur": 1.8, "estab": true,  "push": 1.02, "nota": "plano que respira — parede verde" },
-    { "id": "S04", "secao": "AMBIENTE",        "rotulo": "CONFORTO",             "fonte": "LOUNGE_TV",    "in": 4.60, "dur": 1.8, "estab": true,  "push": 1.00, "nota": "tilt revelando a poltrona" },
-    { "id": "S05", "secao": "AMBIENTE",        "rotulo": "CIRCULACAO",           "fonte": "LOUNGE_COPA",  "in": 4.60, "dur": 1.8, "estab": true,  "push": 1.00, "nota": "pan pra direita — corte casado com S04" },
-    { "id": "S06", "secao": "DETALHE",         "rotulo": "CORTESIA",             "fonte": "LOUNGE_COPA",  "in": 11.90,"dur": 1.2, "estab": true,  "push": 1.12, "nota": "close da copa — corte curto, ritmo sobe" },
-    { "id": "P01", "secao": "PLACEHOLDER",     "rotulo": "EQUIPE / PROFISSIONAIS","placeholder": true,    "dur": 1.8, "slot": "01", "briefing": "2 tomadas: equipe recebendo paciente na recepcao + dentista de jaleco caminhando" },
-    { "id": "S07", "secao": "CLINICO",         "rotulo": "CONSULTORIO",          "fonte": "CONSULTORIO1", "in": 0.15, "dur": 1.2, "estab": true,  "push": 1.00, "nota": "entrada na sala clinica — corte curto" },
-    { "id": "S08", "secao": "CLINICO",         "rotulo": "CADEIRA",              "fonte": "CONSULTORIO2", "in": 0.60, "dur": 1.8, "estab": true,  "push": 1.03, "nota": "" },
-    { "id": "S09", "secao": "DETALHE",         "rotulo": "INSTRUMENTAL",         "fonte": "CONSULTORIO1", "in": 5.00, "dur": 1.8, "estab": true,  "push": 1.00, "ramp": [1.0, 0.7], "nota": "UNICO speed ramp do filme: 1.0x -> 0.7x fechando no instrumental" },
-    { "id": "P02", "secao": "PLACEHOLDER",     "rotulo": "PROCEDIMENTO",         "placeholder": true,     "dur": 2.4, "slot": "02", "briefing": "maos + instrumento em close, luz do refletor, paciente na cadeira (sem rosto identificavel sem autorizacao)" },
-    { "id": "P03", "secao": "PLACEHOLDER",     "rotulo": "ENTREVISTA",           "placeholder": true,     "dur": 3.6, "slot": "03", "briefing": "dentista falando, plano medio, 1 soundbite de 3 a 4s — B-roll da clinica por cima na segunda metade" },
-    { "id": "S10", "secao": "RESPIRO",         "rotulo": "LUZ",                  "fonte": "CONSULTORIO2", "in": 4.60, "dur": 1.8, "estab": true,  "push": 1.04, "nota": "plano que abre pra luz — prepara o desfecho" },
-    { "id": "P04", "secao": "PLACEHOLDER",     "rotulo": "SORRISO / PACIENTE",   "placeholder": true,     "dur": 1.8, "slot": "04", "briefing": "close do sorriso do paciente saindo satisfeito — elemento humano, fecha a promessa" },
-    { "id": "S11", "secao": "MARCA",           "rotulo": "ASSINATURA",           "fonte": "RECEPCAO",     "in": 8.40, "dur": 3.0, "estab": true,  "push": 1.03, "speed": 0.7333, "cta": true, "nota": "logo fisica na parede em slow — espaco livre embaixo pro CTA" }
+    {
+      "id": "P00",
+      "secao": "PLACEHOLDER",
+      "rotulo": "FACHADA",
+      "placeholder": true,
+      "dur": 3.0,
+      "slot": "00",
+      "briefing": "plano aberto da fachada, fim de tarde, luz quente. a referencia abre com 3,0s parados aqui — e o plano que diz 'isso e um lugar de verdade' antes de qualquer coisa"
+    },
+    {
+      "id": "S01",
+      "secao": "ABERTURA",
+      "rotulo": "A PLACA",
+      "fonte": "RECEPCAO",
+      "in": 2.4,
+      "dur": 2.1,
+      "push": 1.03,
+      "nota": "pan chegando na placa — equivale ao plano de letreiro da referencia"
+    },
+    {
+      "id": "S02",
+      "secao": "ENTRADA",
+      "rotulo": "RECEPCAO",
+      "fonte": "RECEPCAO",
+      "in": 0.15,
+      "dur": 1.8,
+      "push": 1.02,
+      "nota": "bancada, materiais — a entrada"
+    },
+    {
+      "id": "S03",
+      "secao": "PONTUACAO",
+      "rotulo": "DETALHE",
+      "fonte": "LOUNGE_COPA",
+      "in": 12.2,
+      "dur": 0.6,
+      "push": 1.14,
+      "nota": "corte curto de pontuacao — a referencia usa um de 0,47s aqui"
+    },
+    {
+      "id": "P01",
+      "secao": "ENTREVISTA",
+      "rotulo": "ENTREVISTA / BLOCO 1",
+      "placeholder": true,
+      "dur": 2.4,
+      "slot": "E1",
+      "briefing": "abertura: quem e voce e o que a clinica faz. plano medio, fundo da propria clinica desfocado"
+    },
+    {
+      "id": "S04",
+      "secao": "AMBIENTE",
+      "rotulo": "ESPERA",
+      "fonte": "LOUNGE_TV",
+      "in": 1.0,
+      "dur": 1.2,
+      "push": 1.03,
+      "nota": "cutaway por cima da fala"
+    },
+    {
+      "id": "S05",
+      "secao": "IDENTIDADE",
+      "rotulo": "A MARCA NA PAREDE",
+      "fonte": "RECEPCAO",
+      "in": 4.8,
+      "dur": 1.8,
+      "push": 1.04,
+      "nota": "equivale ao painel iluminado da marca na referencia"
+    },
+    {
+      "id": "P02",
+      "secao": "ENTREVISTA",
+      "rotulo": "ENTREVISTA / BLOCO 2",
+      "placeholder": true,
+      "dur": 2.1,
+      "slot": "E2",
+      "briefing": "o diferencial: o que a Midori faz que a clinica da esquina nao faz"
+    },
+    {
+      "id": "P03",
+      "secao": "PLACEHOLDER",
+      "rotulo": "PROCEDIMENTO",
+      "placeholder": true,
+      "dur": 1.2,
+      "slot": "01",
+      "briefing": "maos com luva e instrumento em close, luz do refletor. sem rosto identificavel sem autorizacao assinada"
+    },
+    {
+      "id": "P04",
+      "secao": "ENTREVISTA",
+      "rotulo": "ENTREVISTA / BLOCO 3",
+      "placeholder": true,
+      "dur": 0.9,
+      "slot": "E3",
+      "briefing": "CURTO. uma frase de impacto, 1 segundo. a referencia usa um retorno de 0,87s aqui pra quebrar o ritmo"
+    },
+    {
+      "id": "S06",
+      "secao": "AMBIENTE",
+      "rotulo": "CONFORTO",
+      "fonte": "LOUNGE_TV",
+      "in": 4.6,
+      "dur": 0.9,
+      "push": 1.0,
+      "nota": ""
+    },
+    {
+      "id": "S07",
+      "secao": "CLINICO",
+      "rotulo": "CONSULTORIO",
+      "fonte": "CONSULTORIO1",
+      "in": 0.15,
+      "dur": 3.0,
+      "push": 1.05,
+      "nota": "o plano longo do bloco clinico — respira"
+    },
+    {
+      "id": "P05",
+      "secao": "ENTREVISTA",
+      "rotulo": "ENTREVISTA / BLOCO 4",
+      "placeholder": true,
+      "dur": 1.8,
+      "slot": "E4",
+      "briefing": "o cuidado com o paciente: como a pessoa e recebida e tratada"
+    },
+    {
+      "id": "P06",
+      "secao": "PLACEHOLDER",
+      "rotulo": "SORRISO / PACIENTE",
+      "placeholder": true,
+      "dur": 2.1,
+      "slot": "02",
+      "briefing": "close do sorriso do paciente. a referencia coloca esse plano exatamente aqui, depois do bloco de cuidado"
+    },
+    {
+      "id": "P07",
+      "secao": "PLACEHOLDER",
+      "rotulo": "EQUIPE",
+      "placeholder": true,
+      "dur": 2.4,
+      "slot": "03",
+      "briefing": "profissional de jaleco trabalhando, lupa ou mascara, concentrado. 2 tomadas"
+    },
+    {
+      "id": "S08",
+      "secao": "PONTUACAO",
+      "rotulo": "PASSAGEM",
+      "fonte": "CONSULTORIO2",
+      "in": 0.6,
+      "dur": 0.9,
+      "push": 1.0,
+      "nota": "corte curto — equivale ao corredor de 0,73s da referencia"
+    },
+    {
+      "id": "S09",
+      "secao": "DETALHE",
+      "rotulo": "ORGANIZACAO",
+      "fonte": "LOUNGE_COPA",
+      "in": 8.0,
+      "dur": 1.5,
+      "push": 1.06,
+      "nota": "equivale a parede de diplomas da referencia — aqui e o armario de vidro, que e o que a clinica tem de 'ordem visivel'. trocado da parede do logo pra nao repetir a marca 4 vezes em 20s"
+    },
+    {
+      "id": "S10",
+      "secao": "DETALHE",
+      "rotulo": "INSTRUMENTAL",
+      "fonte": "CONSULTORIO1",
+      "in": 5.0,
+      "dur": 1.8,
+      "push": 1.0,
+      "ramp": [
+        1.0,
+        0.7
+      ],
+      "nota": "UNICO speed ramp do filme"
+    },
+    {
+      "id": "S11",
+      "secao": "CLINICO",
+      "rotulo": "SALA",
+      "fonte": "CONSULTORIO2",
+      "in": 4.6,
+      "dur": 1.2,
+      "push": 1.03,
+      "nota": ""
+    },
+    {
+      "id": "P08",
+      "secao": "ENTREVISTA",
+      "rotulo": "ENTREVISTA / BLOCO 5",
+      "placeholder": true,
+      "dur": 3.3,
+      "slot": "E5",
+      "briefing": "fechamento e convite. a referencia segura o plano final da entrevista por varios segundos antes de acabar"
+    },
+    {
+      "id": "S12",
+      "secao": "MARCA",
+      "rotulo": "ASSINATURA",
+      "fonte": "RECEPCAO",
+      "in": 8.4,
+      "dur": 3.0,
+      "push": 1.03,
+      "speed": 0.7333,
+      "cta": true,
+      "nota": "placa fisica em slow — espaco livre embaixo pro CTA"
+    }
   ],
-
-  "transicoes": [
-    { "entre": "S04>S05", "tipo": "corte casado por movimento (pan pra direita nos dois lados)" },
-    { "entre": "S06>P01", "tipo": "dissolve 6 frames" },
-    { "entre": "P03>S10", "tipo": "dissolve 6 frames" },
-    { "entre": "P04>S11", "tipo": "dissolve 8 frames" },
-    { "entre": "todos os outros", "tipo": "corte seco" }
-  ],
-
   "texto": {
-    "politica": "minimo. nenhuma afirmacao clinica, nenhum numero, nenhum servico inventado. a logo fisica na parede ja faz a marca.",
+    "politica": "minimo. nenhuma afirmacao clinica, nenhum numero, nenhum servico inventado. a placa fisica na parede ja faz a marca. a referencia so tem o credito do produtor no fim, que nao foi copiado.",
     "cta_placeholder": "[ CTA — @perfil · telefone · endereco ]"
   }
 }

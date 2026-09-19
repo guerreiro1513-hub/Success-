@@ -32,31 +32,42 @@ Só esse plano re-renderiza (o resto sai do cache). Segundos, não minutos.
 
 ## Caso 2 — chegou a entrevista
 
-Mesma coisa no `P03`, com duas diferenças:
+A entrevista **não é um bloco só**: são 5 (`P01`, `P02`, `P04`, `P05`, `P08`).
+Foi assim que a referência foi montada — a fala é a espinha e o B-roll entra
+por cima dela. Cada slot tem no `timeline.json` o briefing do que aquele
+soundbite precisa cobrir.
 
-- **`dur` pode crescer**, mas só em múltiplos de **0,6s**: 3,6 → 4,2 → 4,8 → 5,4.
+Mesma mecânica do caso 1, com duas diferenças:
+
+- **`dur` pode crescer**, mas só em múltiplos de **0,3s**: 2,4 → 2,7 → 3,0 → 3,3.
   Fora da grade a trilha sai de sincronia.
-- A segunda metade do soundbite recebe B-roll por cima (L-cut). Isso vira dois
-  blocos: o primeiro com a imagem da entrevista, o segundo com um plano de
-  clínica enquanto o áudio continua. Me mande o arquivo que eu escolho o
-  soundbite e monto.
+- Parte de cada soundbite recebe B-roll por cima (L-cut): a imagem já virou
+  clínica enquanto o áudio da fala continua. Isso vira dois blocos no JSON.
+  Me mande os arquivos que eu escolho os soundbites e monto.
 
 ## Caso 3 — quer trocar um plano que já existe
 
 Mexa em `in` (onde começa na fonte). Não mexa em `dur` se não precisar.
 Rode `build.py`.
 
-## Caso 4 — chegou a referência
+## Caso 4 — quer ajustar a cor
 
-Aí o que muda é a gramática: duração dos planos, ordem das seções, onde entra
-dissolve, e a cor (`show_look`). Continua sendo edição de `timeline.json`.
-Os clipes, o grafismo, a trilha e os scripts continuam valendo.
+Os números que o corte persegue estão em `docs/00-blueprint.md`, medidos na
+referência. Dois botões diretos no `show_look` do `timeline.json`:
+
+- **mais/menos vibrante:** `saturation=0.70`. Baixar pra `0.62` fecha o número
+  da referência; subir pra `0.80` deixa mais vivo que ela.
+- **mais/menos quente:** os pares `rs/bs` (sombras) e `rh/bh` (altas) do
+  `colorbalance`. Sombra fria + alta quente é a assinatura do look.
+
+Para mexer numa sala só, mexa no `colorchannelmixer` daquela fonte. Cuidado
+com a recepção: ganho de azul acima de ~1,40 faz o verde do logo virar azul.
 
 ## Regras que não podem quebrar
 
 | Regra | Motivo |
 |---|---|
-| Duração múltipla de **0,6s** | sincronia com a trilha de 100 BPM |
+| Duração múltipla de **0,3s** | sincronia com a trilha de 100 BPM |
 | Gravar tudo **1080×1920 · 30fps** | 60fps misturado dá judder no concat |
 | `push` no máximo **1,12×** | acima disso parece zoom de template |
 | **1** speed ramp no filme | já está usado no `S09` |

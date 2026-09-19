@@ -17,7 +17,7 @@ REN  = os.path.join(RAIZ, "_render")
 FIM  = os.path.join(RAIZ, "08_FINAL")
 GRAF = os.path.join(RAIZ, "06_GRAPHICS")
 W, H, FPS = 1080, 1920, 30
-DISS_BLOCO, DISS_MARCA = 0.2, 8 / 30      # dissolves: bloco e assinatura
+DISS_BLOCO, DISS_MARCA = 0.2, 8 / 30      # so usados se timeline.json pedir
 
 
 def ff(args, **kw):
@@ -124,8 +124,11 @@ def render_plano(s, tl, extra, versao, estab, marcadores, reaproveitar=True):
 
 
 # ------------------------------------------------------------- transicoes
-def mapa_dissolves(planos):
-    """Onde entra dissolve: borda de bloco placeholder e entrada da assinatura."""
+def mapa_dissolves(planos, ligado):
+    """Onde entra dissolve. A referencia e corte seco em tudo, entao por padrao
+    isso devolve so zeros — o campo "dissolves" no timeline.json e que liga."""
+    if not ligado:
+        return [0.0] * max(0, len(planos) - 1)
     d = []
     for i in range(len(planos) - 1):
         a, b = planos[i], planos[i + 1]
@@ -155,15 +158,15 @@ def garante_audio():
             subprocess.run([sys.executable, script], check=True)
 
 
-def monta_audio(versao, total, t_marca, saida):
+def monta_audio(versao, total, t_marca, saida, impacto):
     mus = os.path.join(RAIZ, "04_MUSIC", "trilha-scratch-100bpm.wav")
     amb = os.path.join(RAIZ, "05_SOUND_DESIGN", "ambiencia.wav")
     trs = os.path.join(RAIZ, "05_SOUND_DESIGN", f"transicoes_{versao}.wav")
     tmp = os.path.join(REN, f"musica_{versao}.wav")
 
-    # a trilha tem o impacto da marca em 26,4s. se o corte e mais curto,
+    # a trilha tem o impacto da marca num tempo fixo. se o corte e mais curto,
     # tira compassos inteiros do meio pra assinatura cair no lugar certo.
-    IMPACTO = 26.4
+    IMPACTO = impacto
     if abs(t_marca - IMPACTO) < 0.05:
         shutil.copy(mus, tmp)
     else:
@@ -189,7 +192,7 @@ def build(versao, tl, estab, reaproveitar=True):
     marcadores = versao == "estrutura"
     planos = [s for s in tl["timeline"]
               if versao == "estrutura" or not s.get("placeholder")]
-    diss = mapa_dissolves(planos)
+    diss = mapa_dissolves(planos, tl.get("dissolves", False))
 
     print(f"\n=== corte {versao.upper()} — {len(planos)} planos, "
           f"{sum(s['dur'] for s in planos):.1f}s ===")
@@ -238,10 +241,11 @@ def build(versao, tl, estab, reaproveitar=True):
 
     t_marca = total - planos[-1]["dur"]
     aud = os.path.join(REN, f"audio_{versao}.wav")
-    monta_audio(versao, total, t_marca, aud)
+    monta_audio(versao, total, t_marca, aud,
+                tl["musica"].get("impacto_marca_s", 36.0))
 
-    nome = {"estrutura": "MIDORI_base-v1_ESTRUTURA.mp4",
-            "limpo": "MIDORI_base-v1_LIMPO.mp4"}[versao]
+    nome = {"estrutura": "MIDORI_ref-v2_ESTRUTURA.mp4",
+            "limpo": "MIDORI_ref-v2_LIMPO.mp4"}[versao]
     final = os.path.join(FIM, nome)
     ff(["-i", mudo, "-i", aud, "-map", "0:v", "-map", "1:a",
         "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-ar", "48000",

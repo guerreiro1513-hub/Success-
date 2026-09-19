@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Trilha SCRATCH original, sintetizada aqui — 100 BPM, 29.4s.
+"""Trilha SCRATCH original, sintetizada aqui — 100 BPM, 46,2s.
 
 NAO e trilha final. Serve pra travar o ritmo do corte: cada corte do
 timeline.json cai exatamente num tempo desta trilha. Quando entrar a trilha
@@ -12,7 +12,7 @@ SR   = 48000
 BPM  = 100.0
 BEAT = 60.0 / BPM          # 0.6s
 BAR  = BEAT * 4            # 2.4s
-DUR  = 30.6
+DUR  = 46.2          # 19 compassos + cauda
 N    = int(SR * DUR)
 t    = np.arange(N) / SR
 mix  = np.zeros((2, N))
@@ -94,49 +94,49 @@ def subida(t0, dur, g=0.14):
     soma(s, t0, 0.5, g)
 
 # ---------------------------------------------------------------- arranjo
-# Fmaj7 | Am7 | Dm7 | Bbmaj7  (x3) — 2,4s por compasso
+# Fmaj7 | Am7 | Dm7 | Bbmaj7  (x5) — 2,4s por compasso, 19 compassos
+# A entrevista volta 5 vezes ao longo do corte, entao o arranjo e enxuto do
+# comeco ao fim: tem que caber embaixo de voz em qualquer ponto, nao so num.
+MARCA = 36.0
 acordes = [
     [por('F',-1), por('A'), por('C',1), por('E',1)],
     [por('A',-1), por('C'), por('E',1), por('G',1)],
     [por('D',-1), por('F'), por('A'), por('C',1)],
     [por('A#',-2), por('D'), por('F'), por('A')],
 ]
-for b in range(13):
-    ac = acordes[b % 4]
+for b in range(20):
     t0 = b * BAR
     if t0 >= DUR: break
-    brilho = 620 if t0 < 3.6 else (760 if 19.2 <= t0 < 22.8 else 1150)
-    ganho  = 0.13 if t0 < 3.6 else (0.12 if 19.2 <= t0 < 22.8 else 0.17)
-    if t0 >= 26.4: ganho = 0.20
+    ac = acordes[b % 4]
+    brilho = 620 if t0 < 4.8 else 1050
+    ganho  = 0.12 if t0 < 4.8 else 0.15
+    if t0 >= MARCA: ganho, brilho = 0.20, 1250
     pad(ac, t0, BAR * 1.05, g=ganho, brilho=brilho)
 
-# sininhos a partir de 3.6s, pausa na entrevista
-padrao = [0, 1.5, 2.5, 3.5]
-for b in range(1, 13):
+# sininho: entra no compasso 3 e fica esparso (1 por tempo forte + 1 sincopado)
+for b in range(2, 20):
     t0 = b * BAR
-    if t0 < 3.6 or t0 >= DUR: continue
-    if 19.2 <= t0 < 22.8: continue
+    if t0 >= DUR: break
     ac = acordes[b % 4]
-    for j, p in enumerate(padrao):
+    for j, p in enumerate((0.0, 2.5)):
         tn = t0 + p * BEAT
         if tn >= DUR: break
-        f = ac[2 + (j % 2)] * 2
-        sino(f, tn, g=0.085 if j % 2 else 0.11, pan=0.38 + 0.24 * (j % 2))
+        sino(ac[2 + j] * 2, tn, g=0.10 if j == 0 else 0.075, pan=0.40 + 0.20 * j)
 
-# pulso a partir de 10.2s, fora da entrevista
-tb = 10.2
+# pulso grave: so a partir do compasso 6, a cada 2 tempos
+tb = 12.0
 while tb < DUR - 0.4:
-    if not (19.2 <= tb < 22.8):
-        bumbo(tb, g=0.26 if tb < 22.8 else 0.30)
+    bumbo(tb, g=0.24 if tb < MARCA else 0.30)
     tb += BEAT * 2
-ts = 12.0
-while ts < DUR - 0.4:
-    if not (19.2 <= ts < 22.8):
-        chocalho(ts)
+
+# chocalho: entra depois e some antes do fim
+ts = 16.8
+while ts < DUR - 2.0:
+    chocalho(ts)
     ts += BEAT
 
-subida(22.2, 4.2, g=0.13)      # sobe pra assinatura
-bumbo(26.4, g=0.40)            # impacto da marca
+subida(MARCA - 4.2, 4.2, g=0.13)   # sobe pra assinatura
+bumbo(MARCA, g=0.40)               # impacto da marca
 
 # ---------------------------------------------------------------- reverb
 ir_n = idx(1.6)

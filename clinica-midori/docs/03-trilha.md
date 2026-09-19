@@ -3,8 +3,11 @@
 ## A trilha do corte é SCRATCH
 
 `04_MUSIC/trilha-scratch-100bpm.wav` foi **sintetizada por código** aqui mesmo
-(`make_music.py`): pad Fmaj7 / Am7 / Dm7 / Bbmaj7, sininho, pulso grave e uma
-subida entrando na assinatura, com reverb por convolução.
+(`make_music.py`): 46,2s, 19 compassos, pad Fmaj7 / Am7 / Dm7 / Bbmaj7, sininho,
+pulso grave e uma subida entrando na assinatura, com reverb por convolução.
+
+O arranjo é enxuto de propósito: a entrevista volta 5 vezes ao longo do corte,
+então a trilha tem que caber embaixo de voz em qualquer ponto, não só num.
 
 **Ela não é boa o bastante pra ser a trilha final.** É som sintetizado, sem
 instrumento real e sem mixagem profissional. O que ela resolve — e resolve bem
@@ -32,10 +35,10 @@ a ambiência mas sem a trilha:
 
 ```bash
 # mixa só ambiência + transições, sem música
-ffmpeg -i 08_FINAL/MIDORI_base-v1_LIMPO.mp4 \
+ffmpeg -i 08_FINAL/MIDORI_ref-v2_LIMPO.mp4 \
        -i 05_SOUND_DESIGN/ambiencia.wav \
        -map 0:v -map 1:a -c:v copy -shortest \
-       08_FINAL/MIDORI_base-v1_LIMPO_sem-trilha.mp4
+       08_FINAL/MIDORI_ref-v2_LIMPO_sem-trilha.mp4
 ```
 
 ## Mix atual
@@ -45,4 +48,4 @@ ffmpeg -i 08_FINAL/MIDORI_base-v1_LIMPO.mp4 \
 | Trilha | base |
 | Ambiência real da clínica | −5 dB |
 | 2 passagens de transição | discreto |
-| Master | loudnorm alvo −14 LUFS · TP −1,2 dB · **medido −13,0 LUFS** |
+| Master | loudnorm alvo −14 LUFS · TP −1,2 dB · **medido −14,0 LUFS** |
