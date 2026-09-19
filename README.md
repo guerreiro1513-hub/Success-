@@ -75,3 +75,13 @@ falha. Orçamento recomendado: **70 créditos** (~R$ 12,25) — detalhamento em
 2. ~~PRODUCT LOCK~~ ✅ preenchido
 3. Adicionar créditos na conta Kairogen
 4. Executar a ETAPA 3 na ordem descrita em `docs/06-custos-e-pipeline.md`
+
+---
+
+## Projeto 2 · Clínica Midori (reel institucional 9:16)
+
+Corte base a partir de 5 gravações da clínica. Ver
+[`clinica-midori/README.md`](clinica-midori/README.md).
+
+**Estado:** corte base v1 entregue em dois cortes (estrutura 29,4s e limpo 19,8s).
+Pendente: vídeo de referência, entrevista, equipe, procedimento, sorriso e fachada.

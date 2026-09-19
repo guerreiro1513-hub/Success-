@@ -1,0 +1,4 @@
+_render/
+# audio gerado por script — refeito automaticamente pelo build.py
+04_MUSIC/*.wav
+05_SOUND_DESIGN/*.wav
