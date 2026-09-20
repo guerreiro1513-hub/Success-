@@ -1,0 +1,6 @@
+# intermediarios pesados: os clipes cortados, as stems e os renders.
+# o entregavel vive em entrega/ e a receita inteira em project/
+selected/
+audio/
+final/
+preview/

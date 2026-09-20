@@ -1,0 +1,240 @@
+{
+ "fps": 30,
+ "largura": 1080,
+ "altura": 1920,
+ "quadros": 640,
+ "duracao": 21.333,
+ "bpm": 90,
+ "quadros_por_tempo": 20,
+ "impacto_musical": {
+  "fonte_s": 70.605,
+  "quadro": 180,
+  "tempo_s": 6.0
+ },
+ "cortes": [
+  {
+   "id": "h1",
+   "take": "T04",
+   "entrada_fonte": 0.9,
+   "quadro_inicio": 0,
+   "quadros": 45,
+   "tempo_inicio": 0.0,
+   "duracao": 1.5,
+   "zoom": [
+    1.02,
+    1.12
+   ],
+   "janela_vertical": 0.5,
+   "grade": "GA",
+   "motivo": "gancho: a tomada mais nitida do lote"
+  },
+  {
+   "id": "h2",
+   "take": "T03",
+   "entrada_fonte": 3.6,
+   "quadro_inicio": 45,
+   "quadros": 40,
+   "tempo_inicio": 1.5,
+   "duracao": 1.333,
+   "zoom": [
+    1.12,
+    1.02
+   ],
+   "janela_vertical": 0.5,
+   "grade": "GA",
+   "motivo": "mesma churrasqueira, outro angulo"
+  },
+  {
+   "id": "h3",
+   "take": "T02",
+   "entrada_fonte": 0.3,
+   "quadro_inicio": 85,
+   "quadros": 35,
+   "tempo_inicio": 2.833,
+   "duracao": 1.167,
+   "zoom": [
+    1.02,
+    1.11
+   ],
+   "janela_vertical": 0.5,
+   "grade": "GA",
+   "motivo": "costela"
+  },
+  {
+   "id": "h4",
+   "take": "T03",
+   "entrada_fonte": 0.2,
+   "quadro_inicio": 120,
+   "quadros": 25,
+   "tempo_inicio": 4.0,
+   "duracao": 0.833,
+   "zoom": [
+    1.11,
+    1.02
+   ],
+   "janela_vertical": 0.5,
+   "grade": "GA",
+   "motivo": "fumaca, a mais quente do lote"
+  },
+  {
+   "id": "h5",
+   "take": "T04",
+   "entrada_fonte": 0.05,
+   "quadro_inicio": 145,
+   "quadros": 20,
+   "tempo_inicio": 4.833,
+   "duracao": 0.667,
+   "zoom": [
+    1.02,
+    1.12
+   ],
+   "janela_vertical": 0.5,
+   "grade": "GA",
+   "motivo": "aperta o ritmo"
+  },
+  {
+   "id": "h6",
+   "take": "T02",
+   "entrada_fonte": 1.4,
+   "quadro_inicio": 165,
+   "quadros": 15,
+   "tempo_inicio": 5.5,
+   "duracao": 0.5,
+   "zoom": [
+    1.14,
+    1.24
+   ],
+   "janela_vertical": 0.5,
+   "grade": "GA",
+   "motivo": "antecipacao: meio segundo, empurra pra dentro"
+  },
+  {
+   "id": "r1",
+   "take": "T01",
+   "entrada_fonte": 0.3,
+   "quadro_inicio": 180,
+   "quadros": 120,
+   "tempo_inicio": 6.0,
+   "duracao": 4.0,
+   "zoom": [
+    1.62,
+    1.12
+   ],
+   "janela_vertical": 0.92,
+   "grade": "GB",
+   "motivo": "REVEAL. impacto musical no primeiro quadro"
+  },
+  {
+   "id": "s1",
+   "take": "T01",
+   "entrada_fonte": 4.6,
+   "quadro_inicio": 300,
+   "quadros": 60,
+   "tempo_inicio": 10.0,
+   "duracao": 2.0,
+   "zoom": [
+    1.16,
+    1.26
+   ],
+   "janela_vertical": 0.9,
+   "grade": "GB",
+   "motivo": "escala: a fileira correndo"
+  },
+  {
+   "id": "s2",
+   "take": "T04",
+   "entrada_fonte": 1.6,
+   "quadro_inicio": 360,
+   "quadros": 20,
+   "tempo_inicio": 12.0,
+   "duracao": 0.667,
+   "zoom": [
+    1.06,
+    1.14
+   ],
+   "janela_vertical": 0.5,
+   "grade": "GA",
+   "motivo": "corte de carne, casa movimento"
+  },
+  {
+   "id": "s3",
+   "take": "T01",
+   "entrada_fonte": 6.7,
+   "quadro_inicio": 380,
+   "quadros": 40,
+   "tempo_inicio": 12.667,
+   "duracao": 1.333,
+   "zoom": [
+    1.18,
+    1.28
+   ],
+   "janela_vertical": 0.9,
+   "grade": "GB",
+   "motivo": "volta pra fileira"
+  },
+  {
+   "id": "s4",
+   "take": "T03",
+   "entrada_fonte": 2.7,
+   "quadro_inicio": 420,
+   "quadros": 20,
+   "tempo_inicio": 14.0,
+   "duracao": 0.667,
+   "zoom": [
+    1.04,
+    1.12
+   ],
+   "janela_vertical": 0.5,
+   "grade": "GA",
+   "motivo": "brasa"
+  },
+  {
+   "id": "s5",
+   "take": "T01",
+   "entrada_fonte": 8.1,
+   "quadro_inicio": 440,
+   "quadros": 40,
+   "tempo_inicio": 14.667,
+   "duracao": 1.333,
+   "zoom": [
+    1.2,
+    1.3
+   ],
+   "janela_vertical": 0.88,
+   "grade": "GB",
+   "motivo": "ultima passada"
+  },
+  {
+   "id": "b1",
+   "take": "T05",
+   "entrada_fonte": 2.4,
+   "quadro_inicio": 480,
+   "quadros": 80,
+   "tempo_inicio": 16.0,
+   "duracao": 2.667,
+   "zoom": [
+    1.0,
+    1.05
+   ],
+   "janela_vertical": 0.5,
+   "grade": "GC",
+   "motivo": "a frase dele, corta na pausa natural de 5,07 s"
+  },
+  {
+   "id": "b2",
+   "take": "END",
+   "entrada_fonte": 9.55,
+   "quadro_inicio": 560,
+   "quadros": 80,
+   "tempo_inicio": 18.667,
+   "duracao": 2.667,
+   "zoom": [
+    1.0,
+    1.04
+   ],
+   "janela_vertical": 0.88,
+   "grade": "GB",
+   "motivo": "fecho: quadro congelado + brasao"
+  }
+ ]
+}

@@ -1,0 +1,866 @@
+{
+ "T01": [
+  {
+   "t": 0.05,
+   "nitidez": 41.5,
+   "brilho": 139.5,
+   "movimento": 0.0,
+   "calor": -19.5
+  },
+  {
+   "t": 0.3,
+   "nitidez": 42.1,
+   "brilho": 138.6,
+   "movimento": 13.66,
+   "calor": -19.6
+  },
+  {
+   "t": 0.55,
+   "nitidez": 42.4,
+   "brilho": 137.1,
+   "movimento": 13.44,
+   "calor": -19.8
+  },
+  {
+   "t": 0.8,
+   "nitidez": 42.2,
+   "brilho": 135.2,
+   "movimento": 14.54,
+   "calor": -20.0
+  },
+  {
+   "t": 1.05,
+   "nitidez": 42.9,
+   "brilho": 133.5,
+   "movimento": 14.6,
+   "calor": -19.7
+  },
+  {
+   "t": 1.3,
+   "nitidez": 43.8,
+   "brilho": 132.7,
+   "movimento": 14.61,
+   "calor": -20.0
+  },
+  {
+   "t": 1.55,
+   "nitidez": 44.6,
+   "brilho": 131.4,
+   "movimento": 13.06,
+   "calor": -20.3
+  },
+  {
+   "t": 1.8,
+   "nitidez": 45.2,
+   "brilho": 129.5,
+   "movimento": 12.0,
+   "calor": -20.4
+  },
+  {
+   "t": 2.05,
+   "nitidez": 45.5,
+   "brilho": 128.3,
+   "movimento": 9.84,
+   "calor": -20.4
+  },
+  {
+   "t": 2.3,
+   "nitidez": 46.1,
+   "brilho": 127.6,
+   "movimento": 13.72,
+   "calor": -20.3
+  },
+  {
+   "t": 2.55,
+   "nitidez": 45.9,
+   "brilho": 127.9,
+   "movimento": 15.23,
+   "calor": -20.3
+  },
+  {
+   "t": 2.8,
+   "nitidez": 45.9,
+   "brilho": 129.1,
+   "movimento": 17.59,
+   "calor": -20.1
+  },
+  {
+   "t": 3.05,
+   "nitidez": 45.6,
+   "brilho": 130.6,
+   "movimento": 17.76,
+   "calor": -19.6
+  },
+  {
+   "t": 3.3,
+   "nitidez": 45.0,
+   "brilho": 132.5,
+   "movimento": 18.6,
+   "calor": -18.9
+  },
+  {
+   "t": 3.55,
+   "nitidez": 45.2,
+   "brilho": 133.6,
+   "movimento": 16.87,
+   "calor": -18.6
+  },
+  {
+   "t": 3.8,
+   "nitidez": 45.1,
+   "brilho": 134.2,
+   "movimento": 16.44,
+   "calor": -18.5
+  },
+  {
+   "t": 4.05,
+   "nitidez": 44.9,
+   "brilho": 134.3,
+   "movimento": 14.59,
+   "calor": -18.9
+  },
+  {
+   "t": 4.3,
+   "nitidez": 44.4,
+   "brilho": 134.6,
+   "movimento": 12.7,
+   "calor": -19.0
+  },
+  {
+   "t": 4.55,
+   "nitidez": 44.5,
+   "brilho": 135.1,
+   "movimento": 8.42,
+   "calor": -19.1
+  },
+  {
+   "t": 4.8,
+   "nitidez": 44.6,
+   "brilho": 135.1,
+   "movimento": 10.33,
+   "calor": -18.8
+  },
+  {
+   "t": 5.05,
+   "nitidez": 45.1,
+   "brilho": 134.8,
+   "movimento": 13.25,
+   "calor": -18.3
+  },
+  {
+   "t": 5.3,
+   "nitidez": 45.3,
+   "brilho": 134.6,
+   "movimento": 16.35,
+   "calor": -17.7
+  },
+  {
+   "t": 5.55,
+   "nitidez": 45.1,
+   "brilho": 134.6,
+   "movimento": 16.21,
+   "calor": -17.3
+  },
+  {
+   "t": 5.8,
+   "nitidez": 45.2,
+   "brilho": 133.6,
+   "movimento": 17.67,
+   "calor": -17.1
+  },
+  {
+   "t": 6.05,
+   "nitidez": 45.0,
+   "brilho": 132.5,
+   "movimento": 16.67,
+   "calor": -16.9
+  },
+  {
+   "t": 6.3,
+   "nitidez": 45.5,
+   "brilho": 131.5,
+   "movimento": 16.55,
+   "calor": -16.4
+  },
+  {
+   "t": 6.55,
+   "nitidez": 45.9,
+   "brilho": 130.2,
+   "movimento": 14.13,
+   "calor": -16.0
+  },
+  {
+   "t": 6.8,
+   "nitidez": 45.9,
+   "brilho": 128.9,
+   "movimento": 11.43,
+   "calor": -15.9
+  },
+  {
+   "t": 7.05,
+   "nitidez": 46.0,
+   "brilho": 128.8,
+   "movimento": 9.74,
+   "calor": -15.9
+  },
+  {
+   "t": 7.3,
+   "nitidez": 46.0,
+   "brilho": 129.4,
+   "movimento": 13.44,
+   "calor": -15.4
+  },
+  {
+   "t": 7.55,
+   "nitidez": 46.0,
+   "brilho": 130.2,
+   "movimento": 13.82,
+   "calor": -15.2
+  },
+  {
+   "t": 7.8,
+   "nitidez": 46.0,
+   "brilho": 130.9,
+   "movimento": 14.79,
+   "calor": -15.4
+  },
+  {
+   "t": 8.05,
+   "nitidez": 45.8,
+   "brilho": 131.5,
+   "movimento": 14.43,
+   "calor": -15.4
+  },
+  {
+   "t": 8.3,
+   "nitidez": 46.0,
+   "brilho": 131.7,
+   "movimento": 16.24,
+   "calor": -14.9
+  },
+  {
+   "t": 8.55,
+   "nitidez": 46.0,
+   "brilho": 131.9,
+   "movimento": 16.19,
+   "calor": -14.1
+  },
+  {
+   "t": 8.8,
+   "nitidez": 46.1,
+   "brilho": 131.8,
+   "movimento": 18.2,
+   "calor": -12.8
+  },
+  {
+   "t": 9.05,
+   "nitidez": 46.5,
+   "brilho": 131.2,
+   "movimento": 18.95,
+   "calor": -11.3
+  },
+  {
+   "t": 9.3,
+   "nitidez": 46.9,
+   "brilho": 130.9,
+   "movimento": 20.6,
+   "calor": -9.5
+  },
+  {
+   "t": 9.55,
+   "nitidez": 48.3,
+   "brilho": 130.1,
+   "movimento": 22.35,
+   "calor": -7.1
+  }
+ ],
+ "T02": [
+  {
+   "t": 0.05,
+   "nitidez": 66.9,
+   "brilho": 101.3,
+   "movimento": 0.0,
+   "calor": 30.2
+  },
+  {
+   "t": 0.3,
+   "nitidez": 64.8,
+   "brilho": 100.3,
+   "movimento": 38.03,
+   "calor": 28.1
+  },
+  {
+   "t": 0.55,
+   "nitidez": 64.4,
+   "brilho": 99.9,
+   "movimento": 38.8,
+   "calor": 26.5
+  },
+  {
+   "t": 0.8,
+   "nitidez": 62.0,
+   "brilho": 100.2,
+   "movimento": 40.4,
+   "calor": 23.0
+  },
+  {
+   "t": 1.05,
+   "nitidez": 60.9,
+   "brilho": 97.4,
+   "movimento": 36.73,
+   "calor": 22.0
+  },
+  {
+   "t": 1.3,
+   "nitidez": 57.8,
+   "brilho": 98.5,
+   "movimento": 36.11,
+   "calor": 21.0
+  },
+  {
+   "t": 1.55,
+   "nitidez": 55.5,
+   "brilho": 102.6,
+   "movimento": 35.03,
+   "calor": 22.1
+  },
+  {
+   "t": 1.8,
+   "nitidez": 51.4,
+   "brilho": 117.0,
+   "movimento": 39.78,
+   "calor": 25.4
+  },
+  {
+   "t": 2.05,
+   "nitidez": 46.6,
+   "brilho": 117.3,
+   "movimento": 38.62,
+   "calor": 26.9
+  },
+  {
+   "t": 2.3,
+   "nitidez": 53.8,
+   "brilho": 128.3,
+   "movimento": 75.16,
+   "calor": 44.0
+  },
+  {
+   "t": 2.55,
+   "nitidez": 36.5,
+   "brilho": 135.3,
+   "movimento": 58.54,
+   "calor": 48.5
+  },
+  {
+   "t": 2.8,
+   "nitidez": 42.2,
+   "brilho": 143.7,
+   "movimento": 64.0,
+   "calor": 40.5
+  }
+ ],
+ "T03": [
+  {
+   "t": 0.05,
+   "nitidez": 61.1,
+   "brilho": 89.8,
+   "movimento": 0.0,
+   "calor": 34.6
+  },
+  {
+   "t": 0.3,
+   "nitidez": 61.6,
+   "brilho": 86.3,
+   "movimento": 45.97,
+   "calor": 34.5
+  },
+  {
+   "t": 0.55,
+   "nitidez": 59.9,
+   "brilho": 92.8,
+   "movimento": 40.9,
+   "calor": 36.0
+  },
+  {
+   "t": 0.8,
+   "nitidez": 56.9,
+   "brilho": 99.3,
+   "movimento": 44.63,
+   "calor": 35.3
+  },
+  {
+   "t": 1.05,
+   "nitidez": 52.1,
+   "brilho": 109.9,
+   "movimento": 41.4,
+   "calor": 34.6
+  },
+  {
+   "t": 1.3,
+   "nitidez": 41.7,
+   "brilho": 118.0,
+   "movimento": 37.01,
+   "calor": 33.0
+  },
+  {
+   "t": 1.55,
+   "nitidez": 48.5,
+   "brilho": 121.7,
+   "movimento": 33.1,
+   "calor": 34.8
+  },
+  {
+   "t": 1.8,
+   "nitidez": 53.9,
+   "brilho": 119.6,
+   "movimento": 38.22,
+   "calor": 38.0
+  },
+  {
+   "t": 2.05,
+   "nitidez": 56.1,
+   "brilho": 121.0,
+   "movimento": 33.85,
+   "calor": 36.2
+  },
+  {
+   "t": 2.3,
+   "nitidez": 60.6,
+   "brilho": 115.1,
+   "movimento": 35.48,
+   "calor": 38.9
+  },
+  {
+   "t": 2.55,
+   "nitidez": 60.6,
+   "brilho": 113.8,
+   "movimento": 32.26,
+   "calor": 37.5
+  },
+  {
+   "t": 2.8,
+   "nitidez": 63.1,
+   "brilho": 107.9,
+   "movimento": 32.76,
+   "calor": 37.4
+  },
+  {
+   "t": 3.05,
+   "nitidez": 61.6,
+   "brilho": 112.8,
+   "movimento": 29.5,
+   "calor": 30.7
+  },
+  {
+   "t": 3.3,
+   "nitidez": 61.1,
+   "brilho": 109.6,
+   "movimento": 25.85,
+   "calor": 29.9
+  },
+  {
+   "t": 3.55,
+   "nitidez": 60.5,
+   "brilho": 109.3,
+   "movimento": 26.08,
+   "calor": 31.3
+  },
+  {
+   "t": 3.8,
+   "nitidez": 61.3,
+   "brilho": 111.1,
+   "movimento": 35.21,
+   "calor": 35.4
+  },
+  {
+   "t": 4.05,
+   "nitidez": 64.0,
+   "brilho": 106.4,
+   "movimento": 39.03,
+   "calor": 45.2
+  },
+  {
+   "t": 4.3,
+   "nitidez": 71.0,
+   "brilho": 96.4,
+   "movimento": 47.55,
+   "calor": 47.2
+  },
+  {
+   "t": 4.55,
+   "nitidez": 69.9,
+   "brilho": 90.9,
+   "movimento": 47.28,
+   "calor": 40.4
+  }
+ ],
+ "T04": [
+  {
+   "t": 0.05,
+   "nitidez": 63.1,
+   "brilho": 102.1,
+   "movimento": 0.0,
+   "calor": 25.4
+  },
+  {
+   "t": 0.3,
+   "nitidez": 65.4,
+   "brilho": 98.5,
+   "movimento": 50.72,
+   "calor": 30.5
+  },
+  {
+   "t": 0.55,
+   "nitidez": 68.3,
+   "brilho": 106.2,
+   "movimento": 43.36,
+   "calor": 38.6
+  },
+  {
+   "t": 0.8,
+   "nitidez": 71.0,
+   "brilho": 110.8,
+   "movimento": 47.89,
+   "calor": 44.9
+  },
+  {
+   "t": 1.05,
+   "nitidez": 72.5,
+   "brilho": 107.0,
+   "movimento": 46.97,
+   "calor": 44.9
+  },
+  {
+   "t": 1.3,
+   "nitidez": 73.8,
+   "brilho": 101.3,
+   "movimento": 46.2,
+   "calor": 43.7
+  },
+  {
+   "t": 1.55,
+   "nitidez": 74.0,
+   "brilho": 99.2,
+   "movimento": 43.44,
+   "calor": 40.7
+  },
+  {
+   "t": 1.8,
+   "nitidez": 74.4,
+   "brilho": 98.0,
+   "movimento": 45.83,
+   "calor": 33.7
+  },
+  {
+   "t": 2.05,
+   "nitidez": 70.7,
+   "brilho": 97.6,
+   "movimento": 47.51,
+   "calor": 27.0
+  },
+  {
+   "t": 2.3,
+   "nitidez": 71.0,
+   "brilho": 88.9,
+   "movimento": 49.26,
+   "calor": 26.4
+  },
+  {
+   "t": 2.55,
+   "nitidez": 67.9,
+   "brilho": 94.2,
+   "movimento": 46.0,
+   "calor": 21.4
+  }
+ ],
+ "T05": [
+  {
+   "t": 0.05,
+   "nitidez": 64.8,
+   "brilho": 110.4,
+   "movimento": 0.0,
+   "calor": 29.5
+  },
+  {
+   "t": 0.3,
+   "nitidez": 67.2,
+   "brilho": 103.2,
+   "movimento": 40.04,
+   "calor": 33.1
+  },
+  {
+   "t": 0.55,
+   "nitidez": 72.3,
+   "brilho": 96.0,
+   "movimento": 47.73,
+   "calor": 38.0
+  },
+  {
+   "t": 0.8,
+   "nitidez": 73.6,
+   "brilho": 95.3,
+   "movimento": 49.68,
+   "calor": 40.7
+  },
+  {
+   "t": 1.05,
+   "nitidez": 72.5,
+   "brilho": 96.5,
+   "movimento": 46.61,
+   "calor": 37.9
+  },
+  {
+   "t": 1.3,
+   "nitidez": 67.8,
+   "brilho": 98.8,
+   "movimento": 46.7,
+   "calor": 30.4
+  },
+  {
+   "t": 1.55,
+   "nitidez": 65.5,
+   "brilho": 101.1,
+   "movimento": 45.63,
+   "calor": 26.8
+  },
+  {
+   "t": 1.8,
+   "nitidez": 59.0,
+   "brilho": 104.9,
+   "movimento": 52.95,
+   "calor": 18.9
+  },
+  {
+   "t": 2.05,
+   "nitidez": 50.5,
+   "brilho": 111.8,
+   "movimento": 50.87,
+   "calor": 18.0
+  },
+  {
+   "t": 2.3,
+   "nitidez": 47.5,
+   "brilho": 115.7,
+   "movimento": 48.65,
+   "calor": 15.1
+  },
+  {
+   "t": 2.55,
+   "nitidez": 48.4,
+   "brilho": 120.9,
+   "movimento": 46.43,
+   "calor": 14.8
+  },
+  {
+   "t": 2.8,
+   "nitidez": 49.7,
+   "brilho": 122.9,
+   "movimento": 42.62,
+   "calor": 12.8
+  },
+  {
+   "t": 3.05,
+   "nitidez": 49.1,
+   "brilho": 121.6,
+   "movimento": 36.43,
+   "calor": 11.7
+  },
+  {
+   "t": 3.3,
+   "nitidez": 49.0,
+   "brilho": 121.0,
+   "movimento": 34.33,
+   "calor": 10.7
+  },
+  {
+   "t": 3.55,
+   "nitidez": 49.3,
+   "brilho": 121.4,
+   "movimento": 32.07,
+   "calor": 10.6
+  },
+  {
+   "t": 3.8,
+   "nitidez": 49.7,
+   "brilho": 120.7,
+   "movimento": 29.12,
+   "calor": 8.1
+  },
+  {
+   "t": 4.05,
+   "nitidez": 48.9,
+   "brilho": 119.9,
+   "movimento": 21.05,
+   "calor": 7.7
+  },
+  {
+   "t": 4.3,
+   "nitidez": 49.1,
+   "brilho": 120.5,
+   "movimento": 18.12,
+   "calor": 6.7
+  },
+  {
+   "t": 4.55,
+   "nitidez": 49.1,
+   "brilho": 121.7,
+   "movimento": 17.6,
+   "calor": 6.0
+  },
+  {
+   "t": 4.8,
+   "nitidez": 49.8,
+   "brilho": 122.0,
+   "movimento": 24.08,
+   "calor": 6.9
+  },
+  {
+   "t": 5.05,
+   "nitidez": 48.9,
+   "brilho": 118.8,
+   "movimento": 24.16,
+   "calor": 4.4
+  },
+  {
+   "t": 5.3,
+   "nitidez": 47.8,
+   "brilho": 117.7,
+   "movimento": 16.88,
+   "calor": 4.1
+  },
+  {
+   "t": 5.55,
+   "nitidez": 47.3,
+   "brilho": 116.9,
+   "movimento": 13.19,
+   "calor": 3.8
+  },
+  {
+   "t": 5.8,
+   "nitidez": 47.0,
+   "brilho": 117.4,
+   "movimento": 15.4,
+   "calor": 3.6
+  },
+  {
+   "t": 6.05,
+   "nitidez": 47.2,
+   "brilho": 118.6,
+   "movimento": 16.04,
+   "calor": 2.9
+  },
+  {
+   "t": 6.3,
+   "nitidez": 47.6,
+   "brilho": 123.6,
+   "movimento": 18.87,
+   "calor": 4.6
+  },
+  {
+   "t": 6.55,
+   "nitidez": 47.5,
+   "brilho": 120.0,
+   "movimento": 21.53,
+   "calor": 5.6
+  },
+  {
+   "t": 6.8,
+   "nitidez": 48.6,
+   "brilho": 118.1,
+   "movimento": 17.49,
+   "calor": 2.5
+  },
+  {
+   "t": 7.05,
+   "nitidez": 48.3,
+   "brilho": 118.5,
+   "movimento": 15.09,
+   "calor": 2.6
+  },
+  {
+   "t": 7.3,
+   "nitidez": 49.2,
+   "brilho": 115.3,
+   "movimento": 17.95,
+   "calor": 2.7
+  },
+  {
+   "t": 7.55,
+   "nitidez": 48.9,
+   "brilho": 117.7,
+   "movimento": 24.0,
+   "calor": 2.6
+  },
+  {
+   "t": 7.8,
+   "nitidez": 46.9,
+   "brilho": 114.2,
+   "movimento": 24.11,
+   "calor": 1.8
+  },
+  {
+   "t": 8.05,
+   "nitidez": 46.4,
+   "brilho": 115.7,
+   "movimento": 13.71,
+   "calor": 0.7
+  },
+  {
+   "t": 8.3,
+   "nitidez": 45.7,
+   "brilho": 116.3,
+   "movimento": 13.81,
+   "calor": 0.6
+  },
+  {
+   "t": 8.55,
+   "nitidez": 45.6,
+   "brilho": 116.8,
+   "movimento": 12.74,
+   "calor": 0.1
+  },
+  {
+   "t": 8.8,
+   "nitidez": 45.5,
+   "brilho": 117.8,
+   "movimento": 13.51,
+   "calor": -0.0
+  },
+  {
+   "t": 9.05,
+   "nitidez": 44.7,
+   "brilho": 118.2,
+   "movimento": 9.28,
+   "calor": -0.1
+  },
+  {
+   "t": 9.3,
+   "nitidez": 44.0,
+   "brilho": 116.0,
+   "movimento": 13.67,
+   "calor": 0.3
+  },
+  {
+   "t": 9.55,
+   "nitidez": 43.4,
+   "brilho": 117.3,
+   "movimento": 10.88,
+   "calor": -0.8
+  },
+  {
+   "t": 9.8,
+   "nitidez": 43.3,
+   "brilho": 118.1,
+   "movimento": 8.21,
+   "calor": -0.2
+  },
+  {
+   "t": 10.05,
+   "nitidez": 43.6,
+   "brilho": 120.0,
+   "movimento": 10.09,
+   "calor": -0.2
+  }
+ ]
+}
