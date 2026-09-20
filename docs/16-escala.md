@@ -78,3 +78,52 @@ de compasso a 90 BPM.
 ## Entrega
 - `entrega/guerreiros-ESCALA-25s.mp4` — 25,5 s, 1080x1920, 30 fps, 27,2 MB
 - `entrega/guerreiros-ESCALA-25s-SEM-MUSICA.mp4` — mesma imagem, 27,2 MB
+
+## Revisão 2 — corte de 13,3 s para retenção
+
+Reclamação: *"quero algo que viralize, isso não viraliza"*. Procede, e o motivo
+é estrutural, não de acabamento.
+
+### O que estava travando o de 25,5 s
+1. **Duração.** 25,5 s num formato em que a distribuição é puxada por taxa de
+   conclusão. Quanto mais longo, menos gente chega ao fim.
+2. **Falante no fim.** 7,8 s de rosto falando encerrando o vídeo. É exatamente
+   onde o dedo desliza.
+3. **Reveal aos 6,3 s.** O pagamento da promessa chegava tarde e chegava devagar,
+   num travelling, não num corte.
+4. **Texto descritivo.** "Isso aqui é só 1 de 6" explica, não provoca.
+
+### O corte novo
+13,33 s. **400 quadros, todos em múltiplos de 20.**
+
+A música anda em 90 BPM. Um tempo de 90 BPM é 0,66667 s, que a 30 fps dá
+**exatamente 20 quadros**. Então a grade de corte e a grade musical são a mesma
+coisa, sem esticar nada: todo corte cai numa batida.
+
+| Quadro | Batidas | Take | Papel |
+|---|---|---|---|
+| 0 | 1 | 1433 | Parede de carne já apertada. Texto entra no quadro 2 |
+| 20 | 2 | 1429 | **Corte seco para o aberto. O reveal é aqui, aos 0,67 s** |
+| 60–160 | 1 cada | 1430, 1431, 1433, 1431, 1430 | Metralhadora, cinco cortes |
+| 160 | 4 | 1429 | A fileira abrindo. "SÃO SEIS." e "AO MESMO TEMPO" |
+| 240 | 1 | 1436 | Emenda |
+| 260 | 4 | 1436 | A frase dele, cortada na pausa natural de 5,1 s |
+| 340 | 3 | fecho | Brasão |
+
+A inversão principal: o reveal deixou de ser o clímax do meio e virou a
+**resposta imediata** à promessa do primeiro segundo. O texto "E ISSO É SÓ UMA."
+entra sobre o close no quadro 2 e ainda está na tela quando o corte abre. A
+frase e a imagem que a comprova acontecem juntas.
+
+A fala do pai caiu de 7,8 s para 2,67 s. Medi os blocos de fala do take: 2,5 a
+5,0 e 5,8 a 10,2, com uma respiração entre eles. O corte em 5,1 pega a primeira
+frase inteira e para na pausa, sem cortar palavra.
+
+O texto fica todo na faixa de asfalto, a 79,5% da altura, na mesma posição do
+começo ao fim. Não pula de lugar e nunca cobre as churrasqueiras.
+
+### Entrega
+- `entrega/guerreiros-ESCALA-13s.mp4` — 13,33 s, 19,1 MB
+- `entrega/guerreiros-ESCALA-13s-SEM-MUSICA.mp4` — 18,7 MB
+
+As de 25,5 s continuam no repositório como versão longa.
