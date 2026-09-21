@@ -169,3 +169,55 @@ entrega.
 A legenda da fala do pai não foi feita. Não há reconhecimento de fala neste
 ambiente. A fala foi posicionada e cortada por envelope de energia, na pausa
 natural de 5,07 s do take, sem picar palavra.
+
+---
+
+# Versão 2 — o pai na abertura
+
+Pedido: a fala inteira do pai no começo, e os takes da churrasqueira depois.
+
+22,000 s, 660 quadros. `build_cut2.sh` e `mktx2.py`.
+
+## Linha do tempo
+
+| Quadro | Tempo | Dura | Take | Entrada | Zoom | Papel |
+|---|---|---|---|---|---|---|
+| 0 | 0,000 | **8,333** | T05 | 1,90 | 1,00→1,07 | A fala inteira, áudio original, sem música |
+| 250 | 8,333 | 1,33 | T04 | 1,00 | 1,02→1,12 | **Corte seco. A música bate aqui** |
+| 290 | 9,667 | 1,00 | T03 | 3,40 | 1,12→1,02 | |
+| 320 | 10,667 | 0,67 | T02 | 0,20 | 1,02→1,11 | |
+| 340 | 11,333 | 0,67 | T03 | 2,20 | 1,11→1,02 | |
+| 360 | 12,000 | 0,33 | T04 | 1,85 | 1,10→1,20 | Meio tempo |
+| 370 | 12,333 | 0,33 | T02 | 1,45 | 1,18→1,32 | Meio tempo, antecipação |
+| 380 | 12,667 | 3,33 | T01 | 0,30 | 1,62→1,26 | **REVEAL** |
+| 480 | 16,000 | 1,33 | T01 | 4,60 | 1,20→1,34 | Escala |
+| 520 | 17,333 | 0,67 | T04 | 1,20 | 1,06→1,16 | |
+| 540 | 18,000 | 1,00 | T01 | 6,70 | 1,45→1,30 | |
+| 570 | 19,000 | 0,67 | T03 | 0,30 | 1,04→1,12 | |
+| 590 | 19,667 | 1,00 | T01 | 8,10 | 1,28→1,44 | |
+| 620 | 20,667 | 1,33 | fecho | 9,55 | 1,00→1,04 | Brasão |
+
+A fala dele vai de 2,5 s a 10,2 s no take original. O corte pega de 1,90 a
+10,23, ou seja, a frase inteira com um respiro antes e a cauda preservada.
+
+Depois dos 250 quadros tudo anda em tempos e **meios tempos** de 90 BPM: 40, 30,
+20, 20, 10, 10 quadros. Os dois cortes de 10 quadros são a antecipação, e o
+reveal em seguida ocupa 5 tempos.
+
+## O impacto
+
+Agora cai no **quadro 250, em 8,333 s**, no corte que sai do rosto dele para a
+parede de carne. Mesmo ponto da faixa, 70,605 s.
+
+| Janela | Nível |
+|---|---|
+| quadros 247–250 | −36,7 dB |
+| quadros 250–253 | −8,5 dB |
+| **salto** | **+28,1 dB** |
+
+Ficou 1,7 dB maior que na versão anterior, porque o que vem antes agora é a voz
+dele sozinha, sem trilha nenhuma por baixo, e o contraste é maior.
+
+## Entrega
+- `entrega/guerreiros-ESCALA-PAI-22s.mp4` — 28,7 MB
+- `entrega/guerreiros-ESCALA-PAI-22s-SEM-MUSICA.mp4` — 27,2 MB
