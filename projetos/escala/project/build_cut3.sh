@@ -27,7 +27,7 @@ cl(){ ID=$1;SRC=$2;SS=$3;NF=$4;Z0=$5;Z1=$6;FX=$7;FY=$8;GK=$9
   E="($Z0+($Z1-$Z0)*t/$DU)"
   # T06 tem marcacao de tempo irregular: fps=30 duplicava e pulava quadros
   # (a carne em bloco travava). Nele cada quadro da fonte vira um quadro da saida
-  case $SRC in *T06*) FR="setpts=N/(30*TB)";; *) FR="fps=30";; esac
+  case $SRC in *T06*|*T12*) FR="setpts=N/(30*TB)";; *) FR="fps=30";; esac
   case $GK in NO) G="null";; GN) G="$GN";; GA) G="$GA";; GB) G="$GB";; GC) G="$GC";; esac
   $FF -y -ss $SS -t $SD -i "$SRC" -filter_complex \
    "[0:v]scale=${W}*2:${H}*2:force_original_aspect_ratio=increase:flags=lanczos,crop=${W}*2:${H}*2,setsar=1,${FR},\
@@ -39,19 +39,24 @@ crop=${W}:${H}:x='(iw-${W})*${FX}':y='(ih-${H})*${FY}',${G},setsar=1,format=yuv4
 # abertura na churrasqueira: entra em 1,00 do take, 0,6 s de costela e a camera
 # vira. o pai aparece por volta de 1 s. fala inteira ate 10,30 (1a silaba em 2,48)
 cl p1 $P/source/T05.mov 1.00 279 1.00 1.05 0.50 0.50 GC
-# gancho (v7, mais longo a pedido): 45, 30, 40, 60, 45, 45, 55 = 320 quadros,
-# o reveal cai na cabeca do 4o compasso depois do impacto.
+# gancho (v8): 45, 30, 40, 40, 60, 45, 45, 55, 40 = 400 quadros,
+# o reveal cai na cabeca do 5o compasso depois do impacto.
 # x1 IMG_1448 cesto de pecas grandes, x2 IMG_1454 grelha, x3 IMG_1452 grade com ceu
 # (T04 para em 2,5: o take acaba em 2,67. panceta fica em 30: depois a camera
 # vira para pecas vermelhas iguais as do T04)
 # (T02 saiu: e a mesma churrasqueira do T03. costela do T06 saiu: repete a da abertura)
 cl c1 $P/source/T04.mov 1.00  45 1.02 1.12 0.50 0.50 GA
 cl c2 $P/source/T03.mov 3.30  30 1.12 1.03 0.50 0.50 GA
+# y1 IMG_1442: o pai girando o cesto e sorrindo para a camera
+cl y1 $P/source/T13.mov 1.90  40 1.00 1.05 0.50 0.50 GC
 cl x1 $P/source/T11.mov 0.20  40 1.02 1.10 0.50 0.50 GA
 cl c3 $P/source/T06.mov 2.40  60 1.00 1.10 0.50 0.50 GN
 cl x2 $P/source/T10.mov 0.60  45 1.00 1.08 0.50 0.50 GN
 cl c4 $P/source/T06.mov 11.00 45 1.02 1.12 0.50 0.50 GN
 cl x3 $P/source/T09.mov 3.60  55 1.03 1.12 0.50 0.50 GA
+# y2 (video 1, 1080p): cesto cheio girando na frente, o pai andando ao fundo.
+# prepara o reveal
+cl y2 $P/source/T12.mov 15.00 40 1.00 1.04 0.50 0.50 GN
 # (v6: carne fatiada do IMG_1475 e o zoom da operacao sairam a pedido)
 # a carne pronta sendo fatiada na tabua (IMG_1475), fora da montagem
 cl c5 $P/source/T08.mov 1.60  45 1.00 1.08 0.50 0.50 GN
@@ -61,6 +66,6 @@ cl r1 $P/source/T01.mov 0.30 100 1.62 1.26 0.50 0.92 GB
 cl d1 $P/source/T01.mov 6.30  40 1.80 1.68 0.56 0.60 GB
 # fecho: a vinheta da marca (T07), intacta, sem grade nem zoom
 cl o1 $P/source/T07.mov 0.00  47 1.00 1.00 0.50 0.50 NO
-for i in p1 c1 c2 x1 c3 x2 c4 x3 r1 o1; do echo "file '$OUTD/$i.mov'"; done > $OUTD/list.txt
+for i in p1 c1 c2 y1 x1 c3 x2 c4 x3 y2 r1 o1; do echo "file '$OUTD/$i.mov'"; done > $OUTD/list.txt
 $FF -y -hide_banner -loglevel error -f concat -safe 0 -i $OUTD/list.txt -c:v copy -c:a pcm_s16le $OUTD/base.mov
 echo base ok

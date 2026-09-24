@@ -200,3 +200,49 @@ cruzamento de 10 ms.
 Medido: com música −14,9 LUFS, pico −3,5 dBTP. Sem música −17,5 LUFS, pico −4,1 dBTP.
 
 Entrega: `entrega/guerreiros-ESCALA-V7-25s.mp4` e `-SEM-MUSICA`.
+
+---
+
+# V8 — o pai na churrasqueira e legenda no estilo do modelo (27,5 s, 826 quadros)
+
+Pedido: usar o vídeo 1 (`copy_5283…`, T12, 1080p exportado do CapCut) e o
+IMG_1442 (T13), e seguir o terceiro vídeo (`copy_7B80…`) como modelo.
+
+**Do modelo veio a legenda:** minúscula, Roboto Condensed ExtraBold (OFL,
+`assets/fonts`), branca com contorno preto, 2 a 3 palavras por vez, e a palavra
+falada acende em **vermelho** (karaoke), entrando com um pop de 4 quadros.
+Os títulos do reveal e o @ da vinheta seguem o mesmo estilo
+("**6** churrasqueiras / ao mesmo **tempo**").
+O preto e branco do início do modelo não foi copiado: lá ele conta uma história
+(o pai "acordando"), e aqui a abertura é o pai já falando.
+
+Tempos de cada palavra, medidos no espectrograma do take (s): fala 2,48 ·
+gurizada 2,82 · essa 3,62 · é 3,92 · uma 4,02 · das 4,50 · seis 4,80 ·
+churrasqueiras 5,05 · que 5,96 · temos 6,74 · no 7,10 · florais 7,33 · vem 7,80 ·
+pra 7,96 · cá 8,10 · tem 8,26 · muita 8,45 · coisa 8,80 · boa 8,97 · um 9,28 ·
+abraço 9,42 · vem 9,65 · ser 9,82 · feliz 9,95. Cada palavra acende 3 quadros
+antes da voz. O trecho "tem muita coisa boa" é o menos seguro: é falado rápido.
+
+| Quadro | Tempo | Dura | Take | Papel |
+|---|---|---|---|---|
+| 0 | 0,000 | 9,30 | T05 1,00 | Pai falando, fundo musical baixo |
+| 279 | 9,300 | 1,50 | T04 | Peças vermelhas. Impacto |
+| 324 | 10,800 | 1,00 | T03 | Panceta |
+| 354 | 11,800 | 1,33 | **T13 1,90** | O pai girando o cesto, sorrindo para a câmera |
+| 394 | 13,133 | 1,33 | T11 | Cesto de peças grandes |
+| 434 | 14,467 | 2,00 | T06 | Frango |
+| 494 | 16,467 | 1,50 | T10 | Grelha no espeto |
+| 539 | 17,967 | 1,50 | T06 | Carne em bloco |
+| 584 | 19,467 | 1,83 | T09 | Grade com céu |
+| 639 | 21,300 | 1,33 | **T12 15,00** | Cesto cheio girando na frente, o pai andando ao fundo |
+| 679 | 22,633 | 3,33 | T01 | REVEAL, cabeça do 5º compasso após o impacto |
+| 779 | 25,967 | 1,57 | T07 | Vinheta |
+
+T12 é exportação do CapCut: usa o mesmo mapeamento quadro a quadro do T06.
+Nenhum clipe novo tem quadro repetido.
+
+**Trilha:** repetem o 2º e o 3º compasso depois do impacto, emendados na batida.
+
+Medido: com música −14,8 LUFS, pico −3,5 dBTP. Sem música −17,5 LUFS, pico −4,1 dBTP.
+
+Entrega: `entrega/guerreiros-ESCALA-V8-28s.mp4` e `-SEM-MUSICA`.
