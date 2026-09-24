@@ -164,3 +164,9 @@ O reveal agora vai direto para a vinheta. O fundo musical da abertura continua.
 Medido: com música −15,0 LUFS, pico −3,5 dBTP. Sem música −16,9 LUFS, pico −4,1 dBTP.
 
 Entrega: `entrega/guerreiros-ESCALA-V6-20s.mp4` e `-SEM-MUSICA`.
+
+**Correção da carne em bloco:** o IMG do T06 tem marcação de tempo irregular
+perto de 11 s. O filtro `fps=30` duplicava um quadro e pulava outro a cada três
+(16 quadros quase repetidos em 44), e isso travava a imagem. Nos clipes do T06
+cada quadro da fonte agora vira um quadro da saída (`setpts=N/(30*TB)`). O corte
+também recuou para 11,00 s, para não pegar o salto de câmera que existe em 12,52 s.

@@ -25,9 +25,12 @@ colorbalance=rh=-0.02:bh=0.01,${CV},unsharp=5:5:0.30"
 cl(){ ID=$1;SRC=$2;SS=$3;NF=$4;Z0=$5;Z1=$6;FX=$7;FY=$8;GK=$9
   DU=$(python3 -c "print($NF/30)"); SD=$(python3 -c "print(round($NF/30+0.3,3))")
   E="($Z0+($Z1-$Z0)*t/$DU)"
+  # T06 tem marcacao de tempo irregular: fps=30 duplicava e pulava quadros
+  # (a carne em bloco travava). Nele cada quadro da fonte vira um quadro da saida
+  case $SRC in *T06*) FR="setpts=N/(30*TB)";; *) FR="fps=30";; esac
   case $GK in NO) G="null";; GN) G="$GN";; GA) G="$GA";; GB) G="$GB";; GC) G="$GC";; esac
   $FF -y -ss $SS -t $SD -i "$SRC" -filter_complex \
-   "[0:v]scale=${W}*2:${H}*2:force_original_aspect_ratio=increase:flags=lanczos,crop=${W}*2:${H}*2,setsar=1,fps=30,\
+   "[0:v]scale=${W}*2:${H}*2:force_original_aspect_ratio=increase:flags=lanczos,crop=${W}*2:${H}*2,setsar=1,${FR},\
 scale=w='trunc(${W}*${E}/2)*2':h='trunc(${H}*${E}/2)*2':eval=frame:flags=lanczos,\
 crop=${W}:${H}:x='(iw-${W})*${FX}':y='(ih-${H})*${FY}',${G},setsar=1,format=yuv420p[v];\
 [0:a]aresample=48000,aformat=channel_layouts=stereo[a]" \
@@ -43,7 +46,7 @@ cl p1 $P/source/T05.mov 1.00 279 1.00 1.05 0.50 0.50 GC
 cl c1 $P/source/T04.mov 1.00  45 1.02 1.12 0.50 0.50 GA
 cl c2 $P/source/T03.mov 3.30  30 1.12 1.03 0.50 0.50 GA
 cl c3 $P/source/T06.mov 2.40  60 1.00 1.10 0.50 0.50 GN
-cl c4 $P/source/T06.mov 11.15 45 1.02 1.12 0.50 0.50 GN
+cl c4 $P/source/T06.mov 11.00 45 1.02 1.12 0.50 0.50 GN
 # (v6: carne fatiada do IMG_1475 e o zoom da operacao sairam a pedido)
 # a carne pronta sendo fatiada na tabua (IMG_1475), fora da montagem
 cl c5 $P/source/T08.mov 1.60  45 1.00 1.08 0.50 0.50 GN
