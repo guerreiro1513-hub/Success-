@@ -143,3 +143,24 @@ diferente, nada se repete.
 Medido: com música −15,0 LUFS, pico −3,5 dBTP. Sem música −17,4 LUFS, pico −4,1 dBTP.
 
 Entrega: `entrega/guerreiros-ESCALA-V5-23s.mp4` e `-SEM-MUSICA`.
+
+---
+
+# V6 — sem a carne fatiada e sem o zoom da operação (20,2 s, 606 quadros)
+
+Pedido: tirar o IMG_1475 (carne fatiada) e o recorte em zoom da operação.
+O reveal agora vai direto para a vinheta. O fundo musical da abertura continua.
+
+| Quadro | Tempo | Dura | Take | Papel |
+|---|---|---|---|---|
+| 0 | 0,000 | 9,30 | T05 1,00 | Costela, a câmera vira, o pai fala. Fundo musical baixo |
+| 279 | 9,300 | 1,50 | T04 | Peças vermelhas. Impacto da trilha |
+| 324 | 10,800 | 1,00 | T03 | Panceta |
+| 354 | 11,800 | 2,00 | T06 | Frango |
+| 414 | 13,800 | 1,50 | T06 | Carne em bloco |
+| 459 | 15,300 | 3,33 | T01 | REVEAL |
+| 559 | 18,633 | 1,57 | T07 | Vinheta |
+
+Medido: com música −15,0 LUFS, pico −3,5 dBTP. Sem música −16,9 LUFS, pico −4,1 dBTP.
+
+Entrega: `entrega/guerreiros-ESCALA-V6-20s.mp4` e `-SEM-MUSICA`.
