@@ -99,3 +99,47 @@ surgindo quando a palavra já tinha sido dita, e isso parece atraso.
 Medido: com música −14,8 LUFS, sem música −16,8 LUFS, pico −2,1 dBTP.
 
 Entrega: `entrega/guerreiros-ESCALA-V4-21s.mp4` e `-SEM-MUSICA`.
+
+---
+
+# V5 — carne fatiada e fundo musical na abertura (23,0 s, 691 quadros)
+
+Pedido: usar um dos 5 vídeos novos (IMG_1452, 1454, 1455, 1460, 1475) antes da
+cena das seis churrasqueiras, e música baixa por baixo da fala, com a fala mandando.
+
+**Escolhido: IMG_1475 (T08), 1,60 a 3,10 s.** A carne pronta sendo fatiada na
+tábua, com o miolo rosado. É o único plano de serviço do vídeo e não repete
+churrasqueira. Os outros saíram: 1452 repete o rolete de peças vermelhas do T04;
+1454 e 1455 são grelha aberta com o mesmo tipo de peça; 1460 é a tábua parada,
+mais fraca que o 1475. Grade leve (GN): com a GA a tábua virava laranja.
+
+| Quadro | Tempo | Dura | Take | Papel |
+|---|---|---|---|---|
+| 0 | 0,000 | 9,30 | T05 1,00 | Costela, a câmera vira, o pai fala. Fundo musical baixo |
+| 279 | 9,300 | 1,50 | T04 | Peças vermelhas. Impacto da trilha |
+| 324 | 10,800 | 1,00 | T03 | Panceta |
+| 354 | 11,800 | 2,00 | T06 | Frango |
+| 414 | 13,800 | 1,50 | T06 | Carne em bloco |
+| 459 | 15,300 | 1,50 | T08 | **Carne sendo fatiada** |
+| 504 | 16,800 | 3,33 | T01 | REVEAL |
+| 604 | 20,133 | 1,33 | T01 | A operação |
+| 644 | 21,467 | 1,57 | T07 | Vinheta |
+
+## Fundo musical da abertura
+
+Veio da mesma faixa, mas do trecho **anterior** ao impacto: a versão 25s
+começava a trilha em 56,54 s da faixa, e o impacto das versões novas está em
+70,605 s. Recuperado pela subtração 25s − 25s-SEM-MUSICA em janelas de 0,25 s.
+A correlação com o trecho pós-impacto ficou abaixo de 0,17: é material
+diferente, nada se repete.
+
+- 8,2 s de fundo, entra em 1,1 s com fade de 1,2 s e termina no quadro do impacto.
+- O trecho foi cortado numa batida e posicionado para que a grade de 90 BPM
+  dele passe exatamente pelo impacto: o fundo desemboca na batida.
+- 17 dB abaixo da voz, grave cortado em 150 Hz e −4 dB entre 1 e 4 kHz,
+  a faixa da inteligibilidade da fala.
+- A versão SEM-MUSICA não leva o fundo.
+
+Medido: com música −15,0 LUFS, pico −3,5 dBTP. Sem música −17,4 LUFS, pico −4,1 dBTP.
+
+Entrega: `entrega/guerreiros-ESCALA-V5-23s.mp4` e `-SEM-MUSICA`.

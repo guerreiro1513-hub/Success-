@@ -3,7 +3,7 @@
 import os, shutil
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 P = "/home/user/Success-/projetos/escala"
-W, H, TOT = 1080, 1920, 646
+W, H, TOT = 1080, 1920, 691
 FONT = P + "/assets/fonts/Montserrat.ttf"
 WHITE = (255, 255, 255); YEL = (255, 206, 38); RED = (214, 38, 30)
 # area segura do Reels: nada abaixo de ~1480 (legenda do post e botoes)
@@ -62,15 +62,15 @@ CAP = [
 CSZ = 62; CY = 1180; LEAD = 78
 capl = [(s, e, [(line_img(p, CSZ)[0], f0) for p, f0 in ls]) for s, e, ls in CAP]
 
-# ---- reveal: comeca no quadro 459 ----
+# ---- reveal: comeca no quadro 504 ----
 T1, _ = line_img([("6 ", YEL), ("CHURRASQUEIRAS.", WHITE)], 78, track=2)
 T2, _ = line_img([("AO MESMO TEMPO.", WHITE)], 78, track=2)
-R_IN1, R_IN2, R_OUT = 465, 493, 551
+R_IN1, R_IN2, R_OUT = 510, 538, 596
 
-# ---- fecho: a vinheta da marca entra no quadro 599 e ja traz o logo.
+# ---- fecho: a vinheta da marca entra no quadro 644 e ja traz o logo.
 # aqui so o @ embaixo dele, saindo junto com o escurecimento da vinheta
 HDL, _ = line_img([("@GUERREIROSGRILL", WHITE)], 40, track=5, wt="Bold")
-LOCK = 599
+LOCK = 644
 OUT = P + "/work/tx3"; shutil.rmtree(OUT, ignore_errors=True); os.makedirs(OUT)
 for fr in range(TOT):
     c = Image.new("RGBA", (W, H), (0, 0, 0, 0))
