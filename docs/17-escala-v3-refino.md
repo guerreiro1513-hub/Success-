@@ -170,3 +170,33 @@ perto de 11 s. O filtro `fps=30` duplicava um quadro e pulava outro a cada três
 (16 quadros quase repetidos em 44), e isso travava a imagem. Nos clipes do T06
 cada quadro da fonte agora vira um quadro da saída (`setpts=N/(30*TB)`). O corte
 também recuou para 11,00 s, para não pegar o salto de câmera que existe em 12,52 s.
+
+---
+
+# V7 — mais churrasqueira (24,9 s, 746 quadros)
+
+Pedido: o trecho das churrasqueiras estava curto. Entraram IMG_1448 (T11),
+IMG_1454 (T10) e IMG_1452 (T09), intercalados com os cortes que já existiam.
+
+| Quadro | Tempo | Dura | Take | Carne |
+|---|---|---|---|---|
+| 0 | 0,000 | 9,30 | T05 1,00 | Pai falando, fundo musical baixo |
+| 279 | 9,300 | 1,50 | T04 | Peças vermelhas. Impacto da trilha |
+| 324 | 10,800 | 1,00 | T03 | Panceta |
+| 354 | 11,800 | 1,33 | **T11 0,20** | Cesto de peças grandes |
+| 394 | 13,133 | 2,00 | T06 | Frango |
+| 454 | 15,133 | 1,50 | **T10 0,60** | Grelha, peças no espeto (grade leve GN) |
+| 499 | 16,633 | 1,50 | T06 | Carne em bloco |
+| 544 | 18,133 | 1,83 | **T09 3,60** | Grade de carne com o céu |
+| 599 | 19,967 | 3,33 | T01 | REVEAL, na cabeça do 4º compasso após o impacto |
+| 699 | 23,300 | 1,57 | T07 | Vinheta |
+
+As carnes somam 10,7 s, contra 6,0 s na V6. Nenhum clipe novo tem quadro repetido.
+
+**Trilha:** o gancho passou do comprimento da trilha recuperada. O 2º compasso
+depois do impacto (4 batidas) toca duas vezes, emendado na batida com
+cruzamento de 10 ms.
+
+Medido: com música −14,9 LUFS, pico −3,5 dBTP. Sem música −17,5 LUFS, pico −4,1 dBTP.
+
+Entrega: `entrega/guerreiros-ESCALA-V7-25s.mp4` e `-SEM-MUSICA`.

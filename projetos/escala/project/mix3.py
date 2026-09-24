@@ -7,7 +7,7 @@ import numpy as np, scipy.io.wavfile as w, scipy.signal as sg, subprocess, os
 FF = "/usr/local/lib/python3.11/dist-packages/imageio_ffmpeg/binaries/ffmpeg-linux-x86_64-v7.0.2"
 P = "/home/user/Success-/projetos/escala"; WK = P + "/work"; OUT = WK + "/mix3"
 os.makedirs(OUT, exist_ok=True)
-SR = 48000; FPS = 30; TOT = 606
+SR = 48000; FPS = 30; TOT = 746
 def rd(p):
     sr, x = w.read(p); assert sr == SR
     x = x.astype(np.float64) / 32768.0
@@ -28,7 +28,15 @@ for a, b in zip(B[:-1], B[1:]):
 HIT = 279; OLDHIT = 250
 T = np.zeros((int(TOT / FPS * SR), 2))
 src0 = int(OLDHIT / FPS * SR); dst0 = int(HIT / FPS * SR)
-seg = mus[src0:src0 + len(T) - dst0]
+mm = mus[src0:]
+# v7: o gancho ficou maior que a trilha recuperada. repete o 2o compasso depois
+# do impacto (4 batidas de 90 BPM), emendado na batida com cruzamento de 10 ms
+b4 = int(4 * 0.666667 * SR); xf = int(0.010 * SR)
+a_, b_ = mm[:2 * b4].copy(), mm[b4:].copy()
+r_ = np.linspace(0, 1, xf)[:, None]
+a_[-xf:] = a_[-xf:] * (1 - r_) + b_[:xf] * r_
+mm = np.concatenate([a_, b_[xf:]])
+seg = mm[:len(T) - dst0]
 T[dst0:dst0 + len(seg)] += seg
 # cauda: a trilha desce junto com o escurecimento da vinheta
 L = len(T); fo = int(1.1 * SR)
@@ -57,15 +65,15 @@ b, a = sg.butter(2, 120 / (SR / 2), "high"); A = sg.lfilter(b, a, A, axis=0)
 env = np.zeros(len(T))
 def ramp(t0, t1, v0, v1):
     i, j = int(t0 * SR), int(t1 * SR); env[i:j] = np.linspace(v0, v1, j - i)
-ramp(HIT / FPS, 14.633, 0.30, 0.30)            # gancho: chiado da carne por baixo
-ramp(14.633, 15.300, 0.30, 0.55)               # antecipacao, sobe um pouco
-ramp(15.300, 15.307, 0.55, 0.26)              # reveal: a trilha manda
-ramp(15.307, TOT / FPS, 0.26, 0.26)
+ramp(HIT / FPS, 19.300, 0.30, 0.30)            # gancho: chiado da carne por baixo
+ramp(19.300, 19.967, 0.30, 0.55)               # antecipacao, sobe um pouco
+ramp(19.967, 19.974, 0.55, 0.26)              # reveal: a trilha manda
+ramp(19.974, TOT / FPS, 0.26, 0.26)
 Amb = A * env[:, None]
 k = int(0.02 * SR); Amb[dst0:dst0 + k] *= np.linspace(0, 1, k)[:, None]
 
 # ---- impacto sutil no reveal: sub de 48 Hz decaindo, sem clique ----
-R = int(459 / FPS * SR); d = int(0.55 * SR); t = np.arange(d) / SR
+R = int(599 / FPS * SR); d = int(0.55 * SR); t = np.arange(d) / SR
 sub = np.sin(2 * np.pi * (48 - 14 * t) * t) * np.exp(-t * 7.5) * (1 - np.exp(-t * 400))
 Hit = np.zeros_like(T); Hit[R:R + d, 0] = Hit[R:R + d, 1] = sub * 0.20
 

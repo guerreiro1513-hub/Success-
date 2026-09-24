@@ -39,14 +39,19 @@ crop=${W}:${H}:x='(iw-${W})*${FX}':y='(ih-${H})*${FY}',${G},setsar=1,format=yuv4
 # abertura na churrasqueira: entra em 1,00 do take, 0,6 s de costela e a camera
 # vira. o pai aparece por volta de 1 s. fala inteira ate 10,30 (1a silaba em 2,48)
 cl p1 $P/source/T05.mov 1.00 279 1.00 1.05 0.50 0.50 GC
-# gancho: uma churrasqueira por corte, nenhuma volta. 45, 30, 60, 45 quadros
+# gancho (v7, mais longo a pedido): 45, 30, 40, 60, 45, 45, 55 = 320 quadros,
+# o reveal cai na cabeca do 4o compasso depois do impacto.
+# x1 IMG_1448 cesto de pecas grandes, x2 IMG_1454 grelha, x3 IMG_1452 grade com ceu
 # (T04 para em 2,5: o take acaba em 2,67. panceta fica em 30: depois a camera
 # vira para pecas vermelhas iguais as do T04)
 # (T02 saiu: e a mesma churrasqueira do T03. costela do T06 saiu: repete a da abertura)
 cl c1 $P/source/T04.mov 1.00  45 1.02 1.12 0.50 0.50 GA
 cl c2 $P/source/T03.mov 3.30  30 1.12 1.03 0.50 0.50 GA
+cl x1 $P/source/T11.mov 0.20  40 1.02 1.10 0.50 0.50 GA
 cl c3 $P/source/T06.mov 2.40  60 1.00 1.10 0.50 0.50 GN
+cl x2 $P/source/T10.mov 0.60  45 1.00 1.08 0.50 0.50 GN
 cl c4 $P/source/T06.mov 11.00 45 1.02 1.12 0.50 0.50 GN
+cl x3 $P/source/T09.mov 3.60  55 1.03 1.12 0.50 0.50 GA
 # (v6: carne fatiada do IMG_1475 e o zoom da operacao sairam a pedido)
 # a carne pronta sendo fatiada na tabua (IMG_1475), fora da montagem
 cl c5 $P/source/T08.mov 1.60  45 1.00 1.08 0.50 0.50 GN
@@ -56,6 +61,6 @@ cl r1 $P/source/T01.mov 0.30 100 1.62 1.26 0.50 0.92 GB
 cl d1 $P/source/T01.mov 6.30  40 1.80 1.68 0.56 0.60 GB
 # fecho: a vinheta da marca (T07), intacta, sem grade nem zoom
 cl o1 $P/source/T07.mov 0.00  47 1.00 1.00 0.50 0.50 NO
-for i in p1 c1 c2 c3 c4 r1 o1; do echo "file '$OUTD/$i.mov'"; done > $OUTD/list.txt
+for i in p1 c1 c2 x1 c3 x2 c4 x3 r1 o1; do echo "file '$OUTD/$i.mov'"; done > $OUTD/list.txt
 $FF -y -hide_banner -loglevel error -f concat -safe 0 -i $OUTD/list.txt -c:v copy -c:a pcm_s16le $OUTD/base.mov
 echo base ok
