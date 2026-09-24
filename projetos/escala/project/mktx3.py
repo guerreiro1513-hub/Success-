@@ -3,7 +3,7 @@
 import os, shutil
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 P = "/home/user/Success-/projetos/escala"
-W, H, TOT = 1080, 1920, 640
+W, H, TOT = 1080, 1920, 626
 FONT = P + "/assets/fonts/Montserrat.ttf"
 WHITE = (255, 255, 255); YEL = (255, 206, 38); RED = (214, 38, 30)
 # area segura do Reels: nada abaixo de ~1480 (legenda do post e botoes)
@@ -50,32 +50,26 @@ def rule(wd, h=6, col=RED):
     return Image.new("RGBA", (max(1, wd), h), col + (255,))
 
 # ---- legenda da fala: tempos medidos no espectrograma do take ----
-# quadro 0 = 2,30 s do take. Cada grupo tem ate 2 linhas; a 2a entra no tempo dela.
+# quadro 0 = 0,00 s do take (fala comeca em 2,48 s = quadro 74). Cada grupo tem ate 2 linhas; a 2a entra no tempo dela.
 CAP = [
-    (4, 38,   [([("FALA, ", WHITE), ("GURIZADA!", YEL)], 4)]),
-    (39, 107, [([("ESSA É UMA DAS", WHITE)], 39), ([("SEIS CHURRASQUEIRAS", YEL)], 74)]),
-    (108, 163, [([("QUE TEMOS NO ", WHITE), ("FLORAIS.", YEL)], 108)]),
-    (164, 207, [([("VEM PRA CÁ,", WHITE)], 164), ([("TEM MUITA COISA BOA.", WHITE)], 179)]),
-    (208, 239, [([("UM ABRAÇO,", WHITE)], 208), ([("VEM SER ", WHITE), ("FELIZ!", YEL)], 219)]),
+    (73, 107,   [([("FALA, ", WHITE), ("GURIZADA!", YEL)], 73)]),
+    (108, 176, [([("ESSA É UMA DAS", WHITE)], 108), ([("SEIS CHURRASQUEIRAS", YEL)], 143)]),
+    (177, 232, [([("QUE TEMOS NO ", WHITE), ("FLORAIS.", YEL)], 177)]),
+    (233, 276, [([("VEM PRA CÁ,", WHITE)], 233), ([("TEM MUITA COISA BOA.", WHITE)], 248)]),
+    (277, 308, [([("UM ABRAÇO,", WHITE)], 277), ([("VEM SER ", WHITE), ("FELIZ!", YEL)], 288)]),
 ]
 CSZ = 62; CY = 1180; LEAD = 78
 capl = [(s, e, [(line_img(p, CSZ)[0], f0) for p, f0 in ls]) for s, e, ls in CAP]
 
-# ---- reveal: comeca no quadro 370 ----
+# ---- reveal: comeca no quadro 439 ----
 T1, _ = line_img([("6 ", YEL), ("CHURRASQUEIRAS.", WHITE)], 78, track=2)
 T2, _ = line_img([("AO MESMO TEMPO.", WHITE)], 78, track=2)
-R_IN1, R_IN2, R_OUT = 376, 404, 462
+R_IN1, R_IN2, R_OUT = 445, 473, 531
 
-# ---- fecho: quadro 580 ----
-badge = Image.open(P + "/assets/logo_key.png").convert("RGBA")
-bw = 420; badge = badge.resize((bw, int(bw * badge.height / badge.width)), Image.LANCZOS)
+# ---- fecho: a vinheta da marca entra no quadro 579 e ja traz o logo.
+# aqui so o @ embaixo dele, saindo junto com o escurecimento da vinheta
 HDL, _ = line_img([("@GUERREIROSGRILL", WHITE)], 40, track=5, wt="Bold")
-LOCK = 580
-scrim = Image.new("L", (1, H))
-for y in range(H):
-    scrim.putpixel((0, y), int((clamp((y - H * 0.30) / (H * 0.70)) ** 1.3) * 200))
-scrim = scrim.resize((W, H)); SCR = Image.new("RGBA", (W, H), (0, 0, 0, 255)); SCR.putalpha(scrim)
-
+LOCK = 579
 OUT = P + "/work/tx3"; shutil.rmtree(OUT, ignore_errors=True); os.makedirs(OUT)
 for fr in range(TOT):
     c = Image.new("RGBA", (W, H), (0, 0, 0, 0))
@@ -101,19 +95,9 @@ for fr in range(TOT):
         if pr > 0:
             wd = int(420 * pr); c.alpha_composite(rule(wd), (W // 2 - wd // 2, 524))
     # fecho
-    if fr >= LOCK:
-        sa = out_cubic((fr - LOCK) / 12.0)
-        sc = SCR.copy(); sc.putalpha(SCR.split()[3].point(lambda v: int(v * sa))); c = Image.alpha_composite(c, sc)
-        r = fr - (LOCK + 4)
-        if r >= 0:
-            t = out_cubic(r / 12.0)
-            b = badge.filter(ImageFilter.GaussianBlur(3.5 * (1 - out_cubic(r / 9.0)))) if r < 9 else badge
-            place(c, b, W / 2, 1010, a=t, sc=1.10 - 0.10 * out_back(r / 14.0))
-        pr = out_cubic((fr - LOCK - 16) / 10.0)
-        if pr > 0:
-            wd = int(260 * pr); c.alpha_composite(rule(wd, 5), (W // 2 - wd // 2, 1010 + badge.height // 2 + 30))
-        r = fr - (LOCK + 20)
-        if r >= 0:
-            t = out_cubic(r / 8.0); place(c, HDL, W / 2, 1010 + badge.height // 2 + 92, a=t, dy=10 * (1 - t))
+    r = fr - (LOCK + 4)
+    if r >= 0:
+        t = out_cubic(r / 8.0) * (1 - clamp((fr - (LOCK + 26)) / 14.0))
+        place(c, HDL, W / 2, 1372, a=t, dy=10 * (1 - out_cubic(r / 8.0)))
     c.save(f"{OUT}/t_{fr:04d}.png", compress_level=1)
 print("quadros", len(os.listdir(OUT)))

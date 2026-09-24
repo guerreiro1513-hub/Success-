@@ -25,7 +25,7 @@ colorbalance=rh=-0.02:bh=0.01,${CV},unsharp=5:5:0.30"
 cl(){ ID=$1;SRC=$2;SS=$3;NF=$4;Z0=$5;Z1=$6;FX=$7;FY=$8;GK=$9
   DU=$(python3 -c "print($NF/30)"); SD=$(python3 -c "print(round($NF/30+0.3,3))")
   E="($Z0+($Z1-$Z0)*t/$DU)"
-  case $GK in GN) G="$GN";; GA) G="$GA";; GB) G="$GB";; GC) G="$GC";; esac
+  case $GK in NO) G="null";; GN) G="$GN";; GA) G="$GA";; GB) G="$GB";; GC) G="$GC";; esac
   $FF -y -ss $SS -t $SD -i "$SRC" -filter_complex \
    "[0:v]scale=${W}*2:${H}*2:force_original_aspect_ratio=increase:flags=lanczos,crop=${W}*2:${H}*2,setsar=1,fps=30,\
 scale=w='trunc(${W}*${E}/2)*2':h='trunc(${H}*${E}/2)*2':eval=frame:flags=lanczos,\
@@ -33,27 +33,21 @@ crop=${W}:${H}:x='(iw-${W})*${FX}':y='(ih-${H})*${FY}',${G},setsar=1,format=yuv4
 [0:a]aresample=48000,aformat=channel_layouts=stereo[a]" \
    -map "[v]" -map "[a]" -frames:v $NF -r 30 -c:v libx264 -preset $PRE -crf $CRF -c:a pcm_s16le "$OUTD/$ID.mov" -loglevel error; }
 
-# fala inteira: 2,30 a 10,30 do take. a primeira silaba cai em 2,48
-cl p1 $P/source/T05.mov 2.30 240 1.00 1.06 0.50 0.50 GC
-# gancho intacto da v2, grade nova. tempos e meios tempos de 90 BPM (20 quadros)
+# abertura na churrasqueira: o take comeca 1,6 s em cima da costela e vira
+# para o pai. fala inteira, 0,00 a 10,30. a primeira silaba cai em 2,48
+cl p1 $P/source/T05.mov 0.00 309 1.00 1.05 0.50 0.50 GC
+# gancho: uma churrasqueira por corte, nenhuma volta. 40, 30, 40, 20 quadros
+# (T02 saiu: e a mesma churrasqueira do T03. costela do T06 saiu: repete a da abertura)
 cl c1 $P/source/T04.mov 1.00  40 1.02 1.12 0.50 0.50 GA
-cl c2 $P/source/T03.mov 3.40  30 1.12 1.02 0.50 0.50 GA
-cl c3 $P/source/T02.mov 0.20  20 1.02 1.11 0.50 0.50 GA
-cl c4 $P/source/T03.mov 2.20  20 1.11 1.02 0.50 0.50 GA
-cl c5 $P/source/T04.mov 1.85  10 1.10 1.20 0.50 0.50 GA
-cl c6 $P/source/T02.mov 1.45  10 1.18 1.32 0.50 0.50 GA
+cl c2 $P/source/T03.mov 3.30  30 1.12 1.03 0.50 0.50 GA
+cl c3 $P/source/T06.mov 2.60  40 1.00 1.08 0.50 0.50 GN
+cl c4 $P/source/T06.mov 11.30 20 1.03 1.10 0.50 0.50 GN
 # reveal: mesmo punch-out da v2
 cl r1 $P/source/T01.mov 0.30 100 1.62 1.26 0.50 0.92 GB
-# final novo. v2 voltava 4 vezes ao mesmo travelling; aqui entra um recorte
-# apertado da operacao (fumaca, gente trabalhando), informacao que o aberto nao da
+# a operacao: banner, fumaca, gente trabalhando. nenhuma carne repetida
 cl d1 $P/source/T01.mov 6.30  40 1.80 1.68 0.56 0.60 GB
-# variedade: o que tem dentro das outras churrasqueiras (T06, 1080p nativo,
-# zoom baixo para nao ampliar pixel). frango, costela na fumaca, carne em bloco
-cl n1 $P/source/T06.mov 2.80  20 1.00 1.06 0.50 0.50 GN
-cl n2 $P/source/T06.mov 7.10  20 1.06 1.00 0.50 0.50 GN
-cl n3 $P/source/T06.mov 11.30 30 1.00 1.08 0.50 0.50 GN
-# fecho em movimento, nao congelado
-cl e1 $P/source/T01.mov 7.60  60 1.24 1.30 0.50 0.88 GB
-for i in p1 c1 c2 c3 c4 c5 c6 r1 d1 n1 n2 n3 e1; do echo "file '$OUTD/$i.mov'"; done > $OUTD/list.txt
+# fecho: a vinheta da marca (T07), intacta, sem grade nem zoom
+cl o1 $P/source/T07.mov 0.00  47 1.00 1.00 0.50 0.50 NO
+for i in p1 c1 c2 c3 c4 r1 d1 o1; do echo "file '$OUTD/$i.mov'"; done > $OUTD/list.txt
 $FF -y -hide_banner -loglevel error -f concat -safe 0 -i $OUTD/list.txt -c:v copy -c:a pcm_s16le $OUTD/base.mov
 echo base ok

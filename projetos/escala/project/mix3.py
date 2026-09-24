@@ -7,7 +7,7 @@ import numpy as np, scipy.io.wavfile as w, scipy.signal as sg, subprocess, os
 FF = "/usr/local/lib/python3.11/dist-packages/imageio_ffmpeg/binaries/ffmpeg-linux-x86_64-v7.0.2"
 P = "/home/user/Success-/projetos/escala"; WK = P + "/work"; OUT = WK + "/mix3"
 os.makedirs(OUT, exist_ok=True)
-SR = 48000; FPS = 30; TOT = 640
+SR = 48000; FPS = 30; TOT = 626
 def rd(p):
     sr, x = w.read(p); assert sr == SR
     x = x.astype(np.float64) / 32768.0
@@ -24,20 +24,20 @@ for a, b in zip(B[:-1], B[1:]):
     m, s = mix[i:j].ravel(), sm[i:j].ravel()
     g = float(np.dot(m, s) / (np.dot(s, s) + 1e-12))
     mus[i:j] = mix[i:j] - g * sm[i:j]
-# v3 = v2 - 10 quadros a partir do impacto (fala aparada no respiro inicial)
-HIT = 240; OLDHIT = 250
+# o impacto da trilha cai no corte que sai do pai, agora no quadro 309
+HIT = 309; OLDHIT = 250
 T = np.zeros((int(TOT / FPS * SR), 2))
 src0 = int(OLDHIT / FPS * SR); dst0 = int(HIT / FPS * SR)
 seg = mus[src0:src0 + len(T) - dst0]
 T[dst0:dst0 + len(seg)] += seg
-# cauda: a v3 acaba antes, a trilha desce nos ultimos 0,9 s em vez de cortar
-L = len(T); fo = int(0.9 * SR)
+# cauda: a trilha desce junto com o escurecimento da vinheta
+L = len(T); fo = int(1.1 * SR)
 T[L - fo:] *= np.linspace(1, 0, fo)[:, None] ** 1.6
 
 # ---- voz ----
-# 2,30 a 10,30 do take. limpeza leve: grave cortado, ruido de feira reduzido
+# 0,00 a 10,30 do take (abre na churrasqueira). limpeza leve: grave cortado, ruido de feira reduzido
 # sem deixar a voz metalica, presenca em 3 kHz, compressao 3:1
-ff("-ss", "2.30", "-t", "8.0", "-i", P + "/source/T05.mov", "-vn", "-af",
+ff("-ss", "0", "-t", "10.30", "-i", P + "/source/T05.mov", "-vn", "-af",
    "aresample=48000,highpass=f=95,afftdn=nr=8:nf=-38:tn=1,"
    "equalizer=f=220:t=q:w=1.0:g=-2.5,equalizer=f=3000:t=q:w=1.2:g=3,"
    "equalizer=f=7000:t=q:w=1.5:g=-1.5,"
@@ -57,15 +57,15 @@ b, a = sg.butter(2, 120 / (SR / 2), "high"); A = sg.lfilter(b, a, A, axis=0)
 env = np.zeros(len(T))
 def ramp(t0, t1, v0, v1):
     i, j = int(t0 * SR), int(t1 * SR); env[i:j] = np.linspace(v0, v1, j - i)
-ramp(HIT / FPS, 12.0, 0.30, 0.30)            # gancho: chiado da carne por baixo
-ramp(12.0, 12.333, 0.30, 0.55)               # antecipacao, sobe um pouco
-ramp(12.333, 12.34, 0.55, 0.26)              # reveal: a trilha manda
-ramp(12.34, TOT / FPS, 0.26, 0.26)
+ramp(HIT / FPS, 13.967, 0.30, 0.30)            # gancho: chiado da carne por baixo
+ramp(13.967, 14.633, 0.30, 0.55)               # antecipacao, sobe um pouco
+ramp(14.633, 14.64, 0.55, 0.26)              # reveal: a trilha manda
+ramp(14.64, TOT / FPS, 0.26, 0.26)
 Amb = A * env[:, None]
 k = int(0.02 * SR); Amb[dst0:dst0 + k] *= np.linspace(0, 1, k)[:, None]
 
 # ---- impacto sutil no reveal: sub de 48 Hz decaindo, sem clique ----
-R = int(370 / FPS * SR); d = int(0.55 * SR); t = np.arange(d) / SR
+R = int(439 / FPS * SR); d = int(0.55 * SR); t = np.arange(d) / SR
 sub = np.sin(2 * np.pi * (48 - 14 * t) * t) * np.exp(-t * 7.5) * (1 - np.exp(-t * 400))
 Hit = np.zeros_like(T); Hit[R:R + d, 0] = Hit[R:R + d, 1] = sub * 0.20
 
