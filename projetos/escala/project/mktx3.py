@@ -3,7 +3,7 @@
 import os, shutil
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 P = "/home/user/Success-/projetos/escala"
-W, H, TOT = 1080, 1920, 626
+W, H, TOT = 1080, 1920, 646
 FONT = P + "/assets/fonts/Montserrat.ttf"
 WHITE = (255, 255, 255); YEL = (255, 206, 38); RED = (214, 38, 30)
 # area segura do Reels: nada abaixo de ~1480 (legenda do post e botoes)
@@ -50,26 +50,27 @@ def rule(wd, h=6, col=RED):
     return Image.new("RGBA", (max(1, wd), h), col + (255,))
 
 # ---- legenda da fala: tempos medidos no espectrograma do take ----
-# quadro 0 = 0,00 s do take (fala comeca em 2,48 s = quadro 74). Cada grupo tem ate 2 linhas; a 2a entra no tempo dela.
+# quadro 0 = 1,00 s do take (fala comeca em 2,48 s = quadro 44).
+# cada frase entra 5 quadros ANTES da voz: com a animacao, entrar junto parece atraso Cada grupo tem ate 2 linhas; a 2a entra no tempo dela.
 CAP = [
-    (73, 107,   [([("FALA, ", WHITE), ("GURIZADA!", YEL)], 73)]),
-    (108, 176, [([("ESSA É UMA DAS", WHITE)], 108), ([("SEIS CHURRASQUEIRAS", YEL)], 143)]),
-    (177, 232, [([("QUE TEMOS NO ", WHITE), ("FLORAIS.", YEL)], 177)]),
-    (233, 276, [([("VEM PRA CÁ,", WHITE)], 233), ([("TEM MUITA COISA BOA.", WHITE)], 248)]),
-    (277, 308, [([("UM ABRAÇO,", WHITE)], 277), ([("VEM SER ", WHITE), ("FELIZ!", YEL)], 288)]),
+    (38, 72,   [([("FALA, ", WHITE), ("GURIZADA!", YEL)], 38)]),
+    (73, 141,  [([("ESSA É UMA DAS", WHITE)], 73), ([("SEIS CHURRASQUEIRAS", YEL)], 108)]),
+    (142, 197, [([("QUE TEMOS NO ", WHITE), ("FLORAIS.", YEL)], 142)]),
+    (198, 241, [([("VEM PRA CÁ,", WHITE)], 198), ([("TEM MUITA COISA BOA.", WHITE)], 213)]),
+    (242, 278, [([("UM ABRAÇO,", WHITE)], 242), ([("VEM SER ", WHITE), ("FELIZ!", YEL)], 253)]),
 ]
 CSZ = 62; CY = 1180; LEAD = 78
 capl = [(s, e, [(line_img(p, CSZ)[0], f0) for p, f0 in ls]) for s, e, ls in CAP]
 
-# ---- reveal: comeca no quadro 439 ----
+# ---- reveal: comeca no quadro 459 ----
 T1, _ = line_img([("6 ", YEL), ("CHURRASQUEIRAS.", WHITE)], 78, track=2)
 T2, _ = line_img([("AO MESMO TEMPO.", WHITE)], 78, track=2)
-R_IN1, R_IN2, R_OUT = 445, 473, 531
+R_IN1, R_IN2, R_OUT = 465, 493, 551
 
-# ---- fecho: a vinheta da marca entra no quadro 579 e ja traz o logo.
+# ---- fecho: a vinheta da marca entra no quadro 599 e ja traz o logo.
 # aqui so o @ embaixo dele, saindo junto com o escurecimento da vinheta
 HDL, _ = line_img([("@GUERREIROSGRILL", WHITE)], 40, track=5, wt="Bold")
-LOCK = 579
+LOCK = 599
 OUT = P + "/work/tx3"; shutil.rmtree(OUT, ignore_errors=True); os.makedirs(OUT)
 for fr in range(TOT):
     c = Image.new("RGBA", (W, H), (0, 0, 0, 0))
@@ -81,8 +82,8 @@ for fr in range(TOT):
         for i, (im, f0) in enumerate(ls):
             r = fr - f0
             if r < 0: continue
-            t = out_cubic(r / 5.0)
-            place(c, im, W / 2, y0 + i * LEAD, a=t * ex, sc=0.90 + 0.10 * out_back(r / 6.0), dy=12 * (1 - t))
+            t = out_cubic(r / 3.0)
+            place(c, im, W / 2, y0 + i * LEAD, a=t * ex, sc=0.94 + 0.06 * out_back(r / 4.0), dy=8 * (1 - t))
     # titulos do reveal
     if R_IN1 <= fr < R_OUT + 6:
         ex = 1 - clamp((fr - R_OUT) / 6.0)

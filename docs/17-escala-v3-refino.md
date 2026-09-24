@@ -72,3 +72,30 @@ no corte que sai do pai (quadro 309) e desce junto com o escurecimento da vinhet
 
 - `entrega/guerreiros-ESCALA-V3-FINAL-20s.mp4`
 - `entrega/guerreiros-ESCALA-V3-FINAL-20s-SEM-MUSICA.mp4`
+
+---
+
+# V4 — ajustes de ritmo (21,5 s, 646 quadros)
+
+Pedido: carnes mais tempo na tela, pai nos 3 primeiros segundos, legenda sem atraso.
+
+| Quadro | Tempo | Dura | Take | Papel |
+|---|---|---|---|---|
+| 0 | 0,000 | 9,30 | T05 1,00 | 0,6 s de costela, a câmera vira. **O pai aparece em ~1,2 s** |
+| 279 | 9,300 | 1,50 | T04 1,00 | Peças vermelhas. A música bate aqui |
+| 324 | 10,800 | 1,00 | T03 3,30 | Panceta (não cresce: depois a câmera mostra peças iguais às do T04) |
+| 354 | 11,800 | 2,00 | T06 2,40 | Frango |
+| 414 | 13,800 | 1,50 | T06 11,15 | Carne em bloco |
+| 459 | 15,300 | 3,33 | T01 0,30 | REVEAL |
+| 559 | 18,633 | 1,33 | T01 6,30 | A operação |
+| 599 | 19,967 | 1,57 | T07 | Vinheta |
+
+As carnes somam 6,0 s, contra 4,3 s na versão anterior.
+
+**Legenda:** cada frase entra 5 quadros (0,17 s) antes da voz e a animação caiu de
+5 para 3 quadros. Entrando no mesmo quadro da sílaba, a legenda ainda estava
+surgindo quando a palavra já tinha sido dita, e isso parece atraso.
+
+Medido: com música −14,8 LUFS, sem música −16,8 LUFS, pico −2,1 dBTP.
+
+Entrega: `entrega/guerreiros-ESCALA-V4-21s.mp4` e `-SEM-MUSICA`.

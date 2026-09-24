@@ -33,15 +33,17 @@ crop=${W}:${H}:x='(iw-${W})*${FX}':y='(ih-${H})*${FY}',${G},setsar=1,format=yuv4
 [0:a]aresample=48000,aformat=channel_layouts=stereo[a]" \
    -map "[v]" -map "[a]" -frames:v $NF -r 30 -c:v libx264 -preset $PRE -crf $CRF -c:a pcm_s16le "$OUTD/$ID.mov" -loglevel error; }
 
-# abertura na churrasqueira: o take comeca 1,6 s em cima da costela e vira
-# para o pai. fala inteira, 0,00 a 10,30. a primeira silaba cai em 2,48
-cl p1 $P/source/T05.mov 0.00 309 1.00 1.05 0.50 0.50 GC
-# gancho: uma churrasqueira por corte, nenhuma volta. 40, 30, 40, 20 quadros
+# abertura na churrasqueira: entra em 1,00 do take, 0,6 s de costela e a camera
+# vira. o pai aparece por volta de 1 s. fala inteira ate 10,30 (1a silaba em 2,48)
+cl p1 $P/source/T05.mov 1.00 279 1.00 1.05 0.50 0.50 GC
+# gancho: uma churrasqueira por corte, nenhuma volta. 45, 30, 60, 45 quadros
+# (T04 para em 2,5: o take acaba em 2,67. panceta fica em 30: depois a camera
+# vira para pecas vermelhas iguais as do T04)
 # (T02 saiu: e a mesma churrasqueira do T03. costela do T06 saiu: repete a da abertura)
-cl c1 $P/source/T04.mov 1.00  40 1.02 1.12 0.50 0.50 GA
+cl c1 $P/source/T04.mov 1.00  45 1.02 1.12 0.50 0.50 GA
 cl c2 $P/source/T03.mov 3.30  30 1.12 1.03 0.50 0.50 GA
-cl c3 $P/source/T06.mov 2.60  40 1.00 1.08 0.50 0.50 GN
-cl c4 $P/source/T06.mov 11.30 20 1.03 1.10 0.50 0.50 GN
+cl c3 $P/source/T06.mov 2.40  60 1.00 1.10 0.50 0.50 GN
+cl c4 $P/source/T06.mov 11.15 45 1.02 1.12 0.50 0.50 GN
 # reveal: mesmo punch-out da v2
 cl r1 $P/source/T01.mov 0.30 100 1.62 1.26 0.50 0.92 GB
 # a operacao: banner, fumaca, gente trabalhando. nenhuma carne repetida
