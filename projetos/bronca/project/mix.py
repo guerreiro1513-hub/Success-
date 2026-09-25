@@ -1,13 +1,13 @@
 # Bronca Fake v2 — som. Voz e ambiente reais na bronca; a trilha gaucha
 # (sintetizada neste repositorio) entra baixa no corte para a cor, por baixo da
-# voz, e sobe quando o logo aparece.
+# voz, e sobe depois do "eeeee" para fechar.
 import numpy as np, scipy.io.wavfile as w, subprocess, os
 FF = "/usr/local/lib/python3.11/dist-packages/imageio_ffmpeg/binaries/ffmpeg-linux-x86_64-v7.0.2"
 P = "/home/user/Success-/projetos/bronca"; WK = P + "/work"; OUT = WK + "/mix"
 os.makedirs(OUT, exist_ok=True)
 SR = 48000; FPS = 30
-Q, E1, F1 = 41 + 187, 115 + 272, 36
-TOT = Q + E1 + F1; LOGO_IN = 609
+Q, E1, F1 = 41 + 187, 119 + 250, 0
+TOT = Q + E1 + F1; LOGO_IN = 588
 def rd(p):
     x = w.read(p)[1].astype(np.float64) / 32768
     return x if x.ndim == 2 else np.stack([x, x], 1)
@@ -39,6 +39,6 @@ for nm, x in (("com", V + mus), ("sem", V)):
     x = x * (0.5 / np.abs(x).max())
     w.write(OUT + f"/pre_{nm}.wav", SR, (x * 32767).astype(np.int16))
     ff("-i", OUT + f"/pre_{nm}.wav", "-af",
-       "loudnorm=I=-14:TP=-1.5:LRA=9,alimiter=limit=0.66:level=false:attack=2:release=60,aresample=48000",
+       "loudnorm=I=-14:TP=-1.5:LRA=9,alimiter=limit=0.60:level=false:attack=2:release=60,aresample=48000",
        "-ar", "48000", OUT + f"/final_{nm}.wav")
 print("ok", TOT, "quadros, ganho video1 %.2f" % g)
