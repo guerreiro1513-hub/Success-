@@ -28,14 +28,17 @@ cl q1 $P/source/T13.mov 1.00  23 1.06 1.08 0.58 0.30 "$BW"
 # 2 video 2, 1,77 a 6,30: levanta a cabeca e da a bronca olhando para a camera.
 #   punch-in seco no corte (1,08 -> 1,22), a fala inteira sem picotar
 cl q2 $P/source/T13.mov 1.767 136 1.22 1.17 0.60 0.28 "$BW"
-# 3 video 1 do inicio do 2o take ate o fim, 8,67 a 17,73 (a emenda do CapCut vai ate 8,63): corte seco para a cor. ele na churrasqueira, a camera abre, cestos cheios girando
-#   na frente, ele andando e abrindo os bracos. fonte 1080p: aproximacao ate 1,05
-cl e1 $P/source/T12.mov 8.667 272 1.00 1.05 0.50 0.40 "$GC"
+# 3 video 1 de 4,70 ate o fim (pedido do cliente): corte seco para a cor.
+#   take A 4,70-8,53 (ele na churrasqueira) + take B 8,67-17,73 (a camera abre,
+#   cestos cheios, ele andando e abrindo os bracos). os quadros da emenda do
+#   CapCut (8,53-8,63) ficam de fora: vira um corte seco. fonte 1080p: ate 1,05
+cl e1 $P/source/T12.mov 4.70 115 1.00 1.03 0.50 0.40 "$GC"
+cl e2 $P/source/T12.mov 8.667 272 1.00 1.05 0.50 0.40 "$GC"
 # 4 ultimo quadro do video 1 parado, aproximacao lenta, logo por cima (camada de texto)
-$FF -y -loglevel error -sseof -0.04 -i $WK/e1.mov -frames:v 1 -update 1 $WK/last.png
+$FF -y -loglevel error -sseof -0.04 -i $WK/e2.mov -frames:v 1 -update 1 $WK/last.png
 $FF -y -loglevel error -loop 1 -framerate 30 -i $WK/last.png -f lavfi -i anullsrc=r=48000:cl=stereo \
  -filter_complex "[0:v]scale=w='trunc(${W}*(1.00+0.035*t/1.2)/2)*2':h='trunc(${H}*(1.00+0.035*t/1.2)/2)*2':eval=frame:flags=lanczos,crop=${W}:${H},setsar=1,format=yuv420p[v]" \
  -map "[v]" -map 1:a -frames:v 36 -r 30 -c:v libx264 -preset $PRE -crf $CRF -c:a pcm_s16le -t 1.2 $WK/f1.mov
-for i in q1 q2 e1 f1; do echo "file '$WK/$i.mov'"; done > $WK/list.txt
+for i in q1 q2 e1 e2 f1; do echo "file '$WK/$i.mov'"; done > $WK/list.txt
 $FF -y -hide_banner -loglevel error -f concat -safe 0 -i $WK/list.txt -c:v copy -c:a pcm_s16le $WK/base.mov
 echo base ok
