@@ -2,8 +2,8 @@
 #  - frase da trend no topo (TikTok Sans, a fonte das trends do TikTok): entra
 #    quando ele levanta a cabeca para a bronca, nao no primeiro quadro, e sai no
 #    corte para a cor
-#  - legenda do video 1 (transcricao do cliente) em Poppins ExtraBold minuscula,
-#    branca com contorno, palavra-chave em vermelho (linguagem do video-modelo)
+#  - legenda do video 1 (transcricao do cliente) no estilo viral: Montserrat
+#    Black MAIUSCULA, contorno grosso, 2-3 palavras, a palavra falada em amarelo
 #  - sem logo no fim (o cliente pediu para cortar o final)
 import os, shutil
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
@@ -70,17 +70,39 @@ TR_IN, TR_OUT, TR_Y = 12, Q - 1, 318     # entra em 0,4 s (nao no primeiro quadr
 # 7,60-8,50 | vale ate uma dancinha 9,50-11,45 | besta de tao macia que ta
 # 11,60-13,40 | eita trem bom 13,45-14,65 | rapaz 14,85-15,55 | eeeee 16,15-16,75
 # video 1 4,55 -> quadro 228; 8,667 -> quadro 347
-CAPS = [
-    (230, 270, ["rapaaaz"], {"rapaaaz"}),
-    (320, 346, ["tá macia mesmo hein"], {"macia"}),
-    (372, 430, ["vale até uma", "dancinha"], {"dancinha"}),
-    (435, 489, ["besta de tão", "macia que tá"], {"macia"}),
-    (491, 526, ["eita trem bom"], {"trem", "bom"}),
-    (532, 553, ["rapaz"], {"rapaz"}),
-    (571, 592, ["eeeee"], {"eeeee"}),
+CAPS = [   # 2 a 3 palavras por vez, uma linha (o que mais segura retencao)
+    (230, 270, ["rapaaaz"], set()),
+    (320, 333, ["tá macia"], set()),
+    (334, 346, ["mesmo hein"], set()),
+    (372, 391, ["vale até"], set()),
+    (392, 430, ["uma dancinha"], set()),
+    (435, 460, ["besta de tão"], set()),
+    (461, 489, ["macia que tá"], set()),
+    (491, 526, ["eita trem bom"], set()),
+    (532, 553, ["rapaz"], set()),
+    (571, 592, ["eeeee"], set()),
 ]
 import re
 def syl(w): return max(1, len(re.findall(r"[aeiouáéíóúâêôãõ]+", w.lower())))
+YEL = (255, 222, 0)
+def mont_black(sz):
+    f = ImageFont.truetype(E_ + "/assets/fonts/Montserrat.ttf", sz); f.set_variation_by_name("Black"); return f
+def viral_img(lines, act, ft, stroke=10):
+    """legenda viral: MAIUSCULA, branca, contorno preto grosso, sombra dura; a
+    palavra falada fica amarela."""
+    lines = [[x.upper() for x in l] for l in lines]
+    asc, dsc = ft.getmetrics(); lh = int((asc + dsc) * 1.05); sp = ft.getlength(" "); pad = 50
+    ws = [[ft.getlength(x) for x in l] for l in lines]
+    lw = [sum(a) + sp * (len(a) - 1) for a in ws]; tw = int(max(lw))
+    im = Image.new("RGBA", (tw + 2 * pad, lh * len(lines) + 2 * pad), (0, 0, 0, 0)); sh = im.copy()
+    d, ds = ImageDraw.Draw(im), ImageDraw.Draw(sh); k = 0
+    for i, (l, wl) in enumerate(zip(lines, ws)):
+        x = pad + (tw - lw[i]) / 2; y = pad + i * lh
+        for wd, w_ in zip(l, wl):
+            ds.text((x + 4, y + 8), wd, font=ft, fill=(0, 0, 0, 200), stroke_width=stroke, stroke_fill=(0, 0, 0, 200))
+            d.text((x, y), wd, font=ft, fill=(YEL if k == act else WHITE) + (255,), stroke_width=stroke, stroke_fill=INK + (255,))
+            x += w_ + sp; k += 1
+    return Image.alpha_composite(sh.filter(ImageFilter.GaussianBlur(3)), im)
 def karaoke_img(lines, act, ft, stroke=6):
     """legenda estilo CapCut: todas as palavras brancas com contorno; a palavra
     ativa (indice global act) ganha caixa vermelha arredondada atras."""
@@ -107,7 +129,7 @@ for s0, e0, ls, hl in CAPS:
     tot = sum(syl(x) for x in words); acc = 0; starts = []
     for x in words:   # cada palavra acende proporcional as silabas dentro do trecho falado
         starts.append(s0 + int(round(acc / tot * (e0 - s0)))); acc += syl(x)
-    CAPI.append((s0, e0, starts, [karaoke_img(lines, i, poppins(84)) for i in range(len(words))]))
+    CAPI.append((s0, e0, starts, [viral_img(lines, i, mont_black(92)) for i in range(len(words))]))
 CY = 1400
 
 # ---- fecho ----
@@ -125,7 +147,7 @@ for fr in range(TOT):
         if s0 - 3 <= fr <= e0:
             act = max([i for i, st in enumerate(starts) if st - 2 <= fr] or [0])
             r = fr - (s0 - 3); rw = fr - (starts[act] - 2)
-            sc = (0.82 + 0.18 * out_back(r / 4.0)) * (1.0 + 0.05 * (1 - out_cubic(rw / 4.0)))
+            sc = (0.80 + 0.20 * out_back(r / 4.0)) * (1.0 + 0.07 * (1 - out_cubic(rw / 4.0)))
             place(c, imgs[act], W / 2, CY, out_cubic(r / 2.0), sc)
     c.save(f"{OUT}/t_{fr:04d}.png", compress_level=1)
 print("quadros", TOT)

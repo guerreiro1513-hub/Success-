@@ -19,10 +19,10 @@ existem neste ambiente, então o estilo foi recriado):
   arredondadas por linha: "quando o marketing pede pra / gravar mais um vídeo
   que / vai dar 0 curtidas". Entra em 0,4 s (não no primeiro quadro) e sai no
   corte para a cor.
-- **Legenda do vídeo 1**, palavra por palavra como as legendas automáticas do
-  CapCut: Poppins ExtraBold branca com contorno, a palavra falada em caixa
-  vermelha com um pop de 4 quadros. Cada palavra acende proporcional às sílabas
-  dentro do trecho medido.
+- **Legenda do vídeo 1** no estilo que mais viraliza hoje (Hormozi/MrBeast):
+  Montserrat Black MAIÚSCULA, branca, contorno preto grosso, sombra dura,
+  2 a 3 palavras por vez numa linha só, a palavra falada em amarelo com um pop.
+  Cada palavra acende proporcional às sílabas dentro do trecho medido.
 
 Transcrição do cliente: "Rapaz tá macia mesmo hein, vale até uma dancinha besta
 de tão macia que tá, eita trem bom rapaz, eeeee". Ela cobre o trecho do vídeo 1
