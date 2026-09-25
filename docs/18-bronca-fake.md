@@ -15,9 +15,9 @@ Brutos:
 **Texto** (a pedido, no visual dos textos do CapCut; o CapCut e seus modelos não
 existem neste ambiente, então o estilo foi recriado):
 
-- **Frase da trend**, TikTok Sans ExtraBold branca com contorno preto, "0
-  curtidas" em vermelho (as caixas brancas saíram a pedido): "quando o marketing pede pra / gravar mais um vídeo
-  que / vai dar 0 curtidas". Entra em 0,4 s (não no primeiro quadro) e sai no
+- **Frase da trend**, TikTok Sans ExtraBold branca **sem borda**, só uma sombra
+  suave por trás; "10 curtidas" em vermelho (caixas e contorno saíram a pedido): "quando o marketing pede pra / gravar mais um vídeo
+  que / vai dar 10 curtidas". Entra em 0,4 s (não no primeiro quadro) e sai no
   corte para a cor.
 - **Legenda do vídeo 1** no estilo que mais viraliza hoje (Hormozi/MrBeast):
   Montserrat Black MAIÚSCULA, branca, contorno preto grosso, sombra dura,
@@ -65,6 +65,10 @@ depois do "eeeee".
   repositório, sem dono), a partir de 2,50 s. 11 dB abaixo da voz enquanto ele
   fala; sobe depois do "eeeee" e desce nos últimos 0,9 s.
 - Medido: com trilha −14,6 LUFS, pico −2,1 dBTP. Sem trilha −14,6 LUFS, pico −2,3 dBTP.
+
+## Música
+O cliente vai colocar a música de fundo ele mesmo: a versão para postar é a
+`-SEM-MUSICA` (voz e ambiente, −14,6 LUFS, pico −2,3 dBTP).
 
 ## Entrega
 - `entrega/guerreiros-BRONCA-FAKE-20s.mp4`

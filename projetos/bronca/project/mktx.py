@@ -61,8 +61,22 @@ def boxed_lines(lines, ft, pad_x=26, pad_y=12, r=20, gap=-4):
     return base
 
 # ---- frase da trend ----
-TREND = text_img(["quando o marketing pede pra", "gravar mais um vídeo que", "vai dar 0 curtidas"],
-                 tiktok(68, 800), 7, hl=("0", "curtidas"))
+def plain_img(lines, ft, hl=(), lead=1.14):
+    """texto sem borda: branco (destaque em vermelho), so uma sombra suave atras
+    para ler no ceu claro."""
+    asc, dsc = ft.getmetrics(); lh = int((asc + dsc) * lead); sp = ft.getlength(" ")
+    ws = [ft.getlength(l) for l in lines]; tw = int(max(ws)); pad = 50
+    im = Image.new("RGBA", (tw + 2 * pad, lh * len(lines) + 2 * pad), (0, 0, 0, 0)); sh = im.copy()
+    d, ds = ImageDraw.Draw(im), ImageDraw.Draw(sh)
+    for i, (l, lw) in enumerate(zip(lines, ws)):
+        x = pad + (tw - lw) / 2; y = pad + i * lh
+        ds.text((x, y + 3), l, font=ft, fill=(0, 0, 0, 175))
+        for wd in l.split(" "):
+            d.text((x, y), wd, font=ft, fill=(RED if wd in hl else WHITE) + (255,))
+            x += ft.getlength(wd) + sp
+    return Image.alpha_composite(sh.filter(ImageFilter.GaussianBlur(9)), im)
+TREND = plain_img(["quando o marketing pede pra", "gravar mais um vídeo que", "vai dar 10 curtidas"],
+                  tiktok(70, 800), hl=("10", "curtidas"))
 TR_IN, TR_OUT, TR_Y = 12, Q - 1, 318     # entra em 0,4 s (nao no primeiro quadro)
 
 # ---- legenda do video 1 ----
