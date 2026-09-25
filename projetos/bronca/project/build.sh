@@ -23,11 +23,12 @@ crop=${W}:${H}:x='(iw-${W})*${FX}':y='(ih-${H})*${FY}',${G},setsar=1,format=yuv4
 [0:a]aresample=48000,aformat=channel_layouts=stereo[a]" \
    -map "[v]" -map "[a]" -frames:v $NF -r 30 -c:v libx264 -preset $PRE -crf $CRF -c:a pcm_s16le "$WK/$ID.mov" -loglevel error; }
 
-# 1 video 2 (IMG_1442, 4K), 1,00 a 1,77: trabalhando calado e serio
-cl q1 $P/source/T13.mov 1.00  23 1.06 1.08 0.58 0.30 "$BW"
-# 2 video 2, 1,77 a 6,30: levanta a cabeca e da a bronca olhando para a camera.
-#   punch-in seco no corte (1,08 -> 1,22), a fala inteira sem picotar
-cl q2 $P/source/T13.mov 1.767 136 1.22 1.17 0.60 0.28 "$BW"
+# 1 video 2 (IMG_1442, 4K), 0,40 a 1,77: trabalhando calado e serio (mais longo
+#   para a frase da trend ter tempo de ser lida)
+cl q1 $P/source/T13.mov 0.40  41 1.06 1.09 0.58 0.30 "$BW"
+# 2 video 2, 1,77 a 8,00: levanta a cabeca e da a bronca olhando para a camera,
+#   ate o fim da ultima frase (7,96). punch-in seco no corte, a fala inteira
+cl q2 $P/source/T13.mov 1.767 187 1.22 1.15 0.60 0.28 "$BW"
 # 3 video 1 de 4,70 ate o fim (pedido do cliente): corte seco para a cor.
 #   take A 4,70-8,53 (ele na churrasqueira) + take B 8,67-17,73 (a camera abre,
 #   cestos cheios, ele andando e abrindo os bracos). os quadros da emenda do
