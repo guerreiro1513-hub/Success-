@@ -1,44 +1,45 @@
-# Bronca Fake — 13,8 s
+# Bronca Fake — 13,1 s
 
-Vídeo de comédia com o pai. Referência de linguagem: `copy_7B80…` (o "queimou
-tudo" em preto e branco, que vira cor quando a grelha abre, e fecha com a
-pegadinha). Brutos: vídeo 1 (`copy_5283…`, exportação do CapCut, 1080p, dois
-takes emendados em 8,5 s) e IMG_1442 (4K).
-Receita: `projetos/bronca/project/build.sh` e `mix.py`.
+Vídeo de comédia com o pai, só com os vídeos 1 e 2, editado na linguagem do
+vídeo-modelo (`copy_7B80…`). Nenhum take da ESCALA.
+Receita: `projetos/bronca/project/build.sh`, `mktx.py`, `mix.py`, `render.sh`.
 
-**Sem legenda, a pedido:** o cliente coloca depois. Sem reconhecimento de fala
-no ambiente, as falas não foram transcritas. Nenhuma palavra foi cortada ou
-reordenada: os cortes caem nas pausas medidas na voz.
+Brutos:
+- **Vídeo 2** (IMG_1442, 4K): trabalha calado até 1,7 s, levanta a cabeça e dá
+  a bronca olhando para a câmera (o trecho mais alto do áudio, 1,75–2,6 s),
+  continua falando e volta a trabalhar.
+- **Vídeo 1** (`copy_5283…`, exportação do CapCut, 1080p): o final, 11,1–17,7 s.
+  Câmera aberta, cestos cheios girando na frente, ele andando e falando, os
+  braços abertos em ~16,4 s. Depois de 17,8 s é a marca do CapCut.
 
-## O que veio da referência
-- Preto e branco no "problema" e cor na virada. Lá a cor volta quando a grelha
-  abre; aqui volta quando ele olha para a câmera e sorri.
-- Takes longos enquanto ele fala, corte seco na virada, sem transição de efeito.
-- Voz e ambiente reais no começo; trilha só quando a carne aparece.
-- Não copiado: diálogo, peruca, pegadinha, texto, planos.
+**Sem legenda, a pedido.** Nenhuma palavra foi cortada ou reordenada.
 
-## Linha do tempo (30 fps, 413 quadros)
+## Linguagem do modelo aplicada
+- Preto e branco no "problema" (a bronca) e **corte seco para a cor** quando a
+  carne aparece.
+- Punch-in seco no rosto quando ele levanta a cabeça para dar a bronca.
+- Fala sem picotar, takes longos.
+- Logo grande por cima da imagem no fim, com o @ embaixo. Pop de 6 quadros.
+- Sem transição de efeito.
+
+## Linha do tempo (30 fps, 394 quadros)
 
 | Quadro | Tempo | Dura | Fonte | O quê |
 |---|---|---|---|---|
-| 0 | 0,00 | 7,40 | Vídeo 1, 0,95–8,35 | A bronca, P&B. Fala 1,0–2,5 e 3,5–5,9; 1,6 s calado virando a carne; uma palavra em 7,6. Aproximação 1,00→1,07 (fonte 1080p) |
-| 222 | 7,40 | 2,70 | IMG_1442, 0,90–3,60 | Calado e sério 0,9 s, levanta os olhos, fala, **sorri**. A cor volta em 4 quadros no sorriso. Aproximação 1,08→1,16 (fonte 4K) |
-| 303 | 10,10 | 2,10 | IMG_1452, 3,30–5,40 | A carne, grade com céu e fumaça. **A trilha entra seca no corte** |
-| 366 | 12,20 | 1,57 | Vinheta | Logo, a trilha desce junto com o escurecimento |
+| 0 | 0,00 | 0,77 | Vídeo 2, 1,00 | Trabalhando calado e sério. P&B, 1,06→1,08 |
+| 23 | 0,77 | 4,53 | Vídeo 2, 1,77–6,30 | **A bronca**. Punch-in seco para 1,22, desce a 1,17. P&B |
+| 159 | 5,30 | 6,63 | Vídeo 1, 11,10–17,73 | **Corte seco para a cor.** Cestos cheios, ele andando, braços abertos. A trilha entra baixa |
+| 352 | 11,73 | — | — | O logo entra por cima do céu, o @ 8 quadros depois. A trilha sobe |
+| 358 | 11,93 | 1,20 | Último quadro do vídeo 1 | Parado, aproximação lenta 1,00→1,035 |
 
 ## Som
-- Voz: passa-alta 90 Hz, redução de ruído leve (6 dB), −2 dB em 250 Hz,
-  +2,5 dB em 3,2 kHz, compressão 2,5:1. Sem excitador nem de-esser, para não
-  soar processada.
-- Trilha: `entrega/trilha-gaucha-100bpm.wav` (sintetizada no repositório,
-  sem dono), a partir de 2,50 s, numa cabeça de compasso, 1,5 dB abaixo da voz.
-- Chiado real do IMG_1452 por baixo da trilha.
-- Medido: com trilha −14,7 LUFS, sem trilha −14,2 LUFS, pico −3,5 dBTP.
-
-## Cor
-Correção leve, sem filtro. P&B com contraste 1,14 e altas seguradas. Pele e
-carne com vibrance baixo, sem empurrar o laranja.
+- Voz: passa-alta 90 Hz, redução de ruído leve, −2 dB em 250 Hz, +2,5 dB em
+  3,2 kHz, compressão 2,5:1. As duas fontes ficaram no mesmo nível.
+- Trilha gaúcha (`entrega/trilha-gaucha-100bpm.wav`, sintetizada no
+  repositório, sem dono), a partir de 2,50 s. 11 dB abaixo da voz enquanto ele
+  fala; sobe para −1 dB no logo; desce nos últimos 0,9 s.
+- Medido: com trilha −14,5 LUFS, sem trilha −14,3 LUFS, pico −3,5 dBTP.
 
 ## Entrega
-- `entrega/guerreiros-BRONCA-FAKE-14s.mp4`
-- `entrega/guerreiros-BRONCA-FAKE-14s-SEM-MUSICA.mp4`
+- `entrega/guerreiros-BRONCA-FAKE-13s.mp4`
+- `entrega/guerreiros-BRONCA-FAKE-13s-SEM-MUSICA.mp4`
