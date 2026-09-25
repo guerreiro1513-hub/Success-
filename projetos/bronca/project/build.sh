@@ -27,14 +27,17 @@ crop=${W}:${H}:x='(iw-${W})*${FX}':y='(ih-${H})*${FY}',${G},setsar=1,format=yuv4
 #   para a frase da trend ter tempo de ser lida)
 cl q1 $P/source/T13.mov 0.40  41 1.06 1.09 0.58 0.30 "$BW"
 # 2 video 2, 1,77 a 8,00: levanta a cabeca e da a bronca olhando para a camera,
-#   ate o fim da ultima frase (7,96). punch-in seco no corte, a fala inteira
-cl q2 $P/source/T13.mov 1.767 187 1.22 1.15 0.60 0.28 "$BW"
+#   ate 8,20: a ultima frase acaba em 7,96 e fica ~0,2 s de respiro antes da
+#   virada para a cor. punch-in seco no corte, a fala inteira
+cl q2 $P/source/T13.mov 1.767 193 1.22 1.15 0.60 0.28 "$BW"
 # 3 video 1 de 4,55 (na pausa antes do "rapaaaz", que comeca em 4,62) ate o fim do
 #   "eeeee" com os bracos abertos (17,00). corte seco para a cor.
 #   take A 4,55-8,53 + take B 8,67-17,00; os quadros da emenda do CapCut
 #   (8,53-8,63) ficam de fora. fonte 1080p: aproximacao ate 1,05
 cl e1 $P/source/T12.mov 4.55 119 1.00 1.03 0.50 0.40 "$GC"
-cl e2 $P/source/T12.mov 8.667 250 1.00 1.05 0.50 0.40 "$GC"
+# a troca de take dentro do video 1 era um salto de posicao: o take B entra
+# 10% mais fechado e abre ate 1,02, o corte passa a parecer intencional
+cl e2 $P/source/T12.mov 8.667 250 1.10 1.02 0.50 0.40 "$GC"
 # (sem quadro parado nem logo no fim, a pedido)
 for i in q1 q2 e1 e2; do echo "file '$WK/$i.mov'"; done > $WK/list.txt
 $FF -y -hide_banner -loglevel error -f concat -safe 0 -i $WK/list.txt -c:v copy -c:a pcm_s16le $WK/base.mov

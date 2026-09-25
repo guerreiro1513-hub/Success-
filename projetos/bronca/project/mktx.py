@@ -3,13 +3,13 @@
 #    quando ele levanta a cabeca para a bronca, nao no primeiro quadro, e sai no
 #    corte para a cor
 #  - legenda do video 1 (transcricao do cliente) no estilo viral: Montserrat
-#    Black MAIUSCULA, contorno grosso, 2-3 palavras, a palavra falada em amarelo
+#    Black MAIUSCULA, contorno grosso, 2-3 palavras, a palavra falada em vermelho
 #  - sem logo no fim (o cliente pediu para cortar o final)
 import os, shutil
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 E_ = "/home/user/Success-/projetos/escala"; P = "/home/user/Success-/projetos/bronca"
-W, H, TOT = 1080, 1920, 597
-Q = 41 + 187                     # fim do video 2 (corte para a cor)
+W, H, TOT = 1080, 1920, 603
+Q = 41 + 193                     # fim do video 2 (corte para a cor)
 LOGO_IN = 609
 WHITE = (255, 255, 255); RED = (230, 22, 32); INK = (8, 6, 6)
 def clamp(x): return max(0.0, min(1.0, x))
@@ -61,7 +61,8 @@ def boxed_lines(lines, ft, pad_x=26, pad_y=12, r=20, gap=-4):
     return base
 
 # ---- frase da trend ----
-TREND = boxed_lines(["quando o marketing pede pra", "gravar mais um vídeo que", "vai dar 0 curtidas"], tiktok(62, 600))
+TREND = text_img(["quando o marketing pede pra", "gravar mais um vídeo que", "vai dar 0 curtidas"],
+                 tiktok(68, 800), 7, hl=("0", "curtidas"))
 TR_IN, TR_OUT, TR_Y = 12, Q - 1, 318     # entra em 0,4 s (nao no primeiro quadro)
 
 # ---- legenda do video 1 ----
@@ -70,17 +71,17 @@ TR_IN, TR_OUT, TR_Y = 12, Q - 1, 318     # entra em 0,4 s (nao no primeiro quadr
 # 7,60-8,50 | vale ate uma dancinha 9,50-11,45 | besta de tao macia que ta
 # 11,60-13,40 | eita trem bom 13,45-14,65 | rapaz 14,85-15,55 | eeeee 16,15-16,75
 # video 1 4,55 -> quadro 228; 8,667 -> quadro 347
-CAPS = [   # 2 a 3 palavras por vez, uma linha (o que mais segura retencao)
-    (230, 270, ["rapaaaz"], set()),
-    (320, 333, ["tá macia"], set()),
-    (334, 346, ["mesmo hein"], set()),
-    (372, 391, ["vale até"], set()),
-    (392, 430, ["uma dancinha"], set()),
-    (435, 460, ["besta de tão"], set()),
-    (461, 489, ["macia que tá"], set()),
-    (491, 526, ["eita trem bom"], set()),
-    (532, 553, ["rapaz"], set()),
-    (571, 592, ["eeeee"], set()),
+CAPS = [   # 2 a 3 palavras por vez, uma linha. video 1 comeca no quadro 234
+    (236, 276, ["rapaaaz"], set()),
+    (326, 339, ["tá macia"], set()),
+    (340, 352, ["bicho"], set()),
+    (378, 397, ["vale até"], set()),
+    (398, 436, ["uma dancinha"], set()),
+    (441, 466, ["besta de tão"], set()),
+    (467, 495, ["macia que tá"], set()),
+    (497, 532, ["eita trem bom"], set()),
+    (538, 559, ["rapaz"], set()),
+    (577, 598, ["eeeee"], set()),
 ]
 import re
 def syl(w): return max(1, len(re.findall(r"[aeiouáéíóúâêôãõ]+", w.lower())))
@@ -100,7 +101,7 @@ def viral_img(lines, act, ft, stroke=10):
         x = pad + (tw - lw[i]) / 2; y = pad + i * lh
         for wd, w_ in zip(l, wl):
             ds.text((x + 4, y + 8), wd, font=ft, fill=(0, 0, 0, 200), stroke_width=stroke, stroke_fill=(0, 0, 0, 200))
-            d.text((x, y), wd, font=ft, fill=(YEL if k == act else WHITE) + (255,), stroke_width=stroke, stroke_fill=INK + (255,))
+            d.text((x, y), wd, font=ft, fill=(RED if k == act else WHITE) + (255,), stroke_width=stroke, stroke_fill=INK + (255,))
             x += w_ + sp; k += 1
     return Image.alpha_composite(sh.filter(ImageFilter.GaussianBlur(3)), im)
 def karaoke_img(lines, act, ft, stroke=6):
