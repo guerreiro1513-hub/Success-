@@ -1,4 +1,4 @@
-# Bronca Fake — 13,1 s
+# Bronca Fake — 15,6 s
 
 Vídeo de comédia com o pai, só com os vídeos 1 e 2, editado na linguagem do
 vídeo-modelo (`copy_7B80…`). Nenhum take da ESCALA.
@@ -8,8 +8,8 @@ Brutos:
 - **Vídeo 2** (IMG_1442, 4K): trabalha calado até 1,7 s, levanta a cabeça e dá
   a bronca olhando para a câmera (o trecho mais alto do áudio, 1,75–2,6 s),
   continua falando e volta a trabalhar.
-- **Vídeo 1** (`copy_5283…`, exportação do CapCut, 1080p): o final, 11,1–17,7 s.
-  Câmera aberta, cestos cheios girando na frente, ele andando e falando, os
+- **Vídeo 1** (`copy_5283…`, exportação do CapCut, 1080p): o 2º take inteiro,
+  8,67–17,73 s (a emenda do CapCut vai até 8,63). Ele na churrasqueira, a câmera abre, cestos cheios girando na frente, ele andando e falando, os
   braços abertos em ~16,4 s. Depois de 17,8 s é a marca do CapCut.
 
 **Sem legenda, a pedido.** Nenhuma palavra foi cortada ou reordenada.
@@ -22,15 +22,21 @@ Brutos:
 - Logo grande por cima da imagem no fim, com o @ embaixo. Pop de 6 quadros.
 - Sem transição de efeito.
 
-## Linha do tempo (30 fps, 394 quadros)
+## Linha do tempo (30 fps, 467 quadros)
+
+Revisão: o trecho do vídeo 1 estava curto (6,6 s, só o final). Agora entra o
+2º take inteiro, 9,1 s, logo depois da bronca.
 
 | Quadro | Tempo | Dura | Fonte | O quê |
 |---|---|---|---|---|
 | 0 | 0,00 | 0,77 | Vídeo 2, 1,00 | Trabalhando calado e sério. P&B, 1,06→1,08 |
 | 23 | 0,77 | 4,53 | Vídeo 2, 1,77–6,30 | **A bronca**. Punch-in seco para 1,22, desce a 1,17. P&B |
-| 159 | 5,30 | 6,63 | Vídeo 1, 11,10–17,73 | **Corte seco para a cor.** Cestos cheios, ele andando, braços abertos. A trilha entra baixa |
-| 352 | 11,73 | — | — | O logo entra por cima do céu, o @ 8 quadros depois. A trilha sobe |
-| 358 | 11,93 | 1,20 | Último quadro do vídeo 1 | Parado, aproximação lenta 1,00→1,035 |
+| 159 | 5,30 | 9,07 | Vídeo 1, 8,67–17,73 | **Corte seco para a cor.** Ele na churrasqueira, a câmera abre, cestos cheios, ele andando, braços abertos. A trilha entra baixa |
+| 425 | 14,17 | — | — | O logo entra por cima do céu, o @ 8 quadros depois. A trilha sobe |
+| 431 | 14,37 | 1,20 | Último quadro do vídeo 1 | Parado, aproximação lenta 1,00→1,035 |
+
+Verificado: só dois cortes no vídeo (0,77 e 5,30 s) e nenhum quadro repetido
+na parte do vídeo 1.
 
 ## Som
 - Voz: passa-alta 90 Hz, redução de ruído leve, −2 dB em 250 Hz, +2,5 dB em
@@ -38,8 +44,8 @@ Brutos:
 - Trilha gaúcha (`entrega/trilha-gaucha-100bpm.wav`, sintetizada no
   repositório, sem dono), a partir de 2,50 s. 11 dB abaixo da voz enquanto ele
   fala; sobe para −1 dB no logo; desce nos últimos 0,9 s.
-- Medido: com trilha −14,5 LUFS, sem trilha −14,3 LUFS, pico −3,5 dBTP.
+- Medido: com trilha −14,4 LUFS, pico −3,3 dBTP. Sem trilha −14,3 LUFS, pico −2,3 dBTP.
 
 ## Entrega
-- `entrega/guerreiros-BRONCA-FAKE-13s.mp4`
-- `entrega/guerreiros-BRONCA-FAKE-13s-SEM-MUSICA.mp4`
+- `entrega/guerreiros-BRONCA-FAKE-16s.mp4`
+- `entrega/guerreiros-BRONCA-FAKE-16s-SEM-MUSICA.mp4`

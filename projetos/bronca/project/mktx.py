@@ -3,8 +3,8 @@
 import os, shutil
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 E_ = "/home/user/Success-/projetos/escala"; P = "/home/user/Success-/projetos/bronca"
-W, H, TOT = 1080, 1920, 394
-LOGO_IN = 352          # 0,4 s antes do quadro parado, ainda com a imagem andando
+W, H, TOT = 1080, 1920, 467
+LOGO_IN = 425          # 0,4 s antes do quadro parado, ainda com a imagem andando
 def clamp(x): return max(0.0, min(1.0, x))
 def out_cubic(t): t = clamp(t); return 1 - (1 - t) ** 3
 def out_back(t, s=2.0): t = clamp(t) - 1; return 1 + t * t * ((s + 1) * t + s)

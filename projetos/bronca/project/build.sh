@@ -28,9 +28,9 @@ cl q1 $P/source/T13.mov 1.00  23 1.06 1.08 0.58 0.30 "$BW"
 # 2 video 2, 1,77 a 6,30: levanta a cabeca e da a bronca olhando para a camera.
 #   punch-in seco no corte (1,08 -> 1,22), a fala inteira sem picotar
 cl q2 $P/source/T13.mov 1.767 136 1.22 1.17 0.60 0.28 "$BW"
-# 3 final do video 1, 11,10 a 17,73: corte seco para a cor. cestos cheios girando
+# 3 video 1 do inicio do 2o take ate o fim, 8,67 a 17,73 (a emenda do CapCut vai ate 8,63): corte seco para a cor. ele na churrasqueira, a camera abre, cestos cheios girando
 #   na frente, ele andando e abrindo os bracos. fonte 1080p: aproximacao ate 1,05
-cl e1 $P/source/T12.mov 11.10 199 1.00 1.05 0.50 0.40 "$GC"
+cl e1 $P/source/T12.mov 8.667 272 1.00 1.05 0.50 0.40 "$GC"
 # 4 ultimo quadro do video 1 parado, aproximacao lenta, logo por cima (camada de texto)
 $FF -y -loglevel error -sseof -0.04 -i $WK/e1.mov -frames:v 1 -update 1 $WK/last.png
 $FF -y -loglevel error -loop 1 -framerate 30 -i $WK/last.png -f lavfi -i anullsrc=r=48000:cl=stereo \
