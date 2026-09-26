@@ -89,6 +89,16 @@ TR_IN, TR_OUT, TR_Y = 12, Q - 1, 318     # entra em 0,4 s (nao no primeiro quadr
 # do mix, marcado silaba a silaba). (palavra, quadro de inicio); o bloco some
 # no quadro "fim".
 CAPS = [
+    # video 2 (a bronca), transcricao do cliente:
+    # "quero gravar video nao cara, to vendo se a costela ta boa e ta macia"
+    ([("quero", 40), ("gravar", 54)], 63),
+    ([("vídeo", 64), ("não", 76)], 80),
+    ([("cara", 81)], 100),
+    ([("tô", 121), ("vendo", 124)], 132),
+    ([("se", 133), ("a", 135), ("costela", 137)], 146),
+    ([("tá", 147), ("boa", 150)], 154),
+    ([("e", 155), ("tá", 156), ("macia", 160)], 176),
+    # video 1
     ([("rapaaaz", 180)], 221),
     ([("tá", 268), ("macia", 275)], 288),
     ([("bicho", 290)], 308),
