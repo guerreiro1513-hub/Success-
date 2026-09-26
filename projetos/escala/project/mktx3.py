@@ -4,7 +4,7 @@
 import os, shutil
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 P = "/home/user/Success-/projetos/escala"
-W, H, TOT = 1080, 1920, 826
+W, H, TOT = 1080, 1920, 746
 FONT = P + "/assets/fonts/RobotoCondensed.ttf"
 WHITE = (255, 255, 255); RED = (226, 18, 28); INK = (10, 8, 8)
 MAXW = 860
@@ -69,14 +69,14 @@ for k, ch in enumerate(CH):
     imgs = [words_img(words, i, CSZ) for i in range(len(words))]
     chunks.append((s, e, starts, imgs))
 
-# ---- reveal: comeca no quadro 679 ----
+# ---- reveal: comeca no quadro 599 ----
 R1 = words_img(["6", "churrasqueiras"], 0, 104)
 R2 = words_img(["ao", "mesmo", "tempo"], 2, 104)
-R_IN1, R_IN2, R_OUT = 685, 713, 771
+R_IN1, R_IN2, R_OUT = 605, 633, 691
 
-# ---- fecho: a vinheta da marca entra no quadro 779 e ja traz o logo ----
+# ---- fecho: a vinheta da marca entra no quadro 699 e ja traz o logo ----
 HDL = words_img(["@guerreirosgrill"], -1, 64)
-LOCK = 779
+LOCK = 699
 
 OUT = P + "/work/tx3"; shutil.rmtree(OUT, ignore_errors=True); os.makedirs(OUT)
 for fr in range(TOT):

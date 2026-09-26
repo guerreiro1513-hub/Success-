@@ -254,3 +254,29 @@ passa a começar numa batida e o 1º compasso se repete na frente, emendado com
 10 ms, de modo que a grade de 90 BPM continua passando pelo impacto. Fade de
 entrada de 0,25 s só para não estalar. Continua ~17 dB abaixo da voz. Os takes
 não mudaram. Medido: −14,9 LUFS, pico −2,9 dBTP.
+
+---
+
+# V9 — sem os vídeos da Bronca Fake (24,9 s, 746 quadros)
+
+Na V8 entraram por engano dois trechos que eram da Bronca Fake: IMG_1442 (o pai
+girando o cesto, sorrindo) e o vídeo 1 do CapCut (cesto cheio, o pai andando).
+Os dois saíram. O gancho volta a ter só as carnes (320 quadros, o reveal na
+cabeça do 4º compasso após o impacto, como na V7). Ficam da V8: a legenda no
+estilo do modelo e o fundo musical desde o quadro 0.
+
+| Quadro | Tempo | Take | Papel |
+|---|---|---|---|
+| 0 | 0,00 | T05 | Pai falando, fundo musical baixo desde o 1º quadro |
+| 279 | 9,30 | T04 | Peças vermelhas. Impacto |
+| 324 | 10,80 | T03 | Panceta |
+| 354 | 11,80 | T11 | Cesto de peças grandes |
+| 394 | 13,13 | T06 | Frango |
+| 454 | 15,13 | T10 | Grelha no espeto |
+| 499 | 16,63 | T06 | Carne em bloco |
+| 544 | 18,13 | T09 | Grade com céu |
+| 599 | 19,97 | T01 | REVEAL |
+| 699 | 23,30 | T07 | Vinheta |
+
+Medido: −14,9 LUFS, pico −2,9 dBTP (com trilha); −17,5 LUFS, pico −4,1 (sem).
+Entrega: `entrega/guerreiros-ESCALA-V9-25s.mp4` e `-SEM-MUSICA`.
