@@ -21,7 +21,9 @@ existem neste ambiente, então o estilo foi recriado):
   corte para a cor.
 - **Legenda do vídeo 1** no estilo que mais viraliza hoje (Hormozi/MrBeast):
   Montserrat Black MAIÚSCULA, branca, contorno preto grosso, sombra dura,
-  2 a 3 palavras por vez numa linha só, a palavra falada em vermelho com um pop.
+  2 a 3 palavras por vez numa linha só, a palavra falada em vermelho com um pop
+  leve (3,5 %). Cada bloco sai no quadro em que o próximo entra: antes eles se
+  sobrepunham por 3 quadros na troca e a legenda "bugava".
   **Cada palavra acende no quadro exato em que começa no áudio**, marcado no
   espectrograma do mix final (antes era proporcional às sílabas, e algumas
   entravam até 0,4 s fora). Quadros de início: rapaaaz 180 · tá 268 · macia 275 ·

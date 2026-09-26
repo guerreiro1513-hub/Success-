@@ -156,6 +156,14 @@ for ws_, e0 in CAPS:
     words = [x for x, _ in ws_]; starts = [f for _, f in ws_]
     CAPI.append((starts[0], e0, starts, [viral_img([words], i, mont_black(92)) for i in range(len(words))]))
 CY = 1400
+# janelas sem sobreposicao: cada bloco entra 3 quadros antes da fala, mas nunca
+# junto com o anterior (antes os dois ficavam desenhados um sobre o outro na troca)
+WIN = []
+for s0, e0, starts, imgs in CAPI:
+    ds = s0 - 3
+    if WIN and ds <= WIN[-1][1]:
+        p = WIN[-1]; WIN[-1] = (p[0], ds - 1, p[2], p[3], p[4])
+    WIN.append((ds, e0, s0, starts, imgs))
 
 # ---- fecho ----
 badge = Image.open(E_ + "/assets/logo_key.png").convert("RGBA")
@@ -168,11 +176,11 @@ for fr in range(TOT):
     if TR_IN <= fr <= TR_OUT:
         r = fr - TR_IN
         place(c, TREND, W / 2, TR_Y, out_cubic(r / 4.0), 0.90 + 0.10 * out_back(r / 7.0))
-    for s0, e0, starts, imgs in CAPI:
-        if s0 - 3 <= fr <= e0:
+    for ds, de, s0, starts, imgs in WIN:
+        if ds <= fr <= de:
             act = max([i for i, st in enumerate(starts) if st - 2 <= fr] or [0])
-            r = fr - (s0 - 3); rw = fr - (starts[act] - 2)
-            sc = (0.80 + 0.20 * out_back(r / 4.0)) * (1.0 + 0.07 * (1 - out_cubic(rw / 4.0)))
+            r = fr - ds; rw = fr - (starts[act] - 2)
+            sc = (0.86 + 0.14 * out_back(r / 4.0)) * (1.0 + 0.035 * (1 - out_cubic(rw / 3.0)))
             place(c, imgs[act], W / 2, CY, out_cubic(r / 2.0), sc)
     c.save(f"{OUT}/t_{fr:04d}.png", compress_level=1)
 print("quadros", TOT)
