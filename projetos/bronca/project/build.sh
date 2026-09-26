@@ -25,11 +25,13 @@ crop=${W}:${H}:x='(iw-${W})*${FX}':y='(ih-${H})*${FY}',${G},setsar=1,format=yuv4
 
 # 1 video 2 (IMG_1442, 4K), 0,40 a 1,77: trabalhando calado e serio (mais longo
 #   para a frase da trend ter tempo de ser lida)
-cl q1 $P/source/T13.mov 0.40  41 1.06 1.09 0.58 0.30 "$BW"
+# COR=1 gera a variante toda colorida (o P&B fazia gente pular no teste do Instagram)
+[ "${COR:-0}" = 1 ] && BQ="$GC" || BQ="$BW"
+cl q1 $P/source/T13.mov 0.40  41 1.06 1.09 0.58 0.30 "$BQ"
 # 2 video 2, 1,77 a 6,30: levanta a cabeca e da a bronca olhando para a camera.
 #   a ultima palavra acaba em 6,22 (depois disso ele so trabalha calado): corta
 #   ali e vai direto para o "rapaaaz". punch-in seco no corte, a fala inteira
-cl q2 $P/source/T13.mov 1.767 136 1.22 1.16 0.60 0.28 "$BW"
+cl q2 $P/source/T13.mov 1.767 136 1.22 1.16 0.60 0.28 "$BQ"
 # 3 video 1 de 4,60 (colado no "ra-" do "rapaaaz", que comeca em 4,64) ate o fim do
 #   "eeeee" com os bracos abertos (17,00). corte seco para a cor.
 #   take A 4,60-8,53 + take B 8,67-17,00; os quadros da emenda do CapCut

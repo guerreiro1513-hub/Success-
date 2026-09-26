@@ -75,6 +75,13 @@ no vídeo 1. Agora a bronca termina no quadro 173, o corte cai no 177 e o
 O cliente vai colocar a música de fundo ele mesmo: a versão para postar é a
 `-SEM-MUSICA` (voz e ambiente, −14,3 LUFS, pico −3,7 dBTP).
 
+## Variante colorida
+No teste do Instagram muita gente pulou no começo em preto e branco. A
+variante `-COR` tem a bronca colorida (mesma correção de pele do vídeo 1),
+todo o resto idêntico. Gerada com `COR=1 ./build.sh` e `SUF=-COR ./render.sh`.
+Medido: −14,3 LUFS, pico −4,2 dBTP (com trilha) e −3,7 dBTP (sem).
+
 ## Entrega
 - `entrega/guerreiros-BRONCA-FAKE-18s.mp4`
 - `entrega/guerreiros-BRONCA-FAKE-18s-SEM-MUSICA.mp4`
+- `entrega/guerreiros-BRONCA-FAKE-18s-COR.mp4` e `-COR-SEM-MUSICA.mp4` (sem o P&B)
