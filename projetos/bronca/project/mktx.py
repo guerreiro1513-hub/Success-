@@ -85,17 +85,20 @@ TR_IN, TR_OUT, TR_Y = 12, Q - 1, 318     # entra em 0,4 s (nao no primeiro quadr
 # 7,60-8,50 | vale ate uma dancinha 9,50-11,45 | besta de tao macia que ta
 # 11,60-13,40 | eita trem bom 13,45-14,65 | rapaz 14,85-15,55 | eeeee 16,15-16,75
 # video 1 4,55 -> quadro 228; 8,667 -> quadro 347
-CAPS = [   # 2 a 3 palavras por vez, uma linha. video 1 comeca no quadro 234
-    (236, 276, ["rapaaaz"], set()),
-    (326, 339, ["tá macia"], set()),
-    (340, 352, ["bicho"], set()),
-    (378, 397, ["vale até"], set()),
-    (398, 436, ["uma dancinha"], set()),
-    (441, 466, ["besta de tão"], set()),
-    (467, 495, ["macia que tá"], set()),
-    (497, 532, ["eita trem bom"], set()),
-    (538, 559, ["rapaz"], set()),
-    (577, 598, ["eeeee"], set()),
+# cada palavra no quadro em que comeca no audio do video final (espectrograma
+# do mix, marcado silaba a silaba). (palavra, quadro de inicio); o bloco some
+# no quadro "fim".
+CAPS = [
+    ([("rapaaaz", 243)], 279),
+    ([("tá", 326), ("macia", 333)], 346),
+    ([("bicho", 348)], 366),
+    ([("vale", 379), ("até", 390)], 396),
+    ([("uma", 397), ("dancinha", 411)], 440),
+    ([("besta", 442), ("de", 455), ("tão", 463)], 479),
+    ([("macia", 481), ("que", 489), ("tá", 497)], 506),
+    ([("eita", 508), ("trem", 518), ("bom", 523)], 530),
+    ([("rapaz", 532)], 561),
+    ([("eeeee", 579)], 599),
 ]
 import re
 def syl(w): return max(1, len(re.findall(r"[aeiouáéíóúâêôãõ]+", w.lower())))
@@ -139,12 +142,9 @@ def karaoke_img(lines, act, ft, stroke=6):
             x += w_ + sp; k += 1
     return Image.alpha_composite(sh.filter(ImageFilter.GaussianBlur(8)), im)
 CAPI = []
-for s0, e0, ls, hl in CAPS:
-    lines = [l.split(" ") for l in ls]; words = [x for l in lines for x in l]
-    tot = sum(syl(x) for x in words); acc = 0; starts = []
-    for x in words:   # cada palavra acende proporcional as silabas dentro do trecho falado
-        starts.append(s0 + int(round(acc / tot * (e0 - s0)))); acc += syl(x)
-    CAPI.append((s0, e0, starts, [viral_img(lines, i, mont_black(92)) for i in range(len(words))]))
+for ws_, e0 in CAPS:
+    words = [x for x, _ in ws_]; starts = [f for _, f in ws_]
+    CAPI.append((starts[0], e0, starts, [viral_img([words], i, mont_black(92)) for i in range(len(words))]))
 CY = 1400
 
 # ---- fecho ----

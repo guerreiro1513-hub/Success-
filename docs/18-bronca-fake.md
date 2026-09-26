@@ -22,7 +22,12 @@ existem neste ambiente, então o estilo foi recriado):
 - **Legenda do vídeo 1** no estilo que mais viraliza hoje (Hormozi/MrBeast):
   Montserrat Black MAIÚSCULA, branca, contorno preto grosso, sombra dura,
   2 a 3 palavras por vez numa linha só, a palavra falada em vermelho com um pop.
-  Cada palavra acende proporcional às sílabas dentro do trecho medido.
+  **Cada palavra acende no quadro exato em que começa no áudio**, marcado no
+  espectrograma do mix final (antes era proporcional às sílabas, e algumas
+  entravam até 0,4 s fora). Quadros de início: rapaaaz 243 · tá 326 · macia 333 ·
+  bicho 348 · vale 379 · até 390 · uma 397 · dancinha 411 · besta 442 · de 455 ·
+  tão 463 · macia 481 · que 489 · tá 497 · eita 508 · trem 518 · bom 523 ·
+  rapaz 532 · eeeee 579.
 
 Transcrição do cliente: "Rapaz tá macia mesmo hein (na legenda: "tá macia bicho", correção do cliente), vale até uma dancinha besta
 de tão macia que tá, eita trem bom rapaz, eeeee". Ela cobre o trecho do vídeo 1
