@@ -246,3 +246,11 @@ Nenhum clipe novo tem quadro repetido.
 Medido: com música −14,8 LUFS, pico −3,5 dBTP. Sem música −17,5 LUFS, pico −4,1 dBTP.
 
 Entrega: `entrega/guerreiros-ESCALA-V8-28s.mp4` e `-SEM-MUSICA`.
+
+**Revisão do fundo musical (V8):** a pedido, o fundo baixo toca desde o
+quadro 0 até o fim da fala do pai (antes entrava em 1,1 s com fade de 1,2 s).
+O trecho recuperado da faixa (8,2 s) é mais curto que a fala (9,3 s): ele
+passa a começar numa batida e o 1º compasso se repete na frente, emendado com
+10 ms, de modo que a grade de 90 BPM continua passando pelo impacto. Fade de
+entrada de 0,25 s só para não estalar. Continua ~17 dB abaixo da voz. Os takes
+não mudaram. Medido: −14,9 LUFS, pico −2,9 dBTP.

@@ -102,6 +102,15 @@ end_t = HIT / FPS                                    # o fundo termina no impact
 k = int(np.floor((L - p0) / beat))                  # ultima batida inteira do trecho
 cut = p0 + k * beat                                  # corta o fundo numa batida
 bed = bed[:int(cut * SR)]
+# o fundo tem que tocar desde o quadro 0 (pedido do cliente): comeca o trecho
+# numa batida e repete o 1o compasso na frente, emendado com 10 ms, ate cobrir
+# toda a fala. a grade de 90 BPM continua passando pelo impacto
+bed = bed[int(p0 * SR):]
+bar = int(4 * beat * SR); xf = int(0.010 * SR); rr = np.linspace(0, 1, xf)[:, None]
+while len(bed) / SR < end_t:
+    lp = bed[:bar].copy(); nx = bed.copy()
+    lp[-xf:] = lp[-xf:] * (1 - rr) + nx[:xf] * rr
+    bed = np.concatenate([lp, nx[xf:]])
 start = end_t - len(bed) / SR
 if start < 0: bed = bed[int(-start * SR):]; start = 0.0
 b1, a1 = sg.butter(2, 150 / (SR / 2), "high"); bed = sg.lfilter(b1, a1, bed, axis=0)
@@ -109,7 +118,7 @@ b1, a1 = sg.butter(2, 150 / (SR / 2), "high"); bed = sg.lfilter(b1, a1, bed, axi
 bb, ab = sg.butter(2, [1000 / (SR / 2), 4000 / (SR / 2)], "band")
 bed = bed - (1 - 10 ** (-4 / 20)) * sg.lfilter(bb, ab, bed, axis=0)
 Bed = np.zeros_like(T); i0 = int(start * SR); Bed[i0:i0 + len(bed)] = bed
-fi = int(1.2 * SR); Bed[i0:i0 + fi] *= np.linspace(0, 1, fi)[:, None] ** 2
+fi = int(0.25 * SR); Bed[i0:i0 + fi] *= np.linspace(0, 1, fi)[:, None]   # ja no comeco, so sem clique
 fo2 = int(0.03 * SR); Bed[dst0 - fo2:dst0] *= np.linspace(1, 0, fo2)[:, None]
 # fica 17 dB abaixo da voz
 vr = np.sqrt(np.mean(voz[:dst0] ** 2)); br = np.sqrt(np.mean(Bed[i0:dst0] ** 2)) + 1e-12
