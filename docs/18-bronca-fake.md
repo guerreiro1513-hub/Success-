@@ -34,9 +34,9 @@ de tão macia que tá, eita trem bom rapaz, eeeee". Ela cobre o trecho do vídeo
 depois de 4,55 s. Posições no vídeo 1, medidas no espectrograma: rapaaaz
 4,62–5,95 · tá macia mesmo hein 7,60–8,50 · vale até uma dancinha 9,50–11,45 ·
 besta de tão macia que tá 11,60–13,40 · eita trem bom 13,45–14,65 · rapaz
-14,85–15,55 · eeeee 16,15–16,75 (braços abertos). Transcrição do vídeo 2 (a bronca), do cliente: "quero gravar vídeo não cara,
-tô vendo se a costela tá boa e tá macia". Quadros de início: quero 40 · gravar
-54 · vídeo 64 · não 76 · cara 81 · tô 121 · vendo 124 · se 133 · a 135 ·
+14,85–15,55 · eeeee 16,15–16,75 (braços abertos). Transcrição do vídeo 2 (a bronca), corrigida pelo cliente: "não é hora de
+gravar vídeo não, tô vendo se a costela tá boa e tá macia". Quadros de início:
+não 40 · é 45 · hora 49 · de 57 · gravar 61 · vídeo 67 · não 79 · tô 121 · vendo 124 · se 133 · a 135 ·
 costela 137 · tá 147 · boa 150 · e 155 · tá 156 · macia 160.
 
 ## Linguagem do modelo aplicada
