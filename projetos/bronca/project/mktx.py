@@ -8,8 +8,8 @@
 import os, shutil
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 E_ = "/home/user/Success-/projetos/escala"; P = "/home/user/Success-/projetos/bronca"
-W, H, TOT = 1080, 1920, 603
-Q = 41 + 193                     # fim do video 2 (corte para a cor)
+W, H, TOT = 1080, 1920, 545
+Q = 41 + 136                     # fim do video 2 (corte para a cor)
 LOGO_IN = 609
 WHITE = (255, 255, 255); RED = (230, 22, 32); INK = (8, 6, 6)
 def clamp(x): return max(0.0, min(1.0, x))
@@ -89,16 +89,16 @@ TR_IN, TR_OUT, TR_Y = 12, Q - 1, 318     # entra em 0,4 s (nao no primeiro quadr
 # do mix, marcado silaba a silaba). (palavra, quadro de inicio); o bloco some
 # no quadro "fim".
 CAPS = [
-    ([("rapaaaz", 243)], 279),
-    ([("tá", 326), ("macia", 333)], 346),
-    ([("bicho", 348)], 366),
-    ([("vale", 379), ("até", 390)], 396),
-    ([("uma", 397), ("dancinha", 411)], 440),
-    ([("besta", 442), ("de", 455), ("tão", 463)], 479),
-    ([("macia", 481), ("que", 489), ("tá", 497)], 506),
-    ([("eita", 508), ("trem", 518), ("bom", 523)], 530),
-    ([("rapaz", 532)], 561),
-    ([("eeeee", 579)], 599),
+    ([("rapaaaz", 180)], 221),
+    ([("tá", 268), ("macia", 275)], 288),
+    ([("bicho", 290)], 308),
+    ([("vale", 321), ("até", 332)], 338),
+    ([("uma", 339), ("dancinha", 353)], 382),
+    ([("besta", 384), ("de", 397), ("tão", 405)], 421),
+    ([("macia", 423), ("que", 431), ("tá", 439)], 448),
+    ([("eita", 450), ("trem", 460), ("bom", 465)], 472),
+    ([("rapaz", 474)], 503),
+    ([("eeeee", 521)], 541),
 ]
 import re
 def syl(w): return max(1, len(re.findall(r"[aeiouáéíóúâêôãõ]+", w.lower())))

@@ -26,15 +26,15 @@ crop=${W}:${H}:x='(iw-${W})*${FX}':y='(ih-${H})*${FY}',${G},setsar=1,format=yuv4
 # 1 video 2 (IMG_1442, 4K), 0,40 a 1,77: trabalhando calado e serio (mais longo
 #   para a frase da trend ter tempo de ser lida)
 cl q1 $P/source/T13.mov 0.40  41 1.06 1.09 0.58 0.30 "$BW"
-# 2 video 2, 1,77 a 8,00: levanta a cabeca e da a bronca olhando para a camera,
-#   ate 8,20: a ultima frase acaba em 7,96 e fica ~0,2 s de respiro antes da
-#   virada para a cor. punch-in seco no corte, a fala inteira
-cl q2 $P/source/T13.mov 1.767 193 1.22 1.15 0.60 0.28 "$BW"
-# 3 video 1 de 4,55 (na pausa antes do "rapaaaz", que comeca em 4,62) ate o fim do
+# 2 video 2, 1,77 a 6,30: levanta a cabeca e da a bronca olhando para a camera.
+#   a ultima palavra acaba em 6,22 (depois disso ele so trabalha calado): corta
+#   ali e vai direto para o "rapaaaz". punch-in seco no corte, a fala inteira
+cl q2 $P/source/T13.mov 1.767 136 1.22 1.16 0.60 0.28 "$BW"
+# 3 video 1 de 4,60 (colado no "ra-" do "rapaaaz", que comeca em 4,64) ate o fim do
 #   "eeeee" com os bracos abertos (17,00). corte seco para a cor.
-#   take A 4,55-8,53 + take B 8,67-17,00; os quadros da emenda do CapCut
+#   take A 4,60-8,53 + take B 8,67-17,00; os quadros da emenda do CapCut
 #   (8,53-8,63) ficam de fora. fonte 1080p: aproximacao ate 1,05
-cl e1 $P/source/T12.mov 4.55 119 1.00 1.03 0.50 0.40 "$GC"
+cl e1 $P/source/T12.mov 4.60 118 1.00 1.03 0.50 0.40 "$GC"
 # a troca de take dentro do video 1 era um salto de posicao: o take B entra
 # 10% mais fechado e abre ate 1,02, o corte passa a parecer intencional
 cl e2 $P/source/T12.mov 8.667 250 1.10 1.02 0.50 0.40 "$GC"

@@ -6,8 +6,8 @@ FF = "/usr/local/lib/python3.11/dist-packages/imageio_ffmpeg/binaries/ffmpeg-lin
 P = "/home/user/Success-/projetos/bronca"; WK = P + "/work"; OUT = WK + "/mix"
 os.makedirs(OUT, exist_ok=True)
 SR = 48000; FPS = 30
-Q, E1, F1 = 41 + 193, 119 + 250, 0
-TOT = Q + E1 + F1; LOGO_IN = 594
+Q, E1, F1 = 41 + 136, 118 + 250, 0
+TOT = Q + E1 + F1; LOGO_IN = 536
 def rd(p):
     x = w.read(p)[1].astype(np.float64) / 32768
     return x if x.ndim == 2 else np.stack([x, x], 1)

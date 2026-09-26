@@ -1,4 +1,4 @@
-# Bronca Fake — 20,1 s
+# Bronca Fake — 18,2 s
 
 Vídeo de comédia com o pai, só com os vídeos 1 e 2, editado na linguagem do
 vídeo-modelo (`copy_7B80…`). Nenhum take da ESCALA.
@@ -24,10 +24,10 @@ existem neste ambiente, então o estilo foi recriado):
   2 a 3 palavras por vez numa linha só, a palavra falada em vermelho com um pop.
   **Cada palavra acende no quadro exato em que começa no áudio**, marcado no
   espectrograma do mix final (antes era proporcional às sílabas, e algumas
-  entravam até 0,4 s fora). Quadros de início: rapaaaz 243 · tá 326 · macia 333 ·
-  bicho 348 · vale 379 · até 390 · uma 397 · dancinha 411 · besta 442 · de 455 ·
-  tão 463 · macia 481 · que 489 · tá 497 · eita 508 · trem 518 · bom 523 ·
-  rapaz 532 · eeeee 579.
+  entravam até 0,4 s fora). Quadros de início: rapaaaz 180 · tá 268 · macia 275 ·
+  bicho 290 · vale 321 · até 332 · uma 339 · dancinha 353 · besta 384 · de 397 ·
+  tão 405 · macia 423 · que 431 · tá 439 · eita 450 · trem 460 · bom 465 ·
+  rapaz 474 · eeeee 521.
 
 Transcrição do cliente: "Rapaz tá macia mesmo hein (na legenda: "tá macia bicho", correção do cliente), vale até uma dancinha besta
 de tão macia que tá, eita trem bom rapaz, eeeee". Ela cobre o trecho do vídeo 1
@@ -44,24 +44,20 @@ não tem transcrição.
 - Fala sem picotar, takes longos.
 - Sem transição de efeito.
 
-## Linha do tempo (30 fps, 603 quadros)
+## Linha do tempo (30 fps, 545 quadros)
 
-Cortes melhorados: o vídeo 2 vai até 8,20 (a última frase acaba em 7,96), então
-há ~0,2 s de respiro antes da virada para a cor. Na troca de take dentro do
-vídeo 1 o take B entra 10% mais fechado e abre até 1,02, disfarçando o salto
-de posição.
-
-Revisões: o vídeo 1 entra em 4,55 (na pausa antes do "rapaaaz", que o 4,70
-cortava); o final (quadro parado com logo) saiu a pedido; o vídeo termina
-depois do "eeeee".
+Revisão: corte direto da bronca para o "rapaaaz". A bronca acaba em 6,22 no
+vídeo 2 (antes o corte ia até 8,20: 2 s dele calado); o "ra-" começa em 4,64
+no vídeo 1. Agora a bronca termina no quadro 173, o corte cai no 177 e o
+"rapaaaz" começa no 180.
 
 | Quadro | Tempo | Dura | Fonte | O quê |
 |---|---|---|---|---|
 | 0 | 0,00 | 1,37 | Vídeo 2, 0,40–1,77 | Trabalhando calado e sério. P&B |
 | 12 | 0,40 | — | — | Entra a frase da trend |
-| 41 | 1,37 | 6,43 | Vídeo 2, 1,77–8,20 | **A bronca**. Punch-in seco para 1,22 → 1,15. P&B |
-| 234 | 7,80 | 3,97 | Vídeo 1, 4,55–8,53 | **Corte seco para a cor.** "rapaaaz", "tá macia mesmo hein". A trilha entra baixa |
-| 353 | 11,77 | 8,33 | Vídeo 1, 8,67–17,00 | "vale até uma dancinha besta de tão macia que tá", "eita trem bom", "rapaz", "eeeee" |
+| 41 | 1,37 | 4,53 | Vídeo 2, 1,77–6,30 | **A bronca**. Punch-in seco para 1,22 → 1,16. P&B |
+| 177 | 5,90 | 3,93 | Vídeo 1, 4,60–8,53 | **Corte seco para a cor**, direto no "rapaaaz". A trilha entra baixa |
+| 295 | 9,83 | 8,33 | Vídeo 1, 8,67–17,00 | Take B entra 10% mais fechado e abre até 1,02 |
 
 ## Som
 - Voz: passa-alta 90 Hz, redução de ruído leve, −2 dB em 250 Hz, +2,5 dB em
@@ -69,12 +65,12 @@ depois do "eeeee".
 - Trilha gaúcha (`entrega/trilha-gaucha-100bpm.wav`, sintetizada no
   repositório, sem dono), a partir de 2,50 s. 11 dB abaixo da voz enquanto ele
   fala; sobe depois do "eeeee" e desce nos últimos 0,9 s.
-- Medido: com trilha −14,6 LUFS, pico −2,1 dBTP. Sem trilha −14,6 LUFS, pico −2,3 dBTP.
+- Medido: com trilha −14,3 LUFS, pico −4,2 dBTP. Sem trilha −14,3 LUFS, pico −3,7 dBTP.
 
 ## Música
 O cliente vai colocar a música de fundo ele mesmo: a versão para postar é a
-`-SEM-MUSICA` (voz e ambiente, −14,6 LUFS, pico −2,3 dBTP).
+`-SEM-MUSICA` (voz e ambiente, −14,3 LUFS, pico −3,7 dBTP).
 
 ## Entrega
-- `entrega/guerreiros-BRONCA-FAKE-20s.mp4`
-- `entrega/guerreiros-BRONCA-FAKE-20s-SEM-MUSICA.mp4`
+- `entrega/guerreiros-BRONCA-FAKE-18s.mp4`
+- `entrega/guerreiros-BRONCA-FAKE-18s-SEM-MUSICA.mp4`
