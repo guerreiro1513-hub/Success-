@@ -7,7 +7,7 @@ FF = "/usr/local/lib/python3.11/dist-packages/imageio_ffmpeg/binaries/ffmpeg-lin
 P = "/home/user/Success-/projetos/bastidor"; WK = P + "/work"; OUT = WK + "/mix"
 os.makedirs(OUT, exist_ok=True)
 SR = 48000; FPS = 30
-CUTS = [0, 105, 285, 360, 460, 507]          # a1 a2 a3 a4 | vinheta
+CUTS = [0, 171, 261, 396, 496, 543]          # a1 a2 a3 a4 | vinheta
 def rd(p):
     x = w.read(p)[1].astype(np.float64) / 32768
     return x if x.ndim == 2 else np.stack([x, x], 1)
@@ -17,13 +17,14 @@ ff("-i", WK + "/cut/base.mov", "-vn", "-af",
    "-ar", "48000", "-ac", "2", OUT + "/nat.wav")
 N = int(CUTS[-1] / FPS * SR)
 A = rd(OUT + "/nat.wav"); A = np.pad(A, ((0, max(0, N - len(A))), (0, 0)))[:N]
-# nivela cada take no mesmo RMS (o IMG_1459 veio ~10 dB mais baixo)
+# nivela cada take no mesmo RMS (o IMG_1459 e o take novo vieram bem mais baixos)
 ref = None
 for a, b in zip(CUTS[:-2], CUTS[1:-1]):
     i, j = int(a / FPS * SR), int(b / FPS * SR)
     r = np.sqrt(np.mean(A[i:j] ** 2)) + 1e-9
     if ref is None: ref = r
-    A[i:j] *= min(ref / r, 4.0)
+    print("take %d-%d: ganho %.1f dB" % (a, b, 20 * np.log10(min(ref / r, 10.0))))
+    A[i:j] *= min(ref / r, 10.0)
 iv = int(CUTS[-2] / FPS * SR)
 k = int(0.35 * SR); A[iv - k:iv] *= np.linspace(1, 0, k)[:, None]; A[iv:] = 0   # sai na vinheta
 for c in CUTS[1:-2]:                          # emendas sem estalo

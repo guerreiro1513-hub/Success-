@@ -1,4 +1,4 @@
-# Bastidor Tranquilo — 16,9 s
+# Bastidor Tranquilo — 18,1 s
 
 Reel documental: a câmera chega e o dono já está trabalhando. Poucos cortes,
 takes longos, som natural. O cliente pediu para renderizar direto (sem esperar
@@ -18,34 +18,42 @@ Receita: `projetos/bastidor/project/build.sh` e `mix.py`.
 | IMG_1470 | 5,0 s | Tenda com clientes, movimento | Ambiente |
 | IMG_1471 | 5,8 s | O dono com o soprador, movimento atrás; depois sai andando | Apoio |
 | IMG_1473 | 1,8 s | Outro funcionário com o soprador | Pouco uso |
+| copy_231F… (novo) | 15,4 s | Exportação do CapCut, 1080p. O dono embalando a carne para os clientes, gente em volta, joinha. Logo do CapCut a partir de ~13 s | **Principal** (bastidor de verdade) |
 
 **Fala:** nenhum take tem fala clara (medido por detecção de voz: só conversa
-de fundo). Sem legenda e sem texto de contexto (não há informação confirmada
-de dia ou horário para escrever).
+de fundo). Sem legenda.
 
-## Linha do tempo (30 fps, 507 quadros)
+**Texto:** uma linha só, "bastidores do Guerreiro's Grill", TikTok Sans
+SemiBold 50 px, branca com sombra suave, no topo, de 0,27 a 3,2 s. Pedido do
+cliente pensando no gancho dos 3 s (a maioria assiste sem som). Nada inventado:
+dia, horário e lugar não foram confirmados, então não entram.
+
+## Linha do tempo (30 fps, 543 quadros)
+
+v2: o boné vira o gancho (pedido do cliente), entra o take novo, o soprador
+(IMG_1471) sai.
 
 | Quadro | Tempo | Dura | Take | O quê |
 |---|---|---|---|---|
-| 0 | 0,00 | 3,50 | IMG_1455, 0,50 | Mãos virando a carne na grelha |
-| 105 | 3,50 | 6,00 | IMG_1459, 2,00 | Boné na mangueira, põe na cabeça, olha e sorri. Take inteiro |
-| 285 | 9,50 | 2,50 | IMG_1471, 0,30 | O soprador, o restaurante atrás |
-| 360 | 12,00 | 3,33 | IMG_1458, 1,40 | A peça de carne saindo da grelha |
-| 460 | 15,33 | 1,57 | Vinheta | Logo |
+| 0 | 0,00 | 5,70 | IMG_1459, 2,30 | A mão molhando o boné na mangueira (curiosidade), ele põe o boné, olha e sorri |
+| 171 | 5,70 | 3,00 | IMG_1455, 0,50 | Mãos virando a carne na grelha |
+| 261 | 8,70 | 4,50 | Take novo, 0,50 | Embalando a carne para os clientes, joinha |
+| 396 | 13,20 | 3,33 | IMG_1458, 1,40 | A peça de carne saindo da grelha |
+| 496 | 16,53 | 1,57 | Vinheta | Logo |
 
-Aproximação no máximo 1,00→1,04, sem punch-in, sem transição de efeito.
+O take novo usa o mapeamento quadro a quadro (exportação do CapCut); nenhum
+quadro repetido.
 
 ## Cor
 Documental: contraste 1,06, saturação 1,03, balanço levemente quente, altas
 seguradas. Sem empurrar vermelho/laranja.
 
 ## Som
-Som natural de cada take, nivelado entre si (o IMG_1459 veio ~10 dB mais
-baixo), emendas de 20 ms nos cortes, redução de ruído leve e compressão 2:1.
+Som natural de cada take, nivelado entre si, emendas de 20 ms nos cortes, redução de ruído leve e compressão 2:1.
 Versão com trilha: gaúcha (sintetizada no repositório) 16 dB abaixo do
-ambiente, sobe um pouco no logo. Medido: −15,2 LUFS / −3,8 dBTP (com),
-−15,0 LUFS / −4,2 dBTP (sem).
+ambiente, sobe um pouco no logo. Medido: −15,1 LUFS / −4,2 dBTP (com),
+−14,9 LUFS / −4,1 dBTP (sem).
 
 ## Entrega
-- `entrega/guerreiros-BASTIDOR-17s.mp4`
-- `entrega/guerreiros-BASTIDOR-17s-SEM-MUSICA.mp4`
+- `entrega/guerreiros-BASTIDOR-18s.mp4`
+- `entrega/guerreiros-BASTIDOR-18s-SEM-MUSICA.mp4`
