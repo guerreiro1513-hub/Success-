@@ -57,3 +57,49 @@ ambiente, sobe um pouco no logo. Medido: −15,1 LUFS / −4,2 dBTP (com),
 ## Entrega
 - `entrega/guerreiros-BASTIDOR-18s.mp4`
 - `entrega/guerreiros-BASTIDOR-18s-SEM-MUSICA.mp4`
+
+---
+
+# v3 — montagem no ritmo, música gerada no Kairogen (16,9 s, 507 quadros)
+
+O cliente reprovou a v2 (texto e edição) e pediu algo diferente, com música
+de fundo boa, usando os conectores.
+
+## Música (Kairogen, 3 créditos cada)
+Duas trilhas instrumentais de 22 s geradas: **A** sertanejo-funk (viola caipira,
+bateria moderna, 808) e **B** hip-hop. A CDN do Kairogen está bloqueada no
+proxy deste ambiente; os arquivos vieram pela função de download do próprio
+conector e estão em `projetos/bastidor/assets/`. Escolhida a **A**: ~133 BPM
+(batida 0,45 s, 1ª batida em 0,03 s), ganha energia em ~7 s e acaba sozinha
+perto de 17 s. IDs: A `6abebcf07a12b76894c08db7`, B `6abebcfdbf204872071cbfd2`.
+
+## Montagem (todo corte numa batida)
+
+| Quadro | Tempo | Take | O quê |
+|---|---|---|---|
+| 0 | 0,00 | IMG_1459, 3,30 | Gancho: a mão molha o boné, ele põe e sorri. "POR TRÁS DA BRASA" |
+| 109 | 3,63 | IMG_1455 | Virando a carne (2 batidas) |
+| 136 | 4,53 | IMG_1456 | Potes com a marca |
+| 163 | 5,43 | IMG_1457 | Carne indo pro saco |
+| 190 | 6,33 | IMG_1471 | O soprador |
+| 217 | 7,23 | Take novo | **Na virada da música**: embalando para os clientes, joinha (8 batidas) |
+| 325 | 10,83 | IMG_1470 | Tenda cheia |
+| 352 | 11,73 | IMG_1466 | Atendimento |
+| 379 | 12,63 | IMG_1458 | A peça saindo da grelha. "O RESULTADO" |
+| 460 | 15,33 | Vinheta | Logo |
+
+## Texto
+Anton (Google Fonts, OFL), maiúscula, branca com sombra dura, palavra-chave em
+vermelho, entrada com pop. "POR TRÁS DA BRASA" no gancho, embaixo do rosto
+(y 1250); "O RESULTADO" no topo, acima da carne (y 300).
+
+## Cor
+Documental cinematográfica: saturação −8 % com o vermelho da carne preservado,
+amarelo da guia e verdes contidos, sombras levemente frias, altas quentes,
+pretos foscos, vinheta sutil e grão fino.
+
+## Som
+A trilha manda; o som natural fica 9 dB abaixo, nivelado entre os takes.
+Medido: −13,9 LUFS / −2,8 dBTP (com), −14,0 / −3,3 (sem música, só ambiente).
+
+Entrega: `entrega/guerreiros-BASTIDOR-17s.mp4` e `-SEM-MUSICA`.
