@@ -103,3 +103,29 @@ A trilha manda; o som natural fica 9 dB abaixo, nivelado entre os takes.
 Medido: −13,9 LUFS / −2,8 dBTP (com), −14,0 / −3,3 (sem música, só ambiente).
 
 Entrega: `entrega/guerreiros-BASTIDOR-17s.mp4` e `-SEM-MUSICA`.
+
+---
+
+# v4 — fonte editorial, só música, cor de câmera 4K (16,0 s, 480 quadros)
+
+Pedidos: fonte mais bonita, tirar o áudio dos takes, gancho do boné mais curto,
+sem o "O RESULTADO", cor como se fosse gravado numa câmera 4K.
+
+- **Gancho**: entra direto nele levantando o boné (IMG_1459 de 4,20), 6 batidas
+  (2,73 s) em vez de 8. A trilha passa a começar em 0,90 s (2 batidas), então
+  todos os cortes seguintes continuam nas mesmas batidas e a virada ainda cai
+  no take novo.
+- **Texto**: dupla editorial em Playfair Display (OFL): "por trás da" em
+  itálico médio e "BRASA" em Black 200 px com espaçamento, branco com sombra
+  suave, entrada suave sem pulo, de 0,2 a 2,7 s, embaixo do rosto. "O
+  RESULTADO" saiu.
+- **Som**: só a trilha A do Kairogen (sem o ambiente dos takes). Uma entrega só.
+- **Cor**: sem grão e sem vinheta. Contraste de câmera de cinema com altas
+  suaves e pretos sem lift, saturação +6 %, amarelo da guia contido, nitidez
+  adaptativa (cas 0,55). Exportado em CRF 17.
+
+Cortes (quadros): 0 · 82 · 109 · 136 · 163 · 190 (take novo) · 298 · 325 · 352
+(a carne) · 433 (vinheta) · 480.
+
+Medido: −13,7 LUFS, pico −3,7 dBTP.
+Entrega: `entrega/guerreiros-BASTIDOR-16s.mp4`.
