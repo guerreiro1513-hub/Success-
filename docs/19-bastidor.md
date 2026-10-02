@@ -129,3 +129,13 @@ Cortes (quadros): 0 · 82 · 109 · 136 · 163 · 190 (take novo) · 298 · 325 
 
 Medido: −13,7 LUFS, pico −3,7 dBTP.
 Entrega: `entrega/guerreiros-BASTIDOR-16s.mp4`.
+
+# v5 — música nova e sem travamento (16,0 s, 480 quadros)
+- **Música**: trilha C do Kairogen (groove funk / lo-fi instrumental, 3 créditos),
+  `assets/musica_C_groove.mp3`. Mesma grade de ~133 BPM (batida 0,45 s); começa
+  em 0,44 s para as batidas caírem nos mesmos cortes.
+- **Travamento**: a análise quadro a quadro não achou quadro repetido. O que tremia
+  era o zoom animado (`scale eval=frame` em degraus de 2 px + crop inteiro). Saiu o
+  zoom (enquadramento fixo), todos os takes passam por `setpts=N/(30*TB)` (sem
+  `fps=30`), nitidez `cas` 0,55 → 0,35 e bitrate menor (CRF 18, máx. 10 Mbps).
+- Medido: −14,7 LUFS / −2,2 dBFS, 21 MB.
