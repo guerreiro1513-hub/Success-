@@ -139,3 +139,10 @@ Entrega: `entrega/guerreiros-BASTIDOR-16s.mp4`.
   zoom (enquadramento fixo), todos os takes passam por `setpts=N/(30*TB)` (sem
   `fps=30`), nitidez `cas` 0,55 → 0,35 e bitrate menor (CRF 18, máx. 10 Mbps).
 - Medido: −14,7 LUFS / −2,2 dBFS, 21 MB.
+
+## v5 CINEMA (versão alternativa para comparar)
+`project/render_cine.sh` aplica um look de cinema por cima da v5, só nas cenas
+(a vinheta fica intacta): curva fílmica com mais contraste, sombras frias e altas
+quentes, halation leve nas altas luzes, vinheta e grão fino. Mesma montagem,
+mesma música, sem mudar a cadência (30 fps, nada de 24 fps para não voltar a travar).
+Entrega: `entrega/guerreiros-BASTIDOR-16s-CINEMA.mp4`.
