@@ -145,4 +145,6 @@ Entrega: `entrega/guerreiros-BASTIDOR-16s.mp4`.
 (a vinheta fica intacta): curva fílmica com mais contraste, sombras frias e altas
 quentes, halation leve nas altas luzes, vinheta e grão fino. Mesma montagem,
 mesma música, sem mudar a cadência (30 fps, nada de 24 fps para não voltar a travar).
-Entrega: `entrega/guerreiros-BASTIDOR-16s-CINEMA.mp4`.
+Entrega: `entrega/guerreiros-BASTIDOR-16s-CINEMA.mp4`. Clareada depois do feedback
+("muito escuro"): gama 1,07, meios-tons erguidos, vinheta mais leve; brilho médio
+fica igual ao da versão normal.

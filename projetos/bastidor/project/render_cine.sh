@@ -8,14 +8,14 @@
 set -e
 FF=/usr/local/lib/python3.11/dist-packages/imageio_ffmpeg/binaries/ffmpeg-linux-x86_64-v7.0.2
 WK=/home/user/Success-/projetos/bastidor/work; O=/home/user/Success-/entrega/guerreiros-BASTIDOR-16s-CINEMA.mp4
-LOOK="eq=saturation=0.95:contrast=1.10:gamma=0.97,\
+LOOK="eq=saturation=0.97:contrast=1.06:gamma=1.07,\
 colorbalance=rs=-0.05:gs=-0.01:bs=0.06:rm=0.015:bm=-0.015:rh=0.05:gh=0.015:bh=-0.05:pl=1,\
-curves=all='0/0.015 0.2/0.15 0.5/0.49 0.8/0.82 1/0.95'"
+curves=all='0/0.015 0.2/0.17 0.5/0.54 0.8/0.85 1/0.96'"
 C=$WK/cut; ENC="-c:v libx264 -preset medium -crf 14 -pix_fmt yuv420p -an"
 # 1) cenas com o look (quadros 0-432)
 $FF -y -hide_banner -loglevel error -i $C/base.mov -filter_complex "[0:v]setpts=N/(30*TB),${LOOK},format=gbrp,split[g][h];\
 [h]curves=all='0/0 0.82/0 1/1',gblur=sigma=22,colorchannelmixer=rr=1:gg=0.45:bb=0.25[hl];\
-[g][hl]blend=all_mode=screen:all_opacity=0.18,vignette=angle=PI/5:mode=forward,format=yuv420p,noise=alls=5:allf=t[v]" \
+[g][hl]blend=all_mode=screen:all_opacity=0.18,vignette=angle=PI/8:mode=forward,format=yuv420p,noise=alls=5:allf=t[v]" \
   -map "[v]" -frames:v 433 -r 30 $ENC $C/cine_a.mov
 # 2) vinheta intacta (433 em diante)
 $FF -y -hide_banner -loglevel error -i $C/base.mov -vf "setpts=N/(30*TB),trim=start_frame=433,setpts=PTS-STARTPTS,format=yuv420p" -r 30 $ENC $C/cine_b.mov
