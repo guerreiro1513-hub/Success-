@@ -3,7 +3,7 @@
 import os, shutil
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 P = "/home/user/Success-/projetos/segredo"; FP = P + "/assets/fonts"
-W, H, TOT = 1080, 1920, 337
+W, H, TOT = 1080, 1920, 373
 def clamp(x): return max(0.0, min(1.0, x))
 def oc(t): t = clamp(t); return 1 - (1 - t) ** 3
 def txt(s, sz, font="Poppins-Bold.ttf", stroke=5):
@@ -15,11 +15,11 @@ def txt(s, sz, font="Poppins-Bold.ttf", stroke=5):
     return Image.alpha_composite(sh.filter(ImageFilter.GaussianBlur(5)), im)
 # (imagem, entra, sai, y centro, entrada em quadros)
 ITEMS = [
-    (txt("Ele vai contar um segredo…", 64, "Poppins-SemiBold.ttf", 5), 6, 92, 1480, 6),
-    # fala (1441, take 2): quadro 95 = 4,90 s do take
-    (txt("Sabe o que tem aqui", 74), 98, 122, 1430, 3),
-    (txt("no Guerreiro's Grill?", 74), 123, 135, 1430, 0),
-    (txt("CARNE BOA.", 96, "Poppins-ExtraBold.ttf", 6), 136, 160, 1430, 3),
+    (txt("Ele vai contar um segredo…", 64, "Poppins-SemiBold.ttf", 5), 6, 112, 1480, 6),
+    # fala (1440, take 2): quadro 90 = 4,30 s do take; fala de 5,40 a 6,75 s
+    (txt("Sabe o que tem aqui", 74), 123, 147, 1430, 3),
+    (txt("no Guerreiro's Grill?", 74), 123, 147, 1530, 3),
+    (txt("CARNE BOA.", 104, "Poppins-ExtraBold.ttf", 6), 148, 176, 1470, 3),
 ]
 OD = P + "/work/tx"; shutil.rmtree(OD, ignore_errors=True); os.makedirs(OD)
 for fr in range(TOT):

@@ -39,3 +39,15 @@ Medido: −14,6 LUFS / −2,7 dBFS.
 
 Pipeline: `project/build.sh` → `mktx.py` → `mix.py` → `render.sh`.
 Entrega: `entrega/guerreiros-SEGREDO-11s.mp4`.
+
+# v2 — fala certa e sem barulho de carro (12,4 s, 373 quadros)
+Feedback: "o segredo tá muito som de carro e tá cortado o vídeo errado".
+- Os papéis estavam invertidos: o **1440 é o close da fala** (ele cochicha colado na
+  lente) e o 1441 é o da mão. A fala agora sai do 1440, take 2 (fala de 5,40 a 6,75 s),
+  inteiro e sem corte: levanta a mão, encosta na lente, conta, se afasta rindo e faz joinha.
+- Linha do tempo: 1440 0,00 (chama com o dedo, 42 q) → 1441 3,00 (olha pros lados,
+  só imagem, 48 q) → 1440 4,30 (segredo + risada + joinha, 113 q) → making (123 q) → vinheta.
+- Ruído: `project/denoise.py` faz subtração espectral com perfil de ruído dos trechos
+  sem fala de cada take (grave de motor cortado forte), e o ambiente fica 10 dB abaixo
+  fora da fala. Ruído de rua de −21 para −40 dB; a fala fica ~22 dB acima.
+- Medido: −14,8 LUFS / −3,0 dBFS. Entrega: `entrega/guerreiros-SEGREDO-12s.mp4`.

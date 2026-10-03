@@ -1,45 +1,42 @@
-# O Segredo — som. Fala original do 1441 (take 2) com limpeza leve; abertura
-# so com o ambiente do 1440 (antes da fala dele). Musica epica (Kairogen) entra
-# com o impacto no corte para o "the making".
-import numpy as np, scipy.io.wavfile as w, subprocess, os
+# O Segredo v2 — som. Fala do 1440 (take 2) e ambiente dos takes com o ruido de
+# carro tirado por subtracao espectral (denoise.py). Musica epica entra no making.
+import numpy as np, scipy.io.wavfile as w, subprocess, os, re
 FF = "/usr/local/lib/python3.11/dist-packages/imageio_ffmpeg/binaries/ffmpeg-linux-x86_64-v7.0.2"
 P = "/home/user/Success-/projetos/segredo"; S = P + "/source"; OUT = P + "/work/mix"
 os.makedirs(OUT, exist_ok=True)
-SR = 48000; FPS = 30; TOT = 337; N = int(TOT / FPS * SR)
+SR = 48000; FPS = 30; TOT = 373; N = int(TOT / FPS * SR)
 def ff(*a): subprocess.run([FF, "-y", "-v", "error", *a], check=True)
 def rd(p):
     x = w.read(p)[1].astype(np.float64) / 32768
     return x if x.ndim == 2 else np.stack([x, x], 1)
-VOZ = ("aresample=48000,highpass=f=90,afftdn=nr=6:nf=-40:tn=1,"
-       "equalizer=f=250:t=q:w=1:g=-2,equalizer=f=3200:t=q:w=1.2:g=2.5,"
-       "acompressor=threshold=-24dB:ratio=2.5:attack=8:release=150:makeup=2,aformat=channel_layouts=stereo")
-ff("-ss", "0", "-t", str(38 / FPS), "-i", S + "/IMG_1440.mov", "-vn", "-af", VOZ, "-ar", "48000", OUT + "/a1.wav")
-ff("-ss", "3.0", "-t", str(129 / FPS), "-i", S + "/IMG_1441.mov", "-vn", "-af", VOZ, "-ar", "48000", OUT + "/a2.wav")
-a1, a2 = rd(OUT + "/a1.wav"), rd(OUT + "/a2.wav")
-D = np.zeros((N, 2)); i1 = int(38 / FPS * SR); i2 = int(167 / FPS * SR)
-a1 = a1[:i1]; D[:len(a1)] = a1 * 0.8
-a2 = a2[:i2 - i1]; D[i1:i1 + len(a2)] = a2
-# suspense quieto: ambiente de rua 8 dB abaixo fora da fala (fala: 5,00-7,05 s do take = 3,30-5,35 s na saida)
-g = np.full(N, 10 ** (-8 / 20)); s0, s1 = int((38 / FPS + 2.00 - 0.08) * SR), int((38 / FPS + 4.05) * SR)
-r = int(0.08 * SR); g[s0:s1] = 1.0
-g[s0 - r:s0] = np.linspace(10 ** (-8 / 20), 1, r); g[s1:s1 + r] = np.linspace(1, 10 ** (-8 / 20), r)
+DN = P + "/project/denoise.py"
+for nm, spans in (("1440", "0-1.6,3.5-4.5,7.0-8.1"), ("1441", "0-1.3,3.0-5.8,6.8-8.3")):
+    ff("-i", f"{S}/IMG_{nm}.mov", "-vn", "-ac", "2", "-ar", "48000", "-af", "highpass=f=100", f"{OUT}/r{nm}.wav")
+    subprocess.run(["python3", DN, f"{OUT}/r{nm}.wav", f"{OUT}/d{nm}.wav", spans], check=True)
+    ff("-i", f"{OUT}/d{nm}.wav", "-af", "equalizer=f=250:t=q:w=1:g=-2,equalizer=f=3200:t=q:w=1.2:g=3,"
+       "acompressor=threshold=-26dB:ratio=2.5:attack=8:release=150:makeup=3", "-ar", "48000", f"{OUT}/v{nm}.wav")
+A, B = rd(OUT + "/v1440.wav"), rd(OUT + "/v1441.wav")
+def take(x, t0, nf): i = int(t0 * SR); return x[i:i + int(nf / FPS * SR)]
+D = np.zeros((N, 2)); pos = 0
+for x, t0, nf in ((A, 0.0, 42), (B, 3.0, 48), (A, 4.3, 113)):
+    seg = take(x, t0, nf); n = len(seg); k = int(0.012 * SR)
+    seg = seg.copy(); seg[:k] *= np.linspace(0, 1, k)[:, None]; seg[-k:] *= np.linspace(1, 0, k)[:, None]
+    D[pos:pos + n] = seg; pos = int((pos / SR * FPS + nf) / FPS * SR)
+# ambiente restante 10 dB abaixo fora da fala (suspense limpo)
+s0, s1 = int((90 + 33) / FPS * SR), int((90 + 74) / FPS * SR)   # fala
+lo = 10 ** (-10 / 20); g = np.full(N, lo); r = int(0.1 * SR)
+g[s0 - r:s1 + r] = 1.0; g[s0 - 2 * r:s0 - r] = np.linspace(lo, 1, r); g[s1 + r:s1 + 2 * r] = np.linspace(1, lo, r)
 D *= g[:, None]
-k = int(0.015 * SR)
-D[i1 - k:i1] *= np.linspace(1, 0, k)[:, None]; D[i1:i1 + k] *= np.linspace(0, 1, k)[:, None]
-D[i2 - k:i2] *= np.linspace(1, 0, k)[:, None]
+i2 = int(203 / FPS * SR)
 M = rd(P + "/work/musica.wav")[:N - i2]
 Mu = np.zeros((N, 2)); Mu[i2:i2 + len(M)] = M
 fo = int(0.8 * SR); Mu[N - fo:] *= np.linspace(1, 0, fo)[:, None] ** 1.5
-# musica no mesmo nivel percebido da fala (a fala ja acabou quando ela entra)
 rv = np.sqrt(np.mean(D[s0:s1] ** 2)); rm = np.sqrt(np.mean(Mu[i2:] ** 2)) + 1e-12
 Mu *= rv / rm * 10 ** (-2.0 / 20)
 X = D + Mu; X = X * (0.5 / np.abs(X).max())
 w.write(OUT + "/pre.wav", SR, (X * 32767).astype(np.int16))
-# ganho fixo (loudnorm dinamico subia o ambiente de novo): mede e ajusta para -14 LUFS
-import re
 r = subprocess.run([FF, "-i", OUT + "/pre.wav", "-af", "ebur128", "-f", "null", "-"], capture_output=True, text=True).stderr
 I = float(re.findall(r"I:\s+(-?[\d.]+) LUFS", r)[-1]); gdb = -14.0 - I
-ff("-i", OUT + "/pre.wav", "-af", f"volume={gdb:.2f}dB,alimiter=limit=0.70:level=false:attack=2:release=60,aresample=48000",
+ff("-i", OUT + "/pre.wav", "-af", f"volume={gdb:.2f}dB,alimiter=limit=0.62:level=false:attack=2:release=60,aresample=48000",
    "-ar", "48000", OUT + "/final.wav")
 print("ganho", round(gdb, 1))
-print("ok")
