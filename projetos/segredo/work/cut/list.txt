@@ -1,6 +1,5 @@
 file '/home/user/Success-/projetos/segredo/work/cut/s1.mov'
 file '/home/user/Success-/projetos/segredo/work/cut/s2.mov'
-file '/home/user/Success-/projetos/segredo/work/cut/s3.mov'
 file '/home/user/Success-/projetos/segredo/work/cut/s4.mov'
 file '/home/user/Success-/projetos/segredo/work/cut/s5.mov'
 file '/home/user/Success-/projetos/segredo/work/cut/s6.mov'

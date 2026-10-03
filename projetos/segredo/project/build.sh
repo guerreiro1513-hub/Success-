@@ -1,5 +1,5 @@
 #!/bin/bash
-# O Segredo — montagem. Saida 1080x1920, 30 fps, 373 quadros (12,43 s).
+# O Segredo — montagem. Saida 1080x1920, 30 fps, 307 quadros (10,23 s).
 # Sem zoom animado (enquadramento fixo por plano, o "punch-in" e um corte seco).
 set -e
 FF=/usr/local/lib/python3.11/dist-packages/imageio_ffmpeg/binaries/ffmpeg-linux-x86_64-v7.0.2
@@ -27,14 +27,10 @@ cl(){ ID=$1;SRC=$2;SS=$3;NF=$4;Z=$5;FX=$6;FY=$7;G=$8;M=$9
    "[0:v]${FR},scale=${ZW}:${ZH}:force_original_aspect_ratio=increase:flags=lanczos,\
 crop=${W}:${H}:x='(iw-${W})*${FX}':y='(ih-${H})*${FY}',${G},setsar=1,format=yuv420p[v]" \
    -map "[v]" -frames:v $NF -r 30 -c:v libx264 -preset medium -crf $CRF -an "$WK/$ID.mov" -loglevel error; }
-# v2: o 1440 e o close da fala (ele cochicha colado na lente); o 1441 e o da mao.
-# 1) chama com o dedo, na churrasqueira (antes da 1a fala dele)
-cl s1 $S/IMG_1440.mov     0.00 42 1.00 0.50 0.50 "$NAT" n
-# 2) mao: olha pros lados, desconfiado (so imagem)
-cl s2 $S/IMG_1441.mov     3.00 48 1.00 0.50 0.50 "$NAT" n
-# 3) 1440 take 2 inteiro: levanta a mao, encosta na lente, conta o segredo,
-#    se afasta rindo e faz joinha (a aproximacao dele ja e o "punch-in")
-cl s3 $S/IMG_1440.mov     4.30 113 1.00 0.50 0.50 "$NAT" n
+# v3: um plano so do 1440 do inicio: ele chama, a camera vai em direcao a ele e ele
+# cochicha colado na lente (take 1, fala 1,85-3,35). Depois a risada com joinha.
+cl s1 $S/IMG_1440.mov     0.00 104 1.00 0.50 0.50 "$NAT" n
+cl s2 $S/IMG_1440.mov     6.95 33 1.00 0.50 0.50 "$NAT" n
 # 4) the making: faca na carne crua (noite, 60p -> camera lenta 2x)
 cl s4 $S/COMIDA_NOITE.mov 1.84 30 1.00 0.50 0.50 "$CINN" s
 # 5) carne levantada no garfo (dia, ja vem em camera lenta)
@@ -45,6 +41,6 @@ cl s6 $S/COMIDA_NOITE.mov  8.50 30 1.00 0.50 0.50 "$CINN" s
 cl s7 $S/COMIDA_NOITE.mov 11.10 30 1.00 0.50 0.50 "$CINN" s
 # 8) vinheta da marca, intacta
 cl s8 /home/user/Success-/projetos/escala/source/T07.mov 0.00 47 1.00 0.50 0.50 null n
-for i in s1 s2 s3 s4 s5 s6 s7 s8; do echo "file '$WK/$i.mov'"; done > $WK/list.txt
+for i in s1 s2 s4 s5 s6 s7 s8; do echo "file '$WK/$i.mov'"; done > $WK/list.txt
 $FF -y -hide_banner -loglevel error -f concat -safe 0 -i $WK/list.txt -c:v copy $WK/base.mov
 echo base ok

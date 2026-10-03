@@ -51,3 +51,14 @@ Feedback: "o segredo tá muito som de carro e tá cortado o vídeo errado".
   sem fala de cada take (grave de motor cortado forte), e o ambiente fica 10 dB abaixo
   fora da fala. Ruído de rua de −21 para −40 dB; a fala fica ~22 dB acima.
 - Medido: −14,8 LUFS / −3,0 dBFS. Entrega: `entrega/guerreiros-SEGREDO-12s.mp4`.
+
+# v3 — plano único na chegada e legenda certa (10,2 s, 307 quadros)
+Feedback: cortes do começo ruins (quer que, quando ele chama, já venha a câmera indo
+na direção dele) e legenda errada. A fala real é **"No Guerreiro's Grill tem carne
+de qualidade."**
+- O 1441 saiu. O começo é um plano só do 1440 (take 1, 0,00–3,47 s): ele chama, a
+  câmera vai até ele e ele cochicha colado na lente (fala de 1,85 a 3,35 s). Depois,
+  corte para a risada com joinha (1440, 6,95–8,05 s), making e vinheta.
+- Legendas pela pausa da voz em 2,42 s (fim de "Grill", 5ª de 13 sílabas):
+  "No Guerreiro's Grill" (q 55–72), "tem carne" + "DE QUALIDADE." (q 73–103).
+- Entrega: `entrega/guerreiros-SEGREDO-10s.mp4` (substitui a de 12 s).
