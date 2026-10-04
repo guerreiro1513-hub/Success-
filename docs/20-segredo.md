@@ -102,3 +102,9 @@ Guerreiro's Grill?" e, no corte, só "Carne de qualidade.", legenda bonita, troc
   vinheta sonora do TikTok no fim fica de fora). ~97 BPM; a batida de grave de 7,22 s
   cai no corte do making (q 178). Fica 12 dB abaixo nas falas e sobe no corte.
 - Medido: −14,6 LUFS / −2,6 dBFS. Entrega: `entrega/guerreiros-SEGREDO-16s.mp4`.
+
+# v7 — mais cinema (16,7 s)
+Render: reforço de cor (sombras frias, altas quentes, sem escurecer), bordas
+desfocadas como lente aberta (`project/mkmask.py` + maskedmerge), halation mais forte,
+leve aberração cromática, grão e faixas pretas de cinema (140 px em cima e embaixo,
+menos na vinheta). Brilho médio mantido: pai 122,8 / making 84,6.
