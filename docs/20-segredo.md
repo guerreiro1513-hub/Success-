@@ -111,3 +111,6 @@ menos na vinheta). Brilho médio mantido: pai 122,8 / making 84,6.
 
 # v8 — tela cheia de Reels
 Sem as faixas pretas (o cliente quer o vídeo ocupando a tela toda). Resto igual à v7.
+
+# v9 — faixas pretas de volta
+O cliente preferiu com as faixas: volta exatamente a v7 (render e arquivo).
