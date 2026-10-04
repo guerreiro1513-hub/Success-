@@ -62,3 +62,18 @@ de qualidade."**
 - Legendas pela pausa da voz em 2,42 s (fim de "Grill", 5ª de 13 sílabas):
   "No Guerreiro's Grill" (q 55–72), "tem carne" + "DE QUALIDADE." (q 73–103).
 - Entrega: `entrega/guerreiros-SEGREDO-10s.mp4` (substitui a de 12 s).
+
+# v4 — pergunta + resposta, começo editado, making maior (15,6 s, 468 quadros)
+Feedback: a fala do take 1 é a pergunta **"Sabe o que tem no Guerreiro's Grill?"**;
+a resposta **"No Guerreiro's Grill tem carne de qualidade."** vem de outra fala (take 2).
+Vídeo curto: mais cinema, começo mais editado para segurar quem assiste.
+- Gancho: "O SEGREDO / do Guerreiro's Grill" no 1º quadro; punch-in seco no dedo
+  chamando (1,22x); chegada da câmera acelerada 1,6x.
+- Fala: pergunta 1440 1,80–3,42 s (q 45–93) e resposta 1440 5,25–6,80 s (q 94–140),
+  emendadas no mesmo enquadramento colado na lente; risada e joinha (q 141–177).
+- Som: música de suspense "na ponta dos pés" (Kairogen, 2 créditos) 13 dB abaixo da fala
+  até o impacto; corte seco para a épica no making (q 178).
+- Making com 8 planos (~8 s): fogo, faca na carne crua, grelha giratória, carne no
+  garfo, tesoura no frango, fatiando costela, fatiando na tábua, o dono fatiando com fumaça.
+  Câmera lenta 2x só nos planos com 60 quadros reais (sem quadro repetido).
+- Medido: −15,2 LUFS / −1,9 dBFS. Entrega: `entrega/guerreiros-SEGREDO-15s.mp4`.
