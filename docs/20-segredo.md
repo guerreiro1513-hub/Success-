@@ -108,3 +108,6 @@ Render: reforço de cor (sombras frias, altas quentes, sem escurecer), bordas
 desfocadas como lente aberta (`project/mkmask.py` + maskedmerge), halation mais forte,
 leve aberração cromática, grão e faixas pretas de cinema (140 px em cima e embaixo,
 menos na vinheta). Brilho médio mantido: pai 122,8 / making 84,6.
+
+# v8 — tela cheia de Reels
+Sem as faixas pretas (o cliente quer o vídeo ocupando a tela toda). Resto igual à v7.
