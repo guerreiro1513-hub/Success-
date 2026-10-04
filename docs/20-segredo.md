@@ -77,3 +77,19 @@ Vídeo curto: mais cinema, começo mais editado para segurar quem assiste.
   garfo, tesoura no frango, fatiando costela, fatiando na tábua, o dono fatiando com fumaça.
   Câmera lenta 2x só nos planos com 60 quadros reais (sem quadro repetido).
 - Medido: −15,2 LUFS / −1,9 dBFS. Entrega: `entrega/guerreiros-SEGREDO-15s.mp4`.
+
+# v5 — começo de cinema, mais claro, legenda nova e música nova (15,6 s)
+Feedback: começo cinematográfico, takes menos escuros, falas = "Sabe o que tem no
+Guerreiro's Grill?" e, no corte, só "Carne de qualidade.", legenda bonita, trocar música.
+- Cor: cinema claro em tudo (curva fílmica com meios-tons erguidos, sombras frias,
+  altas quentes) + halation e grão fino no render (menos a vinheta). Brilho médio:
+  pai 113 → 121, making 60 → 84 (escala 0–255).
+- Abertura: título "o segredo do / Guerreiro's Grill" em Playfair itálico, marca em
+  dourado com brilho (no estilo do "The making / Steak" da referência).
+- Legendas palavra a palavra (Poppins ExtraBold): a palavra entra com pop e fica dourada
+  enquanto é dita; marca e QUALIDADE em dourado. Tempo por sílaba dentro de cada trecho
+  de fala (pergunta 1,85–2,42 / 2,45–3,35 s do take 1; resposta 5,45–6,75 s do take 2).
+- Música (Kairogen, 5 créditos): "trailer" (piano, relógio, cordas, sobe até um drop)
+  por baixo da fala, com o drop (12,065 s) no corte do making; ali entra o "groove"
+  épico no impacto dele (1,06 s) até o fim.
+- Medido: −14,8 LUFS / −3,3 dBFS.
