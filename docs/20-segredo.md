@@ -114,3 +114,6 @@ Sem as faixas pretas (o cliente quer o vídeo ocupando a tela toda). Resto igual
 
 # v9 — faixas pretas de volta
 O cliente preferiu com as faixas: volta exatamente a v7 (render e arquivo).
+
+# v10 — carnes sem manchas azuladas
+O reforço de sombras frias (no build e de novo no render, somado) mais a aberração cromática deixavam manchas azul-esverdeadas na pele do frango e nas carnes. Making agora com cor quente e neutra, um pouco mais escuro (gamma 0,98 dia / 1,06 noite), nitidez 0,25; o render não mexe mais na cor nem desloca canais. Faixas pretas mantidas.

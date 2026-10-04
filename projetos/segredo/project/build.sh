@@ -11,14 +11,14 @@ W=1080; H=1920; CRF=15
 NAT="eq=contrast=1.06:saturation=0.99:gamma=1.05,\
 colorbalance=rs=-0.03:gs=-0.005:bs=0.04:rm=0.01:bm=-0.01:rh=0.04:gh=0.012:bh=-0.04:pl=1,\
 curves=all='0/0.02 0.2/0.185 0.5/0.535 0.8/0.84 1/0.965',cas=strength=0.3"
-# making (dia): contraste de cinema sem afundar
-CIN="eq=contrast=1.08:saturation=1.06:gamma=1.04,\
-colorbalance=rs=-0.03:bs=0.04:rm=0.02:bm=-0.02:rh=0.05:gh=0.015:bh=-0.05:pl=1,\
-curves=all='0/0 0.15/0.12 0.5/0.53 0.85/0.89 1/0.98',vignette=angle=PI/7,cas=strength=0.45"
-# making (noite): bem mais aberto, a fonte ja e escura
-CINN="eq=contrast=1.05:saturation=1.08:gamma=1.16,\
-colorbalance=rs=-0.03:bs=0.04:rm=0.02:bm=-0.02:rh=0.05:gh=0.015:bh=-0.05:pl=1,\
-curves=all='0/0.01 0.12/0.12 0.5/0.57 0.85/0.92 1/0.99',vignette=angle=PI/8,cas=strength=0.5"
+# v10: making sem empurrar azul nas sombras (deixava manchas azuladas na pele
+# do frango/carne), quente e neutro, um pouco mais escuro, nitidez mais leve.
+CIN="eq=contrast=1.08:saturation=1.03:gamma=0.98,\
+colorbalance=rs=0.01:bs=-0.01:rm=0.015:bm=-0.015:rh=0.03:gh=0.01:bh=-0.03,\
+curves=all='0/0 0.15/0.11 0.5/0.49 0.85/0.87 1/0.97',vignette=angle=PI/6,cas=strength=0.25"
+CINN="eq=contrast=1.06:saturation=1.03:gamma=1.06,\
+colorbalance=rs=0.01:bs=-0.01:rm=0.015:bm=-0.015:rh=0.03:gh=0.01:bh=-0.03,\
+curves=all='0/0 0.12/0.10 0.5/0.52 0.85/0.89 1/0.98',vignette=angle=PI/7,cas=strength=0.25"
 # cl ID SRC SS NF ZOOM FX FY GRADE MODO   (MODO: n = normal 30p | s = 60p em camera lenta 2x | x = 30p acelerado 1,6x | i = 30p interpolado para camera lenta 2x | f = fps=30)
 cl(){ ID=$1;SRC=$2;SS=$3;NF=$4;Z=$5;FX=$6;FY=$7;G=$8;M=$9
   case $M in s) FR="setpts=N/(30*TB)"; SD=$(python3 -c "print(round($NF/60+0.3,3))");;

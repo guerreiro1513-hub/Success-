@@ -10,10 +10,10 @@ python3 /home/user/Success-/projetos/segredo/project/mkmask.py
 # bordas desfocadas como lente aberta, halation, leve aberracao cromatica, grao,
 # e faixas pretas de cinema (aplicadas no fim, por cima de tudo menos a vinheta)
 $FF -y -hide_banner -loglevel error -i $C/base.mov -loop 1 -i $WK/lente.png -filter_complex "[0:v]setpts=N/(30*TB),\
-colorbalance=rs=-0.035:gs=-0.01:bs=0.05:rh=0.035:gh=0.01:bh=-0.04:pl=1,eq=saturation=1.05:contrast=1.03:gamma=1.02,format=gbrp,split=3[s][b][h];\
+format=gbrp,split=3[s][b][h];\
 [b]gblur=sigma=9[bl];[1:v]format=gray,format=gbrp[mk];[s][bl][mk]maskedmerge[l];\
 [h]curves=all='0/0 0.78/0 1/1',gblur=sigma=22,colorchannelmixer=rr=1:gg=0.5:bb=0.3[hl];\
-[l][hl]blend=all_mode=screen:all_opacity=0.22:shortest=1,rgbashift=rh=-2:bh=2,format=yuv420p,noise=alls=5:allf=t[v]" \
+[l][hl]blend=all_mode=screen:all_opacity=0.22:shortest=1,format=yuv420p,noise=alls=5:allf=t[v]" \
   -map "[v]" -frames:v 454 -r 30 $ENC $C/fin_a.mov
 $FF -y -hide_banner -loglevel error -i $C/base.mov -vf "setpts=N/(30*TB),trim=start_frame=454,setpts=PTS-STARTPTS,format=yuv420p" -r 30 $ENC $C/fin_b.mov
 printf "file '%s'\nfile '%s'\n" $C/fin_a.mov $C/fin_b.mov > $C/fin.txt
