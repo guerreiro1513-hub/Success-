@@ -93,3 +93,12 @@ Guerreiro's Grill?" e, no corte, só "Carne de qualidade.", legenda bonita, troc
   por baixo da fala, com o drop (12,065 s) no corte do making; ali entra o "groove"
   épico no impacto dele (1,06 s) até o fim.
 - Medido: −14,8 LUFS / −3,3 dBFS.
+
+# v6 — making todo em câmera lenta e a música escolhida pelo cliente (16,7 s, 501 quadros)
+- Os 8 planos do making agora são todos em câmera lenta 2x. Os de 60 quadros reais
+  usam os quadros da câmera; os dois de 30 quadros (fatiando na tábua e o dono com
+  fumaça) são interpolados (`minterpolate` mci). Nenhum quadro repetido.
+- Música: a do vídeo que o cliente mandou (`source/MUSICA_REF.mp4`, até 19,9 s; a
+  vinheta sonora do TikTok no fim fica de fora). ~97 BPM; a batida de grave de 7,22 s
+  cai no corte do making (q 178). Fica 12 dB abaixo nas falas e sobe no corte.
+- Medido: −14,6 LUFS / −2,6 dBFS. Entrega: `entrega/guerreiros-SEGREDO-16s.mp4`.

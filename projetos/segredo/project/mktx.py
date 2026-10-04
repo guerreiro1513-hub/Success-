@@ -6,7 +6,7 @@
 import os, shutil
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 P = "/home/user/Success-/projetos/segredo"; FP = P + "/assets/fonts"
-W, H, TOT = 1080, 1920, 468; FPS = 30
+W, H, TOT = 1080, 1920, 501; FPS = 30
 GOLD = (240, 190, 70); WHITE = (255, 255, 255)
 def clamp(x): return max(0.0, min(1.0, x))
 def oc(t): t = clamp(t); return 1 - (1 - t) ** 3

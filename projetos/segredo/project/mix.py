@@ -4,7 +4,7 @@ import numpy as np, scipy.io.wavfile as w, subprocess, os, re
 FF = "/usr/local/lib/python3.11/dist-packages/imageio_ffmpeg/binaries/ffmpeg-linux-x86_64-v7.0.2"
 P = "/home/user/Success-/projetos/segredo"; S = P + "/source"; OUT = P + "/work/mix"
 os.makedirs(OUT, exist_ok=True)
-SR = 48000; FPS = 30; TOT = 468; N = int(TOT / FPS * SR)
+SR = 48000; FPS = 30; TOT = 501; N = int(TOT / FPS * SR)
 def ff(*a): subprocess.run([FF, "-y", "-v", "error", *a], check=True)
 def rd(p):
     x = w.read(p)[1].astype(np.float64) / 32768
@@ -28,28 +28,20 @@ g = np.full(N, 10 ** (-10 / 20))
 for a, b in sp: g[a:b] = 1.0
 g = np.convolve(g, np.ones(4800) / 4800, "same"); D *= g[:, None]
 rv = np.sqrt(np.mean(np.concatenate([D[a:b] for a, b in sp]) ** 2))
-# musica (v5): trilha "trailer" (suspense com piano e relogio, sobe ate um drop) por
-# baixo da fala, com o drop dela (12,065 s) exatamente no corte para o making; ali
-# entra a trilha "groove" no impacto dela (1,06 s), que segura o making ate o fim.
+# musica (v6): a trilha escolhida pelo cliente (source/MUSICA_REF.mp4, 0-19,9 s; depois
+# disso entra a vinheta sonora do TikTok, que fica de fora). Toca o video inteiro:
+# baixa por baixo das falas e sobe no corte para o making, com a batida de grave de
+# 7,22 s da musica caindo exatamente no quadro 178.
 MAKE = fr(178)
-T = rd(P + "/work/trailer.wav"); off = int((12.065 - 178 / FPS) * SR)
-Tr = np.zeros((N, 2)); seg = T[off:off + N]; Tr[:len(seg)] = seg
-fo = int(0.7 * SR); d0 = MAKE + int(0.35 * SR)
-Tr[d0:d0 + fo] *= np.linspace(1, 0, fo)[:, None] ** 2; Tr[d0 + fo:] = 0
-Tr[:int(0.03 * SR)] *= np.linspace(0, 1, int(0.03 * SR))[:, None]
-Tr[:MAKE] *= rv / (np.sqrt(np.mean(Tr[:MAKE] ** 2)) + 1e-12) * 10 ** (-12 / 20)
-Tr[MAKE:] *= rv / (np.sqrt(np.mean(Tr[:MAKE] ** 2)) + 1e-12) * 0 + 1  # nivel do drop acompanha o trecho
-G = rd(P + "/work/groove.wav"); g0 = int(1.06 * SR)
-Mu = np.zeros((N, 2)); seg = G[g0:g0 + N - MAKE]; Mu[MAKE:MAKE + len(seg)] = seg
+R = rd(P + "/work/ref.wav")[:int(19.9 * SR)]; off = int((7.22 - 178 / FPS) * SR)
+Mu = np.zeros((N, 2)); seg = R[off:off + N]; Mu[:len(seg)] = seg
+full = rv / (np.sqrt(np.mean(Mu[MAKE:] ** 2)) + 1e-12) * 10 ** (-2.0 / 20)
+env = np.full(N, full * 10 ** (-12 / 20)); r = int(0.06 * SR)
+env[MAKE:] = full; env[MAKE - r:MAKE] = np.linspace(full * 10 ** (-12 / 20), full, r)
+Mu *= env[:, None]
+fi = int(0.4 * SR); Mu[:fi] *= np.linspace(0, 1, fi)[:, None]
 fo = int(0.9 * SR); Mu[N - fo:] *= np.linspace(1, 0, fo)[:, None] ** 1.5
-k = rv / (np.sqrt(np.mean(Mu[MAKE:N - fo] ** 2)) + 1e-12) * 10 ** (-2.0 / 20)
-Mu *= k
-# o drop da trailer no mesmo ganho do groove (impacto duplo)
-gT = rv / (np.sqrt(np.mean(T[off:off + MAKE] ** 2)) + 1e-12) * 10 ** (-12 / 20)
-Tr[MAKE:] = 0; seg = T[off + MAKE:off + d0 + fo] * gT
-seg[d0 - MAKE:] *= np.linspace(1, 0, len(seg) - (d0 - MAKE))[:, None] ** 2
-Tr[MAKE:MAKE + len(seg)] = seg
-Su = Tr
+Su = 0
 X = D + Mu + Su; X = X * (0.5 / np.abs(X).max())
 w.write(OUT + "/pre.wav", SR, (X * 32767).astype(np.int16))
 r = subprocess.run([FF, "-i", OUT + "/pre.wav", "-af", "ebur128", "-f", "null", "-"], capture_output=True, text=True).stderr
