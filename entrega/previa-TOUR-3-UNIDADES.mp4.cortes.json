@@ -1,0 +1,36 @@
+{
+  "duracao": 8.4,
+  "fps": 30,
+  "cortes": [
+    {
+      "t": 0.0,
+      "clip": "TV_C128a_fachada.mov",
+      "unidade": "TROPICAL VILLE"
+    },
+    {
+      "t": 1.6,
+      "clip": "TV_C128b_frangos.mov",
+      "unidade": "TROPICAL VILLE"
+    },
+    {
+      "t": 3.3,
+      "clip": "TV_C130_grelha_giratoria.mov",
+      "unidade": "TROPICAL VILLE"
+    },
+    {
+      "t": 5.033,
+      "clip": "TV_C122_costela.mov",
+      "unidade": "TROPICAL VILLE"
+    },
+    {
+      "t": 6.467,
+      "clip": "TV_C122_costela.mov",
+      "unidade": "fim"
+    }
+  ],
+  "transicoes_de_camera": [
+    1.6,
+    3.3,
+    5.033
+  ]
+}
