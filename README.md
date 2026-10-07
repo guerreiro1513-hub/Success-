@@ -95,6 +95,5 @@ sorriso e equipe.
 Vídeo de apresentação do ortodontista, com placeholders no lugar das 4 falas.
 Ver [`hugo-almeida/README.md`](hugo-almeida/README.md).
 
-**Estado:** render preliminar 540×960 entregue (55,6s). Final aguardando
-aprovação do ritmo. Pendente: os 4 blocos de fala, a trilha e a regravação da
-fachada.
+**Estado:** render final 1080×1920 entregue (55,6s, CRF 18). Pendente: os 4
+blocos de fala, a trilha e a regravação da fachada.

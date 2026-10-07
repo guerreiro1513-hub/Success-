@@ -11,10 +11,13 @@ entrarem em `falas/`, a linha do tempo se reacomoda sozinha.
 
 | | |
 |---|---|
-| `output/hugo-almeida_PREVIEW.mp4` | **render preliminar 540×960** — é o que você pede pra aprovar o ritmo |
-| `output/hugo-almeida_FINAL.mp4` | ainda não gerado — **aguardando seu ok no preview** |
+| `output/hugo-almeida_FINAL.mp4` | **1080×1920, CRF 18, pico 16 Mbps** — é este que vai pro Instagram |
+| `output/hugo-almeida_PREVIEW.mp4` | 540×960, CRF 28 — só pra conferir ritmo rápido. Não julgue qualidade por ele |
 
-Pra gerar o final depois de aprovar: `python3 render.py`
+```bash
+python3 render.py             # final 1080×1920
+python3 render.py --preview   # rascunho rápido
+```
 
 ---
 

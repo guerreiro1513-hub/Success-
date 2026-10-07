@@ -470,7 +470,7 @@ def build(preview, reaproveitar):
     nome = "hugo-almeida_PREVIEW.mp4" if preview else "hugo-almeida_FINAL.mp4"
     final = os.path.join(SAIDA, nome)
     vb = (["-crf", "28", "-preset", "veryfast"] if preview else
-          ["-crf", "19", "-preset", "slow", "-maxrate", "12M", "-bufsize", "24M",
+          ["-crf", "18", "-preset", "slow", "-maxrate", "16M", "-bufsize", "32M",
            "-profile:v", "high", "-level", "4.1"])
     ff(["-i", corpo, "-i", mus, "-filter_complex",
         f"[0:a][1:a]amix=inputs=2:normalize=0:dropout_transition=0[x];"
