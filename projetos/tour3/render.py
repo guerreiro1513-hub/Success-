@@ -47,7 +47,8 @@ def clip_frames(clip, W, H, fps, look):
     rf = clip.get("reframe", {"zoom": 1.0, "x": 0.5, "y": 0.5})
     z = rf.get("zoom", 1.0)
     zw, zh = int(math.ceil(W * z / 2) * 2), int(math.ceil(H * z / 2) * 2)
-    chain = [f"scale={zw}:{zh}:force_original_aspect_ratio=increase:flags=lanczos",
+    chain = ([clip["pre"]] if clip.get("pre") else []) + [
+             f"scale={zw}:{zh}:force_original_aspect_ratio=increase:flags=lanczos",
              f"crop={W}:{H}:(iw-{W})*{rf.get('x', 0.5)}:(ih-{H})*{rf.get('y', 0.5)}"]
     if clip.get("hflip"): chain.append("hflip")
     if clip.get("fix"): chain.append(clip["fix"])
@@ -209,13 +210,25 @@ def hit(dur=0.7):
 
 
 def ambience(clip, out_start, nfr, fps, total_n, db):
+    """Som do proprio clipe. Com "audio_speed": true o som segue as rampas de
+    velocidade (atempo por trecho, sem mudar o tom) e fica sincronizado com a imagem."""
     if db is None or db <= -59: return None
-    a, _, _ = clip["segments"][0]
     dur = nfr / fps
-    r = subprocess.run([FF, "-v", "error", "-ss", f"{a:.3f}", "-t", f"{dur:.3f}", "-i", P(clip["file"]),
-                        "-vn", "-ac", "2", "-ar", str(SR), "-af", "highpass=f=80", "-f", "s16le", "-"],
-                       capture_output=True).stdout
+    if clip.get("audio_speed"):
+        parts, labels = [], []
+        for i, (a, b, sp) in enumerate(clip["segments"]):
+            parts.append(f"[0:a]atrim={a:.3f}:{b:.3f},asetpts=PTS-STARTPTS,atempo={sp:.4f}[a{i}]")
+            labels.append(f"[a{i}]")
+        fc = ";".join(parts) + ";" + "".join(labels) + f"concat=n={len(labels)}:v=0:a=1,highpass=f=60[o]"
+        cmd = [FF, "-v", "error", "-i", P(clip["file"]), "-filter_complex", fc, "-map", "[o]",
+               "-ac", "2", "-ar", str(SR), "-f", "s16le", "-"]
+    else:
+        a = clip["segments"][0][0]
+        cmd = [FF, "-v", "error", "-ss", f"{a:.3f}", "-t", f"{dur:.3f}", "-i", P(clip["file"]),
+               "-vn", "-ac", "2", "-ar", str(SR), "-af", "highpass=f=80", "-f", "s16le", "-"]
+    r = subprocess.run(cmd, capture_output=True).stdout
     x = np.frombuffer(r, np.int16).astype(np.float32).reshape(-1, 2) / 32768
+    x = x[:int(dur * SR)].copy()
     if len(x) == 0: return None
     k = min(int(0.03 * SR), len(x) // 2)
     x[:k] *= np.linspace(0, 1, k)[:, None]; x[-k:] *= np.linspace(1, 0, k)[:, None]
@@ -226,12 +239,14 @@ def ambience(clip, out_start, nfr, fps, total_n, db):
 # ---------------------------------------------------------------- render
 def main():
     preview = "--preview" in sys.argv
+    so_entrada = "--entrada" in sys.argv          # so a abertura + o 1o clipe, em qualidade final
     tl = json.load(open(os.path.join(ROOT, "timeline.json")))
     o = tl["output"]; fps = o["fps"]
     sc = o.get("preview_scale", 0.5) if preview else 1.0
     W, H = int(o["w"] * sc) // 2 * 2, int(o["h"] * sc) // 2 * 2
     samples = 8 if preview else 16
     out_path = P(o["preview_file"] if preview else o["file"])
+    if so_entrada: out_path = P(o.get("entrada_file", "../../entrega/teste-ENTRADA-GTA.mp4"))
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     look = tl.get("look", {}).get("filters", "")
     T = Type(tl["typography"], sc)
@@ -245,6 +260,9 @@ def main():
             seq.append({"clip": c, "loc": loc, "title": i == loc.get("title_clip", 0)})
     if not seq: sys.exit("timeline sem clipes")
     end = tl.get("ending")
+    if so_entrada:
+        seq = seq[:2]; end = None
+        seq[-1]["clip"] = dict(seq[-1]["clip"], transition_out={"type": "cut"})
     if end and end.get("tail"):
         seq.append({"clip": end["tail"], "loc": None, "ending": True})
 

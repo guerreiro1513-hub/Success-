@@ -1,18 +1,18 @@
 {
   "_como_usar": "Troque arquivos, cortes, ordem e textos aqui e rode: python3 render.py --preview (baixa resolucao) ou python3 render.py (final 1080x1920). Tempos em segundos do arquivo original. 'segments' = [inicio, fim, velocidade]: 1 = normal, 0.5 = camera lenta 2x, 2 = acelerado 2x. 'dir' do whip = direcao (graus) em que a IMAGEM se move na tela: 0 = direita, 90 = baixo, 180 = esquerda, 270 = cima.",
-
   "output": {
-    "w": 1080, "h": 1920, "fps": 30,
+    "w": 1080,
+    "h": 1920,
+    "fps": 30,
     "file": "../../entrega/guerreiros-TOUR-3-UNIDADES.mp4",
     "preview_file": "../../entrega/previa-TOUR-3-UNIDADES.mp4",
-    "preview_scale": 0.5
+    "preview_scale": 0.5,
+    "entrada_file": "../../entrega/teste-ENTRADA-GTA.mp4"
   },
-
   "look": {
     "_nota": "cor base da marca, aplicada em todos os clipes depois do ajuste individual",
     "filters": "eq=contrast=1.06:saturation=1.04,curves=r='0/0 0.5/0.51 1/1':b='0/0.01 0.5/0.49 1/0.97',vignette=angle=PI/7"
   },
-
   "typography": {
     "font_name": "assets/fonts/Anton-Regular.ttf",
     "font_label": "assets/fonts/Oswald[wght].ttf",
@@ -21,85 +21,244 @@
     "label_size": 58,
     "label_tracking": 0.36,
     "name_tracking": 0.02,
-    "color": [246, 239, 226],
-    "accent": [233, 185, 73],
+    "color": [
+      246,
+      239,
+      226
+    ],
+    "accent": [
+      233,
+      185,
+      73
+    ],
     "x": 84,
     "y": 1180
   },
-
   "opening": {
-    "enabled": false,
-    "_nota": "descida aerea (referencia 1). Precisa de uma gravacao de tela do Google Earth descendo ate a unidade Jardim Aclimacao. Quando chegar: enabled=true e preencha o clip abaixo.",
-    "clip": null
+    "enabled": true,
+    "_nota": "entrada do GTA (referencia 1, pedido do cliente): cidade vista de cima com os saltos de zoom e a descida, cortada antes de aparecerem os personagens, em corte vertical no centro (fora das marcas do TikTok). Som original da entrada, acelerado junto com a imagem.",
+    "clip": {
+      "file": "referencias/REF1_abertura_aerea.mp4",
+      "segments": [
+        [
+          0.78,
+          2.0,
+          1.5
+        ],
+        [
+          2.0,
+          6.0,
+          2.2
+        ],
+        [
+          6.0,
+          7.6,
+          2.5
+        ],
+        [
+          7.6,
+          8.85,
+          1.2
+        ]
+      ],
+      "reframe": {
+        "zoom": 1.0,
+        "x": 0.5,
+        "y": 0.5
+      },
+      "fix": "unsharp=7:7:0.9:5:5:0.0,noise=alls=3:allf=t",
+      "ambience_db": -18,
+      "audio_speed": true,
+      "transition_out": {
+        "type": "zoom",
+        "frames": 7,
+        "amount": 0.8,
+        "cx": 0.5,
+        "cy": 0.55,
+        "in_cx": 0.5,
+        "in_cy": 0.6
+      },
+      "pre": "hqdn3d=2:1.5:3:3"
+    }
   },
-
   "locations": [
     {
       "name": "JARDIM ACLIMAÇÃO",
-      "title": ["UNIDADE", "JARDIM ACLIMAÇÃO"],
-      "title_clip": 0, "title_start": 0.15, "title_dur": 1.5,
+      "title": [
+        "UNIDADE",
+        "JARDIM ACLIMAÇÃO"
+      ],
+      "title_clip": 0,
+      "title_start": 0.15,
+      "title_dur": 1.5,
       "clips": []
     },
     {
       "name": "TROPICAL VILLE",
-      "title": ["UNIDADE", "TROPICAL VILLE"],
-      "title_clip": 0, "title_start": 0.12, "title_dur": 1.45,
+      "title": [
+        "UNIDADE",
+        "TROPICAL VILLE"
+      ],
+      "title_clip": 0,
+      "title_start": 0.12,
+      "title_dur": 1.45,
       "clips": [
         {
           "file": "source/TV_C128a_fachada.mov",
           "_o_que": "fachada, camera avancando ate a churrasqueira (estabelecimento)",
-          "segments": [[0.25, 1.85, 1.0]],
-          "reframe": {"zoom": 1.0, "x": 0.5, "y": 0.5},
+          "segments": [
+            [
+              0.25,
+              1.85,
+              1.0
+            ]
+          ],
+          "reframe": {
+            "zoom": 1.0,
+            "x": 0.5,
+            "y": 0.5
+          },
           "fix": "colorbalance=rh=-0.05:gh=0.10:bh=-0.06:gm=0.03,eq=gamma=0.97",
           "ambience_db": -60,
-          "transition_out": {"type": "zoom", "frames": 6, "amount": 0.7, "cx": 0.22, "cy": 0.86, "in_cx": 0.5, "in_cy": 0.62}
+          "transition_out": {
+            "type": "zoom",
+            "frames": 6,
+            "amount": 0.7,
+            "cx": 0.22,
+            "cy": 0.86,
+            "in_cx": 0.5,
+            "in_cy": 0.62
+          }
         },
         {
           "file": "source/TV_C128b_frangos.mov",
           "_o_que": "frangos girando; avanca e depois a camera abre pra direita (fim vira o whip)",
-          "segments": [[0.05, 0.55, 1.0], [0.55, 1.25, 2.0], [1.25, 2.30, 1.2]],
-          "reframe": {"zoom": 1.0, "x": 0.5, "y": 0.5},
+          "segments": [
+            [
+              0.05,
+              0.55,
+              1.0
+            ],
+            [
+              0.55,
+              1.25,
+              2.0
+            ],
+            [
+              1.25,
+              2.3,
+              1.2
+            ]
+          ],
+          "reframe": {
+            "zoom": 1.0,
+            "x": 0.5,
+            "y": 0.5
+          },
           "fix": "eq=gamma=1.10",
           "ambience_db": -60,
-          "transition_out": {"type": "whip", "frames": 5, "dir": 150, "amount": 0.55}
+          "transition_out": {
+            "type": "whip",
+            "frames": 5,
+            "dir": 150,
+            "amount": 0.55
+          }
         },
         {
           "file": "source/TV_C130_grelha_giratoria.mov",
           "_o_que": "grelha giratoria de perto, camera subindo; camera lenta e depois acelera para o whip",
-          "segments": [[0.05, 0.65, 0.6], [0.65, 2.00, 3.0], [2.00, 2.42, 1.5]],
-          "reframe": {"zoom": 1.0, "x": 0.5, "y": 0.5},
+          "segments": [
+            [
+              0.05,
+              0.65,
+              0.6
+            ],
+            [
+              0.65,
+              2.0,
+              3.0
+            ],
+            [
+              2.0,
+              2.42,
+              1.5
+            ]
+          ],
+          "reframe": {
+            "zoom": 1.0,
+            "x": 0.5,
+            "y": 0.5
+          },
           "fix": "eq=gamma=1.16:saturation=0.96",
           "ambience_db": -30,
-          "transition_out": {"type": "whip", "frames": 5, "dir": 55, "amount": 0.5}
+          "transition_out": {
+            "type": "whip",
+            "frames": 5,
+            "dir": 55,
+            "amount": 0.5
+          }
         },
         {
           "file": "source/TV_C122_costela.mov",
           "_o_que": "costela no giro, camera indo pra esquerda (imagem corre pra direita) e avancando",
-          "segments": [[0.30, 0.60, 2.0], [0.60, 1.90, 1.0]],
-          "reframe": {"zoom": 1.0, "x": 0.5, "y": 0.5},
+          "segments": [
+            [
+              0.3,
+              0.6,
+              2.0
+            ],
+            [
+              0.6,
+              1.9,
+              1.0
+            ]
+          ],
+          "reframe": {
+            "zoom": 1.0,
+            "x": 0.5,
+            "y": 0.5
+          },
           "fix": "eq=gamma=1.02:contrast=1.04",
           "ambience_db": -30,
-          "transition_out": {"type": "cut"}
+          "transition_out": {
+            "type": "cut"
+          }
         }
       ]
     },
     {
       "name": "FLORAIS",
-      "title": ["UNIDADE", "FLORAIS"],
-      "title_clip": 0, "title_start": 0.15, "title_dur": 1.5,
+      "title": [
+        "UNIDADE",
+        "FLORAIS"
+      ],
+      "title_clip": 0,
+      "title_start": 0.15,
+      "title_dur": 1.5,
       "clips": []
     }
   ],
-
   "ending": {
-    "lines": ["GUERREIRO'S GRILL", "3 UNIDADES · CUIABÁ"],
+    "lines": [
+      "GUERREIRO'S GRILL",
+      "3 UNIDADES · CUIABÁ"
+    ],
     "dur": 2.0,
     "_nota": "fecha sobre o fim do ultimo clipe, em camera lenta e escurecendo",
-    "tail": {"file": "source/TV_C122_costela.mov", "segments": [[1.90, 2.48, 0.3]],
-             "fix": "eq=gamma=1.02:contrast=1.04", "ambience_db": -32},
+    "tail": {
+      "file": "source/TV_C122_costela.mov",
+      "segments": [
+        [
+          1.9,
+          2.48,
+          0.3
+        ]
+      ],
+      "fix": "eq=gamma=1.02:contrast=1.04",
+      "ambience_db": -32
+    },
     "darken": 0.5
   },
-
   "sound": {
     "whoosh_db": -22,
     "end_hit_db": -20

@@ -25,3 +25,13 @@ também `<saida>.cortes.json` com os tempos dos cortes (para sincronizar a músi
 Sequência: fachada (título) → zoom para dentro da churrasqueira → frangos (rampa
 2x no meio) → whip 150° → grelha (câmera lenta 0,6x e acelera 3x) → whip 55° →
 costela → encerramento em câmera lenta 0,3x escurecendo. Prévia: 8,4 s.
+
+## Entrada do GTA (pedido do cliente: usar a própria entrada da referência 1)
+- `opening` no timeline: REF1 de 0,78 a 8,85 s (começa depois do personagem verde e
+  corta antes dos personagens aparecerem), corte vertical no centro (fora das marcas do
+  TikTok), saltos acelerados (1,5x / 2,2x / 2,5x / 1,2x) e som original da entrada
+  acompanhando as rampas (`audio_speed`, atempo por trecho). Zoom para dentro da 1ª unidade.
+- Fonte é 1024x576: o corte vertical usa 324 px de largura, ampliados 3,3x. Limpeza:
+  `hqdn3d` antes de ampliar, lanczos, `unsharp` e grão fino.
+- `python3 render.py --entrada` gera só a abertura + 1º clipe em 1080x1920:
+  `entrega/teste-ENTRADA-GTA.mp4` (5,9 s).
