@@ -87,3 +87,14 @@ Corte base a partir de 5 gravações da clínica. Ver
 limpo 19,8s). Cor e ritmo calibrados por medição contra a referência.
 Pendente de gravação: entrevista (5 soundbites), fachada, procedimento,
 sorriso e equipe.
+
+---
+
+## Projeto 3 · Hugo Almeida — vídeo fixado do perfil (9:16)
+
+Vídeo de apresentação do ortodontista, com placeholders no lugar das 4 falas.
+Ver [`hugo-almeida/README.md`](hugo-almeida/README.md).
+
+**Estado:** render preliminar 540×960 entregue (55,6s). Final aguardando
+aprovação do ritmo. Pendente: os 4 blocos de fala, a trilha e a regravação da
+fachada.
