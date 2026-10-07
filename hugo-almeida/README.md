@@ -69,12 +69,25 @@ python3 render.py --do-zero   # ignora o cache
 
 ## Acabamento
 
-**Cor.** Cada clipe tem o balanço de branco **medido e corrigido** pra um alvo
-comum (meio-tom R−B +0,010) — os 7 estavam de −0,130 (fachada, céu azul) a
-+0,130 (prateleira, tungstênio). Por isso parecem gravados no mesmo dia.
-Por cima, um look leve: contraste 1,06, saturação 0,96, preto levantado em
-0,030 e o topo da curva puxado pra 0,982 — é o que impede o jaleco e os dentes
-de estourarem. Sombra levemente fria.
+**Cor — decupada da referência por medição.** Cada clipe tem o balanço de
+branco corrigido pra um alvo comum (os 7 iam de −0,130 na fachada a +0,130 na
+prateleira); por cima, um look que persegue os números da referência.
+
+| | Referência | v1 | **v2** |
+|---|---|---|---|
+| luma média | 0,430 | 0,530 | **0,435** |
+| contraste (p95−p5) | 0,716 | 0,667 | **0,709** |
+| saturação | 0,235 | 0,158 | **0,257** |
+| sombras R−B | −0,061 | −0,020 | **−0,055** |
+| meios R−B | +0,039 | +0,019 | **+0,041** |
+| altas R−B | +0,056 | −0,002 | **+0,038** |
+| pixels estourados | 0,015% | 0,162% | **0,006%** |
+
+A assinatura é o **split tone**: sombra fria, meio-tom neutro, alta quente.
+O topo da curva em 0,950 e o ponto 0,92 em 0,890 são a proteção do jaleco e dos
+dentes — o v2 estoura **menos** que a própria referência.
+Preto em 0,005 na curva: 3,5% de pixels quase pretos contra 4,9% da referência —
+fica com preto de verdade, mas ainda do lado levantado que você pediu.
 
 **Giro e enquadre.** Tudo descrito em `timeline.json` como `rotacao` + `zoom /
 cx / cy` relativos. O render calcula sozinho o zoom mínimo pra não entrar canto
@@ -83,7 +96,13 @@ preto depois do giro, e prende o recorte dentro da área válida.
 **Movimento.** Punch-in de 2–4% nos planos parados, no lugar de estabilizar.
 Não usei `vidstab`: neste build ele deforma a imagem em pan de mão.
 
-**Cortes.** Secos, sem transição. Como na referência de ritmo.
+**Cortes.** Secos, sem transição. Como na referência.
+
+**Ritmo.** A referência tem 20 planos, mediana 1,90s, indo de **0,47s a 3,0s** —
+o ritmo dela não é métrico, e é isso que separa montagem de template. O B-roll
+aqui: `2,14 · 2,20 · 1,20 · 2,10 · 2,40 · 1,60 · 0,70 · 1,40` — mediana 1,85s,
+desvio 0,55. O plano de **0,70s** (close do modelo de arcada) é o corte de
+pontuação que quebra a regularidade.
 
 **Áudio.** B-roll com ambiente em −26 dB. Fala em −16 LUFS por bloco. Música
 com ducking por sidechain, disparado **só pelas falas reais**. Master −14 LUFS.
@@ -92,7 +111,10 @@ com ducking por sidechain, disparado **só pelas falas reais**. Master −14 LUF
 
 ## Ritmo
 
-Da referência que você mandou (a de 16:9 da outra clínica), usei **só o ritmo**:
-blocos de fala alternando com B-roll de 1,5–2,5s, corte seco, e a fala como
-espinha. Medido lá: 20 planos, mediana 1,90s. Aqui o B-roll tem mediana 2,0s.
-Nada da marca, da música, do visual ou do conteúdo dela foi usado.
+Da referência que você mandou (a de 16:9 da outra clínica) vieram **o ritmo e a
+cor**, os dois decupados por medição: blocos de fala alternando com B-roll curto,
+corte seco, fala como espinha, durações irregulares, e o split tone de sombra
+fria / alta quente. Os números estão na tabela acima.
+
+**Nada da marca, da música, do visual de identidade ou do conteúdo dela foi
+usado**, e nenhum trecho dela entra no vídeo.

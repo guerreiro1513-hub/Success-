@@ -1,6 +1,6 @@
 {
   "projeto": "Hugo Almeida · ortodontista · Cuiabá-MT — vídeo fixado do perfil",
-  "versao": "v1-placeholders",
+  "versao": "v2-estilo-referencia",
   "formato": {
     "w": 1080,
     "h": 1920,
@@ -13,8 +13,8 @@
     "lateral": 90
   },
   "look": {
-    "comum": "eq=contrast=1.06:saturation=0.96:gamma=1.02,curves=master='0/0.030 0.25/0.255 0.5/0.512 0.78/0.790 1/0.982',colorbalance=rs=-0.030:bs=0.040:rm=-0.010:bm=0.012:rh=0.012:bh=-0.012,unsharp=5:5:0.25:5:5:0.0",
-    "nota": "Contraste suave, preto levantado em 0.030, topo da curva puxado pra 0.982 pra o jaleco e os dentes não estourarem. Sombra levemente fria. O balanço de branco de cada clipe é corrigido antes disso, em 'wb'."
+    "comum": "eq=contrast=1.13:brightness=-0.040:saturation=1.15:gamma=0.955,curves=master='0/0.005 0.22/0.196 0.5/0.480 0.80/0.770 0.92/0.890 1/0.950',colorbalance=rs=-0.098:bs=0.118:rh=0.058:bh=-0.058,unsharp=5:5:0.25:5:5:0.0",
+    "nota": "Decupado da referência por medição, não no olho. Split tone: sombra fria (rs/bs), meio-tom neutro, alta quente (rh/bh). O topo da curva em 0,950 e o ponto 0,92 em 0,890 são a proteção do jaleco e dos dentes — estouro medido 0,023% contra 0,014% da referência. Preto em 0,005 pra ter preto de verdade, mas ainda acima do esmagado."
   },
   "audio": {
     "musica": "musica/trilha.wav",
@@ -53,7 +53,7 @@
         "cy": 0.5
       },
       "punch": 1.0,
-      "wb": "colorchannelmixer=rr=1.0995:gg=0.9857:bb=0.8893",
+      "wb": "colorchannelmixer=rr=1.0967:gg=0.9841:bb=0.9083",
       "texto": {
         "estilo": "pergunta",
         "linhas": [
@@ -84,7 +84,7 @@
       "rotulo": "RECEPÇÃO",
       "origem": "broll/02_recepcao.mov",
       "in": 2.6,
-      "dur_fonte": 2.5,
+      "dur_fonte": 2.2,
       "rotacao": 0.0,
       "enquadre": {
         "zoom": 1.06,
@@ -92,7 +92,7 @@
         "cy": 0.5
       },
       "punch": 1.04,
-      "wb": "colorchannelmixer=rr=0.9400:gg=1.0110:bb=1.0950",
+      "wb": "colorchannelmixer=rr=0.9440:gg=1.0076:bb=1.1125",
       "texto": {
         "estilo": "pergunta",
         "linhas": [
@@ -114,7 +114,7 @@
       "rotulo": "TECNOLOGIA · SCANNER",
       "origem": "broll/03_tecnologia-scanner.mov",
       "in": 0.5,
-      "dur_fonte": 1.5,
+      "dur_fonte": 1.2,
       "rotacao": 0.0,
       "enquadre": {
         "zoom": 1.55,
@@ -122,7 +122,7 @@
         "cy": 0.52
       },
       "punch": 1.03,
-      "wb": "colorchannelmixer=rr=0.9730:gg=1.0020:bb=1.0680",
+      "wb": "colorchannelmixer=rr=0.9770:gg=0.9991:bb=1.0865",
       "nota": "Reenquadrado à esquerda pra esconder o jaleco que ocupa a direita e a cabeça no canto inferior."
     },
     {
@@ -131,7 +131,7 @@
       "rotulo": "TECNOLOGIA · ALINHADOR",
       "origem": "broll/04_tecnologia-alinhador.mov",
       "in": 1.6,
-      "dur_fonte": 2.0,
+      "dur_fonte": 2.1,
       "rotacao": 0.0,
       "enquadre": {
         "zoom": 1.1,
@@ -139,7 +139,7 @@
         "cy": 0.55
       },
       "punch": 1.02,
-      "wb": "colorchannelmixer=rr=0.9380:gg=1.0150:bb=1.0480",
+      "wb": "colorchannelmixer=rr=0.9419:gg=1.0124:bb=1.0651",
       "nota": "O melhor clipe do material. Entra em 1,60s: antes disso aparece a cabeça do paciente embaixo e um rosto com máscara no topo. Sai em 3,60s, antes do jaleco cobrir a lente."
     },
     {
@@ -148,7 +148,7 @@
       "rotulo": "QUADROS",
       "origem": "broll/05_quadros.mov",
       "in": 0.6,
-      "dur_fonte": 2.5,
+      "dur_fonte": 2.4,
       "rotacao": -3.0,
       "enquadre": {
         "zoom": 1.45,
@@ -156,7 +156,7 @@
         "cy": 0.565
       },
       "punch": 1.03,
-      "wb": "colorchannelmixer=rr=0.9780:gg=1.0060:bb=1.0010",
+      "wb": "colorchannelmixer=rr=0.9826:gg=1.0037:bb=1.0164",
       "texto": {
         "estilo": "pergunta",
         "linhas": [
@@ -178,7 +178,7 @@
       "rotulo": "PRATELEIRA · PRÊMIO",
       "origem": "broll/06_prateleira-premio.mov",
       "in": 0.8,
-      "dur_fonte": 1.5,
+      "dur_fonte": 1.6,
       "rotacao": 0.0,
       "enquadre": {
         "zoom": 1.3,
@@ -186,8 +186,25 @@
         "cy": 0.55
       },
       "punch": 1.03,
-      "wb": "colorchannelmixer=rr=0.8770:gg=1.0290:bb=1.1590",
+      "wb": "colorchannelmixer=rr=0.8805:gg=1.0258:bb=1.1803",
       "nota": "Prêmio e modelos na prateleira. Enquadrado largo de propósito: a placa aparece como objeto, sem close na marca escrita nela."
+    },
+    {
+      "id": "S6b",
+      "tipo": "broll",
+      "rotulo": "MODELO · DETALHE",
+      "origem": "broll/06_prateleira-premio.mov",
+      "in": 2.45,
+      "dur_fonte": 0.7,
+      "rotacao": 0.0,
+      "enquadre": {
+        "zoom": 2.0,
+        "cx": 0.55,
+        "cy": 0.62
+      },
+      "punch": 1.0,
+      "wb": "colorchannelmixer=rr=0.8805:gg=1.0258:bb=1.1803",
+      "nota": "Plano de pontuação de 0,70s. A referência usa cortes de 0,47 a 1,0s pra quebrar o ritmo; sem eles a montagem fica metronômica."
     },
     {
       "id": "S7",
@@ -195,7 +212,7 @@
       "rotulo": "INSTRUMENTOS",
       "origem": "broll/07_instrumentos.mov",
       "in": 1.2,
-      "dur_fonte": 1.5,
+      "dur_fonte": 1.4,
       "rotacao": 9.0,
       "enquadre": {
         "zoom": 1.75,
@@ -203,7 +220,7 @@
         "cy": 0.62
       },
       "punch": 1.02,
-      "wb": "colorchannelmixer=rr=0.9810:gg=1.0020:bb=1.0350",
+      "wb": "colorchannelmixer=rr=0.9847:gg=0.9998:bb=1.0504",
       "texto": {
         "estilo": "pergunta",
         "linhas": [
@@ -227,5 +244,6 @@
         "entra_do_fim": 2.0
       }
     }
-  ]
+  ],
+  "nota_ritmo": "Da referência (20 planos, mediana 1,90s, de 0,47s a 3,0s) veio o princípio de que o ritmo NÃO é métrico. B-roll aqui: 2,14 · 2,20 · 1,20 · 2,10 · 2,40 · 1,60 · 0,70 · 1,40 — mediana 1,85s, desvio 0,56."
 }
