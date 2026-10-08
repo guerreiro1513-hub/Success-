@@ -52,7 +52,7 @@ def clip_frames(clip, W, H, fps, look):
              f"crop={W}:{H}:(iw-{W})*{rf.get('x', 0.5)}:(ih-{H})*{rf.get('y', 0.5)}"]
     if clip.get("hflip"): chain.append("hflip")
     if clip.get("fix"): chain.append(clip["fix"])
-    if look: chain.append(look)
+    if look and not clip.get("no_look"): chain.append(look)
     chain.append("format=rgb24")
     cmd = [FF, "-v", "error", "-ss", f"{t0:.3f}", "-t", f"{t1 - t0 + 0.1:.3f}", "-i", P(clip["file"]),
            "-vf", ",".join(chain), "-fps_mode", "passthrough", "-f", "rawvideo", "-"]
@@ -341,7 +341,8 @@ def apply_pop(frames, cfg, scale):
     font = ImageFont.truetype(P(cfg.get("font", "assets/fonts/Anton-Regular.ttf")), int(cfg.get("size", 200) * scale))
     letters, lw, lh = label_letters(cfg["text"], font, cfg.get("tracking", 0.03), [255, 255, 255], max(3, int(16 * scale)))
     at = cfg.get("start", 0)
-    Hs = track_h(frames, min(at, len(frames) - 1), cfg.get("track", [[0.1, 0.1, 0.9, 0.9]]))
+    Hs = (track_h(frames, min(at, len(frames) - 1), cfg.get("track", [[0.1, 0.1, 0.9, 0.9]]))
+          if cfg.get("follow", 0.3) > 0 else [np.eye(3)] * len(frames))
     cx, cy = cfg.get("cx", 0.5) * W, cfg.get("cy", 0.3) * H
     du, stag = cfg.get("dur", 30), cfg.get("stagger", 2)
     for j in range(len(frames)):
@@ -404,6 +405,10 @@ class Type:
         c, s = self.c, self.s
         L, N = self.block(lines, align)
         W = canvas.width
+        maxw = W - 2 * int(c["x"] * s) + 40
+        if N.width > maxw:          # nome comprido (ex.: JARDIM ACLIMACAO): reduz so o nome para caber
+            f2 = ImageFont.truetype(P(c["font_name"]), int(c["name_size"] * s * maxw / N.width))
+            N = self.line(lines[1], f2, c["name_tracking"], c["color"])
         x0 = int(c["x"] * s); y0 = int((y if y is not None else c["y"]) * s)
         ex = max(0.0, (f - (n - 7)) / 7)                      # saída
         alpha = 1 - ease_out(ex); lift = int(-30 * s * ease_out(ex))
@@ -512,6 +517,8 @@ def main():
         seq[-1]["clip"] = dict(seq[-1]["clip"], transition_out={"type": "cut"})
     if end and end.get("tail"):
         seq.append({"clip": end["tail"], "loc": None, "ending": True})
+    if end and end.get("final_clip"):            # vinheta da marca, intacta, fechando o video
+        seq.append({"clip": end["final_clip"], "loc": None, "vinheta": True})
 
     enc = [FF, "-y", "-v", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(fps),
            "-i", "-", "-c:v", "libx264", "-pix_fmt", "yuv420p",
@@ -532,14 +539,15 @@ def main():
         apply_in(fr, prev_out, W * hr, samples)
         if c.get("logo"): apply_logo(fr, c["logo"])
         if c.get("labels"): apply_labels(fr, c["labels"], sc * hr)
-        if c.get("pop"): apply_pop(fr, c["pop"], sc * hr)
+        for pp in ([c["pop"]] if isinstance(c.get("pop"), dict) else c.get("pop", [])):
+            apply_pop(fr, pp, sc * hr)
         apply_out(fr, c.get("transition_out"), W * hr, samples)
         if hr != 1: fr = [cv2.resize(f, (W, H), interpolation=cv2.INTER_AREA) for f in fr]
         start = frame_no + len(pending) - min((prev_out or {}).get("overlap", 0), len(pending))
         if prev_out and prev_out.get("type") != "cut":
             trans_times.append(start / fps)
         cuts.append({"t": round(start / fps, 3), "clip": os.path.basename(c["file"]),
-                     "unidade": item["loc"]["name"] if item.get("loc") else ("fim" if item.get("ending") else "abertura")})
+                     "unidade": item["loc"]["name"] if item.get("loc") else ("vinheta" if item.get("vinheta") else "fim" if item.get("ending") else "abertura")})
         amb = ambience(c, start, len(fr), fps, None, c.get("ambience_db", -60))
         if amb is not None: amb_list.append((start, amb))
 
@@ -563,7 +571,7 @@ def main():
                 if w_ > 0:
                     b = cv2.GaussianBlur(f, (0, 0), 1 + w_ * W / 60)
                     f = (b * (1 - w_) + np.array(end.get("bg", [245, 240, 232])) * w_).astype(np.uint8)
-            elif item.get("ending"):
+            elif item.get("ending") and end.get("style") != "none":
                 n = len(fr); p = ease_out(min(1, j / 10))
                 f = (f * (1 - end.get("darken", 0.5) * p)).astype(np.uint8)
                 layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))

@@ -79,3 +79,19 @@ Efeitos da referência e o que foi aplicado:
 | FL_C164 (2,4 s, 4K 60p) | câmera baixa ao lado da churrasqueira, fumaça, avança sobre a carne | forte para transição |
 | FL_C177 (2,4 s, 4K 60p) | close dos frangos na grelha, avançando | bom |
 | FL_copyB0FF (8 s, 1000x1210, HDR HLG 10 bits) | grelha de frangos girando, banner em cima, tronco na frente | resolução baixa; precisa converter HDR→SDR |
+
+# v4 — as 3 unidades (23,4 s, formato Reels)
+Jardim Aclimação recebido: JA_C143a (tenda/churrasqueiras, avança — estabelecimento),
+JA_C139 (grelha com o banner, passa rápido), JA_IMG_1633 (espetos girando, iPhone 30p,
+9,7 s — usado 4,4–5,7 s), JA_C143b (costela na grelha; não usado, repetia o C139).
+
+Sequência: entrada GTA com gancho "POV: O GPS TE LEVOU PRO / GUERREIRO'S GRILL" →
+zoom → **Jardim** (logo cai na tenda, título; grelha com reverse; "NO ESPETO") → whip →
+**Tropical Ville** (logo na fachada, mergulho na churrasqueira, FRANGO NO ROLETE, NA BRASA
+com reverse, COSTELA) → whip → **Florais** (vista aberta + título; câmera baixa na fumaça;
+frangos com "NO CAPRICHO") → grelha girando (HDR convertido com tonemap hable) → whip →
+**vinheta da marca** (take enviado pelo cliente = T07 da ESCALA), intacta, sem o look de cor.
+
+Ajustes: nome de unidade comprido reduz só o tamanho do nome para caber (JARDIM ACLIMAÇÃO);
+clipe pode ter `no_look`; final pode ter `final_clip`. Sem música (−24 LUFS de ambiente).
+Entrega: `entrega/guerreiros-TOUR-3-UNIDADES.mp4` (1080x1920, 30 fps, 39 MB).

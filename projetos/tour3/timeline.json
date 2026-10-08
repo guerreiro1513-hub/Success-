@@ -73,7 +73,31 @@
         "in_cx": 0.5,
         "in_cy": 0.6
       },
-      "_nota": "gerado por prep_abertura.py (imagem inteira nitida numa janela que abre ate a tela cheia). Corta no ultimo quadro antes do salto para a rua (personagens)."
+      "_nota": "gerado por prep_abertura.py (imagem inteira nitida numa janela que abre ate a tela cheia). Corta no ultimo quadro antes do salto para a rua (personagens).",
+      "pop": [
+        {
+          "text": "POV: O GPS TE LEVOU PRO",
+          "font": "assets/fonts/Oswald[wght].ttf",
+          "size": 76,
+          "cx": 0.5,
+          "cy": 0.205,
+          "start": 3,
+          "dur": 96,
+          "stagger": 1,
+          "follow": 0,
+          "tracking": 0.04
+        },
+        {
+          "text": "GUERREIRO'S GRILL",
+          "size": 124,
+          "cx": 0.5,
+          "cy": 0.27,
+          "start": 14,
+          "dur": 85,
+          "stagger": 1.5,
+          "follow": 0
+        }
+      ]
     }
   },
   "locations": [
@@ -84,9 +108,132 @@
         "JARDIM ACLIMAÇÃO"
       ],
       "title_clip": 0,
-      "title_start": 0.15,
-      "title_dur": 1.5,
-      "clips": []
+      "title_start": 0.2,
+      "title_dur": 1.25,
+      "clips": [
+        {
+          "file": "source/JA_C143a.mov",
+          "_o_que": "tenda e churrasqueiras, camera avancando (estabelecimento)",
+          "segments": [
+            [
+              0.15,
+              1.9,
+              1.0
+            ]
+          ],
+          "reframe": {
+            "zoom": 1.0,
+            "x": 0.5,
+            "y": 0.5
+          },
+          "hires": 2,
+          "fix": "colorbalance=rh=-0.05:gh=0.10:bh=-0.06:gm=0.03,eq=gamma=0.97",
+          "ambience_db": -32,
+          "logo": {
+            "file": "../../referencias/logo-brasao-recortado.png",
+            "land": 12,
+            "fly_frames": 10,
+            "cx": 0.55,
+            "cy": 0.16,
+            "h": 0.15,
+            "depth": 12,
+            "track_y": [
+              0.05,
+              0.38
+            ],
+            "occlude_green": false,
+            "fly_scale": 1.6,
+            "fly_rot": 10,
+            "fly_dx": 0.0,
+            "fly_dy": -0.45
+          },
+          "transition_out": {
+            "type": "zoom",
+            "frames": 6,
+            "amount": 0.7,
+            "cx": 0.55,
+            "cy": 0.55,
+            "in_cx": 0.5,
+            "in_cy": 0.5
+          }
+        },
+        {
+          "file": "source/JA_C139.mov",
+          "_o_que": "grelha de carnes com o banner, camera passando rapido; fim com reverse",
+          "segments": [
+            [
+              0.05,
+              1.1,
+              1.0
+            ],
+            [
+              1.1,
+              0.7,
+              2.0
+            ],
+            [
+              0.7,
+              2.05,
+              1.6
+            ]
+          ],
+          "reframe": {
+            "zoom": 1.0,
+            "x": 0.5,
+            "y": 0.5
+          },
+          "fix": "eq=gamma=1.04",
+          "ambience_db": -32,
+          "transition_out": {
+            "type": "whip",
+            "frames": 5,
+            "dir": 60,
+            "amount": 0.5
+          }
+        },
+        {
+          "file": "source/JA_IMG_1633.mov",
+          "_o_que": "espetos girando de perto (iPhone 30p)",
+          "segments": [
+            [
+              4.4,
+              5.7,
+              1.0
+            ]
+          ],
+          "reframe": {
+            "zoom": 1.0,
+            "x": 0.5,
+            "y": 0.5
+          },
+          "fix": "eq=gamma=1.0:saturation=0.97",
+          "ambience_db": -32,
+          "pop": {
+            "text": "NO ESPETO",
+            "size": 210,
+            "cx": 0.5,
+            "cy": 0.3,
+            "start": 5,
+            "dur": 30,
+            "stagger": 2,
+            "follow": 0.08,
+            "track": [
+              [
+                0.05,
+                0.05,
+                0.95,
+                0.7
+              ]
+            ]
+          },
+          "transition_out": {
+            "type": "whip",
+            "frames": 5,
+            "dir": 0,
+            "amount": 0.55
+          }
+        }
+      ]
     },
     {
       "name": "TROPICAL VILLE",
@@ -287,7 +434,10 @@
           "fix": "eq=gamma=1.02:contrast=1.04",
           "ambience_db": -30,
           "transition_out": {
-            "type": "cut"
+            "type": "whip",
+            "frames": 5,
+            "dir": 0,
+            "amount": 0.55
           },
           "labels": [
             {
@@ -330,8 +480,107 @@
       ],
       "title_clip": 0,
       "title_start": 0.15,
-      "title_dur": 1.5,
-      "clips": []
+      "title_dur": 1.3,
+      "clips": [
+        {
+          "file": "source/FL_IMG_1429.mov",
+          "_o_que": "vista aberta: tendas com o banner, churrasqueiras na rua",
+          "segments": [
+            [
+              0.3,
+              1.8,
+              1.0
+            ]
+          ],
+          "reframe": {
+            "zoom": 1.06,
+            "x": 0.5,
+            "y": 0.55
+          },
+          "fix": "eq=gamma=0.98:contrast=1.04",
+          "ambience_db": -32,
+          "transition_out": {
+            "type": "zoom",
+            "frames": 6,
+            "amount": 0.7,
+            "cx": 0.45,
+            "cy": 0.62,
+            "in_cx": 0.5,
+            "in_cy": 0.5
+          }
+        },
+        {
+          "file": "source/FL_C164.mov",
+          "_o_que": "camera baixa ao lado da churrasqueira, fumaca, avanca sobre a carne",
+          "segments": [
+            [
+              0.05,
+              0.8,
+              0.6
+            ],
+            [
+              0.8,
+              2.2,
+              1.4
+            ]
+          ],
+          "reframe": {
+            "zoom": 1.0,
+            "x": 0.5,
+            "y": 0.5
+          },
+          "fix": "eq=gamma=1.0:contrast=1.06",
+          "ambience_db": -32,
+          "transition_out": {
+            "type": "whip",
+            "frames": 5,
+            "dir": 220,
+            "amount": 0.55
+          }
+        },
+        {
+          "file": "source/FL_C177.mov",
+          "_o_que": "close dos frangos na grelha, avancando",
+          "segments": [
+            [
+              0.05,
+              1.3,
+              0.8
+            ]
+          ],
+          "reframe": {
+            "zoom": 1.0,
+            "x": 0.5,
+            "y": 0.5
+          },
+          "fix": "eq=gamma=1.05",
+          "ambience_db": -32,
+          "pop": {
+            "text": "NO CAPRICHO",
+            "size": 200,
+            "cx": 0.5,
+            "cy": 0.3,
+            "start": 4,
+            "dur": 32,
+            "stagger": 2,
+            "follow": 0.12,
+            "track": [
+              [
+                0.05,
+                0.05,
+                0.95,
+                0.7
+              ]
+            ]
+          },
+          "transition_out": {
+            "type": "whip",
+            "frames": 5,
+            "dir": 180,
+            "amount": 0.55
+          }
+        }
+      ]
     }
   ],
   "ending": {
@@ -340,24 +589,55 @@
       "3 UNIDADES · CUIABÁ"
     ],
     "dur": 2.0,
-    "_nota": "fim como o da ref. 3: o ultimo plano clareia ate um fundo claro e o brasao entra e assenta, com '3 UNIDADES · CUIABA' embaixo",
+    "_nota": "fim: ultimo plano do Florais (grelha girando) faz um whip e entra a vinheta da marca (take enviado pelo cliente), intacta",
     "tail": {
-      "file": "source/TV_C122_costela.mov",
+      "file": "source/FL_copyB0FF.mov",
+      "_o_que": "grelha girando com o banner; o giro vira o whip para o fundo claro (HDR convertido)",
       "segments": [
         [
-          1.9,
-          2.4,
-          0.5
+          1.7,
+          2.85,
+          1.0
         ]
       ],
-      "fix": "eq=gamma=1.02:contrast=1.04",
-      "ambience_db": -32
+      "reframe": {
+        "zoom": 1.0,
+        "x": 0.5,
+        "y": 0.5
+      },
+      "pre": "zscale=t=linear:npl=203,format=gbrpf32le,zscale=p=bt709,tonemap=hable:desat=0,zscale=t=bt709:m=bt709:r=tv,format=yuv420p",
+      "fix": "eq=gamma=1.04:contrast=1.04",
+      "ambience_db": -34,
+      "transition_out": {
+        "type": "whip",
+        "frames": 5,
+        "dir": 180,
+        "amount": 0.55,
+        "in_frames": 3
+      }
     },
     "darken": 0.5,
-    "style": "white",
-    "logo": "../../referencias/logo-brasao-recortado.png",
-    "flash": 8,
-    "card_dur": 1.7
+    "style": "none",
+    "final_clip": {
+      "file": "source/VINHETA.mov",
+      "segments": [
+        [
+          0.0,
+          1.57,
+          1.0
+        ]
+      ],
+      "reframe": {
+        "zoom": 1.0,
+        "x": 0.5,
+        "y": 0.5
+      },
+      "ambience_db": -60,
+      "transition_out": {
+        "type": "cut"
+      },
+      "no_look": true
+    }
   },
   "sound": {
     "whoosh_db": -22,
