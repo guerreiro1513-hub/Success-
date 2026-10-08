@@ -108,3 +108,24 @@ vídeo de inspiração (T TECH).
 - Tropical Ville: C128a (título + logo) → C128b (FRANGO NO ROLETE) → C130 (NA BRASA, rajada) → C122 (NO CARVÃO).
 - Florais: IMG_1429 (título) → C164 (CHURRASCO RAIZ, o slogan do brasão) → C177 (NO CAPRICHO) →
   copyB0FF (a placa "CHURRASCO NA BRASA"; o giro vira o whip) → vinheta.
+
+# v6 — correção pedida: edição da ref. 3 como molde, transições mais lentas, texto reposicionado (20,2 s)
+Revisão da v5 contra a referência (T TECH, medida quadro a quadro):
+- A ref. corta seco e cada plano ENTRA já em movimento rápido que desacelera (rampa), com borrão
+  de movimento e um leve clarão; não usa whip entre planos. A v5 empilhava whip + borrão a cada
+  corte, rápido demais para ler. Agora: `segments` aceita rampa `[a, b, v0, v1]` (ex.: 3x → 0,55x),
+  o borrão vem da mistura dos quadros reais percorridos (fonte 60p), e o corte é `ramp_in`
+  (clarão de 5 quadros). Whip removido.
+- Duração: abertura de cada unidade ~2 s (logo montando devagar em 16 quadros, como a fachada da
+  ref.), detalhes 32 quadros (~1,07 s), mergulho fachada→frangos em 12 quadros com dissolve de 4,
+  vinheta entra com dissolve de 8.
+- Tipografia num sistema só (Montserrat, como a ref.): título "UNIDADE" 500 espaçado + nome 800,
+  alinhado à esquerda, margem 84 px à esquerda e 150 px à direita (botões do Reels), sombra só na
+  faixa do texto; letreiros 600 presos no cenário (sem deslizar); destaque grande 800 por letra.
+- Posições (zonas do Reels respeitadas: topo 220 px, base 420 px, coluna de botões à direita):
+  JARDIM título y 1300 (chão), COSTELA na parede do fundo, NO ESPETO no toldo; TROPICAL VILLE título
+  y 700 (sobre a árvore — embaixo ficam o homem e a churrasqueira), FRANGO NO ROLETE na parede de inox,
+  NA BRASA no capô sobre a costela; FLORAIS título y 1300 (asfalto), NO CARVÃO na tampa com fumaça,
+  NO CAPRICHO acima dos frangos. Saíram: CHURRASCO RAIZ e NA BRASA da grelha giratória (texto em cima
+  da comida). Logos baixados para fora da faixa do topo.
+- Todos os 4 vídeos de cada unidade continuam usados (12 clipes + entrada + vinheta).

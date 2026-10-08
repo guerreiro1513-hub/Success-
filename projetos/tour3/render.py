@@ -59,13 +59,27 @@ def clip_frames(clip, W, H, fps, look):
     raw = subprocess.run(cmd, capture_output=True, check=True).stdout
     src = np.frombuffer(raw, np.uint8).reshape(-1, H, W, 3)
     out = []
-    for a, b, sp in segs:                      # b < a = reverse (a imagem volta)
+    def grab(t, v):
+        k = (t - t0) * sf
+        n = int(round(abs(v) * sf / fps)) if abs(v) > 1.3 else 1   # rapido: mistura os quadros que a camera percorreu
+        if n <= 1:
+            return src[min(len(src) - 1, max(0, int(round(k))))]
+        ks = [min(len(src) - 1, max(0, int(round(k + (1 if v > 0 else -1) * i)))) for i in range(n)]
+        return np.mean([src[i].astype(np.float32) for i in ks], axis=0).astype(np.uint8)
+    for seg in segs:
+        if len(seg) == 4:                        # rampa: velocidade vai de v0 a v1 (desacelera)
+            a, b, v0, v1 = seg; d = 1 if b >= a else -1; t = a
+            while (t - b) * d < 0:
+                p = abs(t - a) / max(1e-6, abs(b - a))
+                v = v1 + (v0 - v1) * (1 - p) ** 2
+                out.append(grab(t, d * v)); t += d * v / fps
+            continue
+        a, b, sp = seg                           # b < a = reverse (a imagem volta)
         d = 1 if b >= a else -1
         n = max(1, int(round(abs(b - a) / sp * fps)))
         for i in range(n):
             t = a + d * i * sp / fps
-            k = min(len(src) - 1, max(0, int(round((t - t0) * sf))))
-            out.append(src[k])
+            out.append(grab(t, d * sp))
     return out
 
 
@@ -106,7 +120,7 @@ def match_zoom_blur(img, a0, a1, cx, cy, samples):
 
 def apply_out(frames, tr, W, samples):
     """Fim do clipe A: a câmera acelera na direção do movimento até o corte."""
-    if not tr or tr["type"] == "cut": return
+    if not tr or tr["type"] in ("cut", "ramp_in"): return
     k = tr.get("frames", 5); k = min(k, len(frames))
     for j in range(k):
         p0, p1 = j / k, (j + 1) / k
@@ -126,6 +140,12 @@ def apply_out(frames, tr, W, samples):
 def apply_in(frames, tr, W, samples):
     """Começo do clipe B: o mesmo movimento chega do lado oposto e desacelera."""
     if not tr or tr["type"] == "cut": return
+    if tr["type"] == "ramp_in":
+        lift = tr.get("lift", 0.16)
+        for j in range(min(tr.get("in_frames", 5), len(frames))):
+            g = lift * (1 - j / tr.get("in_frames", 5)) ** 2
+            frames[j] = np.clip(frames[j] * (1 - g) + 255 * g, 0, 255).astype(np.uint8)
+        return
     k = tr.get("in_frames", tr.get("frames", 5)); k = min(k, len(frames))
     for j in range(k):
         p0, p1 = 1 - j / k, 1 - (j + 1) / k
@@ -326,7 +346,7 @@ def apply_labels(frames, labels, scale):
             for n, (img, x, cw) in enumerate(letters):
                 p = ease_out(min(1, max(0, (k - n * stag) / 5)))
                 if p <= 0: continue
-                dx = int((1 - p) * lh * 0.6)
+                dx = int((1 - p) * lh * L.get("slide", 0.0))
                 sl = np.roll(img, dx, axis=1) if dx else img
                 lay = lay + sl * np.array([1, 1, 1, p * out_a], np.float32) * (1 - lay[..., 3:4] / 255)
             M = Hs[j] @ base
@@ -339,6 +359,8 @@ def apply_pop(frames, cfg, scale):
     """Texto grande que salta letra por letra sobre o produto (como o '2200W' da ref. 3) e segue o movimento."""
     H, W = frames[0].shape[:2]
     font = ImageFont.truetype(P(cfg.get("font", "assets/fonts/Anton-Regular.ttf")), int(cfg.get("size", 200) * scale))
+    try: font.set_variation_by_axes([cfg.get("weight", 800)])
+    except Exception: pass
     letters, lw, lh = label_letters(cfg["text"], font, cfg.get("tracking", 0.03), [255, 255, 255], max(3, int(16 * scale)))
     at = cfg.get("start", 0)
     Hs = (track_h(frames, min(at, len(frames) - 1), cfg.get("track", [[0.1, 0.1, 0.9, 0.9]]))
@@ -373,6 +395,8 @@ class Type:
     def __init__(self, cfg, scale):
         self.c, self.s = cfg, scale
         self.fname = ImageFont.truetype(P(cfg["font_name"]), int(cfg["name_size"] * scale))
+        try: self.fname.set_variation_by_axes([cfg.get("name_weight", 800)])
+        except Exception: pass
         self.flabel = ImageFont.truetype(P(cfg["font_label"]), int(cfg["label_size"] * scale))
         try: self.flabel.set_variation_by_axes([cfg.get("label_weight", 500)])
         except Exception: pass
@@ -405,9 +429,11 @@ class Type:
         c, s = self.c, self.s
         L, N = self.block(lines, align)
         W = canvas.width
-        maxw = W - 2 * int(c["x"] * s) + 40
+        maxw = W - int(c["x"] * s) - int(c.get("right_margin", 150) * s) + 40
         if N.width > maxw:          # nome comprido (ex.: JARDIM ACLIMACAO): reduz so o nome para caber
             f2 = ImageFont.truetype(P(c["font_name"]), int(c["name_size"] * s * maxw / N.width))
+            try: f2.set_variation_by_axes([c.get("name_weight", 800)])
+            except Exception: pass
             N = self.line(lines[1], f2, c["name_tracking"], c["color"])
         x0 = int(c["x"] * s); y0 = int((y if y is not None else c["y"]) * s)
         ex = max(0.0, (f - (n - 7)) / 7)                      # saída
@@ -434,6 +460,14 @@ def composite(frame, layer):
     a = np.asarray(layer, dtype=np.float32)
     al = a[..., 3:4] / 255.0
     return (frame * (1 - al) + a[..., :3] * al).astype(np.uint8)
+
+
+def band(H, y0, y1, strength):
+    """Sombra suave so na faixa do texto (bordas em degrade de 160 px)."""
+    y = np.arange(H, dtype=np.float32); e = 160 * H / 1920
+    g = np.clip((y - (y0 - e)) / e, 0, 1) * np.clip(((y1 + e) - y) / e, 0, 1)
+    g = g * g * (3 - 2 * g)
+    return (g * strength)[:, None, None]
 
 
 def gradient(H, W, strength, top=False):
@@ -560,10 +594,11 @@ def main():
             f = f.copy()
             if tstart is not None and tstart <= j < tstart + tdur:
                 k = j - tstart
-                g = min(1, k / 6, (tdur - k) / 6) * 0.55
-                f = (f * (1 - gradient(H, W, g))).astype(np.uint8)
+                g = min(1, k / 6, (tdur - k) / 6) * loc.get("title_shade", 0.42)
+                ty = (loc.get("title_y") or tl["typography"]["y"]) * sc
+                f = (f * (1 - band(H, ty - 140 * sc, ty + 330 * sc, g))).astype(np.uint8)
                 layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-                T.draw(layer, loc["title"], k, tdur)
+                T.draw(layer, loc["title"], k, tdur, y=loc.get("title_y"))
                 f = composite(f, layer)
             if item.get("ending") and end.get("style") == "white":
                 n = len(fr); fl = end.get("flash", 8)

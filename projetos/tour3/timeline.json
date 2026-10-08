@@ -14,13 +14,13 @@
     "filters": "eq=contrast=1.06:saturation=1.04,curves=r='0/0 0.5/0.51 1/1':b='0/0.01 0.5/0.49 1/0.97',vignette=angle=PI/7"
   },
   "typography": {
-    "font_name": "assets/fonts/Anton-Regular.ttf",
-    "font_label": "assets/fonts/Oswald[wght].ttf",
+    "font_name": "assets/fonts/Montserrat.ttf",
+    "font_label": "assets/fonts/Montserrat.ttf",
     "label_weight": 500,
-    "name_size": 150,
-    "label_size": 58,
-    "label_tracking": 0.36,
-    "name_tracking": 0.02,
+    "name_size": 118,
+    "label_size": 40,
+    "label_tracking": 0.42,
+    "name_tracking": 0.0,
     "color": [
       246,
       239,
@@ -32,7 +32,9 @@
       73
     ],
     "x": 84,
-    "y": 1180
+    "y": 1300,
+    "name_weight": 800,
+    "right_margin": 150
   },
   "opening": {
     "enabled": true,
@@ -66,36 +68,40 @@
       "audio_speed": true,
       "transition_out": {
         "type": "zoom",
-        "frames": 7,
-        "amount": 0.8,
+        "frames": 8,
+        "amount": 0.45,
         "cx": 0.5,
         "cy": 0.55,
         "in_cx": 0.5,
-        "in_cy": 0.6
+        "in_cy": 0.5,
+        "in_frames": 6
       },
       "_nota": "entrada do GTA em tela cheia vertical (pedido do cliente): faixa central da imagem (fora das marcas do TikTok), limpa e ampliada. Corta antes do salto para a rua (sem personagens). prep_abertura.py fica como alternativa (janela horizontal).",
       "pop": [
         {
           "text": "POV: O GPS TE LEVOU PRO",
-          "font": "assets/fonts/Oswald[wght].ttf",
-          "size": 76,
+          "font": "assets/fonts/Montserrat.ttf",
+          "size": 52,
           "cx": 0.5,
-          "cy": 0.205,
+          "cy": 0.2,
           "start": 3,
           "dur": 96,
           "stagger": 1,
           "follow": 0,
-          "tracking": 0.04
+          "tracking": 0.04,
+          "weight": 600
         },
         {
           "text": "GUERREIRO'S GRILL",
-          "size": 124,
+          "size": 96,
           "cx": 0.5,
-          "cy": 0.27,
+          "cy": 0.245,
           "start": 14,
           "dur": 85,
           "stagger": 1.5,
-          "follow": 0
+          "follow": 0,
+          "font": "assets/fonts/Montserrat.ttf",
+          "weight": 800
         }
       ],
       "pre": "hqdn3d=2:1.5:3:3"
@@ -109,17 +115,18 @@
         "JARDIM ACLIMAÇÃO"
       ],
       "title_clip": 0,
-      "title_start": 0.12,
-      "title_dur": 1.3,
+      "title_start": 0.85,
+      "title_dur": 1.2,
       "clips": [
         {
           "file": "source/JA_C143a.mov",
           "_o_que": "tenda e churrasqueiras, camera avancando (estabelecimento)",
           "segments": [
             [
-              0.3,
-              1.8,
-              1.0
+              0.05,
+              2.14,
+              2.0,
+              0.7
             ]
           ],
           "reframe": {
@@ -132,11 +139,11 @@
           "ambience_db": -32,
           "logo": {
             "file": "../../referencias/logo-brasao-recortado.png",
-            "land": 12,
-            "fly_frames": 10,
+            "land": 22,
+            "fly_frames": 16,
             "cx": 0.55,
-            "cy": 0.16,
-            "h": 0.15,
+            "cy": 0.205,
+            "h": 0.13,
             "depth": 12,
             "track_y": [
               0.05,
@@ -149,13 +156,9 @@
             "fly_dy": -0.45
           },
           "transition_out": {
-            "type": "zoom",
-            "frames": 6,
-            "amount": 0.7,
-            "cx": 0.55,
-            "cy": 0.55,
-            "in_cx": 0.5,
-            "in_cy": 0.5
+            "type": "ramp_in",
+            "in_frames": 5,
+            "lift": 0.14
           }
         },
         {
@@ -163,9 +166,10 @@
           "_o_que": "costela na grelha, camera avancando e passando (imagem corre pra esquerda e sobe)",
           "segments": [
             [
-              0.1,
-              0.6,
-              0.5
+              0.05,
+              1.15,
+              3.0,
+              0.55
             ]
           ],
           "reframe": {
@@ -176,25 +180,26 @@
           "fix": "eq=gamma=1.03",
           "ambience_db": -32,
           "transition_out": {
-            "type": "whip",
-            "frames": 5,
-            "dir": 205,
-            "amount": 0.5
+            "type": "ramp_in",
+            "in_frames": 5,
+            "lift": 0.14
           },
           "labels": [
             {
               "text": "COSTELA",
-              "cx": 0.62,
-              "cy": 0.15,
-              "size": 92,
+              "font": "assets/fonts/Montserrat.ttf",
               "weight": 600,
-              "tracking": 0.1,
-              "at": 6,
-              "start": 3,
-              "dur": 26,
+              "cx": 0.6,
+              "cy": 0.17,
+              "size": 70,
+              "tracking": 0.12,
+              "at": 8,
+              "start": 4,
+              "dur": 28,
               "stagger": 0.9,
               "skew": 0.0,
               "rot": -2,
+              "slide": 0.0,
               "track": [
                 [
                   0.2,
@@ -211,9 +216,10 @@
           "_o_que": "grelha de carnes com o banner, camera passando rapido; fim com reverse",
           "segments": [
             [
-              0.3,
-              0.8,
-              0.5
+              0.05,
+              1.15,
+              3.0,
+              0.55
             ]
           ],
           "reframe": {
@@ -224,10 +230,9 @@
           "fix": "eq=gamma=1.04",
           "ambience_db": -32,
           "transition_out": {
-            "type": "whip",
-            "frames": 5,
-            "dir": 200,
-            "amount": 0.5
+            "type": "ramp_in",
+            "in_frames": 5,
+            "lift": 0.14
           }
         },
         {
@@ -235,8 +240,9 @@
           "_o_que": "espetos girando de perto (iPhone 30p)",
           "segments": [
             [
-              6.4,
-              7.4,
+              6.1,
+              7.53,
+              2.4,
               1.0
             ]
           ],
@@ -249,13 +255,16 @@
           "ambience_db": -32,
           "pop": {
             "text": "NO ESPETO",
-            "size": 210,
+            "font": "assets/fonts/Montserrat.ttf",
+            "weight": 800,
+            "size": 150,
             "cx": 0.5,
-            "cy": 0.3,
-            "start": 3,
+            "cy": 0.27,
+            "start": 6,
             "dur": 26,
-            "stagger": 1.5,
-            "follow": 0.08,
+            "stagger": 1.6,
+            "follow": 0.1,
+            "tracking": 0.02,
             "track": [
               [
                 0.05,
@@ -266,13 +275,13 @@
             ]
           },
           "transition_out": {
-            "type": "whip",
-            "frames": 5,
-            "dir": 225,
-            "amount": 0.55
+            "type": "ramp_in",
+            "in_frames": 5,
+            "lift": 0.14
           }
         }
-      ]
+      ],
+      "title_y": 1300
     },
     {
       "name": "TROPICAL VILLE",
@@ -281,17 +290,18 @@
         "TROPICAL VILLE"
       ],
       "title_clip": 0,
-      "title_start": 0.12,
-      "title_dur": 1.3,
+      "title_start": 0.85,
+      "title_dur": 1.1,
       "clips": [
         {
           "file": "source/TV_C128a_fachada.mov",
           "_o_que": "fachada, camera avancando ate a churrasqueira (estabelecimento)",
           "segments": [
             [
-              0.25,
-              1.75,
-              1.0
+              0.05,
+              2.07,
+              2.0,
+              0.7
             ]
           ],
           "reframe": {
@@ -303,23 +313,22 @@
           "ambience_db": -60,
           "transition_out": {
             "type": "match_zoom",
-            "frames": 9,
+            "frames": 12,
             "amount": 3.0,
             "cx": 0.27,
             "cy": 0.8,
-            "overlap": 3,
-            "in_frames": 6,
-            "in_amount": 1.25,
-            "_nota": "videos 2 e 3 sao da mesma gravacao (clip C128): a camera mergulha na janela da churrasqueira e vira o close dos frangos"
+            "overlap": 4,
+            "in_frames": 8,
+            "in_amount": 1.2
           },
           "hires": 2,
           "logo": {
             "file": "../../referencias/logo-brasao-recortado.png",
-            "land": 13,
-            "fly_frames": 10,
+            "land": 20,
+            "fly_frames": 16,
             "cx": 0.5,
-            "cy": 0.195,
-            "h": 0.17,
+            "cy": 0.225,
+            "h": 0.14,
             "depth": 12,
             "track_y": [
               0.17,
@@ -339,8 +348,9 @@
           "segments": [
             [
               0.05,
-              0.55,
-              0.5
+              1.02,
+              2.2,
+              0.55
             ]
           ],
           "reframe": {
@@ -351,25 +361,26 @@
           "fix": "eq=gamma=1.10",
           "ambience_db": -60,
           "transition_out": {
-            "type": "whip",
-            "frames": 5,
-            "dir": 150,
-            "amount": 0.55
+            "type": "ramp_in",
+            "in_frames": 5,
+            "lift": 0.14
           },
           "labels": [
             {
               "text": "FRANGO NO ROLETE",
-              "cx": 0.64,
-              "cy": 0.25,
-              "size": 88,
+              "font": "assets/fonts/Montserrat.ttf",
               "weight": 600,
-              "tracking": 0.08,
-              "at": 4,
-              "start": 3,
-              "dur": 26,
-              "stagger": 0.8,
+              "cx": 0.62,
+              "cy": 0.25,
+              "size": 66,
+              "tracking": 0.12,
+              "at": 8,
+              "start": 4,
+              "dur": 28,
+              "stagger": 0.9,
               "skew": -0.08,
               "rot": -2,
+              "slide": 0.0,
               "track": [
                 [
                   0.3,
@@ -377,8 +388,7 @@
                   1.0,
                   0.31
                 ]
-              ],
-              "_nota": "rotulo preso na parede de inox da churrasqueira (ref. 3)"
+              ]
             }
           ]
         },
@@ -388,13 +398,9 @@
           "segments": [
             [
               0.05,
-              0.3,
-              0.5
-            ],
-            [
-              0.8,
-              0.3,
-              1.0
+              1.15,
+              3.0,
+              0.55
             ]
           ],
           "reframe": {
@@ -405,29 +411,9 @@
           "fix": "eq=gamma=1.16:saturation=0.96",
           "ambience_db": -30,
           "transition_out": {
-            "type": "whip",
-            "frames": 5,
-            "dir": 330,
-            "amount": 0.5
-          },
-          "pop": {
-            "text": "NA BRASA",
-            "cx": 0.5,
-            "cy": 0.32,
-            "size": 220,
-            "start": 1,
-            "dur": 28,
-            "stagger": 1.2,
-            "track": [
-              [
-                0.05,
-                0.05,
-                0.95,
-                0.6
-              ]
-            ],
-            "_nota": "texto grande que salta letra por letra sobre o produto (como o '2200W' da ref. 3)",
-            "follow": 0.3
+            "type": "ramp_in",
+            "in_frames": 5,
+            "lift": 0.14
           }
         },
         {
@@ -435,9 +421,10 @@
           "_o_que": "costela no giro, camera indo pra esquerda (imagem corre pra direita) e avancando",
           "segments": [
             [
-              0.6,
-              1.1,
-              0.5
+              0.4,
+              1.5,
+              3.0,
+              0.55
             ]
           ],
           "reframe": {
@@ -448,25 +435,26 @@
           "fix": "eq=gamma=1.02:contrast=1.04",
           "ambience_db": -30,
           "transition_out": {
-            "type": "whip",
-            "frames": 5,
-            "dir": 0,
-            "amount": 0.55
+            "type": "ramp_in",
+            "in_frames": 5,
+            "lift": 0.14
           },
           "labels": [
             {
-              "text": "NO CARVÃO",
-              "cx": 0.62,
-              "cy": 0.12,
-              "size": 92,
+              "text": "NA BRASA",
+              "font": "assets/fonts/Montserrat.ttf",
               "weight": 600,
-              "tracking": 0.1,
-              "at": 6,
-              "start": 3,
-              "dur": 26,
+              "cx": 0.6,
+              "cy": 0.165,
+              "size": 92,
+              "tracking": 0.12,
+              "at": 8,
+              "start": 4,
+              "dur": 28,
               "stagger": 0.9,
               "skew": 0.0,
               "rot": -3,
+              "slide": 0.0,
               "track": [
                 [
                   0.0,
@@ -484,7 +472,8 @@
             }
           ]
         }
-      ]
+      ],
+      "title_y": 700
     },
     {
       "name": "FLORAIS",
@@ -493,7 +482,7 @@
         "FLORAIS"
       ],
       "title_clip": 0,
-      "title_start": 0.15,
+      "title_start": 0.6,
       "title_dur": 1.3,
       "clips": [
         {
@@ -501,8 +490,9 @@
           "_o_que": "vista aberta: tendas com o banner, churrasqueiras na rua",
           "segments": [
             [
-              0.3,
-              1.8,
+              0.05,
+              2.38,
+              1.6,
               1.0
             ]
           ],
@@ -514,13 +504,9 @@
           "fix": "eq=gamma=0.98:contrast=1.04",
           "ambience_db": -32,
           "transition_out": {
-            "type": "zoom",
-            "frames": 6,
-            "amount": 0.7,
-            "cx": 0.45,
-            "cy": 0.62,
-            "in_cx": 0.5,
-            "in_cy": 0.5
+            "type": "ramp_in",
+            "in_frames": 5,
+            "lift": 0.14
           }
         },
         {
@@ -528,9 +514,10 @@
           "_o_que": "camera baixa ao lado da churrasqueira, fumaca, avanca sobre a carne",
           "segments": [
             [
-              0.3,
-              0.8,
-              0.5
+              0.05,
+              1.15,
+              3.0,
+              0.55
             ]
           ],
           "reframe": {
@@ -541,25 +528,26 @@
           "fix": "eq=gamma=1.0:contrast=1.06",
           "ambience_db": -32,
           "transition_out": {
-            "type": "whip",
-            "frames": 5,
-            "dir": 220,
-            "amount": 0.55
+            "type": "ramp_in",
+            "in_frames": 5,
+            "lift": 0.14
           },
           "labels": [
             {
-              "text": "CHURRASCO RAIZ",
+              "text": "NO CARVÃO",
+              "font": "assets/fonts/Montserrat.ttf",
+              "weight": 600,
               "cx": 0.58,
               "cy": 0.3,
               "size": 78,
-              "weight": 600,
-              "tracking": 0.1,
-              "at": 6,
-              "start": 3,
-              "dur": 26,
+              "tracking": 0.12,
+              "at": 8,
+              "start": 4,
+              "dur": 28,
               "stagger": 0.9,
               "skew": 0.06,
               "rot": 4,
+              "slide": 0.0,
               "track": [
                 [
                   0.25,
@@ -576,9 +564,10 @@
           "_o_que": "close dos frangos na grelha, avancando",
           "segments": [
             [
-              0.3,
-              0.8,
-              0.5
+              0.05,
+              1.15,
+              3.0,
+              0.55
             ]
           ],
           "reframe": {
@@ -590,13 +579,16 @@
           "ambience_db": -32,
           "pop": {
             "text": "NO CAPRICHO",
-            "size": 200,
+            "font": "assets/fonts/Montserrat.ttf",
+            "weight": 800,
+            "size": 130,
             "cx": 0.5,
-            "cy": 0.3,
-            "start": 2,
-            "dur": 27,
-            "stagger": 1.3,
-            "follow": 0.12,
+            "cy": 0.2,
+            "start": 6,
+            "dur": 26,
+            "stagger": 1.6,
+            "follow": 0.1,
+            "tracking": 0.02,
             "track": [
               [
                 0.05,
@@ -607,13 +599,13 @@
             ]
           },
           "transition_out": {
-            "type": "whip",
-            "frames": 5,
-            "dir": 185,
-            "amount": 0.55
+            "type": "ramp_in",
+            "in_frames": 5,
+            "lift": 0.14
           }
         }
-      ]
+      ],
+      "title_y": 1300
     }
   ],
   "ending": {
@@ -628,8 +620,8 @@
       "_o_que": "grelha com a placa CHURRASCO NA BRASA; o giro natural (whip) leva para a vinheta",
       "segments": [
         [
-          4.2,
-          5.2,
+          3.9,
+          4.85,
           1.0
         ]
       ],
@@ -642,11 +634,8 @@
       "fix": "eq=gamma=1.04:contrast=1.04",
       "ambience_db": -34,
       "transition_out": {
-        "type": "whip",
-        "frames": 5,
-        "dir": 185,
-        "amount": 0.55,
-        "in_frames": 3
+        "type": "cut",
+        "overlap": 8
       }
     },
     "darken": 0.5,
@@ -673,8 +662,8 @@
     }
   },
   "sound": {
-    "whoosh_db": -22,
+    "whoosh_db": -27,
     "end_hit_db": -20
   },
-  "_ritmo": "v5 (edicao da ref. 3, T TECH): 1 plano = 1 batida de 1,0 s (30 quadros), titulos com 1,5 s, rajada de 0,5 s na grelha giratoria, planos de 60p em camera lenta 0,5x (deslize suave) e whip no pico entre eles; rotulos presos no cenario em quase todo plano."
+  "_ritmo": "v6 = edicao da ref. 3 (T TECH) como molde: plano de abertura de cada unidade segura ~2 s com o logo montando (como a fachada da ref.); cada plano de detalhe dura ~1,05 s e ENTRA em rampa (comeca rapido com borrao de movimento real e desacelera ate camera lenta), corte seco com leve clarao, sem whip; nomes em letreiro preso no cenario."
 }
