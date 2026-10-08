@@ -127,53 +127,124 @@ def card_faltando(arquivo, caminho, w, h):
     img.save(caminho)
 
 
-def png_texto(spec, caminho, w, h, seg_seguranca):
-    """Texto de tela: terço superior, nunca sobre o rosto, fundo escuro discreto."""
-    from PIL import Image, ImageDraw, ImageFilter
-    img = Image.new("RGBA", (w, h), (0, 0, 0, 0))
-    d = ImageDraw.Draw(img)
+# ------------------------------------------------- sistema tipográfico
+# Papéis (3, e só 3):
+#   marcador  — número do capítulo, sans bold caixa alta, teal, tracking largo
+#   pergunta  — Instrument Serif, o único papel grande; é a voz do vídeo
+#   apoio     — sans regular, abaixo da pergunta, para nome/função e CTA
+# Contraste entre papéis vem de tamanho + peso + cor + espaço, não só de tamanho.
+# Texto claro sobre imagem: mais entrelinha, um pouco mais de tracking e sombra
+# difusa, porque serif de haste fina some em fundo movimentado.
+TIPO = dict(marcador=("InstrumentSans-Bold", 34, 8.0),
+            pergunta=("InstrumentSerif-Regular", 116),
+            apoio=("InstrumentSans-Regular", 34))
+TEAL = (126, 214, 197)
+OSSO = (255, 255, 255)
+
+
+def _sombra(camada, raio=22, opacidade=150, desloc=(0, 7)):
+    from PIL import Image, ImageFilter
+    a = camada.split()[3].point(lambda p: int(p * opacidade / 255))
+    s = Image.new("RGBA", camada.size, (0, 0, 0, 0))
+    s.putalpha(a)
+    s = s.filter(ImageFilter.GaussianBlur(raio))
+    out = Image.new("RGBA", camada.size, (0, 0, 0, 0))
+    out.alpha_composite(s, desloc)
+    out.alpha_composite(camada)
+    return out
+
+
+def _tracked(d, x, y, txt, f, cor, tr):
+    for c in txt:
+        d.text((x, y), c, font=f, fill=cor)
+        x += d.textlength(c, font=f) + tr
+
+
+def _larg_tracked(d, txt, f, tr):
+    return sum(d.textlength(c, font=f) + tr for c in txt) - tr
+
+
+def _quebra(d, txt, f, max_larg):
+    pal, linhas, atual = txt.split(), [], ""
+    for p in pal:
+        teste = (atual + " " + p).strip()
+        if d.textlength(teste, font=f) > max_larg and atual:
+            linhas.append(atual); atual = p
+        else:
+            atual = teste
+    linhas.append(atual)
+    return linhas
+
+
+def png_texto(spec, base, w, h, seg):
+    """Gera dois PNGs: o véu (fixo) e o texto (animado na entrada).
+
+    Devolve (caminho_veu, caminho_texto, y_do_bloco).
+    """
+    from PIL import Image, ImageDraw, ImageFont
+    def fo(nome, tam):
+        for c in (os.path.join(FONTES, nome + ".ttf"), FALLBACK_FONTE):
+            if os.path.exists(c):
+                return ImageFont.truetype(c, tam)
+        return ImageFont.load_default()
+
+    esc = h / 1920.0
+    max_larg = w - 2 * (seg["lateral"] + int(70 * esc))
+
+    # --- véu: degradê curto no topo, só o bastante pra segurar a serifa
+    veu = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    vd = ImageDraw.Draw(veu)
+    alt = int(960 * esc)
+    for i in range(alt):
+        vd.line([(0, i), (w, i)], fill=(8, 12, 16, int(195 * (1 - i / alt) ** 1.55)))
+    cam_veu = base + "_veu.png"
+    veu.save(cam_veu)
+
+    # --- texto
+    cam = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    d = ImageDraw.Draw(cam)
     estilo = spec.get("estilo", "pergunta")
-    if estilo == "nome":
-        tams = [int(h * 0.030), int(h * 0.019)]
-        cores = [PALETA["osso"], (196, 214, 220)]
-        fontes = ["InstrumentSans-Bold", "InstrumentSans-Regular"]
-    elif estilo == "cta":
-        tams = [int(h * 0.028), int(h * 0.020)]
-        cores = [PALETA["osso"], PALETA["acento"]]
-        fontes = ["InstrumentSans-Bold", "InstrumentSans-Bold"]
-    else:
-        tams = [int(h * 0.029)]
-        cores = [PALETA["osso"]]
-        fontes = ["InstrumentSans-Bold"]
-
     linhas = spec["linhas"]
-    itens = []
-    for i, ln in enumerate(linhas):
-        f = fonte(fontes[min(i, len(fontes) - 1)], tams[min(i, len(tams) - 1)])
-        bb = d.textbbox((0, 0), ln, font=f)
-        itens.append((ln, f, cores[min(i, len(cores) - 1)], bb[2] - bb[0], bb[3] - bb[1], bb))
+    y = seg["topo"] + int(70 * esc)
 
-    esp = int(h * 0.012)
-    alt = sum(i[4] for i in itens) + esp * (len(itens) - 1)
-    topo = seg_seguranca["topo"] + int(h * 0.055)
-    larg = max(i[3] for i in itens)
+    if spec.get("marcador"):
+        fm = fo(TIPO["marcador"][0], int(TIPO["marcador"][1] * esc))
+        tr = TIPO["marcador"][2] * esc
+        t = spec["marcador"]
+        _tracked(d, (w - _larg_tracked(d, t, fm, tr)) / 2, y, t, fm, TEAL + (255,), tr)
+        y += int(52 * esc)
+        d.line([(w / 2 - 26 * esc, y + 4 * esc), (w / 2 + 26 * esc, y + 4 * esc)],
+               fill=TEAL + (225,), width=max(1, int(2 * esc)))
+        y += int(42 * esc)
 
-    # placa escura discreta atrás do texto, com borda suave
-    pad_x, pad_y = int(h * 0.018), int(h * 0.014)
-    placa = Image.new("RGBA", (w, h), (0, 0, 0, 0))
-    pd = ImageDraw.Draw(placa)
-    x0 = (w - larg) / 2 - pad_x
-    pd.rounded_rectangle([x0, topo - pad_y, x0 + larg + pad_x * 2, topo + alt + pad_y],
-                         radius=int(h * 0.010), fill=(10, 13, 17, 150))
-    placa = placa.filter(ImageFilter.GaussianBlur(0.6))
-    img = Image.alpha_composite(img, placa)
-    d = ImageDraw.Draw(img)
+    if estilo in ("pergunta", "cta"):
+        fq = fo(TIPO["pergunta"][0], int(TIPO["pergunta"][1] * esc))
+        corpo = _quebra(d, linhas[0], fq, max_larg)
+        for ln in corpo:
+            bb = d.textbbox((0, 0), ln, font=fq)
+            d.text(((w - (bb[2] - bb[0])) / 2 - bb[0], y - bb[1]), ln, font=fq, fill=OSSO + (255,))
+            y += int(TIPO["pergunta"][1] * 1.06 * esc)
+        if len(linhas) > 1:
+            fa = fo(TIPO["apoio"][0], int(TIPO["apoio"][1] * esc))
+            tr = 4.0 * esc
+            y += int(16 * esc)
+            t = linhas[1].upper()
+            _tracked(d, (w - _larg_tracked(d, t, fa, tr)) / 2, y, t, fa, TEAL + (245,), tr)
+    else:                                   # nome: serifa + função em caixa alta
+        fq = fo(TIPO["pergunta"][0], int(TIPO["pergunta"][1] * esc))
+        bb = d.textbbox((0, 0), linhas[0], font=fq)
+        d.text(((w - (bb[2] - bb[0])) / 2 - bb[0], y - bb[1]), linhas[0], font=fq, fill=OSSO + (255,))
+        y += int(TIPO["pergunta"][1] * 1.02 * esc)
+        if len(linhas) > 1:
+            fa = fo(TIPO["apoio"][0], int(TIPO["apoio"][1] * esc))
+            tr = 4.5 * esc
+            t = linhas[1].upper()
+            _tracked(d, (w - _larg_tracked(d, t, fa, tr)) / 2, y, t, fa, TEAL + (240,), tr)
 
-    y = topo
-    for ln, f, cor, lw, lh, bb in itens:
-        d.text(((w - lw) / 2 - bb[0], y - bb[1]), ln, font=f, fill=cor + (255,))
-        y += lh + esp
-    img.save(caminho)
+    cam = _sombra(cam, int(22 * esc) or 1, 155, (0, int(7 * esc)))
+    cam_txt = base + "_txt.png"
+    cam.save(cam_txt)
+    return cam_veu, cam_txt
 
 
 # -------------------------------------------------------- um segmento
@@ -181,6 +252,7 @@ def chave_cache(spec, extras, saida):
     """Assinatura do segmento. Só re-renderiza o que mudou — é o que faz
     trocar uma fala custar segundos em vez de refazer o vídeo inteiro."""
     partes = [json.dumps(spec, sort_keys=True, ensure_ascii=False)] + [str(e) for e in extras]
+    partes.append(str(int(os.stat(os.path.abspath(__file__)).st_mtime)))
     for f in extras:
         if isinstance(f, str) and os.path.exists(f):
             st = os.stat(f); partes.append(f"{st.st_size}:{int(st.st_mtime)}")
@@ -255,13 +327,10 @@ def render_broll(s, cfg, W, H, fps, idx, preview):
 
     png = sobrepor_texto(s, idx, W, H, cfg)
     if png:
-        entradas += ["-loop", "1", "-framerate", str(fps), "-t", f"{dur:.3f}", "-i", png]
+        for q in png:
+            entradas += ["-loop", "1", "-framerate", str(fps), "-t", f"{dur:.3f}", "-i", q]
         ini, fim = janela_texto(s, dur)
-        fc = (f"[0:v]{fc_v}[v];[1:v]format=rgba,"
-              f"fade=t=in:st={ini:.2f}:d=0.25:alpha=1,"
-              f"fade=t=out:st={fim-0.25:.2f}:d=0.25:alpha=1[m];"
-              f"[v][m]overlay=0:0:format=yuv420:eof_action=pass[vo]")
-        mapa = ["-filter_complex", fc, "-map", "[vo]"]
+        mapa = ["-filter_complex", filtro_texto(fc_v, 1, 2, ini, fim, H), "-map", "[vo]"]
     else:
         mapa = ["-vf", fc_v, "-map", "0:v"]
 
@@ -282,6 +351,29 @@ def render_broll(s, cfg, W, H, fps, idx, preview):
     return saida, dur
 
 
+def filtro_texto(fc_v, i_veu, i_txt, ini, fim, h):
+    """Véu parado + texto entrando com fade e uma subida curta.
+
+    A subida é de 26px num quadro de 1920 e dura 0,5s com ease-out cúbico:
+    o suficiente pra o olho registrar que o texto chegou, curto o suficiente
+    pra não virar animação de template.
+    """
+    dy = 26 * h / 1920.0
+    fi, fo_ = 0.30, 0.30
+    sai = max(ini + 0.4, fim - fo_)
+    return (
+        f"[0:v]{fc_v}[v];"
+        f"[{i_veu}:v]format=rgba,fade=t=in:st={ini:.2f}:d={fi}:alpha=1,"
+        f"fade=t=out:st={sai:.2f}:d={fo_}:alpha=1[ve];"
+        f"[{i_txt}:v]format=rgba,fade=t=in:st={ini:.2f}:d={fi}:alpha=1,"
+        f"fade=t=out:st={sai:.2f}:d={fo_}:alpha=1[tx];"
+        f"[v][ve]overlay=0:0:format=yuv420:eof_action=pass[v1];"
+        f"[v1][tx]overlay=0:"
+        f"y='if(lt(t\,{ini + 0.5:.2f})\,{dy:.1f}*pow(1-max(0\,(t-{ini:.2f}))/0.5\,3)\,0)'"
+        f":format=yuv420:eof_action=pass[vo]"
+    )
+
+
 def janela_texto(s, dur):
     t = s.get("texto")
     if not t:
@@ -297,9 +389,8 @@ def janela_texto(s, dur):
 def sobrepor_texto(s, idx, W, H, cfg):
     if not s.get("texto"):
         return None
-    png = os.path.join(GRAF, f"texto_{idx:02d}.png")
-    png_texto(s["texto"], png, W, H, cfg["seguranca_instagram"])
-    return png
+    base = os.path.join(GRAF, f"texto_{idx:02d}")
+    return png_texto(s["texto"], base, W, H, cfg["seguranca_instagram"])
 
 
 def acha_fala(bloco):
@@ -328,12 +419,10 @@ def render_fala(s, cfg, W, H, fps, idx, preview):
         vf = f"scale={W}:{H},format=yuv420p"
         png_t = sobrepor_texto(s, idx, W, H, cfg)
         if png_t:
-            entradas += ["-loop", "1", "-framerate", str(fps), "-t", f"{dur:.3f}", "-i", png_t]
+            for q in png_t:
+                entradas += ["-loop", "1", "-framerate", str(fps), "-t", f"{dur:.3f}", "-i", q]
             ini, fim = janela_texto(s, dur)
-            fc = (f"[0:v]{vf}[v];[2:v]format=rgba,fade=t=in:st={ini:.2f}:d=0.25:alpha=1,"
-                  f"fade=t=out:st={fim-0.25:.2f}:d=0.25:alpha=1[m];"
-                  f"[v][m]overlay=0:0:format=yuv420:eof_action=pass[vo]")
-            mapa = ["-filter_complex", fc, "-map", "[vo]"]
+            mapa = ["-filter_complex", filtro_texto(vf, 2, 3, ini, fim, H), "-map", "[vo]"]
         else:
             mapa = ["-vf", vf, "-map", "0:v"]
         ff(entradas + mapa + ["-map", "1:a", "-t", f"{dur:.3f}", "-c:v", "libx264",
@@ -374,12 +463,10 @@ def render_fala(s, cfg, W, H, fps, idx, preview):
     entradas = ["-i", src]
     png = sobrepor_texto(s, idx, W, H, cfg)
     if png:
-        entradas += ["-loop", "1", "-framerate", str(fps), "-t", f"{dur:.3f}", "-i", png]
+        for q in png:
+            entradas += ["-loop", "1", "-framerate", str(fps), "-t", f"{dur:.3f}", "-i", q]
         ini, fim = janela_texto(s, dur)
-        fc = (f"[0:v]{fc_v}[v];[1:v]format=rgba,fade=t=in:st={ini:.2f}:d=0.25:alpha=1,"
-              f"fade=t=out:st={fim-0.25:.2f}:d=0.25:alpha=1[m];"
-              f"[v][m]overlay=0:0:format=yuv420:eof_action=pass[vo]")
-        mapa = ["-filter_complex", fc, "-map", "[vo]"]
+        mapa = ["-filter_complex", filtro_texto(fc_v, 1, 2, ini, fim, H), "-map", "[vo]"]
     else:
         mapa = ["-vf", fc_v, "-map", "0:v"]
 

@@ -56,10 +56,11 @@
       "wb": "colorchannelmixer=rr=1.0967:gg=0.9841:bb=0.9083",
       "texto": {
         "estilo": "pergunta",
+        "marcador": "01",
         "linhas": [
           "Quem é o Hugo?"
         ],
-        "entra_do_fim": 1.5
+        "entra_do_fim": 1.6
       },
       "nota": "LIMITE DA GRAVACAO: a placa inteira so existe nos primeiros ~1,9s — depois a camera anda e ela sai pela direita; nenhum reenquadramento 4K resolve. Por isso o plano tem 2,14s e nao os 3,5s previstos. Giro de -3° (o maximo sem apertar mais o corte). O balanco de branco foi medido ignorando o ceu (14% do quadro), senao a parede cinza vira rosa. Na regravacao: plano parado ou pan MUITO lento, 5s, placa inteira."
     },
@@ -74,8 +75,8 @@
           "Hugo Almeida",
           "Ortodontista · Cuiabá"
         ],
-        "entra": 0.4,
-        "dura": 3.0
+        "entra": 0.5,
+        "dura": 3.2
       }
     },
     {
@@ -95,10 +96,11 @@
       "wb": "colorchannelmixer=rr=0.9440:gg=1.0076:bb=1.1125",
       "texto": {
         "estilo": "pergunta",
+        "marcador": "02",
         "linhas": [
           "O que ele faz de diferente?"
         ],
-        "entra": 0.35
+        "entra": 0.3
       },
       "nota": "Balcão com a placa Clínica Midori, o lustre e a parede ripada. Começa em 2,60s pra pular a porta e a área solta do início."
     },
@@ -159,10 +161,11 @@
       "wb": "colorchannelmixer=rr=0.9826:gg=1.0037:bb=1.0164",
       "texto": {
         "estilo": "pergunta",
+        "marcador": "03",
         "linhas": [
           "Pra quem é o tratamento?"
         ],
-        "entra": 0.35
+        "entra": 0.3
       },
       "nota": "−3° endireita a prateleira; o enquadramento sobe pra tirar o teto. Termina em 3,10s, antes de a câmera chegar na imagem religiosa."
     },
@@ -223,10 +226,11 @@
       "wb": "colorchannelmixer=rr=0.9847:gg=0.9998:bb=1.0504",
       "texto": {
         "estilo": "pergunta",
+        "marcador": "04",
         "linhas": [
           "Como começar?"
         ],
-        "entra": 0.3
+        "entra": 0.25
       },
       "nota": "+7° endireita a bancada. O enquadramento desce e vai pra direita pra tirar a pessoa sentada que aparece no alto à esquerda."
     },
@@ -241,9 +245,16 @@
           "Agende sua avaliação",
           "WhatsApp"
         ],
-        "entra_do_fim": 2.0
+        "entra_do_fim": 2.4
       }
     }
   ],
-  "nota_ritmo": "Da referência (20 planos, mediana 1,90s, de 0,47s a 3,0s) veio o princípio de que o ritmo NÃO é métrico. B-roll aqui: 2,14 · 2,20 · 1,20 · 2,10 · 2,40 · 1,60 · 0,70 · 1,40 — mediana 1,85s, desvio 0,56."
+  "nota_ritmo": "Da referência (20 planos, mediana 1,90s, de 0,47s a 3,0s) veio o princípio de que o ritmo NÃO é métrico. B-roll aqui: 2,14 · 2,20 · 1,20 · 2,10 · 2,40 · 1,60 · 0,70 · 1,40 — mediana 1,85s, desvio 0,56.",
+  "tipografia": {
+    "sistema": "3 papéis: marcador (sans bold caps, teal, tracking 7.5), pergunta (Instrument Serif 116), apoio (sans caps, teal, tracking 4).",
+    "porque": "Serifa editorial de alto contraste é o que lê como premium em vídeo social; grotesk pesado e condensada em caixa alta foram testados sobre o frame real e ficaram genéricos e estourando a margem segura.",
+    "marcadores": "01 a 04 — numeração de capítulo. Não afirma nada sobre a clínica, só organiza.",
+    "entrada": "fade 0,30s + subida de 26px com ease-out cúbico em 0,5s. O véu não se move.",
+    "legibilidade": "Véu de 880px no topo com alfa 165 e sombra difusa de raio 22 — serifa de haste fina some em fundo movimentado sem isso."
+  }
 }

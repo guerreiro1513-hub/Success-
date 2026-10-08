@@ -96,6 +96,26 @@ preto depois do giro, e prende o recorte dentro da área válida.
 **Movimento.** Punch-in de 2–4% nos planos parados, no lugar de estabilizar.
 Não usei `vidstab`: neste build ele deforma a imagem em pan de mão.
 
+**Tipografia.** Três papéis, e só três:
+
+| Papel | Face | Uso |
+|---|---|---|
+| marcador | Instrument Sans Bold 34, caixa alta, teal, tracking 8 | `01`–`04`, numeração de capítulo |
+| pergunta | **Instrument Serif 116** | a voz do vídeo — único papel grande |
+| apoio | Instrument Sans 34, caixa alta, teal, tracking 4 | função e CTA |
+
+Testei três tratamentos sobre o frame real antes de fixar: serifa editorial,
+grotesk pesado (Work Sans) e condensada em caixa alta (Big Shoulders). Os dois
+últimos ficaram genéricos e estouraram a margem segura. A serifa de alto
+contraste é o que lê como premium em vídeo social e é o que combina com clínica.
+
+Os marcadores são **numéricos de propósito** — não afirmam nada sobre a clínica,
+só organizam.
+
+**Entrada do texto:** fade de 0,30s + subida de 26px com ease-out cúbico em
+0,5s. O véu não se move, só o texto. Véu de 960px no topo com alfa 195 e sombra
+difusa de raio 22 — serifa de haste fina some em fundo movimentado sem isso.
+
 **Cortes.** Secos, sem transição. Como na referência.
 
 **Ritmo.** A referência tem 20 planos, mediana 1,90s, indo de **0,47s a 3,0s** —
