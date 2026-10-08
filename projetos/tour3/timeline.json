@@ -36,12 +36,12 @@
   },
   "opening": {
     "enabled": true,
-    "_nota": "entrada do GTA (referencia 1, pedido do cliente): cidade vista de cima com os saltos de zoom e a descida, cortada antes de aparecerem os personagens, em corte vertical no centro (fora das marcas do TikTok). Som original da entrada, acelerado junto com a imagem.",
+    "_nota": "entrada do GTA (referencia 1, pedido do cliente). Rode prep_abertura.py antes (gera work/REF1_vertical.mp4).",
     "clip": {
-      "file": "referencias/REF1_abertura_aerea.mp4",
+      "file": "work/REF1_vertical.mp4",
       "segments": [
         [
-          0.78,
+          0.8,
           2.0,
           1.5
         ],
@@ -52,13 +52,8 @@
         ],
         [
           6.0,
-          7.6,
-          2.5
-        ],
-        [
-          7.6,
-          8.85,
-          1.2
+          7.4,
+          1.6
         ]
       ],
       "reframe": {
@@ -66,7 +61,7 @@
         "x": 0.5,
         "y": 0.5
       },
-      "fix": "unsharp=7:7:0.9:5:5:0.0,noise=alls=3:allf=t",
+      "fix": "noise=alls=2:allf=t",
       "ambience_db": -18,
       "audio_speed": true,
       "transition_out": {
@@ -78,7 +73,7 @@
         "in_cx": 0.5,
         "in_cy": 0.6
       },
-      "pre": "hqdn3d=2:1.5:3:3"
+      "_nota": "gerado por prep_abertura.py (imagem inteira nitida numa janela que abre ate a tela cheia). Corta no ultimo quadro antes do salto para a rua (personagens)."
     }
   },
   "locations": [
@@ -101,7 +96,7 @@
       ],
       "title_clip": 0,
       "title_start": 0.12,
-      "title_dur": 1.45,
+      "title_dur": 1.2,
       "clips": [
         {
           "file": "source/TV_C128a_fachada.mov",
@@ -121,13 +116,31 @@
           "fix": "colorbalance=rh=-0.05:gh=0.10:bh=-0.06:gm=0.03,eq=gamma=0.97",
           "ambience_db": -60,
           "transition_out": {
-            "type": "zoom",
-            "frames": 6,
-            "amount": 0.7,
-            "cx": 0.22,
-            "cy": 0.86,
-            "in_cx": 0.5,
-            "in_cy": 0.62
+            "type": "match_zoom",
+            "frames": 9,
+            "amount": 3.0,
+            "cx": 0.27,
+            "cy": 0.8,
+            "overlap": 3,
+            "in_frames": 6,
+            "in_amount": 1.25,
+            "_nota": "videos 2 e 3 sao da mesma gravacao (clip C128): a camera mergulha na janela da churrasqueira e vira o close dos frangos"
+          },
+          "hires": 2,
+          "logo": {
+            "file": "../../referencias/logo-brasao-recortado.png",
+            "land": 13,
+            "fly_frames": 10,
+            "cx": 0.5,
+            "cy": 0.195,
+            "h": 0.17,
+            "depth": 12,
+            "track_y": [
+              0.17,
+              0.42
+            ],
+            "occlude_green": true,
+            "_nota": "efeito fachada da referencia 2: o logo chega voando e vira um letreiro em cima da fachada, preso a ela"
           }
         },
         {
@@ -166,7 +179,7 @@
         },
         {
           "file": "source/TV_C130_grelha_giratoria.mov",
-          "_o_que": "grelha giratoria de perto, camera subindo; camera lenta e depois acelera para o whip",
+          "_o_que": "grelha giratoria: camera lenta, REVERSE rapido (volta), e acelera ate o whip",
           "segments": [
             [
               0.05,
@@ -175,6 +188,11 @@
             ],
             [
               0.65,
+              0.25,
+              2.0
+            ],
+            [
+              0.25,
               2.0,
               3.0
             ],
@@ -244,14 +262,19 @@
       "3 UNIDADES · CUIABÁ"
     ],
     "dur": 2.0,
-    "_nota": "fecha sobre o fim do ultimo clipe, em camera lenta e escurecendo",
+    "_nota": "fecha sobre o fim do ultimo clipe em camera lenta 0,5x (sem quadro repetido) que volta em reverse, escurecendo",
     "tail": {
       "file": "source/TV_C122_costela.mov",
       "segments": [
         [
           1.9,
-          2.48,
-          0.3
+          2.5,
+          0.5
+        ],
+        [
+          2.5,
+          2.22,
+          0.5
         ]
       ],
       "fix": "eq=gamma=1.02:contrast=1.04",

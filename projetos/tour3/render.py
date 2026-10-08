@@ -42,7 +42,7 @@ def src_fps(path):
 def clip_frames(clip, W, H, fps, look):
     """Lista de quadros RGB (uint8, HxWx3) já na velocidade da timeline."""
     segs = clip["segments"]
-    t0 = min(s[0] for s in segs); t1 = max(s[1] for s in segs)
+    t0 = min(min(s[0], s[1]) for s in segs); t1 = max(max(s[0], s[1]) for s in segs)
     sf = src_fps(clip["file"])
     rf = clip.get("reframe", {"zoom": 1.0, "x": 0.5, "y": 0.5})
     z = rf.get("zoom", 1.0)
@@ -59,10 +59,11 @@ def clip_frames(clip, W, H, fps, look):
     raw = subprocess.run(cmd, capture_output=True, check=True).stdout
     src = np.frombuffer(raw, np.uint8).reshape(-1, H, W, 3)
     out = []
-    for a, b, sp in segs:
-        n = max(1, int(round((b - a) / sp * fps)))
+    for a, b, sp in segs:                      # b < a = reverse (a imagem volta)
+        d = 1 if b >= a else -1
+        n = max(1, int(round(abs(b - a) / sp * fps)))
         for i in range(n):
-            t = a + i * sp / fps
+            t = a + d * i * sp / fps
             k = min(len(src) - 1, max(0, int(round((t - t0) * sf))))
             out.append(src[k])
     return out
@@ -91,6 +92,18 @@ def zoom_blur(img, s0, s1, samples, cx=0.5, cy=0.5):
     return (acc / samples).astype(np.uint8)
 
 
+def match_zoom_blur(img, a0, a1, cx, cy, samples):
+    """Mergulho da camera ate o ponto (cx, cy): amplia e traz o ponto para o centro."""
+    H, W = img.shape[:2]
+    acc = np.zeros(img.shape, np.float32)
+    for i in range(samples):
+        z, p = a0 + (a1 - a0) * (i + 0.5) / samples      # (zoom, quanto o ponto ja veio pro centro)
+        px, py = W * cx + (W / 2 - W * cx) * p, H * cy + (H / 2 - H * cy) * p
+        M = np.float32([[z, 0, px - z * W * cx], [0, z, py - z * H * cy]])
+        acc += cv2.warpAffine(img, M, (W, H), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REFLECT)
+    return (acc / samples).astype(np.uint8)
+
+
 def apply_out(frames, tr, W, samples):
     """Fim do clipe A: a câmera acelera na direção do movimento até o corte."""
     if not tr or tr["type"] == "cut": return
@@ -104,12 +117,16 @@ def apply_out(frames, tr, W, samples):
         elif tr["type"] == "zoom":
             Z = tr.get("amount", 0.5)
             frames[i] = zoom_blur(frames[i], 1 + Z * ease_in(p0), 1 + Z * ease_in(p1), samples, tr.get('cx', 0.5), tr.get('cy', 0.5))
+        elif tr["type"] == "match_zoom":
+            Z = tr.get("amount", 2.5)
+            st = lambda p: np.array([1 + (Z - 1) * ease_in(p), ease_in(p)])
+            frames[i] = match_zoom_blur(frames[i], st(p0), st(p1), tr["cx"], tr["cy"], samples)
 
 
 def apply_in(frames, tr, W, samples):
     """Começo do clipe B: o mesmo movimento chega do lado oposto e desacelera."""
     if not tr or tr["type"] == "cut": return
-    k = tr.get("frames", 5); k = min(k, len(frames))
+    k = tr.get("in_frames", tr.get("frames", 5)); k = min(k, len(frames))
     for j in range(k):
         p0, p1 = 1 - j / k, 1 - (j + 1) / k
         if tr["type"] == "whip":
@@ -118,6 +135,112 @@ def apply_in(frames, tr, W, samples):
         elif tr["type"] == "zoom":
             Z = tr.get("amount", 0.5)
             frames[j] = zoom_blur(frames[j], 1 + Z * ease_in(p0), 1 + Z * ease_in(p1), samples, tr.get('in_cx', 0.5), tr.get('in_cy', 0.5))
+        elif tr["type"] == "match_zoom":
+            Z = tr.get("in_amount", 1.2)
+            frames[j] = zoom_blur(frames[j], 1 + (Z - 1) * ease_in(p0), 1 + (Z - 1) * ease_in(p1), samples)
+
+
+
+# ---------------------------------------------------------------- efeito fachada
+_LOGO = {}
+def load_logo(path, depth):
+    """Logo RGBA com espessura (efeito placa 3D). O telefone e coberto (sem numero no video)."""
+    key = (path, depth)
+    if key in _LOGO: return _LOGO[key]
+    im = np.array(Image.open(P(path)).convert("RGBA")).astype(np.float32)
+    h, w = im.shape[:2]
+    # telefone fica na faixa de baixo, dentro do fundo preto do brasao
+    y0, y1 = int(h * 0.835), int(h * 0.935); x0, x1 = int(w * 0.22), int(w * 0.80)
+    im[y0:y1, x0:x1, :3] = im[y0 - 6:y0 - 4, x0:x1, :3].mean((0, 1))
+    pad = depth + 4
+    out = np.zeros((h + pad, w + pad, 4), np.float32)
+    a = im[..., 3:4] / 255
+    for d in range(depth, 0, -1):          # lateral da placa, mais escura para tras
+        sh = 0.22 + 0.25 * (1 - d / depth)
+        sl = out[d:d + h, d:d + w]
+        col = np.concatenate([im[..., :3] * 0 + np.array([38, 30, 26]) * (sh / 0.47), im[..., 3:4]], -1)
+        sl[:] = sl * (1 - a) + col * a
+    sl = out[:h, :w]; sl[:] = sl * (1 - a) + im * a
+    _LOGO[key] = out
+    return out
+
+
+def track_affines(frames, land, ymin, ymax):
+    """Movimento da fachada (so a faixa ymin..ymax, sem a arvore verde) quadro a quadro.
+    Devolve, para cada quadro, a matriz que leva coordenadas do quadro 'land' para ele."""
+    sm = [cv2.cvtColor(cv2.resize(f, (f.shape[1] // 4, f.shape[0] // 4), interpolation=cv2.INTER_AREA), cv2.COLOR_RGB2GRAY)
+          for f in frames]
+    h, w = sm[0].shape
+    def step(i, j):
+        mask = np.zeros_like(sm[i]); mask[int(h * ymin):int(h * ymax)] = 255
+        hsv = cv2.cvtColor(cv2.resize(frames[i], (w, h), interpolation=cv2.INTER_AREA), cv2.COLOR_RGB2HSV)
+        mask[(hsv[..., 0] > 22) & (hsv[..., 0] < 60) & (hsv[..., 1] > 70)] = 0
+        p0 = cv2.goodFeaturesToTrack(sm[i], 300, 0.01, 5, mask=mask)
+        if p0 is None: return np.float32([[1, 0, 0], [0, 1, 0]])
+        p1, st, _ = cv2.calcOpticalFlowPyrLK(sm[i], sm[j], p0, None)
+        g = st.ravel() == 1
+        M, _ = cv2.estimateAffinePartial2D(p0[g], p1[g], method=cv2.RANSAC, ransacReprojThreshold=1.5)
+        if M is None: M = np.float32([[1, 0, 0], [0, 1, 0]])
+        M = M.astype(np.float32); M[:, 2] *= 4
+        return M
+    def mul(A, B):   # A depois de B
+        A3 = np.vstack([A, [0, 0, 1]]); B3 = np.vstack([B, [0, 0, 1]]); return (A3 @ B3)[:2]
+    T = [None] * len(frames); T[land] = np.float32([[1, 0, 0], [0, 1, 0]])
+    for j in range(land + 1, len(frames)): T[j] = mul(step(j - 1, j), T[j - 1])
+    for j in range(land - 1, -1, -1): T[j] = mul(step(j + 1, j), T[j + 1])
+    return T
+
+
+def apply_logo(frames, cfg):
+    """Logo chega voando (gira, encolhe, com rastro), encaixa na fachada com um
+    pequeno quique e fica preso a ela seguindo a camera. Folhas da arvore passam na frente."""
+    H, W = frames[0].shape[:2]
+    land, F = cfg.get("land", 12), cfg.get("fly_frames", 10)
+    logo = load_logo(cfg["file"], max(2, int(cfg.get("depth", 10) * W / 1080)))
+    lh, lw = logo.shape[:2]
+    target_h = cfg.get("h", 0.14) * H
+    base_s = target_h / lh
+    T = track_affines(frames, land, *cfg.get("track_y", [0.1, 0.45]))
+    ax, ay = cfg.get("cx", 0.5) * W, cfg.get("cy", 0.2) * H
+    def place(j, extra_s, extra_rot, off):
+        Tj = T[j]
+        px, py = Tj @ np.float32([ax, ay, 1])
+        ts = math.hypot(Tj[0, 0], Tj[1, 0]); tr = math.degrees(math.atan2(Tj[1, 0], Tj[0, 0]))
+        s = base_s * ts * extra_s
+        M = cv2.getRotationMatrix2D((lw / 2, lh / 2), -(tr + extra_rot), s)
+        M[0, 2] += px + off[0] - lw / 2; M[1, 2] += py + off[1] - lh / 2
+        return cv2.warpAffine(logo, M, (W, H), flags=cv2.INTER_LINEAR, borderValue=(0, 0, 0, 0))
+    for j in range(len(frames)):
+        q = (j - (land - F)) / F
+        if q < 0: continue
+        layers = []
+        subs = 4 if q < 1 else 1
+        for k in range(subs):
+            qq = min(1.0, q - (subs - 1 - k) / (F * subs)) if q < 1 else 1.0
+            e = ease_out(max(0.0, qq))
+            if q < 1:
+                es, rot = 1 + 2.2 * (1 - e), 38 * (1 - e)
+                off = (0.9 * W * (1 - e), -0.55 * H * (1 - e))
+            else:
+                b = j - land                  # quique ao encaixar
+                es = 1 + 0.07 * math.exp(-b / 2.2) * math.cos(b * 1.3) if b < 10 else 1.0
+                rot, off = 0, (0, 0)
+            layers.append(place(j, es, rot, off))
+        L = sum(layers) / len(layers)
+        f = frames[j].astype(np.float32)
+        a = L[..., 3:4] / 255
+        # sombra da placa na fachada (so depois de encaixar)
+        if q >= 1:
+            sh = cv2.GaussianBlur(a[..., 0], (0, 0), W / 160)
+            sh = np.roll(np.roll(sh, int(W / 90), 1), int(W / 70), 0)[..., None] * 0.45
+            f *= (1 - sh)
+        if cfg.get("occlude_green", True):
+            hsv = cv2.cvtColor(frames[j], cv2.COLOR_RGB2HSV)
+            leaf = ((hsv[..., 0] > 22) & (hsv[..., 0] < 60) & (hsv[..., 1] > 70) & (hsv[..., 2] > 60)).astype(np.float32)
+            leaf = cv2.GaussianBlur(leaf, (0, 0), 1.5)[..., None]
+            a = a * (1 - leaf)
+        f = f * (1 - a) + L[..., :3] * a
+        frames[j] = np.clip(f, 0, 255).astype(np.uint8)
 
 
 # ---------------------------------------------------------------- tipografia
@@ -277,22 +400,28 @@ def main():
     cuts, trans_times, amb_list = [], [], []
     frame_no = 0
     prev_out = None
+    pending = []
     for idx, item in enumerate(seq):
         c = item["clip"]
-        fr = clip_frames(c, W, H, fps, look)
-        apply_in(fr, prev_out, W, samples)
-        apply_out(fr, c.get("transition_out"), W, samples)
+        hr = c.get("hires", 1)
+        fr = clip_frames(c, W * hr, H * hr, fps, look)
+        apply_in(fr, prev_out, W * hr, samples)
+        if c.get("logo"): apply_logo(fr, c["logo"])
+        apply_out(fr, c.get("transition_out"), W * hr, samples)
+        if hr != 1: fr = [cv2.resize(f, (W, H), interpolation=cv2.INTER_AREA) for f in fr]
+        start = frame_no + len(pending) - min((prev_out or {}).get("overlap", 0), len(pending))
         if prev_out and prev_out.get("type") != "cut":
-            trans_times.append(frame_no / fps)
-        cuts.append({"t": round(frame_no / fps, 3), "clip": os.path.basename(c["file"]),
+            trans_times.append(start / fps)
+        cuts.append({"t": round(start / fps, 3), "clip": os.path.basename(c["file"]),
                      "unidade": item["loc"]["name"] if item.get("loc") else ("fim" if item.get("ending") else "abertura")})
-        amb = ambience(c, frame_no, len(fr), fps, None, c.get("ambience_db", -60))
-        if amb is not None: amb_list.append((frame_no, amb))
+        amb = ambience(c, start, len(fr), fps, None, c.get("ambience_db", -60))
+        if amb is not None: amb_list.append((start, amb))
 
         loc = item.get("loc")
         tstart = tdur = None
         if loc and item.get("title"):
             tstart = int(loc.get("title_start", 0.15) * fps); tdur = int(loc.get("title_dur", 1.5) * fps)
+        out_frames = []
         for j, f in enumerate(fr):
             f = f.copy()
             if tstart is not None and tstart <= j < tstart + tdur:
@@ -308,9 +437,23 @@ def main():
                 layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
                 draw_end(T, layer, end["lines"], j, n + 30)
                 f = composite(f, layer)
+            out_frames.append(f)
+        # emenda com sobreposicao (dissolve dentro do borrao) entre o fim do clipe anterior e este
+        ov = (prev_out or {}).get("overlap", 0)
+        if ov and pending:
+            for j in range(min(ov, len(pending), len(out_frames))):
+                w_ = (j + 1) / (ov + 1)
+                out_frames[j] = (pending[j] * (1 - w_) + out_frames[j] * w_).astype(np.uint8)
+            pending = []
+        for f in pending: pe.stdin.write(f.tobytes()); frame_no += 1
+        my_ov = (c.get("transition_out") or {}).get("overlap", 0)
+        keep = out_frames[len(out_frames) - my_ov:] if my_ov else []
+        for f in (out_frames[:len(out_frames) - my_ov] if my_ov else out_frames):
             pe.stdin.write(f.tobytes()); frame_no += 1
+        pending = keep
         prev_out = c.get("transition_out")
         print(f"  {os.path.basename(c['file'])}: {len(fr)} quadros", flush=True)
+    for f in pending: pe.stdin.write(f.tobytes()); frame_no += 1
     pe.stdin.close(); pe.wait()
     total = frame_no
 

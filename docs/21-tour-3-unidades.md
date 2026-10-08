@@ -35,3 +35,24 @@ costela → encerramento em câmera lenta 0,3x escurecendo. Prévia: 8,4 s.
   `hqdn3d` antes de ampliar, lanczos, `unsharp` e grão fino.
 - `python3 render.py --entrada` gera só a abertura + 1º clipe em 1080x1920:
   `entrega/teste-ENTRADA-GTA.mp4` (5,9 s).
+
+# v2 — entrada nítida, todos os clipes, emenda 2→3, efeito fachada e reverse (12,0 s)
+Feedback: cadê o resto do material; entrada com mais qualidade; transição antes de aparecer
+o personagem; vídeos 2 e 3 são da mesma gravação; usar os efeitos da referência 2 (reverse etc.).
+- **Entrada** (`prep_abertura.py` → `work/REF1_vertical.mp4`, rode antes do render):
+  super-resolução local (EDSR, OpenCV) foi testada e não ajudou (fonte já vem borrada, 1 min
+  por quadro). Solução: a imagem horizontal inteira, nítida (ampliação 1,5x), numa janela
+  sobre fundo desfocado dela mesma, que abre até a tela cheia no último salto. Bordas com a
+  marca do TikTok cortadas (x 175–880, y 48–498). Termina em 7,40 s, último quadro antes do
+  salto para a rua — nenhum personagem aparece.
+- **Vídeo 2 → 3 (mesma gravação C128)**: `match_zoom` — a câmera mergulha na janela da
+  churrasqueira (cx 0,27, cy 0,80, 3x, decodificado em 2x para não perder nitidez) e dissolve
+  dentro do borrão (3 quadros) no close dos frangos, que entra assentando de 1,25x.
+- **Efeito fachada (ref. 2)**: o logo chega voando (gira 38°, encolhe de 3,2x, com rastro),
+  encaixa como letreiro em cima da fachada com um quique, ganha espessura 3D e sombra, e fica
+  preso à fachada (rastreio OpenCV da faixa da fachada, sem a árvore); folhas passam na
+  frente. Telefone do logo coberto.
+- **Reverse**: grelha giratória em câmera lenta, volta em reverse 2x e acelera 3x até o whip;
+  o encerramento faz câmera lenta 0,5x e volta em reverse.
+- Final 1080x1920 30 fps: `entrega/guerreiros-TOUR-3-UNIDADES.mp4` (12,0 s, sem música,
+  −21 LUFS só de ambiente/whoosh — a música entra depois).
