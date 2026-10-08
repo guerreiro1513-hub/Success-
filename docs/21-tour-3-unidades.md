@@ -129,3 +129,10 @@ Revisão da v5 contra a referência (T TECH, medida quadro a quadro):
   NO CAPRICHO acima dos frangos. Saíram: CHURRASCO RAIZ e NA BRASA da grelha giratória (texto em cima
   da comida). Logos baixados para fora da faixa do topo.
 - Todos os 4 vídeos de cada unidade continuam usados (12 clipes + entrada + vinheta).
+
+# v7 — sem limite de 20 s: cada clipe usado quase inteiro (33,6 s)
+Pedido: pode passar de 20 s, usar todo o material. Cada clipe agora vai do começo ao fim útil
+(mesma rampa de entrada da ref. 3, terminando em câmera lenta 0,7–0,8x nos de 60p). IMG_1633
+usa 0,4–2,0 s + 4,3–7,6 s (espetos e a mesa com os potes); FL_copyB0FF usa 1,6–5,2 s (frangos
+e a placa CHURRASCO NA BRASA). Letreiros com duração limitada onde a câmera anda muito
+(o rastreio se perde): FRANGO NO ROLETE 32 q, NO CARVÃO 26 q.

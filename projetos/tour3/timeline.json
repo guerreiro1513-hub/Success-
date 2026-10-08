@@ -116,7 +116,7 @@
       ],
       "title_clip": 0,
       "title_start": 0.85,
-      "title_dur": 1.2,
+      "title_dur": 1.3,
       "clips": [
         {
           "file": "source/JA_C143a.mov",
@@ -124,9 +124,9 @@
           "segments": [
             [
               0.05,
-              2.14,
-              2.0,
-              0.7
+              2.38,
+              1.6,
+              0.8
             ]
           ],
           "reframe": {
@@ -167,9 +167,9 @@
           "segments": [
             [
               0.05,
-              1.15,
-              3.0,
-              0.55
+              1.95,
+              2.0,
+              0.8
             ]
           ],
           "reframe": {
@@ -195,7 +195,7 @@
               "tracking": 0.12,
               "at": 8,
               "start": 4,
-              "dur": 28,
+              "dur": 46,
               "stagger": 0.9,
               "skew": 0.0,
               "rot": -2,
@@ -217,9 +217,9 @@
           "segments": [
             [
               0.05,
-              1.15,
-              3.0,
-              0.55
+              2.22,
+              2.0,
+              0.8
             ]
           ],
           "reframe": {
@@ -240,9 +240,15 @@
           "_o_que": "espetos girando de perto (iPhone 30p)",
           "segments": [
             [
-              6.1,
-              7.53,
-              2.4,
+              0.4,
+              2.0,
+              1.8,
+              1.0
+            ],
+            [
+              4.3,
+              7.6,
+              1.4,
               1.0
             ]
           ],
@@ -261,7 +267,7 @@
             "cx": 0.5,
             "cy": 0.27,
             "start": 6,
-            "dur": 26,
+            "dur": 60,
             "stagger": 1.6,
             "follow": 0.1,
             "tracking": 0.02,
@@ -348,9 +354,9 @@
           "segments": [
             [
               0.05,
-              1.02,
-              2.2,
-              0.55
+              2.59,
+              2.0,
+              0.8
             ]
           ],
           "reframe": {
@@ -370,13 +376,13 @@
               "text": "FRANGO NO ROLETE",
               "font": "assets/fonts/Montserrat.ttf",
               "weight": 600,
-              "cx": 0.62,
+              "cx": 0.7,
               "cy": 0.25,
               "size": 66,
               "tracking": 0.12,
               "at": 8,
               "start": 4,
-              "dur": 28,
+              "dur": 32,
               "stagger": 0.9,
               "skew": -0.08,
               "rot": -2,
@@ -398,9 +404,9 @@
           "segments": [
             [
               0.05,
-              1.15,
-              3.0,
-              0.55
+              2.53,
+              2.4,
+              0.7
             ]
           ],
           "reframe": {
@@ -421,10 +427,10 @@
           "_o_que": "costela no giro, camera indo pra esquerda (imagem corre pra direita) e avancando",
           "segments": [
             [
-              0.4,
-              1.5,
-              3.0,
-              0.55
+              0.1,
+              2.49,
+              2.0,
+              0.8
             ]
           ],
           "reframe": {
@@ -450,7 +456,7 @@
               "tracking": 0.12,
               "at": 8,
               "start": 4,
-              "dur": 28,
+              "dur": 59,
               "stagger": 0.9,
               "skew": 0.0,
               "rot": -3,
@@ -483,7 +489,7 @@
       ],
       "title_clip": 0,
       "title_start": 0.6,
-      "title_dur": 1.3,
+      "title_dur": 2.1,
       "clips": [
         {
           "file": "source/FL_IMG_1429.mov",
@@ -491,9 +497,9 @@
           "segments": [
             [
               0.05,
-              2.38,
-              1.6,
-              1.0
+              3.29,
+              1.4,
+              1.1
             ]
           ],
           "reframe": {
@@ -515,9 +521,9 @@
           "segments": [
             [
               0.05,
-              1.15,
-              3.0,
-              0.55
+              2.3,
+              2.2,
+              0.8
             ]
           ],
           "reframe": {
@@ -537,13 +543,13 @@
               "text": "NO CARVÃO",
               "font": "assets/fonts/Montserrat.ttf",
               "weight": 600,
-              "cx": 0.58,
+              "cx": 0.48,
               "cy": 0.3,
               "size": 78,
               "tracking": 0.12,
               "at": 8,
               "start": 4,
-              "dur": 28,
+              "dur": 26,
               "stagger": 0.9,
               "skew": 0.06,
               "rot": 4,
@@ -565,9 +571,9 @@
           "segments": [
             [
               0.05,
-              1.15,
-              3.0,
-              0.55
+              2.39,
+              2.0,
+              0.8
             ]
           ],
           "reframe": {
@@ -585,7 +591,7 @@
             "cx": 0.5,
             "cy": 0.2,
             "start": 6,
-            "dur": 26,
+            "dur": 56,
             "stagger": 1.6,
             "follow": 0.1,
             "tracking": 0.02,
@@ -620,9 +626,14 @@
       "_o_que": "grelha com a placa CHURRASCO NA BRASA; o giro natural (whip) leva para a vinheta",
       "segments": [
         [
-          3.9,
-          4.85,
+          1.6,
+          3.0,
           1.0
+        ],
+        [
+          3.0,
+          5.2,
+          1.3
         ]
       ],
       "reframe": {
@@ -665,5 +676,5 @@
     "whoosh_db": -27,
     "end_hit_db": -20
   },
-  "_ritmo": "v6 = edicao da ref. 3 (T TECH) como molde: plano de abertura de cada unidade segura ~2 s com o logo montando (como a fachada da ref.); cada plano de detalhe dura ~1,05 s e ENTRA em rampa (comeca rapido com borrao de movimento real e desacelera ate camera lenta), corte seco com leve clarao, sem whip; nomes em letreiro preso no cenario."
+  "_ritmo": "v6 = edicao da ref. 3 (T TECH) como molde: plano de abertura de cada unidade segura ~2 s com o logo montando (como a fachada da ref.); cada plano de detalhe dura ~1,05 s e ENTRA em rampa (comeca rapido com borrao de movimento real e desacelera ate camera lenta), corte seco com leve clarao, sem whip; nomes em letreiro preso no cenario. v7: sem limite de 20 s — cada clipe usado quase inteiro (do inicio ao fim util), mesma rampa de entrada."
 }
