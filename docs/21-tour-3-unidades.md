@@ -95,3 +95,16 @@ frangos com "NO CAPRICHO") → grelha girando (HDR convertido com tonemap hable)
 Ajustes: nome de unidade comprido reduz só o tamanho do nome para caber (JARDIM ACLIMAÇÃO);
 clipe pode ter `no_look`; final pode ter `final_clip`. Sem música (−24 LUFS de ambiente).
 Entrega: `entrega/guerreiros-TOUR-3-UNIDADES.mp4` (1080x1920, 30 fps, 39 MB).
+
+# v5 — todos os vídeos de cada unidade, vertical cheio, edição da ref. 3 (18,5 s)
+Pedidos: usar os 4 vídeos de cada unidade; tudo na vertical (a entrada em janela horizontal
+saiu: o GTA volta em tela cheia vertical, faixa central limpa e ampliada); usar a edição do
+vídeo de inspiração (T TECH).
+- Edição da ref. 3 medida: quase todo plano dura exatamente ~1,0 s (uma batida), com uma
+  rajada de planos de 0,5 s, deslizes suaves e whip só no pico. Aplicado: 1 plano = 30
+  quadros, títulos com 1,5 s, planos de 60p em câmera lenta 0,5x, rajada de 0,5 s na grelha
+  giratória (câmera lenta + trecho em reverse), rótulo preso no cenário em quase todo plano.
+- Jardim: C143a (título + logo na tenda) → C143b (COSTELA) → C139 (banner) → IMG_1633 (NO ESPETO).
+- Tropical Ville: C128a (título + logo) → C128b (FRANGO NO ROLETE) → C130 (NA BRASA, rajada) → C122 (NO CARVÃO).
+- Florais: IMG_1429 (título) → C164 (CHURRASCO RAIZ, o slogan do brasão) → C177 (NO CAPRICHO) →
+  copyB0FF (a placa "CHURRASCO NA BRASA"; o giro vira o whip) → vinheta.
