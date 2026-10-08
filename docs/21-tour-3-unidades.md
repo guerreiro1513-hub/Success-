@@ -71,3 +71,11 @@ Efeitos da referência e o que foi aplicado:
   até o fundo claro e o brasão entra com um quique, "3 UNIDADES · CUIABÁ" embaixo.
 - Não aplicados (exigiriam elementos gerados/inventados): fogo acendendo no fogão, água
   estourando o vidro, produtos aparecendo na prateleira.
+
+## Florais — material recebido (aguardando o Jardim Aclimação para editar)
+| Arquivo | Conteúdo | Nota |
+|---|---|---|
+| FL_IMG_1429 (3,3 s, 4K 28p) | vista aberta: tendas com o banner, churrasqueiras na rua, céu | abertura da unidade (não é o IMG_1429 da ESCALA, arquivo diferente) |
+| FL_C164 (2,4 s, 4K 60p) | câmera baixa ao lado da churrasqueira, fumaça, avança sobre a carne | forte para transição |
+| FL_C177 (2,4 s, 4K 60p) | close dos frangos na grelha, avançando | bom |
+| FL_copyB0FF (8 s, 1000x1210, HDR HLG 10 bits) | grelha de frangos girando, banner em cima, tronco na frente | resolução baixa; precisa converter HDR→SDR |
