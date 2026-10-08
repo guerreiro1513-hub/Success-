@@ -140,7 +140,11 @@
               0.42
             ],
             "occlude_green": true,
-            "_nota": "efeito fachada da referencia 2: o logo chega voando e vira um letreiro em cima da fachada, preso a ela"
+            "_nota": "efeito fachada da referencia 2: o logo chega voando e vira um letreiro em cima da fachada, preso a ela",
+            "fly_scale": 1.6,
+            "fly_rot": 10,
+            "fly_dx": 0.0,
+            "fly_dy": -0.45
           }
         },
         {
@@ -175,7 +179,32 @@
             "frames": 5,
             "dir": 150,
             "amount": 0.55
-          }
+          },
+          "labels": [
+            {
+              "text": "FRANGO NO ROLETE",
+              "cx": 0.64,
+              "cy": 0.25,
+              "size": 88,
+              "weight": 600,
+              "tracking": 0.08,
+              "at": 4,
+              "start": 6,
+              "dur": 34,
+              "stagger": 1.2,
+              "skew": -0.08,
+              "rot": -2,
+              "track": [
+                [
+                  0.3,
+                  0.03,
+                  1.0,
+                  0.31
+                ]
+              ],
+              "_nota": "rotulo preso na parede de inox da churrasqueira (ref. 3)"
+            }
+          ]
         },
         {
           "file": "source/TV_C130_grelha_giratoria.mov",
@@ -214,6 +243,25 @@
             "frames": 5,
             "dir": 55,
             "amount": 0.5
+          },
+          "pop": {
+            "text": "NA BRASA",
+            "cx": 0.5,
+            "cy": 0.32,
+            "size": 220,
+            "start": 2,
+            "dur": 32,
+            "stagger": 2,
+            "track": [
+              [
+                0.05,
+                0.05,
+                0.95,
+                0.6
+              ]
+            ],
+            "_nota": "texto grande que salta letra por letra sobre o produto (como o '2200W' da ref. 3)",
+            "follow": 0.3
           }
         },
         {
@@ -240,7 +288,37 @@
           "ambience_db": -30,
           "transition_out": {
             "type": "cut"
-          }
+          },
+          "labels": [
+            {
+              "text": "COSTELA",
+              "cx": 0.62,
+              "cy": 0.12,
+              "size": 96,
+              "weight": 600,
+              "tracking": 0.12,
+              "at": 12,
+              "start": 10,
+              "dur": 30,
+              "stagger": 1.6,
+              "skew": 0.0,
+              "rot": -3,
+              "track": [
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.19
+                ],
+                [
+                  0.0,
+                  0.72,
+                  1.0,
+                  1.0
+                ]
+              ]
+            }
+          ]
         }
       ]
     },
@@ -262,25 +340,24 @@
       "3 UNIDADES · CUIABÁ"
     ],
     "dur": 2.0,
-    "_nota": "fecha sobre o fim do ultimo clipe em camera lenta 0,5x (sem quadro repetido) que volta em reverse, escurecendo",
+    "_nota": "fim como o da ref. 3: o ultimo plano clareia ate um fundo claro e o brasao entra e assenta, com '3 UNIDADES · CUIABA' embaixo",
     "tail": {
       "file": "source/TV_C122_costela.mov",
       "segments": [
         [
           1.9,
-          2.5,
-          0.5
-        ],
-        [
-          2.5,
-          2.22,
+          2.4,
           0.5
         ]
       ],
       "fix": "eq=gamma=1.02:contrast=1.04",
       "ambience_db": -32
     },
-    "darken": 0.5
+    "darken": 0.5,
+    "style": "white",
+    "logo": "../../referencias/logo-brasao-recortado.png",
+    "flash": 8,
+    "card_dur": 1.7
   },
   "sound": {
     "whoosh_db": -22,

@@ -219,8 +219,8 @@ def apply_logo(frames, cfg):
             qq = min(1.0, q - (subs - 1 - k) / (F * subs)) if q < 1 else 1.0
             e = ease_out(max(0.0, qq))
             if q < 1:
-                es, rot = 1 + 2.2 * (1 - e), 38 * (1 - e)
-                off = (0.9 * W * (1 - e), -0.55 * H * (1 - e))
+                es, rot = 1 + cfg.get("fly_scale", 1.6) * (1 - e), cfg.get("fly_rot", 12) * (1 - e)
+                off = (cfg.get("fly_dx", 0.0) * W * (1 - e), cfg.get("fly_dy", -0.45) * H * (1 - e))
             else:
                 b = j - land                  # quique ao encaixar
                 es = 1 + 0.07 * math.exp(-b / 2.2) * math.cos(b * 1.3) if b < 10 else 1.0
@@ -240,7 +240,131 @@ def apply_logo(frames, cfg):
             leaf = cv2.GaussianBlur(leaf, (0, 0), 1.5)[..., None]
             a = a * (1 - leaf)
         f = f * (1 - a) + L[..., :3] * a
+        if 0 <= j - land < 10:                     # brilho de letreiro acendendo
+            gl = cv2.GaussianBlur(a[..., 0], (0, 0), W / 70)[..., None] * (1 - (j - land) / 10) * 0.8
+            f = f + (255 - f) * gl
         frames[j] = np.clip(f, 0, 255).astype(np.uint8)
+
+
+# ---------------------------------------------------------------- rotulos 3D (ref. 3)
+def track_h(frames, at, rects):
+    """Homografias que levam o quadro 'at' para cada quadro, rastreando so as areas
+    'rects' ([x0,y0,x1,y1] normalizados: superficies paradas, fora da grelha que gira)."""
+    sc = 4
+    sm = [cv2.cvtColor(cv2.resize(f, (f.shape[1] // sc, f.shape[0] // sc), interpolation=cv2.INTER_AREA),
+                       cv2.COLOR_RGB2GRAY) for f in frames]
+    h, w = sm[0].shape
+    mask = np.zeros((h, w), np.uint8)
+    for x0, y0, x1, y1 in rects: mask[int(y0 * h):int(y1 * h), int(x0 * w):int(x1 * w)] = 255
+    S = np.diag([sc, sc, 1.0]); Si = np.diag([1 / sc, 1 / sc, 1.0])
+    def step(i, j):
+        p0 = cv2.goodFeaturesToTrack(sm[i], 400, 0.008, 4, mask=mask)
+        if p0 is None or len(p0) < 8: return np.eye(3)
+        p1, st, _ = cv2.calcOpticalFlowPyrLK(sm[i], sm[j], p0, None)
+        g = st.ravel() == 1
+        if g.sum() < 8: return np.eye(3)
+        Hm, _ = cv2.findHomography(p0[g], p1[g], cv2.RANSAC, 1.5)
+        if Hm is None: return np.eye(3)
+        return S @ Hm @ Si
+    Hs = [None] * len(frames); Hs[at] = np.eye(3)
+    for j in range(at + 1, len(frames)): Hs[j] = step(j - 1, j) @ Hs[j - 1]
+    for j in range(at - 1, -1, -1): Hs[j] = step(j + 1, j) @ Hs[j + 1]
+    return Hs
+
+
+def label_letters(text, font, tracking, color, glow):
+    """Cada letra como camada separada (para entrar uma a uma). Devolve imagem cheia + caixas."""
+    sp = font.size * tracking
+    ws = [font.getlength(ch) for ch in text]
+    W_ = int(sum(ws) + sp * (len(text) - 1)) + 2 * glow + 8
+    asc, desc = font.getmetrics(); H_ = asc + desc + 2 * glow + 8
+    out, x = [], glow + 4
+    from PIL import ImageFilter
+    for ch, cw in zip(text, ws):
+        im = Image.new("RGBA", (W_, H_), (0, 0, 0, 0))
+        ImageDraw.Draw(im).text((x, glow + 4), ch, font=font, fill=tuple(color) + (255,))
+        a = np.array(im).astype(np.float32)
+        g = np.array(im.filter(ImageFilter.GaussianBlur(glow))).astype(np.float32)   # brilho de letreiro
+        d = np.array(im.filter(ImageFilter.GaussianBlur(max(1, glow // 2)))).astype(np.float32)  # sombra
+        d = np.roll(d, max(1, glow // 4), axis=0)
+        al = a[..., 3:4] / 255
+        ga = g[..., 3:4] / 255 * 0.28; da = d[..., 3:4] / 255 * 0.75
+        rgb = np.zeros_like(a[..., :3]); aa = np.zeros_like(al)
+        for col, alpha in ((0.0, da), (255.0, ga)):            # sombra, depois brilho
+            rgb = rgb * (1 - alpha) + col * alpha; aa = aa + alpha * (1 - aa)
+        rgb = rgb * (1 - al) + a[..., :3] * al; aa = aa + al * (1 - aa)
+        comb = np.concatenate([np.where(aa > 0, rgb * 1.0, 0), aa * 255], -1)
+        out.append((comb, x, cw)); x += cw + sp
+    return out, W_, H_
+
+
+def apply_labels(frames, labels, scale):
+    """Rotulos presos ao cenario (perspectiva acompanhando a camera), letras entrando uma a uma."""
+    H, W = frames[0].shape[:2]
+    for L in labels:
+        font = ImageFont.truetype(P(L.get("font", "assets/fonts/Oswald[wght].ttf")), max(8, int(L.get("size", 60) * scale)))
+        try: font.set_variation_by_axes([L.get("weight", 600)])
+        except Exception: pass
+        letters, lw, lh = label_letters(L["text"], font, L.get("tracking", 0.06), L.get("color", [255, 255, 255]),
+                                        max(2, int(10 * scale)))
+        at = min(len(frames) - 1, L.get("at", 0))
+        Hs = track_h(frames, at, L.get("track", [[0, 0, 1, 1]])) if L.get("track") else [np.eye(3)] * len(frames)
+        # colocacao no quadro 'at': centro, rotacao e inclinacao (perspectiva) da superficie
+        cx, cy = L["cx"] * W, L["cy"] * H
+        ang = math.radians(L.get("rot", 0)); sk = L.get("skew", 0.0)
+        A = np.array([[math.cos(ang), -math.sin(ang), 0], [math.sin(ang), math.cos(ang), 0], [0, 0, 1]])
+        Pp = np.array([[1, 0, 0], [0, 1, 0], [sk / lw, 0, 1]])        # um lado mais perto que o outro
+        C = np.array([[1, 0, -lw / 2], [0, 1, -lh / 2], [0, 0, 1]])
+        Tm = np.array([[1, 0, cx], [0, 1, cy], [0, 0, 1]])
+        base = Tm @ A @ Pp @ C
+        st, du, stag = L.get("start", 0), L.get("dur", 40), L.get("stagger", 1.5)
+        for j in range(len(frames)):
+            k = j - st
+            if k < 0 or k >= du: continue
+            lay = np.zeros((lh, lw, 4), np.float32)
+            out_a = 1 - ease_out(max(0, (k - (du - 6)) / 6))
+            for n, (img, x, cw) in enumerate(letters):
+                p = ease_out(min(1, max(0, (k - n * stag) / 5)))
+                if p <= 0: continue
+                dx = int((1 - p) * lh * 0.6)
+                sl = np.roll(img, dx, axis=1) if dx else img
+                lay = lay + sl * np.array([1, 1, 1, p * out_a], np.float32) * (1 - lay[..., 3:4] / 255)
+            M = Hs[j] @ base
+            wl = cv2.warpPerspective(lay, M, (W, H), flags=cv2.INTER_LINEAR, borderValue=(0, 0, 0, 0))
+            a = wl[..., 3:4] / 255
+            frames[j] = np.clip(frames[j] * (1 - a) + wl[..., :3] * a, 0, 255).astype(np.uint8)
+
+
+def apply_pop(frames, cfg, scale):
+    """Texto grande que salta letra por letra sobre o produto (como o '2200W' da ref. 3) e segue o movimento."""
+    H, W = frames[0].shape[:2]
+    font = ImageFont.truetype(P(cfg.get("font", "assets/fonts/Anton-Regular.ttf")), int(cfg.get("size", 200) * scale))
+    letters, lw, lh = label_letters(cfg["text"], font, cfg.get("tracking", 0.03), [255, 255, 255], max(3, int(16 * scale)))
+    at = cfg.get("start", 0)
+    Hs = track_h(frames, min(at, len(frames) - 1), cfg.get("track", [[0.1, 0.1, 0.9, 0.9]]))
+    cx, cy = cfg.get("cx", 0.5) * W, cfg.get("cy", 0.3) * H
+    du, stag = cfg.get("dur", 30), cfg.get("stagger", 2)
+    for j in range(len(frames)):
+        k = j - at
+        if k < 0 or k >= du: continue
+        lay = np.zeros((lh, lw, 4), np.float32)
+        out_a = 1 - ease_out(max(0, (k - (du - 5)) / 5))
+        for n, (img, x, cw) in enumerate(letters):
+            q = (k - n * stag) / 6
+            if q <= 0: continue
+            sc_ = 1 + 0.35 * math.exp(-q * 3) * math.cos(q * 5) if q < 2 else 1.0   # salta e assenta
+            cxl, cyl = x + cw / 2, lh / 2
+            M = cv2.getRotationMatrix2D((cxl, cyl), 0, sc_)
+            sl = cv2.warpAffine(img, M, (lw, lh), borderValue=(0, 0, 0, 0))
+            sl[..., 3] *= min(1, q * 2) * out_a
+            lay = lay + sl * (1 - lay[..., 3:4] / 255)
+        pc = Hs[j] @ np.array([cx, cy, 1.0]); pc = pc[:2] / pc[2]
+        fo = cfg.get("follow", 0.3)
+        px, py = cx + (pc[0] - cx) * fo, cy + (pc[1] - cy) * fo
+        M3 = np.array([[1, 0, px - lw / 2], [0, 1, py - lh / 2], [0, 0, 1]])
+        wl = cv2.warpPerspective(lay, M3, (W, H), flags=cv2.INTER_LINEAR, borderValue=(0, 0, 0, 0))
+        a = wl[..., 3:4] / 255
+        frames[j] = np.clip(frames[j] * (1 - a) + wl[..., :3] * a, 0, 255).astype(np.uint8)
 
 
 # ---------------------------------------------------------------- tipografia
@@ -407,6 +531,8 @@ def main():
         fr = clip_frames(c, W * hr, H * hr, fps, look)
         apply_in(fr, prev_out, W * hr, samples)
         if c.get("logo"): apply_logo(fr, c["logo"])
+        if c.get("labels"): apply_labels(fr, c["labels"], sc * hr)
+        if c.get("pop"): apply_pop(fr, c["pop"], sc * hr)
         apply_out(fr, c.get("transition_out"), W * hr, samples)
         if hr != 1: fr = [cv2.resize(f, (W, H), interpolation=cv2.INTER_AREA) for f in fr]
         start = frame_no + len(pending) - min((prev_out or {}).get("overlap", 0), len(pending))
@@ -431,13 +557,21 @@ def main():
                 layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
                 T.draw(layer, loc["title"], k, tdur)
                 f = composite(f, layer)
-            if item.get("ending"):
+            if item.get("ending") and end.get("style") == "white":
+                n = len(fr); fl = end.get("flash", 8)
+                w_ = ease_in(min(1, max(0, (j - (n - fl)) / fl)))
+                if w_ > 0:
+                    b = cv2.GaussianBlur(f, (0, 0), 1 + w_ * W / 60)
+                    f = (b * (1 - w_) + np.array(end.get("bg", [245, 240, 232])) * w_).astype(np.uint8)
+            elif item.get("ending"):
                 n = len(fr); p = ease_out(min(1, j / 10))
                 f = (f * (1 - end.get("darken", 0.5) * p)).astype(np.uint8)
                 layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
                 draw_end(T, layer, end["lines"], j, n + 30)
                 f = composite(f, layer)
             out_frames.append(f)
+        if item.get("ending") and end.get("style") == "white":
+            out_frames += white_card(T, end, W, H, fps)
         # emenda com sobreposicao (dissolve dentro do borrao) entre o fim do clipe anterior e este
         ov = (prev_out or {}).get("overlap", 0)
         if ov and pending:
@@ -484,6 +618,38 @@ def main():
                "transicoes_de_camera": [round(t, 3) for t in trans_times]},
               open(out_path + ".cortes.json", "w"), ensure_ascii=False, indent=2)
     print(f"{out_path}  {total} quadros = {total / fps:.2f} s")
+
+
+def white_card(T, end, W, H, fps):
+    """Encerramento como o da ref. 3: fundo claro, o brasao entra e assenta, linha embaixo."""
+    c, s = T.c, T.s
+    n = int(end.get("card_dur", 1.6) * fps)
+    bg = np.zeros((H, W, 3), np.uint8); bg[:] = end.get("bg", [245, 240, 232])
+    logo = np.array(Image.open(P(end["logo"])).convert("RGBA")).astype(np.float32)
+    lh, lw = logo.shape[:2]
+    y0, y1 = int(lh * 0.835), int(lh * 0.935); x0, x1 = int(lw * 0.22), int(lw * 0.80)
+    logo[y0:y1, x0:x1, :3] = logo[y0 - 6:y0 - 4, x0:x1, :3].mean((0, 1))
+    base = end.get("logo_w", 0.62) * W / lw
+    lab = T.line(end["lines"][1], T.flabel, c["label_tracking"], end.get("ink", [40, 30, 26]))
+    out = []
+    for j in range(n):
+        q = j / 8
+        sc_ = base * (1 + 0.12 * math.exp(-q * 2.2) * math.cos(q * 3.2)) if j < 24 else base
+        al = min(1, j / 4)
+        M = cv2.getRotationMatrix2D((lw / 2, lh / 2), 0, sc_)
+        M[0, 2] += W / 2 - lw / 2; M[1, 2] += H * 0.44 - lh / 2
+        L = cv2.warpAffine(logo, M, (W, H), flags=cv2.INTER_LINEAR, borderValue=(0, 0, 0, 0))
+        a = L[..., 3:4] / 255 * al
+        sh = cv2.GaussianBlur(a[..., 0], (0, 0), W / 60)[..., None] * 0.25
+        f = bg * (1 - sh)
+        f = f * (1 - a) + L[..., :3] * a
+        f = Image.fromarray(np.clip(f, 0, 255).astype(np.uint8)).convert("RGBA")
+        p2 = ease_out(min(1, max(0, (j - 8) / 10)))
+        if p2 > 0:
+            lay = lab.copy(); A_ = np.array(lay); A_[..., 3] = (A_[..., 3] * p2).astype(np.uint8)
+            f.alpha_composite(Image.fromarray(A_), ((W - lab.width) // 2, int(H * 0.44 + base * lh / 2 + 30 * s + (1 - p2) * 20 * s)))
+        out.append(np.array(f.convert("RGB")))
+    return out
 
 
 def draw_end(T, layer, lines, j, n):

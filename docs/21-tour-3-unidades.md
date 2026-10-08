@@ -56,3 +56,18 @@ o personagem; vídeos 2 e 3 são da mesma gravação; usar os efeitos da referê
   o encerramento faz câmera lenta 0,5x e volta em reverse.
 - Final 1080x1920 30 fps: `entrega/guerreiros-TOUR-3-UNIDADES.mp4` (12,0 s, sem música,
   −21 LUFS só de ambiente/whoosh — a música entra depois).
+
+# v3 — efeitos da referência 3 (tour da loja "T TECH", `referencias/REF3_efeitos.mp4`)
+Efeitos da referência e o que foi aplicado:
+- Logo montando na fachada (símbolo cai de cima, acende) → o brasão agora cai de cima,
+  encolhendo, encaixa no telhado e **acende** (brilho que apaga em 10 quadros).
+- Nomes de seção presos nas paredes/prateleiras em perspectiva, letra por letra →
+  `labels`: **FRANGO NO ROLETE** na parede de inox da churrasqueira e **COSTELA** no
+  fundo da churrasqueira, rastreados por homografia só nas partes paradas (a grelha que
+  gira fica fora do rastreio), com sombra e brilho de letreiro.
+- Texto grande saltando sobre o produto ("2200W") → `pop`: **NA BRASA** letra por letra
+  sobre a grelha giratória, acompanhando 30% do movimento.
+- Final em fundo claro com o logo → `ending.style = "white"`: o último plano clareia/desfoca
+  até o fundo claro e o brasão entra com um quique, "3 UNIDADES · CUIABÁ" embaixo.
+- Não aplicados (exigiriam elementos gerados/inventados): fogo acendendo no fogão, água
+  estourando o vidro, produtos aparecendo na prateleira.
