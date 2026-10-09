@@ -148,7 +148,7 @@
             "x": 0.5,
             "y": 0.5
           },
-          "fix": "eq=gamma=1.03:contrast=1.02",
+          "fix": "eq=gamma=1.12:contrast=1.0:saturation=1.08,curves=all='0/0.03 0.15/0.21 0.5/0.56 1/1',colorbalance=rs=0.02:bs=-0.02:rm=0.02:bm=-0.02",
           "ambience_db": -60,
           "transition_out": {
             "type": "ramp_in",
@@ -348,7 +348,7 @@
             "x": 0.5,
             "y": 0.55
           },
-          "fix": "eq=gamma=0.98:contrast=1.04",
+          "fix": "eq=gamma=0.97:contrast=1.05:saturation=1.03,colorbalance=rs=0.03:bs=-0.04:rm=0.03:bm=-0.03:rh=0.01:bh=-0.02",
           "ambience_db": -32,
           "transition_out": {
             "type": "ramp_in",

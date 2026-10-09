@@ -213,3 +213,10 @@ CARNE NO/PONTO, SEM ATALHO./SÓ BRASA., 3 UNIDADES · CUIABÁ/GUERREIRO'S GRILL.
   "over" ponderado pelo alfa (`_over`).
 - Florais: primeiro plano começa 1 s depois (1,15 s).
 - Agendadas 4 rodadas de melhoria a cada 30 min (pedido do cliente).
+
+## Rodada automática 1/4 (cor entre unidades)
+Medição por plano (luz média 0–255 e calor R−B): a abertura da Tropical Ville (take novo) era o plano mais
+escuro do vídeo (54, sombras fechadas) e destoava dos frangos/costela seguintes (62–68). Sombras abertas com
+curva + gama 1,12 e um toque quente → 69. Abertura do Florais levemente aquecida (o céu azul continua azul;
+R−B −14 → −9) para casar com o laranja dos planos de brasa. Nenhum quadro repetido nos planos (só a vinheta,
+que já vem assim). Nada de texto, ordem ou takes mudou.
