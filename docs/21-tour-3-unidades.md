@@ -155,3 +155,32 @@ e a placa CHURRASCO NA BRASA). Letreiros com duração limitada onde a câmera a
   títulos "UNIDADE …"; CHURRASCO NA BRASA (costela, TV), FEITO NO CARVÃO (fumaça, Florais),
   CARNE NO PONTO (costela, Jardim), SEM ATALHO. / SÓ BRASA. (espetos, Jardim); fim sob o brasão:
   "GUERREIRO'S GRILL / 3 UNIDADES · CUIABÁ". Sem texto em frango/carne de perto nem na grelha giratória.
+
+# v9 — fachada antiga de volta, take novo no lugar da costela, mergulho no Jardim, fonte da REF4 (32,3 s)
+- Tropical Ville: take novo (vista de cima, título) → **fachada antiga C128a de volta** com o logo
+  acendendo e o mergulho na churrasqueira até os frangos (C128b) → **take novo `TV_NOVO_4.mov`**
+  (copy_C2CE…, costela girando, 0–1,75 s; depois disso é a tela final do CapCut) **no lugar da costela
+  C122**. A grelha giratória (C130) saiu, a pedido.
+- Jardim: o mesmo mergulho da Tropical Ville — da tenda (C143a) a câmera entra na churrasqueira da
+  direita (cx 0,74, cy 0,50) e sai no close da costela (C143b).
+- Tipografia copiada da REF4 ("Texto chamativo para seus vídeos"): **Poppins Black** laranja com halo
+  laranja + **Poppins SemiBold** branco pequeno encaixado no canto de cima da palavra grande, caixa mista
+  (palavra grande com inicial maiúscula, apoio em minúsculas). Títulos deitados no chão em perspectiva.
+  Frases: "churrasco na / Brasa", "feito no / Carvão", "carne no / Ponto", "sem atalho. / Só brasa.";
+  abertura "POV: o GPS te trouxe / pro lugar certo" → "bem-vindo ao / Guerreiro's Grill"; fim
+  "Guerreiro's Grill / 3 unidades · Cuiabá".
+- Skills de design ("taste" etc.) instaladas aqui são para sites/interfaces, não para vídeo; a fonte e o
+  estilo vieram direto do vídeo de inspiração, como pedido.
+
+# v10 — fonte e estilo de texto copiados da ref. T TECH (REF3), não da REF4
+O cliente esclareceu que a inspiração de fonte/edição é o vídeo da T TECH (REF3).
+- Letreiros como os da loja: **Montserrat SemiBold branco**, caixa normal ("Churrasco na brasa"),
+  brilho branco de LED, presos na parede/toldo/capô em perspectiva (rastreio parcial) e **acendendo
+  letra a letra** (varredura da esquerda para a direita); apagam sem clarão.
+- Destaque como o "2200W": **Unbounded ExtraBold** (letra larga) **cromado** com contorno escuro —
+  "GUERREIRO'S GRILL" na abertura e no fim, "SÓ BRASA" nos espetos do Jardim.
+- Textos: abertura "POV: o GPS te trouxe / pro lugar certo" → GUERREIRO'S GRILL; "Unidade Tropical Ville"
+  (fachada do take novo), "Churrasco na brasa" (costela), "Unidade Florais" (céu), "Feito no carvão"
+  (tampa com fumaça), "Unidade Jardim Aclimação" (toldo), "Carne no ponto" (parede), "Sem atalho." +
+  SÓ BRASA (espetos); fim GUERREIRO'S GRILL + "3 unidades · Cuiabá" sob o brasão.
+- Jardim sem o logo voando (na ref. o logo só monta na fachada principal; o título agora fica no toldo).

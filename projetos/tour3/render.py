@@ -406,7 +406,7 @@ def build_lockup(lines, scale, max_w):
     rows = []
     for L in lines:
         size = L.get("size", 80) * scale
-        path = "assets/fonts/Montserrat-Italic.ttf" if L.get("italic", True) else "assets/fonts/Montserrat.ttf"
+        path = L.get("font") or ("assets/fonts/Montserrat-Italic.ttf" if L.get("italic", True) else "assets/fonts/Montserrat.ttf")
         while True:
             f = _font(path, size, L.get("weight", 800))
             sp = f.size * L.get("tracking", 0.0)
@@ -430,7 +430,16 @@ def build_lockup(lines, scale, max_w):
         for ch in L["text"]:
             d.text((x, y), ch, font=f, fill=255); x += f.getlength(ch) + sp
         a = np.array(im, np.float32) / 255
-        if L.get("color", "white") == "fire":           # degrade de brasa: amarelo-alaranjado em cima, laranja queimado embaixo
+        if L.get("color", "white") == "chrome":         # metal escovado do '2200W' da ref.
+            yy = (np.linspace(0, 1, Hl)[:, None] * Hl - y) / max(1, h)
+            v = np.interp(np.clip(yy, 0, 1), [0, 0.35, 0.55, 0.62, 1], [255, 236, 168, 205, 246])
+            rgb = np.broadcast_to(np.stack([v, v, v * 1.01], -1), (Hl, Wl, 3)).clip(0, 255)
+        elif L.get("color", "white") == "orange":         # laranja chapado da ref. (leve luz em cima)
+            yy = np.linspace(0, 1, Hl)[:, None]
+            band = np.clip((yy * Hl - y) / max(1, h), 0, 1)
+            top, bot = np.array([255, 128, 34.]), np.array([246, 92, 8.])
+            rgb = np.broadcast_to(top[None, None] * (1 - band[..., None]) + bot[None, None] * band[..., None], (Hl, Wl, 3))
+        elif L.get("color", "white") == "fire":           # degrade de brasa: amarelo-alaranjado em cima, laranja queimado embaixo
             yy = np.linspace(0, 1, Hl)[:, None]
             band = np.clip((yy * Hl - y) / max(1, h), 0, 1)
             top, bot = np.array([255, 196, 70.]), np.array([238, 92, 16.])
@@ -438,14 +447,21 @@ def build_lockup(lines, scale, max_w):
             rgb = np.broadcast_to(rgb, (Hl, Wl, 3))
         else:
             rgb = np.broadcast_to(np.array([255, 250, 242.]), (Hl, Wl, 3))
-        out.append((np.concatenate([rgb * 1.0, a[..., None] * 255], -1).astype(np.float32), L.get("delay", i * 3)))
+        img = np.concatenate([rgb * 1.0, a[..., None] * 255], -1).astype(np.float32)
+        if L.get("glow"):                                # halo laranja em volta da palavra grande (ref.)
+            g = cv2.GaussianBlur(a, (0, 0), L.get("glow_r", 16) * scale) * L["glow"]
+            gl = np.concatenate([np.broadcast_to(np.array(L.get("glow_color", [255, 110, 20]), np.float64), (Hl, Wl, 3)), g[..., None] * 255], -1).astype(np.float32)
+            out.append((gl, L.get("delay", i * 3)))
+        out.append((img, L.get("delay", i * 3)))
         y += h
     # sombra unica do bloco (contraste em qualquer fundo)
     A = np.maximum.reduce([o[0][..., 3] for o in out])
-    r = max(1, int(round(3 * scale)))
+    edge_k = float(lines[0].get("_edge", 0.45)) if lines else 0.45
+    soft_k = float(lines[0].get("_soft", 0.55)) if lines else 0.55
+    r = max(1, int(round(2 * scale)))
     edge = cv2.dilate(A, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * r + 1, 2 * r + 1)))
-    edge = cv2.GaussianBlur(edge, (0, 0), 0.8 * scale + 0.3) * 0.82          # contorno escuro fino
-    soft = np.roll(cv2.GaussianBlur(A, (0, 0), 12 * scale), int(7 * scale), 0) * 0.55   # sombra larga
+    edge = cv2.GaussianBlur(edge, (0, 0), 0.8 * scale + 0.3) * edge_k        # contorno escuro bem leve
+    soft = np.roll(cv2.GaussianBlur(A, (0, 0), 12 * scale), int(7 * scale), 0) * soft_k   # sombra larga
     sh = np.maximum(edge, soft)
     return out, sh, Wl, Hl
 
@@ -458,7 +474,7 @@ def apply_texts(frames, texts, scale):
         cx, cy = T_.get("cx", 0.5) * W, T_.get("cy", 0.5) * H
         tilt, rot = T_.get("tilt", 0.0), math.radians(T_.get("rot", 0))
         A = np.array([[math.cos(rot), -math.sin(rot), 0], [math.sin(rot), math.cos(rot), 0], [0, 0, 1]])
-        Pp = np.array([[1, 0, 0], [0, 1, 0], [0, tilt / Hl, 1]])        # deitado no chao: topo mais longe
+        Pp = np.array([[1, 0, 0], [0, 1, 0], [T_.get("skew", 0.0) / Wl, tilt / Hl, 1]])   # chao (tilt) / parede (skew)
         C = np.array([[1, 0, -Wl / 2], [0, 1, -Hl / 2], [0, 0, 1]])
         M0 = A @ Pp @ C
         # caixa do bloco ja em perspectiva; se passar da largura segura, encolhe o bloco todo
@@ -486,6 +502,14 @@ def apply_texts(frames, texts, scale):
             lay = np.zeros((Hl, Wl, 4), np.float32)
             out_k = k - (du - 6)
             for img, dl in rows:                       # entrada: cada linha sobe 3 quadros depois da outra
+                if T_.get("reveal") == "sweep":       # letreiro acendendo letra a letra (ref. T TECH)
+                    p = min(1, max(0, (k - dl) / T_.get("sweep_frames", 12)))
+                    if p <= 0: continue
+                    xs = np.arange(Wl, dtype=np.float32)
+                    m = np.clip((p * (Wl + 120 * scale) - xs) / (60 * scale), 0, 1)
+                    im = img.copy(); im[..., 3] *= m[None, :]
+                    lay = lay + im * (1 - lay[..., 3:4] / 255)
+                    continue
                 p = ease_out(min(1, max(0, (k - dl) / 7)))
                 if p <= 0: continue
                 sc_ = 1.10 - 0.10 * p
@@ -497,7 +521,8 @@ def apply_texts(frames, texts, scale):
             alpha_all = 1.0
             if out_k > 0:                              # saida: clarao rapido e some
                 e = out_k / 6; alpha_all = 1 - ease_out(e)
-                lay[..., :3] = lay[..., :3] + (255 - lay[..., :3]) * min(1, e * 2.5) * 0.8
+                if T_.get("reveal") != "sweep":
+                    lay[..., :3] = lay[..., :3] + (255 - lay[..., :3]) * min(1, e * 2.5) * 0.8
             shl = sh * (lay[..., 3].max() / 255 if lay[..., 3].max() > 0 else 0) * alpha_all
             T3 = np.array([[1, 0, px], [0, 1, py], [0, 0, 1]]) @ M0
             wl = cv2.warpPerspective(lay, T3, (W, H), flags=cv2.INTER_LINEAR, borderValue=(0, 0, 0, 0))

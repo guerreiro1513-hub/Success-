@@ -1,5 +1,5 @@
 {
-  "duracao": 18.467,
+  "duracao": 32.3,
   "fps": 30,
   "cortes": [
     {
@@ -9,83 +9,82 @@
     },
     {
       "t": 3.5,
-      "clip": "JA_C143a.mov",
-      "unidade": "JARDIM ACLIMAÇÃO"
+      "clip": "TV_NOVO_abertura.mov",
+      "unidade": "TROPICAL VILLE"
     },
     {
-      "t": 5.0,
-      "clip": "JA_C143b.mov",
-      "unidade": "JARDIM ACLIMAÇÃO"
-    },
-    {
-      "t": 6.0,
-      "clip": "JA_C139.mov",
-      "unidade": "JARDIM ACLIMAÇÃO"
-    },
-    {
-      "t": 7.0,
-      "clip": "JA_IMG_1633.mov",
-      "unidade": "JARDIM ACLIMAÇÃO"
-    },
-    {
-      "t": 8.0,
+      "t": 5.133,
       "clip": "TV_C128a_fachada.mov",
       "unidade": "TROPICAL VILLE"
     },
     {
-      "t": 9.4,
+      "t": 7.0,
       "clip": "TV_C128b_frangos.mov",
       "unidade": "TROPICAL VILLE"
     },
     {
-      "t": 10.4,
-      "clip": "TV_C130_grelha_giratoria.mov",
+      "t": 9.3,
+      "clip": "TV_NOVO_4.mov",
       "unidade": "TROPICAL VILLE"
     },
     {
-      "t": 11.4,
-      "clip": "TV_C122_costela.mov",
-      "unidade": "TROPICAL VILLE"
-    },
-    {
-      "t": 12.4,
+      "t": 10.933,
       "clip": "FL_IMG_1429.mov",
       "unidade": "FLORAIS"
     },
     {
-      "t": 13.9,
+      "t": 13.667,
       "clip": "FL_C164.mov",
       "unidade": "FLORAIS"
     },
     {
-      "t": 14.9,
+      "t": 15.633,
       "clip": "FL_C177.mov",
       "unidade": "FLORAIS"
     },
     {
-      "t": 15.9,
+      "t": 17.767,
       "clip": "FL_copyB0FF.mov",
-      "unidade": "fim"
+      "unidade": "FLORAIS"
     },
     {
-      "t": 16.9,
+      "t": 20.867,
+      "clip": "JA_C143a.mov",
+      "unidade": "JARDIM ACLIMAÇÃO"
+    },
+    {
+      "t": 23.033,
+      "clip": "JA_C143b.mov",
+      "unidade": "JARDIM ACLIMAÇÃO"
+    },
+    {
+      "t": 24.767,
+      "clip": "JA_C139.mov",
+      "unidade": "JARDIM ACLIMAÇÃO"
+    },
+    {
+      "t": 26.733,
+      "clip": "JA_IMG_1633.mov",
+      "unidade": "JARDIM ACLIMAÇÃO"
+    },
+    {
+      "t": 30.733,
       "clip": "VINHETA.mov",
       "unidade": "vinheta"
     }
   ],
   "transicoes_de_camera": [
     3.5,
-    5.0,
-    6.0,
+    5.133,
     7.0,
-    8.0,
-    9.4,
-    10.4,
-    11.4,
-    12.4,
-    13.9,
-    14.9,
-    15.9,
-    16.9
+    9.3,
+    10.933,
+    13.667,
+    15.633,
+    17.767,
+    20.867,
+    23.033,
+    24.767,
+    26.733
   ]
 }
