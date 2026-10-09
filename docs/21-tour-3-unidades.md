@@ -251,3 +251,7 @@ Correções (`labels_mov`, só na versão `--texto=movimento`):
 - As duas linhas (`text` + `text2`) num letreiro só: andam juntas.
 Letreiros: FRANGO/NA BRASA na parede de inox (TV), FEITO NO/CARVÃO na tampa (Florais), SEM ATALHO./SÓ BRASA.
 no capô dos espetos (Jardim). Montserrat branco com brilho, como o print.
+
+## Rodada automática 3/4
+Coincidiu com o pedido do cliente da v15 (letreiros presos no cenário), feito e renderizado na hora. QA dos
+três planos com letreiro na versão final em movimento: sem quadro travado; letreiros dentro da área segura.
