@@ -148,18 +148,30 @@ def apply_gta(frames, cfg, scale):
         dx = int(-(1 - e) * (bw + x0))
         box = Image.new("RGBA", (bw, bh), (0, 0, 0, 0))
         d = ImageDraw.Draw(box)
-        d.rounded_rectangle([0, 0, bw - 1, bh - 1], radius=int(10 * scale), fill=(8, 8, 10, 178))
-        d.text((pad + int(2 * scale), int(10 * scale) + 3), cfg["label"], font=f_lab, fill=(0, 0, 0, 255))   # sombra
-        d.text((pad, int(10 * scale)), cfg["label"], font=f_lab, fill=(255, 255, 255, 255))
+        sa = cfg.get("style") == "sa"                 # v23: letras dos creditos do San Andreas, sem caixa
         fill = ease_out(min(1, max(0, (k - 5) / 14)))
         by0, by1 = bh - pad - int(cfg.get("bar", 20) * scale), bh - pad
-        d.rectangle([pad, by0, bw - pad, by1], fill=tuple(int(c * 0.35) for c in col) + (255,))
-        d.rectangle([pad, by0, pad + int((bw - 2 * pad) * cfg.get("from", 0.25) + (bw - 2 * pad) * (1 - cfg.get("from", 0.25)) * fill), by1],
-                    fill=tuple(int(c) for c in col) + (255,))
+        bx1 = bw - pad - (int(60 * scale) if sa else 0)
+        if sa:
+            sw = max(2, int(5 * scale))
+            d.text((pad, int(4 * scale)), cfg["label"], font=f_lab, fill=(166, 184, 190, 255), stroke_width=sw, stroke_fill=(8, 8, 10, 255))
+            ob = max(2, int(4 * scale))
+            d.rectangle([pad - ob, by0 - ob, bx1 + ob, by1 + ob], fill=(8, 8, 10, 255))
+        else:
+            d.rounded_rectangle([0, 0, bw - 1, bh - 1], radius=int(10 * scale), fill=(8, 8, 10, 178))
+            d.text((pad + int(2 * scale), int(10 * scale) + 3), cfg["label"], font=f_lab, fill=(0, 0, 0, 255))   # sombra
+            d.text((pad, int(10 * scale)), cfg["label"], font=f_lab, fill=(255, 255, 255, 255))
+        d.rectangle([pad, by0, bx1, by1], fill=tuple(int(c * 0.35) for c in col) + (255,))
+        fr0 = cfg.get("from", 0.25)
+        d.rectangle([pad, by0, pad + int((bx1 - pad) * (fr0 + (1 - fr0) * fill)), by1], fill=tuple(int(c) for c in col) + (255,))
         if k >= 19:                                  # '+' acende quando a barra enche
             q = min(1, (k - 19) / 4); blink = 1.0 if (k - 19) > 8 or (k // 2) % 2 == 0 else 0.4
             pw = f_plus.getlength("+")
-            d.text((bw - pad - pw, int(-8 * scale)), "+", font=f_plus, fill=(90, 220, 90, int(255 * q * blink)))
+            if sa:
+                d.text((bw - pad - pw, by0 - int(f_plus.size * 0.62)), "+", font=f_plus, fill=(110, 230, 100, int(255 * q * blink)),
+                       stroke_width=max(2, int(5 * scale)), stroke_fill=(8, 8, 10, int(255 * q * blink)))
+            else:
+                d.text((bw - pad - pw, int(-8 * scale)), "+", font=f_plus, fill=(90, 220, 90, int(255 * q * blink)))
         arr = np.array(box, np.float32)
         a = arr[..., 3:4] / 255 * a_all
         xa, xb = max(0, x0 + dx), min(W, x0 + dx + bw)
@@ -666,6 +678,12 @@ def build_lockup(lines, scale, max_w):
             top, bot = np.array([255, 196, 70.]), np.array([238, 92, 16.])
             rgb = top[None, None] * (1 - band[..., None]) + bot[None, None] * band[..., None]
             rgb = np.broadcast_to(rgb, (Hl, Wl, 3))
+        elif L.get("color") in ("sa_gold", "sa_slate"):   # creditos do GTA San Andreas (dourado gotico / nomes cinza-azulado)
+            yy = np.linspace(0, 1, Hl)[:, None]
+            band = np.clip((yy * Hl - y) / max(1, h), 0, 1)
+            top, bot = ((np.array([252, 226, 128.]), np.array([212, 166, 58.])) if L["color"] == "sa_gold"
+                        else (np.array([172, 190, 196.]), np.array([128, 147, 154.])))
+            rgb = np.broadcast_to(top[None, None] * (1 - band[..., None]) + bot[None, None] * band[..., None], (Hl, Wl, 3))
         else:
             rgb = np.broadcast_to(np.array([255, 250, 242.]), (Hl, Wl, 3))
         img = np.concatenate([rgb * 1.0, a[..., None] * 255], -1).astype(np.float32)
@@ -679,7 +697,7 @@ def build_lockup(lines, scale, max_w):
     A = np.maximum.reduce([o[0][..., 3] for o in out])
     edge_k = float(lines[0].get("_edge", 0.45)) if lines else 0.45
     soft_k = float(lines[0].get("_soft", 0.55)) if lines else 0.55
-    r = max(1, int(round(2 * scale)))
+    r = max(1, int(round(float(lines[0].get("_edge_r", 2)) * scale))) if lines else max(1, int(round(2 * scale)))
     edge = cv2.dilate(A, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * r + 1, 2 * r + 1)))
     edge = cv2.GaussianBlur(edge, (0, 0), 0.8 * scale + 0.3) * edge_k        # contorno escuro bem leve
     soft = np.roll(cv2.GaussianBlur(A, (0, 0), 12 * scale), int(7 * scale), 0) * soft_k   # sombra larga
@@ -1090,6 +1108,16 @@ def main():
         i = int(cuts[-1]["t"] * SR); h = hit()
         A[i:i + len(h)] += h * 10 ** (snd.get("end_hit_db", -20) / 20)
     A = A[:int(total / fps * SR)]
+    mus = snd.get("music")
+    if mus:                                        # trilha escolhida pelo cliente (v23)
+        raw = subprocess.run([FF, "-v", "error", "-ss", str(mus.get("start", 0)), "-i", P(mus["file"]), "-vn", "-ac", "2", "-ar", str(SR),
+                              "-f", "s16le", "-"], capture_output=True, check=True).stdout
+        m = np.frombuffer(raw, np.int16).reshape(-1, 2).astype(np.float32) / 32768
+        m = m[:len(A)]
+        if len(m) < len(A): m = np.pad(m, ((0, len(A) - len(m)), (0, 0)))
+        fi, fo_ = int(mus.get("fade_in", 0.05) * SR), int(mus.get("fade_out", 1.5) * SR)
+        m[:fi] *= np.linspace(0, 1, fi)[:, None]; m[-fo_:] *= np.linspace(1, 0, fo_)[:, None]
+        A = A * 10 ** (mus.get("bed_db", 0) / 20) + m * 10 ** (mus.get("gain_db", -3) / 20)
     fo = int(0.5 * SR); A[-fo:] *= np.linspace(1, 0, fo)[:, None]
     pk_ = np.abs(A).max()
     if pk_ > 0.89: A *= 0.89 / pk_

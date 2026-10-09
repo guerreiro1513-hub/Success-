@@ -342,3 +342,17 @@ um vídeo na TV (escolha minha); piada no estilo GTA nos três b-rolls; b-rolls 
   exato, alinhado com as estrelas (medido no quadro 45).
 - Ordem da TV: fachada → frangos (mergulho, mesmo take) → grelha giratória → b-roll do frango. A costela girando
   (TV_C122) saiu a pedido do cliente (29,3 s no total).
+
+# v23 — letras dos créditos do GTA San Andreas + trilha do San Andreas (29,3 s)
+Pedido: usar fonte/cor como nos créditos de abertura do San Andreas (print "los santos / Nik Taylor…") e
+colocar a trilha enviada (tema do GTA San Andreas, `source/MUSICA_GTA_SA.mp4`). Última mudança.
+- Frase do b-roll em gótico dourado minúsculo (Pirata One, Google Fonts/OFL — a mais próxima do "los santos"),
+  contorno preto grosso: "frango / na brasa", "picanha / suculenta", "costela / macia". Entra suave.
+- Aviso com barra mantido (pedido do cliente), no estilo dos nomes dos créditos: rótulo em Anton cinza-azulado
+  com contorno preto, barra com borda preta crescendo e "+" verde: VIDA, RESPEITO, RAINHA DO CHURRASCO.
+  Sem linha com o nome da unidade embaixo.
+- Trilha: começa em 6,35 s da faixa, para a batida (9,85 s) cair no corte para a fachada (3,5 s do vídeo);
+  o som original da abertura do GTA foi tirado (brigava com a música). Ambiente dos clipes por baixo.
+  Volume final −14,5 LUFS, pico −1,3 dBFS. Fade de 1,8 s no fim.
+- Aviso de direitos: o tema é da Rockstar; o Instagram pode silenciar ou limitar o alcance. Alternativa
+  segura: publicar sem música e escolher o tema na biblioteca de áudio do próprio Instagram.

@@ -65,7 +65,7 @@
         "y": 0.5
       },
       "fix": "unsharp=7:7:0.9:5:5:0.0,noise=alls=3:allf=t",
-      "ambience_db": -18,
+      "ambience_db": -60,
       "audio_speed": true,
       "transition_out": {
         "type": "zoom",
@@ -342,56 +342,64 @@
           },
           "texts": [
             {
-              "_tipo": "frase de comida",
+              "_tipo": "creditos estilo GTA San Andreas (gotico dourado + nomes cinza-azulados)",
               "lines": [
                 {
-                  "text": "FRANGO",
-                  "font": "assets/fonts/Anton-Regular.ttf",
-                  "size": 70,
-                  "color": "white",
-                  "tracking": 0.06,
+                  "text": "frango",
+                  "font": "assets/fonts/PirataOne-Regular.ttf",
+                  "size": 125,
+                  "color": "sa_gold",
+                  "tracking": 0.0,
                   "italic": false,
-                  "_edge": 0.7,
-                  "_soft": 0.6,
-                  "align": "left"
+                  "align": "left",
+                  "gap": -0.12,
+                  "delay": 0,
+                  "_edge": 1.0,
+                  "_edge_r": 5,
+                  "_soft": 0.5
                 },
                 {
-                  "text": "NA BRASA",
-                  "font": "assets/fonts/Anton-Regular.ttf",
-                  "size": 115,
-                  "color": "fire",
-                  "tracking": 0.02,
+                  "text": "na brasa",
+                  "font": "assets/fonts/PirataOne-Regular.ttf",
+                  "size": 125,
+                  "color": "sa_gold",
+                  "tracking": 0.0,
                   "italic": false,
-                  "gap": -0.18,
-                  "delay": 3,
-                  "align": "left"
+                  "align": "left",
+                  "gap": -0.3,
+                  "delay": 4,
+                  "_edge": 1.0,
+                  "_edge_r": 5,
+                  "_soft": 0.5
                 }
               ],
               "cx": 0.0,
-              "cy": 0.2,
+              "cy": 0.23,
               "start": 37,
               "dur": 44,
               "follow": 0,
-              "punch": true
+              "punch": false
             }
           ],
+          "_fz": 41,
           "gta": {
+            "style": "sa",
             "label": "VIDA",
             "color": [
               200,
               34,
               38
             ],
-            "start": 51,
-            "dur": 32,
-            "y": 630,
-            "from": 0.3,
-            "w": 600,
-            "h": 158,
-            "label_size": 72,
-            "bar": 30
-          },
-          "_fz": 41
+            "start": 49,
+            "dur": 34,
+            "y": 560,
+            "x": 76,
+            "w": 460,
+            "h": 150,
+            "label_size": 60,
+            "bar": 24,
+            "from": 0.3
+          }
         }
       ],
       "title_y": 1300
@@ -522,56 +530,64 @@
           },
           "texts": [
             {
-              "_tipo": "frase de comida",
+              "_tipo": "creditos estilo GTA San Andreas (gotico dourado + nomes cinza-azulados)",
               "lines": [
                 {
-                  "text": "PICANHA",
-                  "font": "assets/fonts/Anton-Regular.ttf",
-                  "size": 70,
-                  "color": "white",
-                  "tracking": 0.06,
+                  "text": "picanha",
+                  "font": "assets/fonts/PirataOne-Regular.ttf",
+                  "size": 125,
+                  "color": "sa_gold",
+                  "tracking": 0.0,
                   "italic": false,
-                  "_edge": 0.7,
-                  "_soft": 0.6,
-                  "align": "left"
+                  "align": "left",
+                  "gap": -0.12,
+                  "delay": 0,
+                  "_edge": 1.0,
+                  "_edge_r": 5,
+                  "_soft": 0.5
                 },
                 {
-                  "text": "SUCULENTA",
-                  "font": "assets/fonts/Anton-Regular.ttf",
-                  "size": 115,
-                  "color": "fire",
-                  "tracking": 0.02,
+                  "text": "suculenta",
+                  "font": "assets/fonts/PirataOne-Regular.ttf",
+                  "size": 125,
+                  "color": "sa_gold",
+                  "tracking": 0.0,
                   "italic": false,
-                  "gap": -0.18,
-                  "delay": 3,
-                  "align": "left"
+                  "align": "left",
+                  "gap": -0.3,
+                  "delay": 4,
+                  "_edge": 1.0,
+                  "_edge_r": 5,
+                  "_soft": 0.5
                 }
               ],
               "cx": 0.0,
-              "cy": 0.2,
+              "cy": 0.23,
               "start": 26,
               "dur": 44,
               "follow": 0,
-              "punch": true
+              "punch": false
             }
           ],
+          "_fz": 30,
           "gta": {
+            "style": "sa",
             "label": "RESPEITO",
             "color": [
               80,
               150,
               235
             ],
-            "start": 40,
-            "dur": 32,
-            "y": 630,
-            "from": 0.3,
-            "w": 600,
-            "h": 158,
-            "label_size": 72,
-            "bar": 30
-          },
-          "_fz": 30
+            "start": 38,
+            "dur": 34,
+            "y": 560,
+            "x": 76,
+            "w": 460,
+            "h": 150,
+            "label_size": 60,
+            "bar": 24,
+            "from": 0.3
+          }
         }
       ],
       "title_y": 1300
@@ -734,56 +750,64 @@
           },
           "texts": [
             {
-              "_tipo": "frase de comida",
+              "_tipo": "creditos estilo GTA San Andreas (gotico dourado + nomes cinza-azulados)",
               "lines": [
                 {
-                  "text": "COSTELA",
-                  "font": "assets/fonts/Anton-Regular.ttf",
-                  "size": 70,
-                  "color": "white",
-                  "tracking": 0.06,
+                  "text": "costela",
+                  "font": "assets/fonts/PirataOne-Regular.ttf",
+                  "size": 125,
+                  "color": "sa_gold",
+                  "tracking": 0.0,
                   "italic": false,
-                  "_edge": 0.7,
-                  "_soft": 0.6,
-                  "align": "left"
+                  "align": "left",
+                  "gap": -0.12,
+                  "delay": 0,
+                  "_edge": 1.0,
+                  "_edge_r": 5,
+                  "_soft": 0.5
                 },
                 {
-                  "text": "MACIA",
-                  "font": "assets/fonts/Anton-Regular.ttf",
-                  "size": 115,
-                  "color": "fire",
-                  "tracking": 0.02,
+                  "text": "macia",
+                  "font": "assets/fonts/PirataOne-Regular.ttf",
+                  "size": 125,
+                  "color": "sa_gold",
+                  "tracking": 0.0,
                   "italic": false,
-                  "gap": -0.18,
-                  "delay": 3,
-                  "align": "left"
+                  "align": "left",
+                  "gap": -0.3,
+                  "delay": 4,
+                  "_edge": 1.0,
+                  "_edge_r": 5,
+                  "_soft": 0.5
                 }
               ],
               "cx": 0.0,
-              "cy": 0.2,
+              "cy": 0.23,
               "start": 31,
               "dur": 44,
               "follow": 0,
-              "punch": true
+              "punch": false
             }
           ],
+          "_fz": 35,
           "gta": {
+            "style": "sa",
             "label": "RAINHA DO CHURRASCO",
             "color": [
               255,
               196,
               40
             ],
-            "start": 45,
-            "dur": 32,
-            "y": 630,
-            "from": 0.3,
-            "w": 720,
-            "h": 158,
-            "label_size": 62,
-            "bar": 30
-          },
-          "_fz": 35
+            "start": 43,
+            "dur": 34,
+            "y": 560,
+            "x": 76,
+            "w": 640,
+            "h": 150,
+            "label_size": 60,
+            "bar": 24,
+            "from": 0.3
+          }
         }
       ],
       "title_y": 1300
@@ -830,7 +854,15 @@
   },
   "sound": {
     "whoosh_db": -27,
-    "end_hit_db": -20
+    "end_hit_db": -20,
+    "music": {
+      "file": "source/MUSICA_GTA_SA.mp4",
+      "start": 6.35,
+      "gain_db": 4.5,
+      "bed_db": 2,
+      "fade_out": 1.8,
+      "_nota": "tema do GTA San Andreas (enviado pelo cliente). A batida (9,85 s da faixa) cai no corte para a fachada (3,5 s)."
+    }
   },
   "_ritmo": "v6 = edicao da ref. 3 (T TECH) como molde: plano de abertura de cada unidade segura ~2 s com o logo montando (como a fachada da ref.); cada plano de detalhe dura ~1,05 s e ENTRA em rampa (comeca rapido com borrao de movimento real e desacelera ate camera lenta), corte seco com leve clarao, sem whip; nomes em letreiro preso no cenario. v7: sem limite de 20 s — cada clipe usado quase inteiro (do inicio ao fim util), mesma rampa de entrada.",
   "_tipografia": "v11: volta ao sistema de texto da v7 a pedido do cliente — UMA fonte (Montserrat), UM lugar (embaixo a esquerda, x 84, y 1300, faixa de sombra), UM formato (linha pequena espacada + linha grande ExtraBold, regua dourada) para titulos e frases; abertura igual a v7. v13: frases de comida com estilo proprio (Anton, centralizadas no alto, branco + degrade de brasa, entrada em estalo); titulos das unidades continuam no sistema da v12 (embaixo a esquerda).",
