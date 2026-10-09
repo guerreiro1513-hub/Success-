@@ -79,44 +79,101 @@
       },
       "_nota": "entrada do GTA em tela cheia vertical (pedido do cliente): faixa central da imagem (fora das marcas do TikTok), limpa e ampliada. Corta antes do salto para a rua (sem personagens). prep_abertura.py fica como alternativa (janela horizontal).",
       "pre": "hqdn3d=2:1.5:3:3",
-      "pop": [
+      "stars": {
+        "n": 5,
+        "r": 44,
+        "cx": 0.5,
+        "cy": 0.165,
+        "start": 2,
+        "every": 3,
+        "dur": 52
+      },
+      "texts": [
         {
-          "text": "O GTA LEVOU VOCÊ PRO",
-          "font": "assets/fonts/Montserrat.ttf",
-          "weight": 600,
-          "size": 50,
-          "cx": 0.46,
-          "cy": 0.185,
-          "start": 3,
-          "dur": 96,
-          "stagger": 1,
+          "_tipo": "hook 1 (piada do GTA: nivel de procurado)",
+          "lines": [
+            {
+              "text": "O CHURRASCO",
+              "font": "assets/fonts/Anton-Regular.ttf",
+              "size": 88,
+              "color": "white",
+              "tracking": 0.06,
+              "italic": false,
+              "_edge": 0.7,
+              "_soft": 0.6
+            },
+            {
+              "text": "MAIS PROCURADO",
+              "font": "assets/fonts/Anton-Regular.ttf",
+              "size": 170,
+              "color": "fire",
+              "tracking": 0.02,
+              "italic": false,
+              "gap": -0.16,
+              "delay": 4
+            },
+            {
+              "text": "DE CUIABÁ",
+              "font": "assets/fonts/Anton-Regular.ttf",
+              "size": 88,
+              "color": "white",
+              "tracking": 0.06,
+              "italic": false,
+              "_edge": 0.7,
+              "_soft": 0.6,
+              "gap": -0.06,
+              "delay": 8
+            }
+          ],
+          "cx": 0.5,
+          "cy": 0.3,
+          "start": 6,
+          "dur": 48,
           "follow": 0,
-          "tracking": 0.04
+          "punch": true,
+          "shade": 0.45
         },
         {
-          "text": "MELHOR CHURRASCO",
-          "font": "assets/fonts/Montserrat.ttf",
-          "weight": 800,
-          "size": 70,
-          "cx": 0.46,
-          "cy": 0.222,
-          "start": 10,
-          "dur": 89,
-          "stagger": 1.2,
+          "_tipo": "hook 2 (missao do GTA: segura ate o fim)",
+          "lines": [
+            {
+              "text": "NOVA MISSÃO:",
+              "font": "assets/fonts/Anton-Regular.ttf",
+              "size": 88,
+              "color": "white",
+              "tracking": 0.06,
+              "italic": false,
+              "_edge": 0.7,
+              "_soft": 0.6
+            },
+            {
+              "text": "COMER NAS",
+              "font": "assets/fonts/Anton-Regular.ttf",
+              "size": 150,
+              "color": "fire",
+              "tracking": 0.02,
+              "italic": false,
+              "gap": -0.14,
+              "delay": 3
+            },
+            {
+              "text": "3 UNIDADES",
+              "font": "assets/fonts/Anton-Regular.ttf",
+              "size": 150,
+              "color": "fire",
+              "tracking": 0.02,
+              "italic": false,
+              "gap": -0.22,
+              "delay": 6
+            }
+          ],
+          "cx": 0.5,
+          "cy": 0.27,
+          "start": 56,
+          "dur": 48,
           "follow": 0,
-          "tracking": 0.04
-        },
-        {
-          "text": "DE CUIABÁ",
-          "font": "assets/fonts/Montserrat.ttf",
-          "weight": 800,
-          "size": 70,
-          "cx": 0.46,
-          "cy": 0.257,
-          "start": 20,
-          "dur": 79,
-          "stagger": 1.5,
-          "follow": 0
+          "punch": true,
+          "shade": 0.45
         }
       ]
     }
@@ -177,13 +234,14 @@
           "ambience_db": -60,
           "transition_out": {
             "type": "match_zoom",
-            "frames": 12,
-            "amount": 3.0,
+            "frames": 9,
+            "amount": 2.2,
             "cx": 0.27,
             "cy": 0.8,
-            "overlap": 4,
-            "in_frames": 8,
-            "in_amount": 1.2
+            "overlap": 2,
+            "in_frames": 11,
+            "in_amount": 1.45,
+            "flash": 0.55
           },
           "hires": 2,
           "logo": {
@@ -231,13 +289,23 @@
           }
         },
         {
+          "reframe": {
+            "zoom": 1.0,
+            "x": 0.5,
+            "y": 0.5
+          },
+          "ambience_db": -60,
+          "transition_out": {
+            "type": "ramp_in",
+            "in_frames": 5,
+            "lift": 0.12
+          },
+          "_broll": true,
           "file": "source/BROLL_DIA.mov",
-          "_o_que": "B-ROLL tesoura abrindo o frango assado: entra lento, PARA com FRANGO NA BRASA e segue",
           "segments": [
             [
-              5.55,
+              5.75,
               6.28,
-              1.0,
               0.5
             ],
             [
@@ -251,48 +319,43 @@
               0.5
             ]
           ],
-          "reframe": {
-            "zoom": 1.0,
-            "x": 0.5,
-            "y": 0.5
+          "fix": "format=gbrp,split[ca][cb];[cb]curves=all='0/0 0.78/0 1/1',gblur=sigma=22,colorchannelmixer=rr=1:gg=0.5:bb=0.3[ch];[ca][ch]blend=all_mode=screen:all_opacity=0.22,eq=contrast=1.08:saturation=1.03:gamma=0.98,colorbalance=rs=0.01:bs=-0.01:rm=0.015:bm=-0.015:rh=0.03:gh=0.01:bh=-0.03,curves=all='0/0 0.15/0.11 0.5/0.49 0.85/0.87 1/0.97',vignette=angle=PI/6,cas=strength=0.25,format=yuv420p,noise=alls=5:allf=t",
+          "_o_que": "B-ROLL tesoura abrindo o frango assado (video de dia)",
+          "cinema": {
+            "lens": true,
+            "bars": 140
           },
-          "fix": "split[ca][cb];[cb]curves=all='0/0 0.72/0 1/1',gblur=sigma=18[ch];[ca][ch]blend=all_mode=screen:all_opacity=0.22,eq=contrast=1.12:saturation=1.06:gamma=1.10,colorbalance=rs=-0.04:gs=-0.01:bs=0.05:rm=0.02:bm=-0.02:rh=0.06:gh=0.02:bh=-0.05:pl=1,curves=all='0/0.012 0.16/0.15 0.5/0.53 0.84/0.88 1/0.985',vignette=angle=PI/4.5,cas=strength=0.45,noise=alls=4:allf=t",
-          "ambience_db": -60,
-          "transition_out": {
-            "type": "ramp_in",
-            "in_frames": 5,
-            "lift": 0.12
-          },
-          "_broll": true,
           "texts": [
             {
-              "_tipo": "frase de comida (estilo v13)",
+              "_tipo": "frase de comida",
               "lines": [
                 {
                   "text": "FRANGO",
                   "font": "assets/fonts/Anton-Regular.ttf",
-                  "size": 92,
+                  "size": 70,
                   "color": "white",
                   "tracking": 0.06,
                   "italic": false,
                   "_edge": 0.7,
-                  "_soft": 0.6
+                  "_soft": 0.6,
+                  "align": "left"
                 },
                 {
                   "text": "NA BRASA",
                   "font": "assets/fonts/Anton-Regular.ttf",
-                  "size": 210,
+                  "size": 115,
                   "color": "fire",
                   "tracking": 0.02,
                   "italic": false,
                   "gap": -0.18,
-                  "delay": 3
+                  "delay": 3,
+                  "align": "left"
                 }
               ],
-              "cx": 0.5,
-              "cy": 0.215,
-              "start": 31,
-              "dur": 42,
+              "cx": 0.0,
+              "cy": 0.2,
+              "start": 28,
+              "dur": 44,
               "follow": 0,
               "punch": true
             }
@@ -384,32 +447,11 @@
           }
         },
         {
-          "file": "source/BROLL_NOITE.mov",
-          "_o_que": "B-ROLL faca entrando na costela (print do cliente): entra em camera lenta, PARA (congela 20 q) com a frase batendo, e segue lento",
-          "segments": [
-            [
-              8.55,
-              9.22,
-              1.0,
-              0.5
-            ],
-            [
-              9.22,
-              9.23,
-              0.015
-            ],
-            [
-              9.23,
-              9.55,
-              0.5
-            ]
-          ],
           "reframe": {
-            "zoom": 1.0,
-            "x": 0.5,
+            "zoom": 1.15,
+            "x": 0.0,
             "y": 0.5
           },
-          "fix": "split[ca][cb];[cb]curves=all='0/0 0.72/0 1/1',gblur=sigma=18[ch];[ca][ch]blend=all_mode=screen:all_opacity=0.22,eq=contrast=1.12:saturation=1.06:gamma=1.10,colorbalance=rs=-0.04:gs=-0.01:bs=0.05:rm=0.02:bm=-0.02:rh=0.06:gh=0.02:bh=-0.05:pl=1,curves=all='0/0.012 0.16/0.15 0.5/0.53 0.84/0.88 1/0.985',vignette=angle=PI/4.5,cas=strength=0.45,noise=alls=4:allf=t",
           "ambience_db": -60,
           "transition_out": {
             "type": "ramp_in",
@@ -417,35 +459,61 @@
             "lift": 0.12
           },
           "_broll": true,
+          "file": "work/PICANHA_60.mov",
+          "segments": [
+            [
+              0.25,
+              0.75,
+              0.5
+            ],
+            [
+              0.75,
+              0.76,
+              0.015
+            ],
+            [
+              0.76,
+              1.2,
+              0.5
+            ]
+          ],
+          "fix": "format=gbrp,split[ca][cb];[cb]curves=all='0/0 0.78/0 1/1',gblur=sigma=22,colorchannelmixer=rr=1:gg=0.5:bb=0.3[ch];[ca][ch]blend=all_mode=screen:all_opacity=0.22,eq=contrast=1.06:saturation=1.03:gamma=1.06,colorbalance=rs=0.01:bs=-0.01:rm=0.015:bm=-0.015:rh=0.03:gh=0.01:bh=-0.03,curves=all='0/0 0.12/0.10 0.5/0.52 0.85/0.89 1/0.98',vignette=angle=PI/7,cas=strength=0.25,format=yuv420p,noise=alls=5:allf=t",
+          "_o_que": "B-ROLL picanha: o assador desce a fatia na tabua com a picanha fatiada na frente (BROLL_NOITE 13,12 s, 30p interpolado para 60)",
+          "cinema": {
+            "lens": true,
+            "bars": 140
+          },
           "texts": [
             {
-              "_tipo": "frase de comida (estilo v13)",
+              "_tipo": "frase de comida",
               "lines": [
                 {
-                  "text": "COSTELA",
+                  "text": "PICANHA",
                   "font": "assets/fonts/Anton-Regular.ttf",
-                  "size": 92,
+                  "size": 70,
                   "color": "white",
                   "tracking": 0.06,
                   "italic": false,
                   "_edge": 0.7,
-                  "_soft": 0.6
+                  "_soft": 0.6,
+                  "align": "left"
                 },
                 {
-                  "text": "NA BRASA",
+                  "text": "SUCULENTA",
                   "font": "assets/fonts/Anton-Regular.ttf",
-                  "size": 210,
+                  "size": 115,
                   "color": "fire",
                   "tracking": 0.02,
                   "italic": false,
                   "gap": -0.18,
-                  "delay": 3
+                  "delay": 3,
+                  "align": "left"
                 }
               ],
-              "cx": 0.5,
-              "cy": 0.215,
-              "start": 28,
-              "dur": 42,
+              "cx": 0.0,
+              "cy": 0.2,
+              "start": 26,
+              "dur": 44,
               "follow": 0,
               "punch": true
             }
@@ -485,14 +553,15 @@
           "ambience_db": -32,
           "transition_out": {
             "type": "match_zoom",
-            "frames": 12,
-            "amount": 3.0,
+            "frames": 9,
+            "amount": 2.2,
             "cx": 0.74,
             "cy": 0.5,
-            "overlap": 4,
-            "in_frames": 8,
-            "in_amount": 1.2,
-            "_nota": "mesmo mergulho da Tropical Ville: da tenda a camera entra na churrasqueira da direita e sai no close da costela (C143b)"
+            "overlap": 2,
+            "in_frames": 11,
+            "in_amount": 1.45,
+            "_nota": "mesmo mergulho da Tropical Ville: da tenda a camera entra na churrasqueira da direita e sai no close da costela (C143b)",
+            "flash": 0.55
           },
           "logo": {
             "file": "../../referencias/logo-brasao-recortado.png",
@@ -561,32 +630,11 @@
           }
         },
         {
-          "file": "source/BROLL_NOITE.mov",
-          "_o_que": "B-ROLL fogo subindo na carne: entra em camera lenta, PARA (congela 20 q) com a frase batendo, e segue lento",
-          "segments": [
-            [
-              10.9,
-              11.55,
-              1.0,
-              0.5
-            ],
-            [
-              11.55,
-              11.56,
-              0.015
-            ],
-            [
-              11.56,
-              11.85,
-              0.5
-            ]
-          ],
           "reframe": {
             "zoom": 1.0,
             "x": 0.5,
             "y": 0.5
           },
-          "fix": "split[ca][cb];[cb]curves=all='0/0 0.72/0 1/1',gblur=sigma=18[ch];[ca][ch]blend=all_mode=screen:all_opacity=0.22,eq=contrast=1.12:saturation=1.06:gamma=1.10,colorbalance=rs=-0.04:gs=-0.01:bs=0.05:rm=0.02:bm=-0.02:rh=0.06:gh=0.02:bh=-0.05:pl=1,curves=all='0/0.012 0.16/0.15 0.5/0.53 0.84/0.88 1/0.985',vignette=angle=PI/4.5,cas=strength=0.45,noise=alls=4:allf=t",
           "ambience_db": -60,
           "transition_out": {
             "type": "ramp_in",
@@ -594,35 +642,74 @@
             "lift": 0.12
           },
           "_broll": true,
+          "file": "source/BROLL_NOITE.mov",
+          "segments": [
+            [
+              8.75,
+              9.22,
+              0.5
+            ],
+            [
+              9.22,
+              9.23,
+              0.015
+            ],
+            [
+              9.23,
+              9.55,
+              0.5
+            ]
+          ],
+          "fix": "format=gbrp,split[ca][cb];[cb]curves=all='0/0 0.78/0 1/1',gblur=sigma=22,colorchannelmixer=rr=1:gg=0.5:bb=0.3[ch];[ca][ch]blend=all_mode=screen:all_opacity=0.22,eq=contrast=1.06:saturation=1.03:gamma=1.06,colorbalance=rs=0.01:bs=-0.01:rm=0.015:bm=-0.015:rh=0.03:gh=0.01:bh=-0.03,curves=all='0/0 0.12/0.10 0.5/0.52 0.85/0.89 1/0.98',vignette=angle=PI/7,cas=strength=0.25,format=yuv420p,noise=alls=5:allf=t",
+          "_o_que": "B-ROLL faca na costela (BROLL_NOITE)",
+          "cinema": {
+            "lens": true,
+            "bars": 140
+          },
           "texts": [
             {
-              "_tipo": "frase de comida (estilo v13)",
+              "_tipo": "frase de comida",
               "lines": [
                 {
-                  "text": "FEITO NO",
+                  "text": "COSTELA",
                   "font": "assets/fonts/Anton-Regular.ttf",
-                  "size": 92,
+                  "size": 70,
                   "color": "white",
                   "tracking": 0.06,
                   "italic": false,
                   "_edge": 0.7,
-                  "_soft": 0.6
+                  "_soft": 0.6,
+                  "align": "left"
                 },
                 {
-                  "text": "CARVÃO",
+                  "text": "MACIA",
                   "font": "assets/fonts/Anton-Regular.ttf",
-                  "size": 210,
+                  "size": 115,
                   "color": "fire",
                   "tracking": 0.02,
                   "italic": false,
                   "gap": -0.18,
-                  "delay": 3
+                  "delay": 3,
+                  "align": "left"
+                },
+                {
+                  "text": "DESMANCHA SÓ DE OLHAR",
+                  "font": "assets/fonts/Anton-Regular.ttf",
+                  "size": 46,
+                  "color": "white",
+                  "tracking": 0.06,
+                  "italic": false,
+                  "_edge": 0.7,
+                  "_soft": 0.6,
+                  "gap": -0.02,
+                  "delay": 9,
+                  "align": "left"
                 }
               ],
-              "cx": 0.5,
-              "cy": 0.215,
-              "start": 27,
-              "dur": 42,
+              "cx": 0.0,
+              "cy": 0.2,
+              "start": 24,
+              "dur": 44,
               "follow": 0,
               "punch": true
             }
@@ -662,7 +749,7 @@
       "no_look": true,
       "block": {
         "lines": [
-          "3 UNIDADES · CUIABÁ",
+          "MISSÃO CUMPRIDA",
           "GUERREIRO'S GRILL"
         ],
         "start": 0.1,
@@ -677,5 +764,5 @@
   },
   "_ritmo": "v6 = edicao da ref. 3 (T TECH) como molde: plano de abertura de cada unidade segura ~2 s com o logo montando (como a fachada da ref.); cada plano de detalhe dura ~1,05 s e ENTRA em rampa (comeca rapido com borrao de movimento real e desacelera ate camera lenta), corte seco com leve clarao, sem whip; nomes em letreiro preso no cenario. v7: sem limite de 20 s — cada clipe usado quase inteiro (do inicio ao fim util), mesma rampa de entrada.",
   "_tipografia": "v11: volta ao sistema de texto da v7 a pedido do cliente — UMA fonte (Montserrat), UM lugar (embaixo a esquerda, x 84, y 1300, faixa de sombra), UM formato (linha pequena espacada + linha grande ExtraBold, regua dourada) para titulos e frases; abertura igual a v7. v13: frases de comida com estilo proprio (Anton, centralizadas no alto, branco + degrade de brasa, entrada em estalo); titulos das unidades continuam no sistema da v12 (embaixo a esquerda).",
-  "_estrutura": "v16: texto so no 1o plano de cada unidade (nome dourado embaixo). Depois dos 3 planos da unidade entra um B-ROLL de comida em close e camera lenta, com look de cinema: frango no rolete (apos Tropical Ville), faca na costela (apos Florais), fogo na grelha (apos Jardim). Fonte dos b-rolls: BROLL_NOITE (o material mais cinematografico que o cliente tem: fundo desfocado, luva preta, avental com logo)."
+  "_estrutura": "v20: hook do GTA (estrelas de procurado + 'nova missao'), um b-roll por unidade no estilo do SEGREDO (camera lenta 0,5x, lente, faixas pretas, halation quente): frango (TV, dia), picanha (Florais), costela (Jardim). Texto da unidade so no 1o plano."
 }

@@ -84,6 +84,63 @@ def clip_frames(clip, W, H, fps, look):
 
 
 # ---------------------------------------------------------------- transições
+_LENS = {}
+def apply_cinema(frames, cfg, scale):
+    """Acabamento do SEGREDO nos b-rolls: centro nitido e bordas desfocadas (lente aberta) e faixas pretas."""
+    H, W = frames[0].shape[:2]
+    if cfg.get("lens", True):
+        key = (W, H)
+        if key not in _LENS:
+            y, x = np.mgrid[0:H, 0:W].astype(np.float32)
+            r = np.sqrt(((x - W / 2) / (W / 2)) ** 2 + ((y - H * 0.47) / (H / 2)) ** 2)
+            _LENS[key] = (np.clip((r - 0.62) / 0.55, 0, 1) ** 1.6)[..., None]
+        m = _LENS[key]
+        for j, f in enumerate(frames):
+            b = cv2.GaussianBlur(f, (0, 0), 9 * scale)
+            frames[j] = (f * (1 - m) + b * m).astype(np.uint8)
+    bar = int(cfg.get("bars", 140) * scale)
+    if bar:
+        for f in frames: f[:bar] = 0; f[H - bar:] = 0
+
+
+def apply_stars(frames, cfg, scale):
+    """Estrelas de procurado do GTA acendendo uma a uma (com o piscar do jogo)."""
+    H, W = frames[0].shape[:2]
+    n, R = cfg.get("n", 5), cfg.get("r", 46) * scale
+    gap = R * 2.35
+    cx, cy = cfg.get("cx", 0.5) * W, cfg.get("cy", 0.2) * H
+    st, every, du = cfg.get("start", 3), cfg.get("every", 3), cfg.get("dur", 60)
+    def star(c, r):
+        return np.array([[c[0] + (r if i % 2 == 0 else r * 0.45) * math.sin(i * math.pi / 5),
+                          c[1] - (r if i % 2 == 0 else r * 0.45) * math.cos(i * math.pi / 5)] for i in range(10)], np.int32)
+    for j in range(len(frames)):
+        k = j - st
+        if k < 0 or k >= du: continue
+        lay = np.zeros((H, W, 3), np.float32); A = np.zeros((H, W), np.float32); G = np.zeros((H, W), np.float32)
+        out_a = 1 - ease_out(max(0, (k - (du - 5)) / 5))
+        for i in range(n):
+            q = (k - i * every) / 5
+            if q <= 0: continue
+            sc_ = 1 + 0.6 * math.exp(-q * 2.5) * math.cos(q * 4) if q < 2.5 else 1.0
+            c = (cx + (i - (n - 1) / 2) * gap, cy)
+            pts = star(c, R * sc_)
+            blink = 0.55 if (cfg.get("blink", True) and (k // 4) % 2 and k > n * every + 6 and k < n * every + 22) else 1.0
+            m = np.zeros((H, W), np.uint8); cv2.fillPoly(m, [pts], 255, cv2.LINE_AA)
+            o = np.zeros((H, W), np.uint8); cv2.polylines(o, [pts], True, 255, max(2, int(6 * scale)), cv2.LINE_AA)
+            a = m / 255.0 * min(1, q) * blink
+            col = np.array([255, 205, 60.]) * (0.85 + 0.15 * np.linspace(1, 0, H)[:, None, None])
+            lay = lay * (1 - a[..., None]) + col * a[..., None]
+            A = np.maximum(A, np.maximum(a, o / 255.0 * min(1, q)))
+            G = np.maximum(G, a)
+        if A.max() == 0: continue
+        glow = cv2.GaussianBlur(G, (0, 0), 14 * scale)[..., None] * 0.6 * out_a
+        f = frames[j].astype(np.float32)
+        f = f + (np.array([255, 150, 30.]) - f) * glow * 0.6
+        a = A[..., None] * out_a
+        f = f * (1 - a) + lay * a          # contorno fica preto (lay = 0 onde so tem contorno)
+        frames[j] = np.clip(f, 0, 255).astype(np.uint8)
+
+
 def shift_blur(img, d0, d1, ang, samples):
     """Desloca a imagem de d0 a d1 px na direção ang (graus) com rastro (motion blur)."""
     H, W = img.shape[:2]
@@ -135,6 +192,9 @@ def apply_out(frames, tr, W, samples):
             Z = tr.get("amount", 2.5)
             st = lambda p: np.array([1 + (Z - 1) * ease_in(p), ease_in(p)])
             frames[i] = match_zoom_blur(frames[i], st(p0), st(p1), tr["cx"], tr["cy"], samples)
+        if tr.get("flash"):                             # clarao subindo ate o corte (luz entre os planos)
+            g = tr["flash"] * ease_in(p1) ** 1.5
+            frames[i] = np.clip(frames[i] * (1 - g) + 255 * g, 0, 255).astype(np.uint8)
 
 
 def apply_in(frames, tr, W, samples):
@@ -158,6 +218,9 @@ def apply_in(frames, tr, W, samples):
         elif tr["type"] == "match_zoom":
             Z = tr.get("in_amount", 1.2)
             frames[j] = zoom_blur(frames[j], 1 + (Z - 1) * ease_in(p0), 1 + (Z - 1) * ease_in(p1), samples)
+        if tr.get("flash"):
+            g = tr["flash"] * (1 - (j + 1) / (k + 1)) ** 2
+            frames[j] = np.clip(frames[j] * (1 - g) + 255 * g, 0, 255).astype(np.uint8)
 
 
 
@@ -605,10 +668,17 @@ def apply_texts(frames, texts, scale):
         Hs = (track_h(frames, min(st, len(frames) - 1), T_.get("track", [[0.05, 0.05, 0.95, 0.95]]))
               if fo > 0 else None)
         CO = cam_offsets(frames) if TEXT_MODE == "movimento" else None
+        shade = T_.get("shade", 0)
         for j in range(len(frames)):
             k = j - st
             if k < 0 or k >= du: continue
             px, py = cx, cy
+            if shade:
+                g = shade * min(1, (k + 1) / 5, (du - k) / 6)
+                yy = np.arange(H, dtype=np.float32)[:, None]
+                hh = (by1 - by0) * 0.75
+                band_ = np.exp(-0.5 * ((yy - (cy + (by0 + by1) / 2)) / hh) ** 2)
+                frames[j] = (frames[j] * (1 - g * band_[..., None])).astype(np.uint8)
             if Hs is not None:
                 pc = Hs[j] @ np.array([cx, cy, 1.0]); pc = pc[:2] / pc[2]
                 px, py = cx + (pc[0] - cx) * fo, cy + (pc[1] - cy) * fo
@@ -858,10 +928,12 @@ def main():
         c = item["clip"]
         hr = c.get("hires", 1)
         fr = clip_frames(c, W * hr, H * hr, fps, look)
+        if c.get("cinema"): apply_cinema(fr, c["cinema"], sc * hr)
         apply_in(fr, prev_out, W * hr, samples)
         if c.get("logo"): apply_logo(fr, c["logo"])
         if TEXT_MODE != "sem":
             if c.get("labels"): apply_labels(fr, c["labels"], sc * hr)
+            if c.get("stars"): apply_stars(fr, c["stars"], sc * hr)
             for pp in ([c["pop"]] if isinstance(c.get("pop"), dict) else c.get("pop", [])):
                 apply_pop(fr, pp, sc * hr)
             if TEXT_MODE == "movimento" and c.get("labels_mov"): apply_labels(fr, c["labels_mov"], sc * hr)

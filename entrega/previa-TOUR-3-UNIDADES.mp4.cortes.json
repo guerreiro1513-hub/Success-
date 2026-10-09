@@ -1,5 +1,5 @@
 {
-  "duracao": 29.0,
+  "duracao": 29.167,
   "fps": 30,
   "cortes": [
     {
@@ -18,57 +18,57 @@
       "unidade": "TROPICAL VILLE"
     },
     {
-      "t": 7.0,
+      "t": 7.067,
       "clip": "TV_C128b_frangos.mov",
       "unidade": "TROPICAL VILLE"
     },
     {
-      "t": 8.433,
+      "t": 8.5,
       "clip": "BROLL_DIA.mov",
       "unidade": "TROPICAL VILLE"
     },
     {
-      "t": 11.1,
+      "t": 11.067,
       "clip": "FL_IMG_1429.mov",
       "unidade": "FLORAIS"
     },
     {
-      "t": 12.9,
+      "t": 12.867,
       "clip": "FL_C164.mov",
       "unidade": "FLORAIS"
     },
     {
-      "t": 14.867,
+      "t": 14.833,
       "clip": "FL_C177.mov",
       "unidade": "FLORAIS"
     },
     {
-      "t": 17.0,
-      "clip": "BROLL_NOITE.mov",
+      "t": 16.967,
+      "clip": "PICANHA_60.mov",
       "unidade": "FLORAIS"
     },
     {
-      "t": 19.367,
+      "t": 19.5,
       "clip": "JA_C143a.mov",
       "unidade": "JARDIM ACLIMAÇÃO"
     },
     {
-      "t": 21.533,
+      "t": 21.733,
       "clip": "JA_C143b.mov",
       "unidade": "JARDIM ACLIMAÇÃO"
     },
     {
-      "t": 23.267,
+      "t": 23.467,
       "clip": "JA_1633_estab.mov",
       "unidade": "JARDIM ACLIMAÇÃO"
     },
     {
-      "t": 25.167,
+      "t": 25.367,
       "clip": "BROLL_NOITE.mov",
       "unidade": "JARDIM ACLIMAÇÃO"
     },
     {
-      "t": 27.433,
+      "t": 27.6,
       "clip": "VINHETA.mov",
       "unidade": "vinheta"
     }
@@ -76,15 +76,15 @@
   "transicoes_de_camera": [
     3.5,
     5.133,
-    7.0,
-    8.433,
-    11.1,
-    12.9,
-    14.867,
-    17.0,
-    19.367,
-    21.533,
-    23.267,
-    27.433
+    7.067,
+    8.5,
+    11.067,
+    12.867,
+    14.833,
+    16.967,
+    19.5,
+    21.733,
+    23.467,
+    27.6
   ]
 }

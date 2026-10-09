@@ -290,3 +290,25 @@ unidade, pegando b-roll também do vídeo de dia.
   grão leve; gama 1,10 para não escurecer a carne.
 - Entrega: `entrega/guerreiros-TOUR-3-UNIDADES.mp4` (versão principal). As versões -TEXTO-EM-MOVIMENTO e
   -SEM-TEXTO ficaram na v15 (o cliente pediu para voltar ao texto fixo).
+
+# v20 — hook do GTA, picanha no Florais, costela no Jardim, look do SEGREDO (29,2 s)
+Pedido: hook de 3 s com piada do GTA para segurar o público; trocar a costela do Florais por picanha
+("PICANHA SUCULENTA") e usar a costela ("COSTELA MACIA" + piada); textos dos b-rolls melhor posicionados;
+b-rolls no estilo do SEGREDO (câmera lenta, cinema); transições da Tropical Ville e do Jardim melhores.
+- **Bug corrigido:** manchas azuis no frango e cinzas na grelha vinham do `colorbalance ... pl=1` (preservar
+  luminosidade) nas cores muito saturadas. Removido; cor dos b-rolls agora é a do SEGREDO (CIN/CINN).
+- **Hook (abertura do GTA):** 5 estrelas de procurado acendendo uma a uma (e piscando, como no jogo) +
+  "O CHURRASCO / MAIS PROCURADO / DE CUIABÁ"; depois "NOVA MISSÃO: / COMER NAS / 3 UNIDADES" (puxa a pessoa
+  a ver as três). Anton com sombra local para ler sobre a cidade. Fim da vinheta: "MISSÃO CUMPRIDA".
+- **B-rolls (um por unidade), estilo SEGREDO:** câmera lenta 0,5x constante, congela ~0,67 s com a frase e
+  segue lenta; lente (bordas desfocadas), faixas pretas de cinema (140 px), halation quente e grão.
+  - Tropical Ville → BROLL_DIA 5,75–6,70 (tesoura no frango) — FRANGO / NA BRASA.
+  - Florais → `work/PICANHA_60.mov` (BROLL_NOITE 13,12–14,38, 30p interpolado para 60 com minterpolate):
+    assador descendo a fatia, picanha fatiada na frente — PICANHA / SUCULENTA. Reenquadro 1,15x.
+  - Jardim → BROLL_NOITE 8,75–9,55 (faca na costela) — COSTELA / MACIA / "DESMANCHA SÓ DE OLHAR".
+  - Texto em cima à esquerda, alinhado à esquerda, tamanho 70/115/46: não cobre o logo do avental, o
+    rosto do assador nem a comida.
+- **Transições TV e Jardim (mergulho):** 9 quadros com zoom 2,2x (era 12 / 3,0x, ficava "lama"),
+  dissolve 2, clarão no corte (`flash` 0,55) e o plano seguinte chega com zoom 1,45→1 em 11 quadros.
+- Novas funções no render.py: `apply_cinema` (lente + faixas), `apply_stars`, `shade` no `apply_texts`,
+  `flash` nas transições.
