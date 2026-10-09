@@ -340,4 +340,5 @@ um vídeo na TV (escolha minha); piada no estilo GTA nos três b-rolls; b-rolls 
 - Jardim: aviso do GTA "GORDURA" trocado por "RAINHA DO CHURRASCO" (barra dourada).
 - Hook: texto ainda 23 px à esquerda (o bloco encostava na margem direita do Reels); `max_w` 0,78 → centro
   exato, alinhado com as estrelas (medido no quadro 45).
-- Ordem da TV: fachada → frangos (mergulho, mesmo take) → grelha giratória → costela girando → b-roll do frango.
+- Ordem da TV: fachada → frangos (mergulho, mesmo take) → grelha giratória → b-roll do frango. A costela girando
+  (TV_C122) saiu a pedido do cliente (29,3 s no total).

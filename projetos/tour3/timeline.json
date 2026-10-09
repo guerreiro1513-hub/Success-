@@ -293,30 +293,6 @@
           }
         },
         {
-          "file": "source/TV_C122_costela.mov",
-          "_o_que": "costela no giro (iPhone 4K/60p), camera indo pra esquerda e avancando",
-          "segments": [
-            [
-              0.0,
-              1.05,
-              1.1,
-              0.8
-            ]
-          ],
-          "reframe": {
-            "zoom": 1.0,
-            "x": 0.66,
-            "y": 0.5
-          },
-          "fix": "eq=gamma=1.02:contrast=1.04",
-          "ambience_db": -60,
-          "transition_out": {
-            "type": "ramp_in",
-            "in_frames": 5,
-            "lift": 0.12
-          }
-        },
-        {
           "reframe": {
             "zoom": 1.0,
             "x": 0.5,
