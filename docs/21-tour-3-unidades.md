@@ -238,3 +238,16 @@ A rodada coincidiu com os pedidos do cliente da v14 (frangos reenquadrados, niti
 texto em movimento), que já foram renderizados. Conferido nas 3 versões: sem quadro preto, pico −1,9 dBFS
 (−23,5 LUFS só de ambiente; a música entra depois), sem quadro travado nos planos — as repetições
 apontadas estão na fonte do GTA (já vem assim) e no dissolve de 8 quadros para a vinheta. Nada mudou.
+
+# v15 — "texto em movimento" = letreiro preso no cenário (como o COSTELA na parede), sem bug
+O cliente mostrou o que quer: o letreiro grudado na parede/tampa, andando com a câmera. Por que bugava antes:
+homografia cheia num cenário 3D com a câmera avançando entortava o texto e às vezes o jogava para fora da tela;
+cada linha era rastreada à parte (separavam); o rastreio bruto tremia.
+Correções (`labels_mov`, só na versão `--texto=movimento`):
+- `track_h_robust`: meia resolução, 800 pontos, checagem ida-e-volta do fluxo, **similaridade** (move/gira/escala)
+  com RANSAC em vez de homografia; passo ruim repete o movimento anterior.
+- `smooth_quads`: cantos do letreiro suavizados no tempo.
+- Trava na área segura com empurrão segurado (máx. em janela de 13 q) e suavizado: nunca corta palavra.
+- As duas linhas (`text` + `text2`) num letreiro só: andam juntas.
+Letreiros: FRANGO/NA BRASA na parede de inox (TV), FEITO NO/CARVÃO na tampa (Florais), SEM ATALHO./SÓ BRASA.
+no capô dos espetos (Jardim). Montserrat branco com brilho, como o print.

@@ -261,6 +261,38 @@
               "follow": 0,
               "punch": true
             }
+          ],
+          "labels_mov": [
+            {
+              "text": "FRANGO",
+              "font": "assets/fonts/Montserrat.ttf",
+              "weight": 600,
+              "size": 64,
+              "tracking": 0.18,
+              "cx": 0.58,
+              "cy": 0.215,
+              "rot": -3,
+              "skew": 0.0,
+              "at": 8,
+              "start": 8,
+              "dur": 34,
+              "stagger": 1.0,
+              "slide": 0.0,
+              "track": [
+                [
+                  0.3,
+                  0.0,
+                  1.0,
+                  0.26
+                ]
+              ],
+              "robust": true,
+              "text2": "NA BRASA",
+              "size2": 132,
+              "weight2": 800,
+              "tracking2": 0.04,
+              "line_gap": -0.12
+            }
           ]
         },
         {
@@ -378,6 +410,38 @@
               "dur": 40,
               "follow": 0,
               "punch": true
+            }
+          ],
+          "labels_mov": [
+            {
+              "text": "FEITO NO",
+              "font": "assets/fonts/Montserrat.ttf",
+              "weight": 600,
+              "size": 64,
+              "tracking": 0.18,
+              "cx": 0.6,
+              "cy": 0.27,
+              "rot": 6,
+              "skew": 0.05,
+              "at": 3,
+              "start": 3,
+              "dur": 26,
+              "stagger": 1.0,
+              "slide": 0.0,
+              "track": [
+                [
+                  0.0,
+                  0.03,
+                  0.62,
+                  0.48
+                ]
+              ],
+              "robust": true,
+              "text2": "CARVÃO",
+              "size2": 132,
+              "weight2": 800,
+              "tracking2": 0.04,
+              "line_gap": -0.12
             }
           ]
         },
@@ -573,6 +637,38 @@
               "dur": 46,
               "follow": 0,
               "punch": true
+            }
+          ],
+          "labels_mov": [
+            {
+              "text": "SEM ATALHO.",
+              "font": "assets/fonts/Montserrat.ttf",
+              "weight": 600,
+              "size": 66,
+              "tracking": 0.18,
+              "cx": 0.62,
+              "cy": 0.27,
+              "rot": -4,
+              "skew": 0.0,
+              "at": 10,
+              "start": 10,
+              "dur": 44,
+              "stagger": 1.0,
+              "slide": 0.0,
+              "track": [
+                [
+                  0.35,
+                  0.08,
+                  1.0,
+                  0.48
+                ]
+              ],
+              "robust": true,
+              "text2": "SÓ BRASA.",
+              "size2": 150,
+              "weight2": 800,
+              "tracking2": 0.04,
+              "line_gap": -0.12
             }
           ]
         }

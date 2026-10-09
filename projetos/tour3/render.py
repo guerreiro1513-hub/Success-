@@ -292,6 +292,59 @@ def track_h(frames, at, rects):
     return Hs
 
 
+def track_h_robust(frames, at, rects):
+    """Rastreio mais firme para letreiros presos no cenario: meia resolucao, mais pontos,
+    homografia com RANSAC; passo ruim (poucos inliers / salto grande) repete o movimento anterior."""
+    sc = 2
+    sm = [cv2.cvtColor(cv2.resize(f, (f.shape[1] // sc, f.shape[0] // sc), interpolation=cv2.INTER_AREA),
+                       cv2.COLOR_RGB2GRAY) for f in frames]
+    h, w = sm[0].shape
+    mask = np.zeros((h, w), np.uint8)
+    for x0, y0, x1, y1 in rects: mask[int(y0 * h):int(y1 * h), int(x0 * w):int(x1 * w)] = 255
+    S = np.diag([sc, sc, 1.0]); Si = np.diag([1 / sc, 1 / sc, 1.0])
+    last = [np.eye(3)]
+    def step(i, j):
+        p0 = cv2.goodFeaturesToTrack(sm[i], 800, 0.005, 5, mask=mask)
+        ok = p0 is not None and len(p0) >= 12
+        if ok:
+            p1, st, _ = cv2.calcOpticalFlowPyrLK(sm[i], sm[j], p0, None, winSize=(31, 31), maxLevel=4)
+            pb, st2, _ = cv2.calcOpticalFlowPyrLK(sm[j], sm[i], p1, None, winSize=(31, 31), maxLevel=4)
+            fb = np.linalg.norm((p0 - pb).reshape(-1, 2), axis=1)
+            g = (st.ravel() == 1) & (st2.ravel() == 1) & (fb < 1.0)
+            ok = g.sum() >= 12
+        if ok:   # similaridade (move, gira, escala) — homografia cheia entorta o texto em cena 3D
+            A2, inl = cv2.estimateAffinePartial2D(p0[g], p1[g], method=cv2.RANSAC, ransacReprojThreshold=1.2)
+            ok = A2 is not None and inl is not None and inl.mean() > 0.4
+            if ok: Hm = np.vstack([A2, [0, 0, 1]])
+        if ok:
+            c = Hm @ np.array([w / 2, h / 2, 1.0]); c = c[:2] / c[2]
+            ok = np.linalg.norm(c - [w / 2, h / 2]) < 0.15 * w
+        M = S @ Hm @ Si if ok else last[0]
+        last[0] = M
+        return M
+    Hs = [None] * len(frames); Hs[at] = np.eye(3)
+    for j in range(at + 1, len(frames)): Hs[j] = step(j - 1, j) @ Hs[j - 1]
+    last[0] = np.eye(3)
+    for j in range(at - 1, -1, -1): Hs[j] = step(j + 1, j) @ Hs[j + 1]
+    return Hs
+
+
+def smooth_quads(Ms, w, h, sigma=2.2):
+    """Suaviza no tempo os 4 cantos do letreiro (tira o tremido do rastreio) e refaz as matrizes."""
+    src = np.float32([[0, 0], [w, 0], [w, h], [0, h]])
+    Q = []
+    for M in Ms:
+        q = M @ np.vstack([src.T, np.ones(4)]); Q.append((q[:2] / q[2]).T)
+    Q = np.array(Q)
+    r = int(3 * sigma); k = np.exp(-0.5 * (np.arange(-r, r + 1) / sigma) ** 2); k /= k.sum()
+    pad = np.pad(Q, ((r, r), (0, 0), (0, 0)), mode="edge")
+    Qs = np.zeros_like(Q)
+    for a in range(4):
+        for b in range(2):
+            Qs[:, a, b] = np.convolve(pad[:, a, b], k, "valid")
+    return [cv2.getPerspectiveTransform(src, q.astype(np.float32)).astype(np.float64) for q in Qs]
+
+
 def label_letters(text, font, tracking, color, glow):
     """Cada letra como camada separada (para entrar uma a uma). Devolve imagem cheia + caixas."""
     sp = font.size * tracking
@@ -327,8 +380,24 @@ def apply_labels(frames, labels, scale):
         except Exception: pass
         letters, lw, lh = label_letters(L["text"], font, L.get("tracking", 0.06), L.get("color", [255, 255, 255]),
                                         max(2, int(10 * scale)))
+        if L.get("text2"):   # segunda linha no MESMO letreiro (as duas andam juntas, centralizadas)
+            f2 = ImageFont.truetype(P(L.get("font", "assets/fonts/Oswald[wght].ttf")), max(8, int(L.get("size2", 100) * scale)))
+            try: f2.set_variation_by_axes([L.get("weight2", 800)])
+            except Exception: pass
+            l2, lw2, lh2 = label_letters(L["text2"], f2, L.get("tracking2", 0.04), L.get("color", [255, 255, 255]),
+                                         max(2, int(10 * scale)))
+            Wc = max(lw, lw2); gap = int(L.get("line_gap", -0.18) * lh2)
+            Hc = lh + lh2 + gap
+            def place(img, w_, y0):
+                c_ = np.zeros((Hc, Wc, 4), np.float32); x0 = (Wc - w_) // 2
+                h_ = min(img.shape[0], Hc - y0); c_[y0:y0 + h_, x0:x0 + w_] = np.maximum(c_[y0:y0 + h_, x0:x0 + w_], img[:h_])
+                return c_
+            letters = [(place(im, lw, 0), x, cw) for im, x, cw in letters] + \
+                      [(place(im, lw2, lh + gap), x, cw) for im, x, cw in l2]
+            lw, lh = Wc, Hc
         at = min(len(frames) - 1, L.get("at", 0))
-        Hs = track_h(frames, at, L.get("track", [[0, 0, 1, 1]])) if L.get("track") else [np.eye(3)] * len(frames)
+        Hs = ((track_h_robust if L.get("robust") else track_h)(frames, at, L.get("track", [[0, 0, 1, 1]]))
+              if L.get("track") else [np.eye(3)] * len(frames))
         # colocacao no quadro 'at': centro, rotacao e inclinacao (perspectiva) da superficie
         cx, cy = L["cx"] * W, L["cy"] * H
         ang = math.radians(L.get("rot", 0)); sk = L.get("skew", 0.0)
@@ -338,6 +407,28 @@ def apply_labels(frames, labels, scale):
         Tm = np.array([[1, 0, cx], [0, 1, cy], [0, 0, 1]])
         base = Tm @ A @ Pp @ C
         st, du, stag = L.get("start", 0), L.get("dur", 40), L.get("stagger", 1.5)
+        Ms = [Hs[j] @ base for j in range(len(frames))]
+        if L.get("robust"):
+            Ms = smooth_quads(Ms, lw, lh)
+            # nunca deixa o letreiro sair da area segura: empurra de volta (suave), sem cortar palavra
+            src = np.array([[0, 0, 1], [lw, 0, 1], [lw, lh, 1], [0, lh, 1]], np.float64).T
+            sh = []
+            for M in Ms:
+                q = M @ src; q = q[:2] / q[2]
+                x0, x1 = SAFE["x0"] * scale, W - SAFE["x1"] * scale
+                y0, y1 = SAFE["y0"] * scale, H - SAFE["y1"] * scale
+                dx = max(0, x0 - q[0].min()) - max(0, q[0].max() - x1)
+                dy = max(0, y0 - q[1].min()) - max(0, q[1].max() - y1)
+                sh.append((dx, dy))
+            sh = np.array(sh, np.float64)
+            from scipy.ndimage import maximum_filter1d, minimum_filter1d
+            pos = maximum_filter1d(np.maximum(sh, 0), 13, axis=0)      # segura o empurrao antes de suavizar
+            neg = minimum_filter1d(np.minimum(sh, 0), 13, axis=0)      # (a suavizacao nao fica abaixo do necessario)
+            sh = pos + neg
+            r = 6; kk = np.exp(-0.5 * (np.arange(-r, r + 1) / 2.5) ** 2); kk /= kk.sum()
+            pad = np.pad(sh, ((r, r), (0, 0)), mode="edge")
+            sh = np.stack([np.convolve(pad[:, i], kk, "valid") for i in range(2)], 1)
+            Ms = [np.array([[1, 0, d[0]], [0, 1, d[1]], [0, 0, 1]]) @ M for d, M in zip(sh, Ms)]
         for j in range(len(frames)):
             k = j - st
             if k < 0 or k >= du: continue
@@ -348,8 +439,8 @@ def apply_labels(frames, labels, scale):
                 if p <= 0: continue
                 dx = int((1 - p) * lh * L.get("slide", 0.0))
                 sl = np.roll(img, dx, axis=1) if dx else img
-                lay = lay + sl * np.array([1, 1, 1, p * out_a], np.float32) * (1 - lay[..., 3:4] / 255)
-            M = Hs[j] @ base
+                lay = _over(lay, sl * np.array([1, 1, 1, p * out_a], np.float32))
+            M = Ms[j]
             wl = cv2.warpPerspective(lay, M, (W, H), flags=cv2.INTER_LINEAR, borderValue=(0, 0, 0, 0))
             a = wl[..., 3:4] / 255
             frames[j] = np.clip(frames[j] * (1 - a) + wl[..., :3] * a, 0, 255).astype(np.uint8)
@@ -773,7 +864,8 @@ def main():
             if c.get("labels"): apply_labels(fr, c["labels"], sc * hr)
             for pp in ([c["pop"]] if isinstance(c.get("pop"), dict) else c.get("pop", [])):
                 apply_pop(fr, pp, sc * hr)
-            if c.get("texts"): apply_texts(fr, c["texts"], sc * hr)
+            if TEXT_MODE == "movimento" and c.get("labels_mov"): apply_labels(fr, c["labels_mov"], sc * hr)
+            elif c.get("texts"): apply_texts(fr, c["texts"], sc * hr)
         apply_out(fr, c.get("transition_out"), W * hr, samples)
         if hr != 1: fr = [cv2.resize(f, (W, H), interpolation=cv2.INTER_AREA) for f in fr]
         start = frame_no + len(pending) - min((prev_out or {}).get("overlap", 0), len(pending))
