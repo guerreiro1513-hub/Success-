@@ -255,3 +255,9 @@ no capô dos espetos (Jardim). Montserrat branco com brilho, como o print.
 ## Rodada automática 3/4
 Coincidiu com o pedido do cliente da v15 (letreiros presos no cenário), feito e renderizado na hora. QA dos
 três planos com letreiro na versão final em movimento: sem quadro travado; letreiros dentro da área segura.
+
+## Rodada automática 4/4 (fechamento)
+Sem mudança nova: o vídeo já tinha recebido, entre as rodadas, todos os ajustes que o cliente pediu (v14/v15).
+Entregas atuais em `entrega/`: guerreiros-TOUR-3-UNIDADES-TEXTO-EM-MOVIMENTO.mp4 (v15, letreiros presos no
+cenário), guerreiros-TOUR-3-UNIDADES.mp4 (texto parado) e -SEM-TEXTO.mp4. Pendente: o take que vai substituir
+FL_copyB0FF (grelha com a placa, fim do Florais).
