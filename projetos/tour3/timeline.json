@@ -81,12 +81,12 @@
       "pre": "hqdn3d=2:1.5:3:3",
       "pop": [
         {
-          "text": "POV: O GPS TE TROUXE",
+          "text": "O GTA LEVOU VOCÊ PRO",
           "font": "assets/fonts/Montserrat.ttf",
           "weight": 600,
           "size": 50,
           "cx": 0.46,
-          "cy": 0.18,
+          "cy": 0.185,
           "start": 3,
           "dur": 96,
           "stagger": 1,
@@ -94,25 +94,25 @@
           "tracking": 0.04
         },
         {
-          "text": "PRO LUGAR CERTO",
+          "text": "MELHOR CHURRASCO",
           "font": "assets/fonts/Montserrat.ttf",
-          "weight": 600,
-          "size": 50,
+          "weight": 800,
+          "size": 70,
           "cx": 0.46,
-          "cy": 0.205,
-          "start": 8,
-          "dur": 91,
-          "stagger": 1,
+          "cy": 0.222,
+          "start": 10,
+          "dur": 89,
+          "stagger": 1.2,
           "follow": 0,
           "tracking": 0.04
         },
         {
-          "text": "GUERREIRO'S GRILL",
+          "text": "DE CUIABÁ",
           "font": "assets/fonts/Montserrat.ttf",
           "weight": 800,
-          "size": 74,
+          "size": 70,
           "cx": 0.46,
-          "cy": 0.25,
+          "cy": 0.257,
           "start": 20,
           "dur": 79,
           "stagger": 1.5,
@@ -148,13 +148,14 @@
             "x": 0.5,
             "y": 0.5
           },
-          "fix": "eq=gamma=1.12:contrast=1.0:saturation=1.08,curves=all='0/0.03 0.15/0.21 0.5/0.56 1/1',colorbalance=rs=0.02:bs=-0.02:rm=0.02:bm=-0.02",
+          "fix": "eq=gamma=1.12:contrast=1.0:saturation=1.08,curves=all='0/0.03 0.15/0.21 0.5/0.56 1/1',colorbalance=rs=0.02:bs=-0.02:rm=0.02:bm=-0.02,cas=strength=0.55,unsharp=5:5:0.5:5:5:0.0",
           "ambience_db": -60,
           "transition_out": {
             "type": "ramp_in",
             "in_frames": 5,
             "lift": 0.12
-          }
+          },
+          "pre": "hqdn3d=2:1.5:4:3,scale=iw*2:ih*2:flags=lanczos"
         },
         {
           "file": "source/TV_C128a_fachada.mov",
@@ -211,15 +212,15 @@
           "segments": [
             [
               0.05,
-              2.59,
-              2.0,
+              1.5,
+              1.6,
               0.8
             ]
           ],
           "reframe": {
-            "zoom": 1.0,
-            "x": 0.5,
-            "y": 0.5
+            "zoom": 1.06,
+            "x": 0.62,
+            "y": 0.62
           },
           "fix": "eq=gamma=1.10",
           "ambience_db": -60,
@@ -255,7 +256,7 @@
               ],
               "cx": 0.5,
               "cy": 0.215,
-              "start": 14,
+              "start": 10,
               "dur": 40,
               "follow": 0,
               "punch": true
@@ -284,40 +285,7 @@
             "type": "ramp_in",
             "in_frames": 5,
             "lift": 0.12
-          },
-          "texts": [
-            {
-              "_tipo": "frase de comida",
-              "lines": [
-                {
-                  "text": "COSTELA",
-                  "font": "assets/fonts/Anton-Regular.ttf",
-                  "size": 92,
-                  "color": "white",
-                  "tracking": 0.06,
-                  "italic": false,
-                  "_edge": 0.7,
-                  "_soft": 0.6
-                },
-                {
-                  "text": "NO PONTO",
-                  "font": "assets/fonts/Anton-Regular.ttf",
-                  "size": 210,
-                  "color": "fire",
-                  "tracking": 0.02,
-                  "italic": false,
-                  "gap": -0.18,
-                  "delay": 3
-                }
-              ],
-              "cx": 0.5,
-              "cy": 0.215,
-              "start": 6,
-              "dur": 40,
-              "follow": 0,
-              "punch": true
-            }
-          ]
+          }
         }
       ],
       "title_y": 1300
@@ -435,40 +403,7 @@
             "type": "ramp_in",
             "in_frames": 5,
             "lift": 0.12
-          },
-          "texts": [
-            {
-              "_tipo": "frase de comida",
-              "lines": [
-                {
-                  "text": "FRANGO",
-                  "font": "assets/fonts/Anton-Regular.ttf",
-                  "size": 92,
-                  "color": "white",
-                  "tracking": 0.06,
-                  "italic": false,
-                  "_edge": 0.7,
-                  "_soft": 0.6
-                },
-                {
-                  "text": "NA BRASA",
-                  "font": "assets/fonts/Anton-Regular.ttf",
-                  "size": 210,
-                  "color": "fire",
-                  "tracking": 0.02,
-                  "italic": false,
-                  "gap": -0.18,
-                  "delay": 3
-                }
-              ],
-              "cx": 0.5,
-              "cy": 0.215,
-              "start": 6,
-              "dur": 40,
-              "follow": 0,
-              "punch": true
-            }
-          ]
+          }
         },
         {
           "file": "source/FL_copyB0FF.mov",
@@ -583,40 +518,7 @@
             "type": "ramp_in",
             "in_frames": 5,
             "lift": 0.12
-          },
-          "texts": [
-            {
-              "_tipo": "frase de comida",
-              "lines": [
-                {
-                  "text": "COSTELA",
-                  "font": "assets/fonts/Anton-Regular.ttf",
-                  "size": 92,
-                  "color": "white",
-                  "tracking": 0.06,
-                  "italic": false,
-                  "_edge": 0.7,
-                  "_soft": 0.6
-                },
-                {
-                  "text": "NO PONTO",
-                  "font": "assets/fonts/Anton-Regular.ttf",
-                  "size": 210,
-                  "color": "fire",
-                  "tracking": 0.02,
-                  "italic": false,
-                  "gap": -0.18,
-                  "delay": 3
-                }
-              ],
-              "cx": 0.5,
-              "cy": 0.215,
-              "start": 10,
-              "dur": 40,
-              "follow": 0,
-              "punch": true
-            }
-          ]
+          }
         },
         {
           "file": "work/JA_1633_estab.mov",

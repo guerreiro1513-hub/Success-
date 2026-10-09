@@ -473,6 +473,22 @@ def _over(lay, im):
     return np.concatenate([rgb, ao * 255], -1)
 
 
+TEXT_MODE = "fixo"
+
+def cam_offsets(frames, factor=0.6, limit=90):
+    """Deslocamento suavizado da camera (para o texto 'andar' junto com a cena sem tremer)."""
+    H, W = frames[0].shape[:2]
+    Hs = track_h(frames, 0, [[0.05, 0.05, 0.95, 0.95]])
+    pts = []
+    for Hm in Hs:
+        p = Hm @ np.array([W / 2, H / 2, 1.0]); pts.append(p[:2] / p[2])
+    pts = np.array(pts) - np.array([W / 2, H / 2])
+    k = np.exp(-0.5 * (np.arange(-9, 10) / 3.5) ** 2); k /= k.sum()
+    pad = np.pad(pts, ((9, 9), (0, 0)), mode="edge")
+    sm = np.stack([np.convolve(pad[:, i], k, "valid") for i in range(2)], 1)
+    lim = limit * W / 1080
+    return np.clip(sm * factor, -lim, lim)
+
 def apply_texts(frames, texts, scale):
     H, W = frames[0].shape[:2]
     for T_ in texts:
@@ -494,9 +510,10 @@ def apply_texts(frames, texts, scale):
             M0 = np.diag([k_, k_, 1.0]) @ M0
             q = M0 @ cs; q = q[:2] / q[2]
         bx0, bx1, by0, by1 = q[0].min(), q[0].max(), q[1].min(), q[1].max()
-        fo = T_.get("follow", 0.0)
+        fo = 0.0 if TEXT_MODE != "fixo" else T_.get("follow", 0.0)
         Hs = (track_h(frames, min(st, len(frames) - 1), T_.get("track", [[0.05, 0.05, 0.95, 0.95]]))
               if fo > 0 else None)
+        CO = cam_offsets(frames) if TEXT_MODE == "movimento" else None
         for j in range(len(frames)):
             k = j - st
             if k < 0 or k >= du: continue
@@ -504,6 +521,9 @@ def apply_texts(frames, texts, scale):
             if Hs is not None:
                 pc = Hs[j] @ np.array([cx, cy, 1.0]); pc = pc[:2] / pc[2]
                 px, py = cx + (pc[0] - cx) * fo, cy + (pc[1] - cy) * fo
+            if CO is not None:
+                o0 = CO[min(st, len(CO) - 1)]
+                px += CO[j][0] - o0[0]; py += CO[j][1] - o0[1]
             # trava na area segura
             px = min(max(px, SAFE["x0"] * scale - bx0), W - SAFE["x1"] * scale - bx1)
             py = min(max(py, SAFE["y0"] * scale - by0), H - SAFE["y1"] * scale - by1)
@@ -699,12 +719,16 @@ def ambience(clip, out_start, nfr, fps, total_n, db):
 def main():
     preview = "--preview" in sys.argv
     so_entrada = "--entrada" in sys.argv          # so a abertura + o 1o clipe, em qualidade final
+    global TEXT_MODE
+    TEXT_MODE = next((a.split("=", 1)[1] for a in sys.argv if a.startswith("--texto=")), "fixo")   # fixo | movimento | sem
     tl = json.load(open(os.path.join(ROOT, "timeline.json")))
     o = tl["output"]; fps = o["fps"]
     sc = o.get("preview_scale", 0.5) if preview else 1.0
     W, H = int(o["w"] * sc) // 2 * 2, int(o["h"] * sc) // 2 * 2
     samples = 8 if preview else 16
     out_path = P(o["preview_file"] if preview else o["file"])
+    if TEXT_MODE != "fixo":
+        out_path = out_path.replace(".mp4", "-TEXTO-EM-MOVIMENTO.mp4" if TEXT_MODE == "movimento" else "-SEM-TEXTO.mp4")
     if so_entrada: out_path = P(o.get("entrada_file", "../../entrega/teste-ENTRADA-GTA.mp4"))
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     look = tl.get("look", {}).get("filters", "")
@@ -745,10 +769,11 @@ def main():
         fr = clip_frames(c, W * hr, H * hr, fps, look)
         apply_in(fr, prev_out, W * hr, samples)
         if c.get("logo"): apply_logo(fr, c["logo"])
-        if c.get("labels"): apply_labels(fr, c["labels"], sc * hr)
-        for pp in ([c["pop"]] if isinstance(c.get("pop"), dict) else c.get("pop", [])):
-            apply_pop(fr, pp, sc * hr)
-        if c.get("texts"): apply_texts(fr, c["texts"], sc * hr)
+        if TEXT_MODE != "sem":
+            if c.get("labels"): apply_labels(fr, c["labels"], sc * hr)
+            for pp in ([c["pop"]] if isinstance(c.get("pop"), dict) else c.get("pop", [])):
+                apply_pop(fr, pp, sc * hr)
+            if c.get("texts"): apply_texts(fr, c["texts"], sc * hr)
         apply_out(fr, c.get("transition_out"), W * hr, samples)
         if hr != 1: fr = [cv2.resize(f, (W, H), interpolation=cv2.INTER_AREA) for f in fr]
         start = frame_no + len(pending) - min((prev_out or {}).get("overlap", 0), len(pending))
@@ -767,6 +792,8 @@ def main():
         if blk:
             tstart, tdur = int(blk.get("start", 0.3) * fps), int(blk.get("dur", 1.3) * fps)
             loc = dict(loc or {}, title=blk["lines"], title_y=blk.get("y"))
+        if TEXT_MODE == "sem": tstart = None
+        TCO = cam_offsets(fr) if (TEXT_MODE == "movimento" and tstart is not None) else None
         out_frames = []
         for j, f in enumerate(fr):
             f = f.copy()
@@ -777,6 +804,11 @@ def main():
                 f = (f * (1 - band(H, ty - 140 * sc, ty + 330 * sc, g))).astype(np.uint8)
                 layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
                 T.draw(layer, loc["title"], k, tdur, y=loc.get("title_y"))
+                if TCO is not None:
+                    o0 = TCO[min(tstart, len(TCO) - 1)]
+                    dx, dy = int(TCO[j][0] - o0[0]), int(TCO[j][1] - o0[1])
+                    sh_ = Image.new("RGBA", (W, H), (0, 0, 0, 0)); sh_.alpha_composite(layer, (dx, dy)) if dx >= 0 and dy >= 0 else sh_.paste(layer, (dx, dy), layer)
+                    layer = sh_
                 f = composite(f, layer)
             if item.get("ending") and end.get("style") == "white":
                 n = len(fr); fl = end.get("flash", 8)

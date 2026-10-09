@@ -220,3 +220,15 @@ escuro do vídeo (54, sombras fechadas) e destoava dos frangos/costela seguintes
 curva + gama 1,12 e um toque quente → 69. Abertura do Florais levemente aquecida (o céu azul continua azul;
 R−B −14 → −9) para casar com o laranja dos planos de brasa. Nenhum quadro repetido nos planos (só a vinheta,
 que já vem assim). Nada de texto, ordem ou takes mudou.
+
+# v14 — uma frase por unidade, frangos reenquadrados, abertura nova, 3 versões de texto
+- Frases (além do nome da unidade): Tropical Ville FRANGO/NA BRASA, Florais FEITO NO/CARVÃO, Jardim
+  SEM ATALHO./SÓ BRASA. Saíram as repetidas (costela TV, frango Florais, costela Jardim).
+- Abertura: "O GTA LEVOU VOCÊ PRO / MELHOR CHURRASCO / DE CUIABÁ".
+- Frangos (C128b): só 0,05–1,50 s (as duas fileiras), reenquadrado (zoom 1,06, x 0,62, y 0,62); saiu
+  o fim em que a câmera desce e corta torto.
+- 1º take da Tropical Ville com mais qualidade: hqdn3d → ampliação 2x lanczos → CAS + unsharp.
+- `render.py --texto=fixo|movimento|sem`: "movimento" faz títulos e frases andarem com a câmera usando o
+  deslocamento rastreado SUAVIZADO (gaussiana de ~0,1 s, 60 %, limite 90 px) — o rastreio bruto anterior
+  tremia/saía do lugar. Saídas: guerreiros-TOUR-3-UNIDADES.mp4 (fixo), -TEXTO-EM-MOVIMENTO.mp4, -SEM-TEXTO.mp4.
+- Florais copyB0FF: o cliente vai mandar substituto.
