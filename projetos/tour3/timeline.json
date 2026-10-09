@@ -17,8 +17,8 @@
     "font_name": "assets/fonts/Montserrat.ttf",
     "font_label": "assets/fonts/Montserrat.ttf",
     "label_weight": 500,
-    "name_size": 118,
-    "label_size": 40,
+    "name_size": 150,
+    "label_size": 42,
     "label_tracking": 0.42,
     "name_tracking": 0.0,
     "color": [
@@ -27,14 +27,15 @@
       226
     ],
     "accent": [
-      233,
-      185,
-      73
+      255,
+      170,
+      50
     ],
     "x": 84,
     "y": 1300,
-    "name_weight": 800,
-    "right_margin": 150
+    "name_weight": 900,
+    "right_margin": 150,
+    "hot": true
   },
   "opening": {
     "enabled": true,
@@ -480,52 +481,22 @@
           }
         },
         {
-          "file": "source/JA_C139.mov",
-          "_o_que": "grelha de carnes com o banner, camera passando rapido; fim com reverse",
+          "file": "work/JA_1633_estab.mov",
+          "_o_que": "espetos (IMG_1633 4,0-7,9 s) ESTABILIZADO com vidstab (prep: ver docs); usa o trecho de perto ate o meio, sem a parte aberta e torta do fim",
           "segments": [
             [
-              0.05,
-              2.22,
-              2.0,
-              0.8
-            ]
-          ],
-          "reframe": {
-            "zoom": 1.0,
-            "x": 0.5,
-            "y": 0.5
-          },
-          "fix": "eq=gamma=1.04",
-          "ambience_db": -32,
-          "transition_out": {
-            "type": "ramp_in",
-            "in_frames": 5,
-            "lift": 0.12
-          }
-        },
-        {
-          "file": "source/JA_IMG_1633.mov",
-          "_o_que": "espetos girando de perto (iPhone 30p)",
-          "segments": [
-            [
-              0.4,
-              2.0,
-              1.8,
-              1.0
-            ],
-            [
-              4.3,
-              7.6,
+              0.1,
+              2.5,
               1.4,
               1.0
             ]
           ],
           "reframe": {
-            "zoom": 1.0,
+            "zoom": 1.08,
             "x": 0.5,
-            "y": 0.5
+            "y": 0.45
           },
-          "fix": "eq=gamma=1.0:saturation=0.97",
+          "fix": "eq=contrast=1.12:gamma=0.95:saturation=1.08,curves=all='0/0 0.25/0.21 0.75/0.78 1/1'",
           "ambience_db": -32,
           "transition_out": {
             "type": "cut",
@@ -536,7 +507,7 @@
               "SEM ATALHO.",
               "SÓ BRASA."
             ],
-            "start": 1.0,
+            "start": 0.5,
             "dur": 1.6,
             "y": 1300
           }

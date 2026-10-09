@@ -542,6 +542,24 @@ class Type:
         try: self.flabel.set_variation_by_axes([cfg.get("label_weight", 500)])
         except Exception: pass
 
+    def hot_line(self, text, font, tracking):
+        """Nome em degrade dourado->brasa com brilho quente e sombra (titulos/frases v12)."""
+        from PIL import ImageFilter
+        base = self.line(text, font, tracking, (255, 255, 255))
+        a = np.array(base).astype(np.float32)
+        A = a[..., 3] / 255
+        rows = np.where(A.max(1) > 0.5)[0]
+        y0, y1 = (rows.min(), rows.max()) if len(rows) else (0, a.shape[0])
+        t = np.clip((np.arange(a.shape[0]) - y0) / max(1, y1 - y0), 0, 1)[:, None]
+        top, mid, bot = np.array([255, 236, 170.]), np.array([255, 190, 64.]), np.array([240, 118, 22.])
+        col = np.where(t[..., None] < 0.5, top + (mid - top) * (t[..., None] / 0.5), mid + (bot - mid) * ((t[..., None] - 0.5) / 0.5))
+        white = (a[..., :3].mean(-1) > 200)[..., None]
+        a[..., :3] = np.where(white, np.broadcast_to(col, a[..., :3].shape), a[..., :3])
+        img = Image.fromarray(a.clip(0, 255).astype(np.uint8))
+        glow = np.zeros_like(a); glow[..., 0], glow[..., 1], glow[..., 2] = 255, 140, 30
+        glow[..., 3] = cv2.GaussianBlur((A * white[..., 0]).astype(np.float32), (0, 0), 14 * self.s) * 150
+        return Image.alpha_composite(Image.fromarray(glow.astype(np.uint8)), img)
+
     def line(self, text, font, tracking, color):
         """Texto com espaçamento entre letras, em RGBA, com sombra suave."""
         sp = font.size * tracking
@@ -560,7 +578,8 @@ class Type:
     def block(self, lines, align):
         c = self.c
         L = self.line(lines[0], self.flabel, c["label_tracking"], c["color"])
-        N = self.line(lines[1], self.fname, c["name_tracking"], c["color"])
+        N = (self.hot_line(lines[1], self.fname, c["name_tracking"]) if c.get("hot") else
+             self.line(lines[1], self.fname, c["name_tracking"], c["color"]))
         return L, N
 
     def draw(self, canvas, lines, f, n, align="left", y=None):
@@ -575,7 +594,8 @@ class Type:
             f2 = ImageFont.truetype(P(c["font_name"]), int(c["name_size"] * s * maxw / N.width))
             try: f2.set_variation_by_axes([c.get("name_weight", 800)])
             except Exception: pass
-            N = self.line(lines[1], f2, c["name_tracking"], c["color"])
+            N = (self.hot_line(lines[1], f2, c["name_tracking"]) if c.get("hot") else
+                 self.line(lines[1], f2, c["name_tracking"], c["color"]))
         x0 = int(c["x"] * s); y0 = int((y if y is not None else c["y"]) * s)
         ex = max(0.0, (f - (n - 7)) / 7)                      # saída
         alpha = 1 - ease_out(ex); lift = int(-30 * s * ease_out(ex))

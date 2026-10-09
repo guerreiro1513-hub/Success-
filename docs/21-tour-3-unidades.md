@@ -193,3 +193,12 @@ UNIDADE/TROPICAL VILLE, CHURRASCO/NA BRASA, UNIDADE/FLORAIS, FEITO NO/CARVÃO, U
 CARNE NO/PONTO, SEM ATALHO./SÓ BRASA., 3 UNIDADES · CUIABÁ/GUERREIRO'S GRILL. Abertura como na v7
 ("POV: O GPS TE TROUXE / PRO LUGAR CERTO" + GUERREIRO'S GRILL, centralizado no topo). Logo do Jardim de volta.
 `clip.block` desenha uma frase com o mesmo sistema do título.
+
+# v12 — título mais chamativo, sai o C139, espetos corrigidos (28,2 s)
+- Texto: mesmo lugar e formato da v11, mas a linha grande ficou maior (150), Montserrat Black (900) e em
+  degradê dourado → brasa com brilho quente (`typography.hot`). Vale para títulos e frases (tudo igual).
+- Saiu o JA_C139 (carnes penduradas na grelha amarela — print 1 do cliente).
+- Espetos (print 2): IMG_1633 4,0–7,9 s estabilizado com vidstab
+  (`vidstabdetect shakiness=8` + `vidstabtransform smoothing=20 zoom=8`) → `work/JA_1633_estab.mov`;
+  usa só a parte de perto até o meio (0,1–2,5 s), sem a abertura torta do fim; leve zoom 1,08, mais
+  contraste e menos névoa da fumaça. O trecho tremido 0,4–2,0 s saiu.

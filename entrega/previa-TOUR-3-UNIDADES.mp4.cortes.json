@@ -1,5 +1,5 @@
 {
-  "duracao": 32.3,
+  "duracao": 28.233,
   "fps": 30,
   "cortes": [
     {
@@ -59,16 +59,11 @@
     },
     {
       "t": 24.767,
-      "clip": "JA_C139.mov",
+      "clip": "JA_1633_estab.mov",
       "unidade": "JARDIM ACLIMAÇÃO"
     },
     {
-      "t": 26.733,
-      "clip": "JA_IMG_1633.mov",
-      "unidade": "JARDIM ACLIMAÇÃO"
-    },
-    {
-      "t": 30.733,
+      "t": 26.667,
       "clip": "VINHETA.mov",
       "unidade": "vinheta"
     }
@@ -84,7 +79,6 @@
     17.767,
     20.867,
     23.033,
-    24.767,
-    26.733
+    24.767
   ]
 }
