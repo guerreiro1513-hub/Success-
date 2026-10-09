@@ -184,3 +184,12 @@ O cliente esclareceu que a inspiração de fonte/edição é o vídeo da T TECH 
   (tampa com fumaça), "Unidade Jardim Aclimação" (toldo), "Carne no ponto" (parede), "Sem atalho." +
   SÓ BRASA (espetos); fim GUERREIRO'S GRILL + "3 unidades · Cuiabá" sob o brasão.
 - Jardim sem o logo voando (na ref. o logo só monta na fachada principal; o título agora fica no toldo).
+
+# v11 — texto volta ao sistema da v7 (pedido: "cada frase uma fonte e uma posição diferente")
+Mantidas as mudanças de montagem (ordem TV→Florais→Jardim, takes novos, mergulhos). Texto:
+UMA fonte (Montserrat), UM lugar (embaixo à esquerda, x 84, y 1300, com faixa de sombra), UM formato
+(linha pequena espaçada + linha grande ExtraBold + régua dourada) para títulos E frases:
+UNIDADE/TROPICAL VILLE, CHURRASCO/NA BRASA, UNIDADE/FLORAIS, FEITO NO/CARVÃO, UNIDADE/JARDIM ACLIMAÇÃO,
+CARNE NO/PONTO, SEM ATALHO./SÓ BRASA., 3 UNIDADES · CUIABÁ/GUERREIRO'S GRILL. Abertura como na v7
+("POV: O GPS TE TROUXE / PRO LUGAR CERTO" + GUERREIRO'S GRILL, centralizado no topo). Logo do Jardim de volta.
+`clip.block` desenha uma frase com o mesmo sistema do título.

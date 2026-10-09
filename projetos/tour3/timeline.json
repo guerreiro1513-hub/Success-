@@ -78,73 +78,43 @@
       },
       "_nota": "entrada do GTA em tela cheia vertical (pedido do cliente): faixa central da imagem (fora das marcas do TikTok), limpa e ampliada. Corta antes do salto para a rua (sem personagens). prep_abertura.py fica como alternativa (janela horizontal).",
       "pre": "hqdn3d=2:1.5:3:3",
-      "texts": [
+      "pop": [
         {
-          "lines": [
-            {
-              "text": "POV: o GPS te trouxe",
-              "font": "assets/fonts/Montserrat.ttf",
-              "weight": 600,
-              "size": 62,
-              "color": "white",
-              "glow": 0.55,
-              "glow_r": 10,
-              "glow_color": [
-                255,
-                244,
-                225
-              ],
-              "_edge": 0.0,
-              "_soft": 0.35,
-              "italic": false
-            },
-            {
-              "text": "pro lugar certo",
-              "font": "assets/fonts/Montserrat.ttf",
-              "weight": 600,
-              "size": 62,
-              "color": "white",
-              "glow": 0.55,
-              "glow_r": 10,
-              "glow_color": [
-                255,
-                244,
-                225
-              ],
-              "_edge": 0.0,
-              "_soft": 0.35,
-              "italic": false,
-              "gap": 0.02
-            }
-          ],
-          "cx": 0.5,
-          "cy": 0.205,
-          "rot": 0,
-          "skew": 0.0,
+          "text": "POV: O GPS TE TROUXE",
+          "font": "assets/fonts/Montserrat.ttf",
+          "weight": 600,
+          "size": 50,
+          "cx": 0.46,
+          "cy": 0.18,
           "start": 3,
-          "dur": 48,
+          "dur": 96,
+          "stagger": 1,
           "follow": 0,
-          "reveal": "sweep",
-          "sweep_frames": 12
+          "tracking": 0.04
         },
         {
-          "lines": [
-            {
-              "text": "GUERREIRO'S GRILL",
-              "font": "assets/fonts/Unbounded.ttf",
-              "weight": 800,
-              "size": 96,
-              "color": "chrome",
-              "_edge": 0.85,
-              "_soft": 0.6,
-              "tracking": 0.0,
-              "italic": false
-            }
-          ],
-          "cx": 0.5,
-          "cy": 0.3,
-          "start": 46,
-          "dur": 56,
+          "text": "PRO LUGAR CERTO",
+          "font": "assets/fonts/Montserrat.ttf",
+          "weight": 600,
+          "size": 50,
+          "cx": 0.46,
+          "cy": 0.205,
+          "start": 8,
+          "dur": 91,
+          "stagger": 1,
+          "follow": 0,
+          "tracking": 0.04
+        },
+        {
+          "text": "GUERREIRO'S GRILL",
+          "font": "assets/fonts/Montserrat.ttf",
+          "weight": 800,
+          "size": 74,
+          "cx": 0.46,
+          "cy": 0.25,
+          "start": 20,
+          "dur": 79,
+          "stagger": 1.5,
           "follow": 0
         }
       ]
@@ -157,9 +127,9 @@
         "UNIDADE",
         "TROPICAL VILLE"
       ],
-      "title_clip": -1,
-      "title_start": 0.85,
-      "title_dur": 1.1,
+      "title_clip": 0,
+      "title_start": 0.6,
+      "title_dur": 1.4,
       "clips": [
         {
           "file": "source/TV_NOVO_abertura.mov",
@@ -183,47 +153,7 @@
             "type": "ramp_in",
             "in_frames": 5,
             "lift": 0.12
-          },
-          "texts": [
-            {
-              "lines": [
-                {
-                  "text": "Unidade Tropical Ville",
-                  "font": "assets/fonts/Montserrat.ttf",
-                  "weight": 600,
-                  "size": 92,
-                  "color": "white",
-                  "glow": 0.55,
-                  "glow_r": 10,
-                  "glow_color": [
-                    255,
-                    244,
-                    225
-                  ],
-                  "_edge": 0.0,
-                  "_soft": 0.35,
-                  "italic": false
-                }
-              ],
-              "cx": 0.42,
-              "cy": 0.3,
-              "rot": -4,
-              "skew": 0.0,
-              "start": 8,
-              "dur": 46,
-              "follow": 0.5,
-              "reveal": "sweep",
-              "sweep_frames": 12,
-              "track": [
-                [
-                  0.0,
-                  0.1,
-                  0.75,
-                  0.45
-                ]
-              ]
-            }
-          ]
+          }
         },
         {
           "file": "source/TV_C128a_fachada.mov",
@@ -321,49 +251,18 @@
             "in_frames": 5,
             "lift": 0.12
           },
-          "texts": [
-            {
-              "lines": [
-                {
-                  "text": "Churrasco na brasa",
-                  "font": "assets/fonts/Montserrat.ttf",
-                  "weight": 600,
-                  "size": 88,
-                  "color": "white",
-                  "glow": 0.55,
-                  "glow_r": 10,
-                  "glow_color": [
-                    255,
-                    244,
-                    225
-                  ],
-                  "_edge": 0.0,
-                  "_soft": 0.35,
-                  "italic": false
-                }
-              ],
-              "cx": 0.5,
-              "cy": 0.19,
-              "rot": -2,
-              "skew": 0.0,
-              "start": 6,
-              "dur": 44,
-              "follow": 0.5,
-              "reveal": "sweep",
-              "sweep_frames": 12,
-              "track": [
-                [
-                  0.0,
-                  0.0,
-                  1.0,
-                  0.25
-                ]
-              ]
-            }
-          ]
+          "block": {
+            "lines": [
+              "CHURRASCO",
+              "NA BRASA"
+            ],
+            "start": 0.25,
+            "dur": 1.3,
+            "y": 1300
+          }
         }
       ],
-      "title_y": 700
+      "title_y": 1300
     },
     {
       "name": "FLORAIS",
@@ -371,9 +270,9 @@
         "UNIDADE",
         "FLORAIS"
       ],
-      "title_clip": -1,
+      "title_clip": 0,
       "title_start": 0.6,
-      "title_dur": 2.1,
+      "title_dur": 1.6,
       "clips": [
         {
           "file": "source/FL_IMG_1429.mov",
@@ -397,47 +296,7 @@
             "type": "ramp_in",
             "in_frames": 5,
             "lift": 0.12
-          },
-          "texts": [
-            {
-              "lines": [
-                {
-                  "text": "Unidade Florais",
-                  "font": "assets/fonts/Montserrat.ttf",
-                  "weight": 600,
-                  "size": 104,
-                  "color": "white",
-                  "glow": 0.55,
-                  "glow_r": 10,
-                  "glow_color": [
-                    255,
-                    244,
-                    225
-                  ],
-                  "_edge": 0.0,
-                  "_soft": 0.35,
-                  "italic": false
-                }
-              ],
-              "cx": 0.5,
-              "cy": 0.3,
-              "rot": -2,
-              "skew": 0.0,
-              "start": 8,
-              "dur": 58,
-              "follow": 0.5,
-              "reveal": "sweep",
-              "sweep_frames": 12,
-              "track": [
-                [
-                  0.0,
-                  0.1,
-                  1.0,
-                  0.5
-                ]
-              ]
-            }
-          ]
+          }
         },
         {
           "file": "source/FL_C164.mov",
@@ -462,46 +321,15 @@
             "in_frames": 5,
             "lift": 0.12
           },
-          "texts": [
-            {
-              "lines": [
-                {
-                  "text": "Feito no carvão",
-                  "font": "assets/fonts/Montserrat.ttf",
-                  "weight": 600,
-                  "size": 88,
-                  "color": "white",
-                  "glow": 0.55,
-                  "glow_r": 10,
-                  "glow_color": [
-                    255,
-                    244,
-                    225
-                  ],
-                  "_edge": 0.0,
-                  "_soft": 0.35,
-                  "italic": false
-                }
-              ],
-              "cx": 0.55,
-              "cy": 0.25,
-              "rot": 5,
-              "skew": 0.06,
-              "start": 6,
-              "dur": 34,
-              "follow": 0.5,
-              "reveal": "sweep",
-              "sweep_frames": 12,
-              "track": [
-                [
-                  0.25,
-                  0.05,
-                  0.95,
-                  0.45
-                ]
-              ]
-            }
-          ]
+          "block": {
+            "lines": [
+              "FEITO NO",
+              "CARVÃO"
+            ],
+            "start": 0.25,
+            "dur": 1.3,
+            "y": 1300
+          }
         },
         {
           "file": "source/FL_C177.mov",
@@ -565,9 +393,9 @@
         "UNIDADE",
         "JARDIM ACLIMAÇÃO"
       ],
-      "title_clip": -1,
-      "title_start": 0.85,
-      "title_dur": 1.3,
+      "title_clip": 0,
+      "title_start": 0.6,
+      "title_dur": 1.4,
       "clips": [
         {
           "file": "source/JA_C143a.mov",
@@ -599,46 +427,24 @@
             "in_amount": 1.2,
             "_nota": "mesmo mergulho da Tropical Ville: da tenda a camera entra na churrasqueira da direita e sai no close da costela (C143b)"
           },
-          "texts": [
-            {
-              "lines": [
-                {
-                  "text": "Unidade Jardim Aclimação",
-                  "font": "assets/fonts/Montserrat.ttf",
-                  "weight": 600,
-                  "size": 84,
-                  "color": "white",
-                  "glow": 0.55,
-                  "glow_r": 10,
-                  "glow_color": [
-                    255,
-                    244,
-                    225
-                  ],
-                  "_edge": 0.0,
-                  "_soft": 0.35,
-                  "italic": false
-                }
-              ],
-              "cx": 0.5,
-              "cy": 0.255,
-              "rot": -3,
-              "skew": 0.0,
-              "start": 8,
-              "dur": 50,
-              "follow": 0.5,
-              "reveal": "sweep",
-              "sweep_frames": 12,
-              "track": [
-                [
-                  0.0,
-                  0.05,
-                  1.0,
-                  0.35
-                ]
-              ]
-            }
-          ]
+          "logo": {
+            "file": "../../referencias/logo-brasao-recortado.png",
+            "land": 22,
+            "fly_frames": 16,
+            "cx": 0.55,
+            "cy": 0.205,
+            "h": 0.13,
+            "depth": 12,
+            "track_y": [
+              0.05,
+              0.38
+            ],
+            "occlude_green": false,
+            "fly_scale": 1.6,
+            "fly_rot": 10,
+            "fly_dx": 0.0,
+            "fly_dy": -0.45
+          }
         },
         {
           "file": "source/JA_C143b.mov",
@@ -663,46 +469,15 @@
             "in_frames": 5,
             "lift": 0.12
           },
-          "texts": [
-            {
-              "lines": [
-                {
-                  "text": "Carne no ponto",
-                  "font": "assets/fonts/Montserrat.ttf",
-                  "weight": 600,
-                  "size": 88,
-                  "color": "white",
-                  "glow": 0.55,
-                  "glow_r": 10,
-                  "glow_color": [
-                    255,
-                    244,
-                    225
-                  ],
-                  "_edge": 0.0,
-                  "_soft": 0.35,
-                  "italic": false
-                }
-              ],
-              "cx": 0.58,
-              "cy": 0.17,
-              "rot": -2,
-              "skew": 0.0,
-              "start": 8,
-              "dur": 40,
-              "follow": 0.5,
-              "reveal": "sweep",
-              "sweep_frames": 12,
-              "track": [
-                [
-                  0.2,
-                  0.02,
-                  1.0,
-                  0.27
-                ]
-              ]
-            }
-          ]
+          "block": {
+            "lines": [
+              "CARNE NO",
+              "PONTO"
+            ],
+            "start": 0.25,
+            "dur": 1.3,
+            "y": 1300
+          }
         },
         {
           "file": "source/JA_C139.mov",
@@ -756,58 +531,15 @@
             "type": "cut",
             "overlap": 8
           },
-          "texts": [
-            {
-              "lines": [
-                {
-                  "text": "Sem atalho.",
-                  "font": "assets/fonts/Montserrat.ttf",
-                  "weight": 600,
-                  "size": 70,
-                  "color": "white",
-                  "glow": 0.55,
-                  "glow_r": 10,
-                  "glow_color": [
-                    255,
-                    244,
-                    225
-                  ],
-                  "_edge": 0.0,
-                  "_soft": 0.35,
-                  "italic": false
-                }
-              ],
-              "cx": 0.5,
-              "cy": 0.205,
-              "rot": 0,
-              "skew": 0.0,
-              "start": 28,
-              "dur": 56,
-              "follow": 0,
-              "reveal": "sweep",
-              "sweep_frames": 12
-            },
-            {
-              "lines": [
-                {
-                  "text": "SÓ BRASA",
-                  "font": "assets/fonts/Unbounded.ttf",
-                  "weight": 800,
-                  "size": 150,
-                  "color": "chrome",
-                  "_edge": 0.85,
-                  "_soft": 0.6,
-                  "tracking": 0.0,
-                  "italic": false
-                }
-              ],
-              "cx": 0.5,
-              "cy": 0.27,
-              "start": 34,
-              "dur": 50,
-              "follow": 0
-            }
-          ]
+          "block": {
+            "lines": [
+              "SEM ATALHO.",
+              "SÓ BRASA."
+            ],
+            "start": 1.0,
+            "dur": 1.6,
+            "y": 1300
+          }
         }
       ],
       "title_y": 1300
@@ -841,58 +573,15 @@
         "type": "cut"
       },
       "no_look": true,
-      "texts": [
-        {
-          "lines": [
-            {
-              "text": "GUERREIRO'S GRILL",
-              "font": "assets/fonts/Unbounded.ttf",
-              "weight": 800,
-              "size": 78,
-              "color": "chrome",
-              "_edge": 0.85,
-              "_soft": 0.6,
-              "tracking": 0.0,
-              "italic": false
-            }
-          ],
-          "cx": 0.5,
-          "cy": 0.7,
-          "start": 2,
-          "dur": 44,
-          "follow": 0
-        },
-        {
-          "lines": [
-            {
-              "text": "3 unidades · Cuiabá",
-              "font": "assets/fonts/Montserrat.ttf",
-              "weight": 600,
-              "size": 58,
-              "color": "white",
-              "glow": 0.55,
-              "glow_r": 10,
-              "glow_color": [
-                255,
-                244,
-                225
-              ],
-              "_edge": 0.0,
-              "_soft": 0.35,
-              "italic": false
-            }
-          ],
-          "cx": 0.5,
-          "cy": 0.745,
-          "rot": 0,
-          "skew": 0.0,
-          "start": 8,
-          "dur": 38,
-          "follow": 0,
-          "reveal": "sweep",
-          "sweep_frames": 12
-        }
-      ]
+      "block": {
+        "lines": [
+          "3 UNIDADES · CUIABÁ",
+          "GUERREIRO'S GRILL"
+        ],
+        "start": 0.1,
+        "dur": 1.4,
+        "y": 1300
+      }
     }
   },
   "sound": {
@@ -900,5 +589,5 @@
     "end_hit_db": -20
   },
   "_ritmo": "v6 = edicao da ref. 3 (T TECH) como molde: plano de abertura de cada unidade segura ~2 s com o logo montando (como a fachada da ref.); cada plano de detalhe dura ~1,05 s e ENTRA em rampa (comeca rapido com borrao de movimento real e desacelera ate camera lenta), corte seco com leve clarao, sem whip; nomes em letreiro preso no cenario. v7: sem limite de 20 s — cada clipe usado quase inteiro (do inicio ao fim util), mesma rampa de entrada.",
-  "_tipografia": "v10 = copia da ref. T TECH (REF3): nomes como letreiro de LED — Montserrat SemiBold branco, caixa normal (so a inicial maiuscula), brilho branco, preso na parede/toldo em perspectiva e acendendo letra a letra (varredura); destaque grande como o '2200W' — letra larga (Unbounded ExtraBold) cromada com contorno escuro. Area segura travada."
+  "_tipografia": "v11: volta ao sistema de texto da v7 a pedido do cliente — UMA fonte (Montserrat), UM lugar (embaixo a esquerda, x 84, y 1300, faixa de sombra), UM formato (linha pequena espacada + linha grande ExtraBold, regua dourada) para titulos e frases; abertura igual a v7."
 }

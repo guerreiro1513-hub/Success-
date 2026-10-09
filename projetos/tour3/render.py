@@ -731,13 +731,17 @@ def main():
         tstart = tdur = None
         if loc and item.get("title"):
             tstart = int(loc.get("title_start", 0.15) * fps); tdur = int(loc.get("title_dur", 1.5) * fps)
+        blk = c.get("block")                     # mesmo bloco de texto do titulo, para as frases (v11)
+        if blk:
+            tstart, tdur = int(blk.get("start", 0.3) * fps), int(blk.get("dur", 1.3) * fps)
+            loc = dict(loc or {}, title=blk["lines"], title_y=blk.get("y"))
         out_frames = []
         for j, f in enumerate(fr):
             f = f.copy()
             if tstart is not None and tstart <= j < tstart + tdur:
                 k = j - tstart
                 g = min(1, k / 6, (tdur - k) / 6) * loc.get("title_shade", 0.42)
-                ty = (loc.get("title_y") or tl["typography"]["y"]) * sc
+                ty = ((loc.get("title_y") if loc else None) or tl["typography"]["y"]) * sc
                 f = (f * (1 - band(H, ty - 140 * sc, ty + 330 * sc, g))).astype(np.uint8)
                 layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
                 T.draw(layer, loc["title"], k, tdur, y=loc.get("title_y"))
