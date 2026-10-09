@@ -390,6 +390,122 @@ def apply_pop(frames, cfg, scale):
         frames[j] = np.clip(frames[j] * (1 - a) + wl[..., :3] * a, 0, 255).astype(np.uint8)
 
 
+# ---------------------------------------------------------------- texto v8 (ref. de tipografia)
+SAFE = {"x0": 70, "x1": 160, "y0": 230, "y1": 420}     # margens do Reels/TikTok em 1080x1920
+
+def _font(path, size, weight):
+    f = ImageFont.truetype(P(path), max(8, int(size)))
+    try: f.set_variation_by_axes([weight])
+    except Exception: pass
+    return f
+
+def build_lockup(lines, scale, max_w):
+    """Bloco de texto: linhas empilhadas (pequena em italico branco + grande em laranja-fogo).
+    Cada linha encolhe sozinha se passar de max_w (nunca corta palavra)."""
+    from PIL import ImageFilter
+    rows = []
+    for L in lines:
+        size = L.get("size", 80) * scale
+        path = "assets/fonts/Montserrat-Italic.ttf" if L.get("italic", True) else "assets/fonts/Montserrat.ttf"
+        while True:
+            f = _font(path, size, L.get("weight", 800))
+            sp = f.size * L.get("tracking", 0.0)
+            w = sum(f.getlength(ch) for ch in L["text"]) + sp * (len(L["text"]) - 1)
+            if w <= max_w or size < 10: break
+            size *= max_w / w * 0.98
+        asc, desc = f.getmetrics()
+        rows.append((L, f, sp, int(w), asc + desc))
+    pad = int(40 * scale)
+    Wl = max(r[3] for r in rows) + 2 * pad
+    gap = [int(L.get("gap", -0.12) * h) for (L, f, sp, w, h) in rows]
+    Hl = sum(r[4] for r in rows) + sum(gap[1:]) + 2 * pad
+    out = []
+    y = pad
+    for i, (L, f, sp, w, h) in enumerate(rows):
+        if i: y += gap[i]
+        im = Image.new("L", (Wl, Hl), 0)
+        al = L.get("align", "center")
+        x = pad + ((Wl - 2 * pad - w) // 2 if al == "center" else 0 if al == "left" else (Wl - 2 * pad - w))
+        d = ImageDraw.Draw(im)
+        for ch in L["text"]:
+            d.text((x, y), ch, font=f, fill=255); x += f.getlength(ch) + sp
+        a = np.array(im, np.float32) / 255
+        if L.get("color", "white") == "fire":           # degrade de brasa: amarelo-alaranjado em cima, laranja queimado embaixo
+            yy = np.linspace(0, 1, Hl)[:, None]
+            band = np.clip((yy * Hl - y) / max(1, h), 0, 1)
+            top, bot = np.array([255, 196, 70.]), np.array([238, 92, 16.])
+            rgb = top[None, None] * (1 - band[..., None]) + bot[None, None] * band[..., None]
+            rgb = np.broadcast_to(rgb, (Hl, Wl, 3))
+        else:
+            rgb = np.broadcast_to(np.array([255, 250, 242.]), (Hl, Wl, 3))
+        out.append((np.concatenate([rgb * 1.0, a[..., None] * 255], -1).astype(np.float32), L.get("delay", i * 3)))
+        y += h
+    # sombra unica do bloco (contraste em qualquer fundo)
+    A = np.maximum.reduce([o[0][..., 3] for o in out])
+    r = max(1, int(round(3 * scale)))
+    edge = cv2.dilate(A, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * r + 1, 2 * r + 1)))
+    edge = cv2.GaussianBlur(edge, (0, 0), 0.8 * scale + 0.3) * 0.82          # contorno escuro fino
+    soft = np.roll(cv2.GaussianBlur(A, (0, 0), 12 * scale), int(7 * scale), 0) * 0.55   # sombra larga
+    sh = np.maximum(edge, soft)
+    return out, sh, Wl, Hl
+
+def apply_texts(frames, texts, scale):
+    H, W = frames[0].shape[:2]
+    for T_ in texts:
+        max_w = (1080 - SAFE["x0"] - SAFE["x1"]) * scale * T_.get("max_w", 1.0)
+        rows, sh, Wl, Hl = build_lockup(T_["lines"], scale, max_w)
+        st, du = T_.get("start", 4), T_.get("dur", 45)
+        cx, cy = T_.get("cx", 0.5) * W, T_.get("cy", 0.5) * H
+        tilt, rot = T_.get("tilt", 0.0), math.radians(T_.get("rot", 0))
+        A = np.array([[math.cos(rot), -math.sin(rot), 0], [math.sin(rot), math.cos(rot), 0], [0, 0, 1]])
+        Pp = np.array([[1, 0, 0], [0, 1, 0], [0, tilt / Hl, 1]])        # deitado no chao: topo mais longe
+        C = np.array([[1, 0, -Wl / 2], [0, 1, -Hl / 2], [0, 0, 1]])
+        M0 = A @ Pp @ C
+        # caixa do bloco ja em perspectiva; se passar da largura segura, encolhe o bloco todo
+        cs = np.array([[0, 0, 1], [Wl, 0, 1], [0, Hl, 1], [Wl, Hl, 1]], np.float64).T
+        q = M0 @ cs; q = q[:2] / q[2]
+        avail = W - (SAFE["x0"] + SAFE["x1"]) * scale
+        k_ = min(1.0, avail / (q[0].max() - q[0].min()))
+        if k_ < 1:
+            M0 = np.diag([k_, k_, 1.0]) @ M0
+            q = M0 @ cs; q = q[:2] / q[2]
+        bx0, bx1, by0, by1 = q[0].min(), q[0].max(), q[1].min(), q[1].max()
+        fo = T_.get("follow", 0.0)
+        Hs = (track_h(frames, min(st, len(frames) - 1), T_.get("track", [[0.05, 0.05, 0.95, 0.95]]))
+              if fo > 0 else None)
+        for j in range(len(frames)):
+            k = j - st
+            if k < 0 or k >= du: continue
+            px, py = cx, cy
+            if Hs is not None:
+                pc = Hs[j] @ np.array([cx, cy, 1.0]); pc = pc[:2] / pc[2]
+                px, py = cx + (pc[0] - cx) * fo, cy + (pc[1] - cy) * fo
+            # trava na area segura
+            px = min(max(px, SAFE["x0"] * scale - bx0), W - SAFE["x1"] * scale - bx1)
+            py = min(max(py, SAFE["y0"] * scale - by0), H - SAFE["y1"] * scale - by1)
+            lay = np.zeros((Hl, Wl, 4), np.float32)
+            out_k = k - (du - 6)
+            for img, dl in rows:                       # entrada: cada linha sobe 3 quadros depois da outra
+                p = ease_out(min(1, max(0, (k - dl) / 7)))
+                if p <= 0: continue
+                sc_ = 1.10 - 0.10 * p
+                M = cv2.getRotationMatrix2D((Wl / 2, Hl / 2), 0, sc_); M[1, 2] += (1 - p) * 18 * scale
+                im = cv2.warpAffine(img, M, (Wl, Hl), borderValue=(0, 0, 0, 0))
+                if p < 1: im = cv2.GaussianBlur(im, (0, 0), 0.1 + 4 * (1 - p))
+                im[..., 3] *= p
+                lay = lay + im * (1 - lay[..., 3:4] / 255)
+            alpha_all = 1.0
+            if out_k > 0:                              # saida: clarao rapido e some
+                e = out_k / 6; alpha_all = 1 - ease_out(e)
+                lay[..., :3] = lay[..., :3] + (255 - lay[..., :3]) * min(1, e * 2.5) * 0.8
+            shl = sh * (lay[..., 3].max() / 255 if lay[..., 3].max() > 0 else 0) * alpha_all
+            T3 = np.array([[1, 0, px], [0, 1, py], [0, 0, 1]]) @ M0
+            wl = cv2.warpPerspective(lay, T3, (W, H), flags=cv2.INTER_LINEAR, borderValue=(0, 0, 0, 0))
+            ws = cv2.warpPerspective(shl, T3, (W, H), flags=cv2.INTER_LINEAR, borderValue=0)
+            f = frames[j].astype(np.float32) * (1 - ws[..., None] / 255 * 0.0 - ws[..., None] / 255)
+            a = wl[..., 3:4] / 255 * alpha_all
+            frames[j] = np.clip(f * (1 - a) + wl[..., :3] * a, 0, 255).astype(np.uint8)
+
 # ---------------------------------------------------------------- tipografia
 class Type:
     def __init__(self, cfg, scale):
@@ -575,6 +691,7 @@ def main():
         if c.get("labels"): apply_labels(fr, c["labels"], sc * hr)
         for pp in ([c["pop"]] if isinstance(c.get("pop"), dict) else c.get("pop", [])):
             apply_pop(fr, pp, sc * hr)
+        if c.get("texts"): apply_texts(fr, c["texts"], sc * hr)
         apply_out(fr, c.get("transition_out"), W * hr, samples)
         if hr != 1: fr = [cv2.resize(f, (W, H), interpolation=cv2.INTER_AREA) for f in fr]
         start = frame_no + len(pending) - min((prev_out or {}).get("overlap", 0), len(pending))

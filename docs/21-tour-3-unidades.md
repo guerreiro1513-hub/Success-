@@ -136,3 +136,22 @@ Pedido: pode passar de 20 s, usar todo o material. Cada clipe agora vai do come�
 usa 0,4–2,0 s + 4,3–7,6 s (espetos e a mesa com os potes); FL_copyB0FF usa 1,6–5,2 s (frangos
 e a placa CHURRASCO NA BRASA). Letreiros com duração limitada onde a câmera anda muito
 (o rastreio se perde): FRANGO NO ROLETE 32 q, NO CARVÃO 26 q.
+
+# v8 — ordem nova, abertura da Tropical Ville trocada, tipografia da REF4 (33,4 s)
+- Ordem: **TROPICAL VILLE → FLORAIS → JARDIM ACLIMAÇÃO**.
+- Tropical Ville: o take novo `source/TV_NOVO_abertura.mov` (copy_6B00…, 5 s, já editado em 3 partes)
+  **substitui** a fachada antiga (C128a, que saiu junto com o logo voando, porque o take novo já tem
+  o letreiro e o logo reais). Trecho usado: 3,20–4,97 s (vista de cima: fachada, banner, churrasqueiro
+  na grelha com fumaça). Ficaram de fora 0–1,3 s (fachada, curta) e 1,4–3,0 s (grelha coberta com papel
+  alumínio). O take traz o @GUERREIROSGRILL do próprio perfil no canto.
+- A grelha com a placa (FL_copyB0FF), que era o fecho, entrou no fim do Florais; o Jardim fecha o vídeo
+  e dissolve na vinheta.
+- Tipografia (REF4 = tutorial "Texto em perspectiva / Texto chamativo"; só a referência visual, nada
+  dela entra no vídeo): bloco com linha pequena em itálico branco espaçado + palavra grande Montserrat
+  Black Italic em degradê de brasa, contorno escuro fino + sombra; títulos deitados no chão em perspectiva;
+  entrada linha a linha (sobe, foca e assenta), saída com clarão. Tudo travado na área segura
+  (70/160/230/420 px) e o bloco encolhe em vez de cortar palavra (corrige "CO", "NO ESP…", "FRANGO N…").
+- Textos (menos, mais fortes): abertura "POV: O GPS TE TROUXE / PRO LUGAR CERTO" → "GUERREIRO'S GRILL";
+  títulos "UNIDADE …"; CHURRASCO NA BRASA (costela, TV), FEITO NO CARVÃO (fumaça, Florais),
+  CARNE NO PONTO (costela, Jardim), SEM ATALHO. / SÓ BRASA. (espetos, Jardim); fim sob o brasão:
+  "GUERREIRO'S GRILL / 3 UNIDADES · CUIABÁ". Sem texto em frango/carne de perto nem na grelha giratória.
