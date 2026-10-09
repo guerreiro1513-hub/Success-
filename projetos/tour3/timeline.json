@@ -129,7 +129,7 @@
         "TROPICAL VILLE"
       ],
       "title_clip": 0,
-      "title_start": 0.6,
+      "title_start": 0.5,
       "title_dur": 1.4,
       "clips": [
         {
@@ -228,82 +228,17 @@
             "type": "ramp_in",
             "in_frames": 5,
             "lift": 0.12
-          },
-          "texts": [
-            {
-              "_tipo": "frase de comida",
-              "lines": [
-                {
-                  "text": "FRANGO",
-                  "font": "assets/fonts/Anton-Regular.ttf",
-                  "size": 92,
-                  "color": "white",
-                  "tracking": 0.06,
-                  "italic": false,
-                  "_edge": 0.7,
-                  "_soft": 0.6
-                },
-                {
-                  "text": "NA BRASA",
-                  "font": "assets/fonts/Anton-Regular.ttf",
-                  "size": 210,
-                  "color": "fire",
-                  "tracking": 0.02,
-                  "italic": false,
-                  "gap": -0.18,
-                  "delay": 3
-                }
-              ],
-              "cx": 0.5,
-              "cy": 0.215,
-              "start": 10,
-              "dur": 40,
-              "follow": 0,
-              "punch": true
-            }
-          ],
-          "labels_mov": [
-            {
-              "text": "FRANGO",
-              "font": "assets/fonts/Montserrat.ttf",
-              "weight": 600,
-              "size": 64,
-              "tracking": 0.18,
-              "cx": 0.58,
-              "cy": 0.215,
-              "rot": -3,
-              "skew": 0.0,
-              "at": 8,
-              "start": 8,
-              "dur": 34,
-              "stagger": 1.0,
-              "slide": 0.0,
-              "track": [
-                [
-                  0.3,
-                  0.0,
-                  1.0,
-                  0.26
-                ]
-              ],
-              "robust": true,
-              "text2": "NA BRASA",
-              "size2": 132,
-              "weight2": 800,
-              "tracking2": 0.04,
-              "line_gap": -0.12
-            }
-          ]
+          }
         },
         {
-          "file": "source/TV_NOVO_4.mov",
-          "_o_que": "take novo no lugar da costela (C122): costela na grelha girando, de perto (30p, export do CapCut; 1,8-3,9 s e a tela final do CapCut, fora)",
+          "file": "source/BROLL_NOITE.mov",
+          "_o_que": "B-ROLL frango no rolete (camera lenta)",
           "segments": [
             [
-              0.0,
-              1.75,
-              1.25,
-              1.0
+              5.55,
+              6.7,
+              1.2,
+              0.6
             ]
           ],
           "reframe": {
@@ -311,13 +246,14 @@
             "x": 0.5,
             "y": 0.5
           },
-          "fix": "eq=gamma=1.02",
+          "fix": "eq=contrast=1.12:saturation=1.05:gamma=1.12,colorbalance=rs=-0.04:gs=-0.01:bs=0.05:rm=0.02:bm=-0.02:rh=0.06:gh=0.02:bh=-0.05:pl=1,curves=all='0/0.012 0.16/0.16 0.5/0.52 0.84/0.88 1/0.985',vignette=angle=PI/5,cas=strength=0.4",
           "ambience_db": -60,
           "transition_out": {
             "type": "ramp_in",
             "in_frames": 5,
             "lift": 0.12
-          }
+          },
+          "_broll": true
         }
       ],
       "title_y": 1300
@@ -329,7 +265,7 @@
         "FLORAIS"
       ],
       "title_clip": 0,
-      "title_start": 0.3,
+      "title_start": 0.5,
       "title_dur": 1.4,
       "clips": [
         {
@@ -378,72 +314,7 @@
             "type": "ramp_in",
             "in_frames": 5,
             "lift": 0.12
-          },
-          "texts": [
-            {
-              "_tipo": "frase de comida",
-              "lines": [
-                {
-                  "text": "FEITO NO",
-                  "font": "assets/fonts/Anton-Regular.ttf",
-                  "size": 92,
-                  "color": "white",
-                  "tracking": 0.06,
-                  "italic": false,
-                  "_edge": 0.7,
-                  "_soft": 0.6
-                },
-                {
-                  "text": "CARVÃO",
-                  "font": "assets/fonts/Anton-Regular.ttf",
-                  "size": 210,
-                  "color": "fire",
-                  "tracking": 0.02,
-                  "italic": false,
-                  "gap": -0.18,
-                  "delay": 3
-                }
-              ],
-              "cx": 0.5,
-              "cy": 0.215,
-              "start": 6,
-              "dur": 40,
-              "follow": 0,
-              "punch": true
-            }
-          ],
-          "labels_mov": [
-            {
-              "text": "FEITO NO",
-              "font": "assets/fonts/Montserrat.ttf",
-              "weight": 600,
-              "size": 64,
-              "tracking": 0.18,
-              "cx": 0.6,
-              "cy": 0.27,
-              "rot": 6,
-              "skew": 0.05,
-              "at": 3,
-              "start": 3,
-              "dur": 26,
-              "stagger": 1.0,
-              "slide": 0.0,
-              "track": [
-                [
-                  0.0,
-                  0.03,
-                  0.62,
-                  0.48
-                ]
-              ],
-              "robust": true,
-              "text2": "CARVÃO",
-              "size2": 132,
-              "weight2": 800,
-              "tracking2": 0.04,
-              "line_gap": -0.12
-            }
-          ]
+          }
         },
         {
           "file": "source/FL_C177.mov",
@@ -470,18 +341,14 @@
           }
         },
         {
-          "file": "source/FL_copyB0FF.mov",
-          "_o_que": "grelha com a placa CHURRASCO NA BRASA; o giro natural (whip) leva para a vinheta",
+          "file": "source/BROLL_NOITE.mov",
+          "_o_que": "B-ROLL faca cortando a costela, luva preta (camera lenta)",
           "segments": [
             [
-              1.6,
-              3.0,
-              1.0
-            ],
-            [
-              3.0,
-              5.2,
-              1.3
+              8.6,
+              10.25,
+              1.2,
+              0.6
             ]
           ],
           "reframe": {
@@ -489,14 +356,14 @@
             "x": 0.5,
             "y": 0.5
           },
-          "pre": "zscale=t=linear:npl=203,format=gbrpf32le,zscale=p=bt709,tonemap=hable:desat=0,zscale=t=bt709:m=bt709:r=tv,format=yuv420p",
-          "fix": "eq=gamma=1.04:contrast=1.04",
-          "ambience_db": -34,
+          "fix": "eq=contrast=1.12:saturation=1.05:gamma=1.12,colorbalance=rs=-0.04:gs=-0.01:bs=0.05:rm=0.02:bm=-0.02:rh=0.06:gh=0.02:bh=-0.05:pl=1,curves=all='0/0.012 0.16/0.16 0.5/0.52 0.84/0.88 1/0.985',vignette=angle=PI/5,cas=strength=0.4",
+          "ambience_db": -60,
           "transition_out": {
             "type": "ramp_in",
             "in_frames": 5,
             "lift": 0.12
-          }
+          },
+          "_broll": true
         }
       ],
       "title_y": 1300
@@ -508,7 +375,7 @@
         "JARDIM ACLIMAÇÃO"
       ],
       "title_clip": 0,
-      "title_start": 0.6,
+      "title_start": 0.5,
       "title_dur": 1.4,
       "clips": [
         {
@@ -605,72 +472,32 @@
           "transition_out": {
             "type": "cut",
             "overlap": 8
-          },
-          "texts": [
-            {
-              "_tipo": "frase de comida",
-              "lines": [
-                {
-                  "text": "SEM ATALHO.",
-                  "font": "assets/fonts/Anton-Regular.ttf",
-                  "size": 92,
-                  "color": "white",
-                  "tracking": 0.06,
-                  "italic": false,
-                  "_edge": 0.7,
-                  "_soft": 0.6
-                },
-                {
-                  "text": "SÓ BRASA.",
-                  "font": "assets/fonts/Anton-Regular.ttf",
-                  "size": 210,
-                  "color": "fire",
-                  "tracking": 0.02,
-                  "italic": false,
-                  "gap": -0.18,
-                  "delay": 3
-                }
-              ],
-              "cx": 0.5,
-              "cy": 0.215,
-              "start": 12,
-              "dur": 46,
-              "follow": 0,
-              "punch": true
-            }
+          }
+        },
+        {
+          "file": "source/BROLL_NOITE.mov",
+          "_o_que": "B-ROLL fogo alto na grelha (camera lenta)",
+          "segments": [
+            [
+              10.55,
+              11.85,
+              1.2,
+              0.6
+            ]
           ],
-          "labels_mov": [
-            {
-              "text": "SEM ATALHO.",
-              "font": "assets/fonts/Montserrat.ttf",
-              "weight": 600,
-              "size": 66,
-              "tracking": 0.18,
-              "cx": 0.62,
-              "cy": 0.27,
-              "rot": -4,
-              "skew": 0.0,
-              "at": 10,
-              "start": 10,
-              "dur": 44,
-              "stagger": 1.0,
-              "slide": 0.0,
-              "track": [
-                [
-                  0.35,
-                  0.08,
-                  1.0,
-                  0.48
-                ]
-              ],
-              "robust": true,
-              "text2": "SÓ BRASA.",
-              "size2": 150,
-              "weight2": 800,
-              "tracking2": 0.04,
-              "line_gap": -0.12
-            }
-          ]
+          "reframe": {
+            "zoom": 1.0,
+            "x": 0.5,
+            "y": 0.5
+          },
+          "fix": "eq=contrast=1.12:saturation=1.05:gamma=1.12,colorbalance=rs=-0.04:gs=-0.01:bs=0.05:rm=0.02:bm=-0.02:rh=0.06:gh=0.02:bh=-0.05:pl=1,curves=all='0/0.012 0.16/0.16 0.5/0.52 0.84/0.88 1/0.985',vignette=angle=PI/5,cas=strength=0.4",
+          "ambience_db": -60,
+          "transition_out": {
+            "type": "ramp_in",
+            "in_frames": 5,
+            "lift": 0.12
+          },
+          "_broll": true
         }
       ],
       "title_y": 1300
@@ -720,5 +547,6 @@
     "end_hit_db": -20
   },
   "_ritmo": "v6 = edicao da ref. 3 (T TECH) como molde: plano de abertura de cada unidade segura ~2 s com o logo montando (como a fachada da ref.); cada plano de detalhe dura ~1,05 s e ENTRA em rampa (comeca rapido com borrao de movimento real e desacelera ate camera lenta), corte seco com leve clarao, sem whip; nomes em letreiro preso no cenario. v7: sem limite de 20 s — cada clipe usado quase inteiro (do inicio ao fim util), mesma rampa de entrada.",
-  "_tipografia": "v11: volta ao sistema de texto da v7 a pedido do cliente — UMA fonte (Montserrat), UM lugar (embaixo a esquerda, x 84, y 1300, faixa de sombra), UM formato (linha pequena espacada + linha grande ExtraBold, regua dourada) para titulos e frases; abertura igual a v7. v13: frases de comida com estilo proprio (Anton, centralizadas no alto, branco + degrade de brasa, entrada em estalo); titulos das unidades continuam no sistema da v12 (embaixo a esquerda)."
+  "_tipografia": "v11: volta ao sistema de texto da v7 a pedido do cliente — UMA fonte (Montserrat), UM lugar (embaixo a esquerda, x 84, y 1300, faixa de sombra), UM formato (linha pequena espacada + linha grande ExtraBold, regua dourada) para titulos e frases; abertura igual a v7. v13: frases de comida com estilo proprio (Anton, centralizadas no alto, branco + degrade de brasa, entrada em estalo); titulos das unidades continuam no sistema da v12 (embaixo a esquerda).",
+  "_estrutura": "v16: texto so no 1o plano de cada unidade (nome dourado embaixo). Depois dos 3 planos da unidade entra um B-ROLL de comida em close e camera lenta, com look de cinema: frango no rolete (apos Tropical Ville), faca na costela (apos Florais), fogo na grelha (apos Jardim). Fonte dos b-rolls: BROLL_NOITE (o material mais cinematografico que o cliente tem: fundo desfocado, luva preta, avental com logo)."
 }

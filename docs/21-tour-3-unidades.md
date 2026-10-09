@@ -261,3 +261,15 @@ Sem mudança nova: o vídeo já tinha recebido, entre as rodadas, todos os ajust
 Entregas atuais em `entrega/`: guerreiros-TOUR-3-UNIDADES-TEXTO-EM-MOVIMENTO.mp4 (v15, letreiros presos no
 cenário), guerreiros-TOUR-3-UNIDADES.mp4 (texto parado) e -SEM-TEXTO.mp4. Pendente: o take que vai substituir
 FL_copyB0FF (grelha com a placa, fim do Florais).
+
+# v16 — texto só na abertura da unidade + b-roll de comida entre as unidades (27,1 s)
+Pedido: voltar o texto (o letreiro preso no cenário ficou ruim), texto só no 1º vídeo de cada unidade, e um
+b-roll de comida depois dos planos de cada unidade, com cara de cinema (ref. REF5_cinema_comida.mp4, TikTok de
+churrasco macro).
+- Texto: só o nome da unidade (dourado, embaixo à esquerda) no 1º plano; nenhuma frase de comida.
+- Estrutura: unidade (3 planos) → B-ROLL. B1 frango no rolete (após Tropical Ville), B2 faca cortando a costela
+  com luva preta (após Florais), B3 fogo alto na grelha (após Jardim). Todos em câmera lenta (rampa 1,2→0,6x).
+- Fonte dos b-rolls: `source/BROLL_NOITE.mov` (755c4d10, o material mais cinematográfico do cliente: fundo
+  desfocado, luva preta, avental com logo, fogo real). BROLL_DIA registrado para uso futuro.
+- Look de cinema só nos b-rolls (são close e aguentam): contraste fílmico, sombras frias/altas quentes,
+  vinheta, nitidez adaptativa; gama 1,12 para não afundar.
