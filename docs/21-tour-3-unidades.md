@@ -232,3 +232,9 @@ que já vem assim). Nada de texto, ordem ou takes mudou.
   deslocamento rastreado SUAVIZADO (gaussiana de ~0,1 s, 60 %, limite 90 px) — o rastreio bruto anterior
   tremia/saía do lugar. Saídas: guerreiros-TOUR-3-UNIDADES.mp4 (fixo), -TEXTO-EM-MOVIMENTO.mp4, -SEM-TEXTO.mp4.
 - Florais copyB0FF: o cliente vai mandar substituto.
+
+## Rodada automática 2/4 (QA das 3 versões da v14)
+A rodada coincidiu com os pedidos do cliente da v14 (frangos reenquadrados, nitidez do 1º take da TV,
+texto em movimento), que já foram renderizados. Conferido nas 3 versões: sem quadro preto, pico −1,9 dBFS
+(−23,5 LUFS só de ambiente; a música entra depois), sem quadro travado nos planos — as repetições
+apontadas estão na fonte do GTA (já vem assim) e no dissolve de 8 quadros para a vinheta. Nada mudou.
