@@ -356,3 +356,10 @@ colocar a trilha enviada (tema do GTA San Andreas, `source/MUSICA_GTA_SA.mp4`). 
   Volume final −14,5 LUFS, pico −1,3 dBFS. Fade de 1,8 s no fim.
 - Aviso de direitos: o tema é da Rockstar; o Instagram pode silenciar ou limitar o alcance. Alternativa
   segura: publicar sem música e escolher o tema na biblioteca de áudio do próprio Instagram.
+
+# v24 — só a música + mais tempo de leitura (32,1 s)
+- Áudio: só a trilha do San Andreas. Som dos vídeos, whooshes e batida final zerados (−14,6 LUFS, pico −1,6).
+- B-rolls ~0,5 s mais longos: congelamento de 20 para 35 quadros (velocidade 0,0086) com frase e barra
+  15 quadros a mais; último b-roll (costela) também segue até 9,75 s da fonte. Cada b-roll ~3,0–3,5 s.
+- Nome da unidade +0,4 s (1,5 s na TV, 1,8 s no Florais e no Jardim), com os clipes de abertura um pouco
+  mais lentos para caber.
