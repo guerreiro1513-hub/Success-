@@ -465,6 +465,14 @@ def build_lockup(lines, scale, max_w):
     sh = np.maximum(edge, soft)
     return out, sh, Wl, Hl
 
+def _over(lay, im):
+    """composicao 'over' correta (cor ponderada pelo alfa de cada camada)"""
+    a = im[..., 3:4] / 255; b = lay[..., 3:4] / 255
+    ao = a + b * (1 - a)
+    rgb = (im[..., :3] * a + lay[..., :3] * b * (1 - a)) / np.maximum(ao, 1e-6)
+    return np.concatenate([rgb, ao * 255], -1)
+
+
 def apply_texts(frames, texts, scale):
     H, W = frames[0].shape[:2]
     for T_ in texts:
@@ -508,16 +516,20 @@ def apply_texts(frames, texts, scale):
                     xs = np.arange(Wl, dtype=np.float32)
                     m = np.clip((p * (Wl + 120 * scale) - xs) / (60 * scale), 0, 1)
                     im = img.copy(); im[..., 3] *= m[None, :]
-                    lay = lay + im * (1 - lay[..., 3:4] / 255)
+                    lay = _over(lay, im)
                     continue
                 p = ease_out(min(1, max(0, (k - dl) / 7)))
                 if p <= 0: continue
                 sc_ = 1.10 - 0.10 * p
+                if T_.get("punch"):                    # entra grande e "bate" no lugar (estalo)
+                    q = min(1, max(0, (k - dl) / 9))
+                    sc_ = 1 + 0.45 * (1 - q) ** 3 - 0.06 * math.sin(math.pi * q) * (q > 0.5)
+                    p = min(1, (k - dl + 1) / 3)
                 M = cv2.getRotationMatrix2D((Wl / 2, Hl / 2), 0, sc_); M[1, 2] += (1 - p) * 18 * scale
                 im = cv2.warpAffine(img, M, (Wl, Hl), borderValue=(0, 0, 0, 0))
                 if p < 1: im = cv2.GaussianBlur(im, (0, 0), 0.1 + 4 * (1 - p))
                 im[..., 3] *= p
-                lay = lay + im * (1 - lay[..., 3:4] / 255)
+                lay = _over(lay, im)
             alpha_all = 1.0
             if out_k > 0:                              # saida: clarao rapido e some
                 e = out_k / 6; alpha_all = 1 - ease_out(e)

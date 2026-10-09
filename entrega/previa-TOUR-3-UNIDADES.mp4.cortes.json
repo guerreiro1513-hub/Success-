@@ -1,5 +1,5 @@
 {
-  "duracao": 28.233,
+  "duracao": 27.3,
   "fps": 30,
   "cortes": [
     {
@@ -33,37 +33,37 @@
       "unidade": "FLORAIS"
     },
     {
-      "t": 13.667,
+      "t": 12.733,
       "clip": "FL_C164.mov",
       "unidade": "FLORAIS"
     },
     {
-      "t": 15.633,
+      "t": 14.7,
       "clip": "FL_C177.mov",
       "unidade": "FLORAIS"
     },
     {
-      "t": 17.767,
+      "t": 16.833,
       "clip": "FL_copyB0FF.mov",
       "unidade": "FLORAIS"
     },
     {
-      "t": 20.867,
+      "t": 19.933,
       "clip": "JA_C143a.mov",
       "unidade": "JARDIM ACLIMAÇÃO"
     },
     {
-      "t": 23.033,
+      "t": 22.1,
       "clip": "JA_C143b.mov",
       "unidade": "JARDIM ACLIMAÇÃO"
     },
     {
-      "t": 24.767,
+      "t": 23.833,
       "clip": "JA_1633_estab.mov",
       "unidade": "JARDIM ACLIMAÇÃO"
     },
     {
-      "t": 26.667,
+      "t": 25.733,
       "clip": "VINHETA.mov",
       "unidade": "vinheta"
     }
@@ -74,11 +74,11 @@
     7.0,
     9.3,
     10.933,
-    13.667,
-    15.633,
-    17.767,
-    20.867,
-    23.033,
-    24.767
+    12.733,
+    14.7,
+    16.833,
+    19.933,
+    22.1,
+    23.833
   ]
 }

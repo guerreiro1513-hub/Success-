@@ -202,3 +202,14 @@ CARNE NO/PONTO, SEM ATALHO./SÓ BRASA., 3 UNIDADES · CUIABÁ/GUERREIRO'S GRILL.
   (`vidstabdetect shakiness=8` + `vidstabtransform smoothing=20 zoom=8`) → `work/JA_1633_estab.mov`;
   usa só a parte de perto até o meio (0,1–2,5 s), sem a abertura torta do fim; leve zoom 1,08, mais
   contraste e menos névoa da fumaça. O trecho tremido 0,4–2,0 s saiu.
+
+# v13 — frases de comida com estilo próprio, Florais 1 s menor (27,3 s)
+- Frases de comida diferentes dos títulos: **Anton** (condensada), centralizadas no alto (cy 0,215), linha de
+  cima branca + linha de baixo enorme em degradê de brasa, entram "batendo" (`punch`). Títulos das unidades
+  continuam iguais (dourados, embaixo à esquerda).
+  FRANGO/NA BRASA (frangos TV e Florais), COSTELA/NO PONTO (costela TV e Jardim), FEITO NO/CARVÃO (fumaça
+  Florais), SEM ATALHO./SÓ BRASA. (espetos Jardim).
+- Corrigido: a composição das camadas de texto somava as cores (a linha de baixo saía branca); agora é
+  "over" ponderado pelo alfa (`_over`).
+- Florais: primeiro plano começa 1 s depois (1,15 s).
+- Agendadas 4 rodadas de melhoria a cada 30 min (pedido do cliente).
