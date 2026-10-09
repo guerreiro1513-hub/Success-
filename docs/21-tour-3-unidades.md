@@ -273,3 +273,20 @@ churrasco macro).
   desfocado, luva preta, avental com logo, fogo real). BROLL_DIA registrado para uso futuro.
 - Look de cinema só nos b-rolls (são close e aguentam): contraste fílmico, sombras frias/altas quentes,
   vinheta, nitidez adaptativa; gama 1,12 para não afundar.
+
+# v17–v19 — um b-roll por unidade que congela com a frase (29,0 s)
+Pedido: "para aí e coloca COSTELA NA BRASA que nem tava antes", cena cinematográfica em câmera lenta, uma por
+unidade, pegando b-roll também do vídeo de dia.
+- Texto do nome da unidade continua só no 1º plano (dourado, embaixo à esquerda, igual antes).
+- Cada unidade termina num b-roll: entra em câmera lenta (1,0→0,5x), **congela ~0,67 s** e a frase em Anton
+  (linha 1 branca + linha 2 em degradê de brasa, entrando com "batida") aparece no alto da área segura;
+  depois segue lenta até o corte.
+  - Tropical Ville → `BROLL_DIA` 5,55–6,70 s (tesoura no frango assado, congela em 6,28) — FRANGO / NA BRASA.
+  - Florais → `BROLL_NOITE` 8,55–9,55 s (faca na costela, congela em 9,22) — COSTELA / NA BRASA.
+  - Jardim Aclimação → `BROLL_NOITE` 10,90–11,85 s (fogo na grelha, congela em 11,55) — FEITO NO / CARVÃO.
+- Só trechos com 60 quadros reais por segundo (os trechos 30p repetiam quadros na câmera lenta). Tempos do
+  BROLL_DIA refeitos com folha de contato a 4 fps (a análise antiga estava errada).
+- Look de cinema nos b-rolls: halation (brilho suave nas altas luzes), contraste, vinheta, nitidez adaptativa e
+  grão leve; gama 1,10 para não escurecer a carne.
+- Entrega: `entrega/guerreiros-TOUR-3-UNIDADES.mp4` (versão principal). As versões -TEXTO-EM-MOVIMENTO e
+  -SEM-TEXTO ficaram na v15 (o cliente pediu para voltar ao texto fixo).

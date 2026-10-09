@@ -1,5 +1,5 @@
 {
-  "duracao": 27.067,
+  "duracao": 29.0,
   "fps": 30,
   "cortes": [
     {
@@ -24,51 +24,51 @@
     },
     {
       "t": 8.433,
-      "clip": "BROLL_NOITE.mov",
+      "clip": "BROLL_DIA.mov",
       "unidade": "TROPICAL VILLE"
     },
     {
-      "t": 9.933,
+      "t": 11.1,
       "clip": "FL_IMG_1429.mov",
       "unidade": "FLORAIS"
     },
     {
-      "t": 11.733,
+      "t": 12.9,
       "clip": "FL_C164.mov",
       "unidade": "FLORAIS"
     },
     {
-      "t": 13.7,
+      "t": 14.867,
       "clip": "FL_C177.mov",
       "unidade": "FLORAIS"
     },
     {
-      "t": 15.833,
+      "t": 17.0,
       "clip": "BROLL_NOITE.mov",
       "unidade": "FLORAIS"
     },
     {
-      "t": 18.0,
+      "t": 19.367,
       "clip": "JA_C143a.mov",
       "unidade": "JARDIM ACLIMAÇÃO"
     },
     {
-      "t": 20.167,
+      "t": 21.533,
       "clip": "JA_C143b.mov",
       "unidade": "JARDIM ACLIMAÇÃO"
     },
     {
-      "t": 21.9,
+      "t": 23.267,
       "clip": "JA_1633_estab.mov",
       "unidade": "JARDIM ACLIMAÇÃO"
     },
     {
-      "t": 23.8,
+      "t": 25.167,
       "clip": "BROLL_NOITE.mov",
       "unidade": "JARDIM ACLIMAÇÃO"
     },
     {
-      "t": 25.5,
+      "t": 27.433,
       "clip": "VINHETA.mov",
       "unidade": "vinheta"
     }
@@ -78,13 +78,13 @@
     5.133,
     7.0,
     8.433,
-    9.933,
-    11.733,
-    13.7,
-    15.833,
-    18.0,
-    20.167,
-    21.9,
-    25.5
+    11.1,
+    12.9,
+    14.867,
+    17.0,
+    19.367,
+    21.533,
+    23.267,
+    27.433
   ]
 }

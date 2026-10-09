@@ -231,14 +231,24 @@
           }
         },
         {
-          "file": "source/BROLL_NOITE.mov",
-          "_o_que": "B-ROLL frango no rolete (camera lenta)",
+          "file": "source/BROLL_DIA.mov",
+          "_o_que": "B-ROLL tesoura abrindo o frango assado: entra lento, PARA com FRANGO NA BRASA e segue",
           "segments": [
             [
               5.55,
+              6.28,
+              1.0,
+              0.5
+            ],
+            [
+              6.28,
+              6.29,
+              0.015
+            ],
+            [
+              6.29,
               6.7,
-              1.2,
-              0.6
+              0.5
             ]
           ],
           "reframe": {
@@ -246,14 +256,47 @@
             "x": 0.5,
             "y": 0.5
           },
-          "fix": "eq=contrast=1.12:saturation=1.05:gamma=1.12,colorbalance=rs=-0.04:gs=-0.01:bs=0.05:rm=0.02:bm=-0.02:rh=0.06:gh=0.02:bh=-0.05:pl=1,curves=all='0/0.012 0.16/0.16 0.5/0.52 0.84/0.88 1/0.985',vignette=angle=PI/5,cas=strength=0.4",
+          "fix": "split[ca][cb];[cb]curves=all='0/0 0.72/0 1/1',gblur=sigma=18[ch];[ca][ch]blend=all_mode=screen:all_opacity=0.22,eq=contrast=1.12:saturation=1.06:gamma=1.10,colorbalance=rs=-0.04:gs=-0.01:bs=0.05:rm=0.02:bm=-0.02:rh=0.06:gh=0.02:bh=-0.05:pl=1,curves=all='0/0.012 0.16/0.15 0.5/0.53 0.84/0.88 1/0.985',vignette=angle=PI/4.5,cas=strength=0.45,noise=alls=4:allf=t",
           "ambience_db": -60,
           "transition_out": {
             "type": "ramp_in",
             "in_frames": 5,
             "lift": 0.12
           },
-          "_broll": true
+          "_broll": true,
+          "texts": [
+            {
+              "_tipo": "frase de comida (estilo v13)",
+              "lines": [
+                {
+                  "text": "FRANGO",
+                  "font": "assets/fonts/Anton-Regular.ttf",
+                  "size": 92,
+                  "color": "white",
+                  "tracking": 0.06,
+                  "italic": false,
+                  "_edge": 0.7,
+                  "_soft": 0.6
+                },
+                {
+                  "text": "NA BRASA",
+                  "font": "assets/fonts/Anton-Regular.ttf",
+                  "size": 210,
+                  "color": "fire",
+                  "tracking": 0.02,
+                  "italic": false,
+                  "gap": -0.18,
+                  "delay": 3
+                }
+              ],
+              "cx": 0.5,
+              "cy": 0.215,
+              "start": 31,
+              "dur": 42,
+              "follow": 0,
+              "punch": true
+            }
+          ]
         }
       ],
       "title_y": 1300
@@ -342,13 +385,23 @@
         },
         {
           "file": "source/BROLL_NOITE.mov",
-          "_o_que": "B-ROLL faca cortando a costela, luva preta (camera lenta)",
+          "_o_que": "B-ROLL faca entrando na costela (print do cliente): entra em camera lenta, PARA (congela 20 q) com a frase batendo, e segue lento",
           "segments": [
             [
-              8.6,
-              10.25,
-              1.2,
-              0.6
+              8.55,
+              9.22,
+              1.0,
+              0.5
+            ],
+            [
+              9.22,
+              9.23,
+              0.015
+            ],
+            [
+              9.23,
+              9.55,
+              0.5
             ]
           ],
           "reframe": {
@@ -356,14 +409,47 @@
             "x": 0.5,
             "y": 0.5
           },
-          "fix": "eq=contrast=1.12:saturation=1.05:gamma=1.12,colorbalance=rs=-0.04:gs=-0.01:bs=0.05:rm=0.02:bm=-0.02:rh=0.06:gh=0.02:bh=-0.05:pl=1,curves=all='0/0.012 0.16/0.16 0.5/0.52 0.84/0.88 1/0.985',vignette=angle=PI/5,cas=strength=0.4",
+          "fix": "split[ca][cb];[cb]curves=all='0/0 0.72/0 1/1',gblur=sigma=18[ch];[ca][ch]blend=all_mode=screen:all_opacity=0.22,eq=contrast=1.12:saturation=1.06:gamma=1.10,colorbalance=rs=-0.04:gs=-0.01:bs=0.05:rm=0.02:bm=-0.02:rh=0.06:gh=0.02:bh=-0.05:pl=1,curves=all='0/0.012 0.16/0.15 0.5/0.53 0.84/0.88 1/0.985',vignette=angle=PI/4.5,cas=strength=0.45,noise=alls=4:allf=t",
           "ambience_db": -60,
           "transition_out": {
             "type": "ramp_in",
             "in_frames": 5,
             "lift": 0.12
           },
-          "_broll": true
+          "_broll": true,
+          "texts": [
+            {
+              "_tipo": "frase de comida (estilo v13)",
+              "lines": [
+                {
+                  "text": "COSTELA",
+                  "font": "assets/fonts/Anton-Regular.ttf",
+                  "size": 92,
+                  "color": "white",
+                  "tracking": 0.06,
+                  "italic": false,
+                  "_edge": 0.7,
+                  "_soft": 0.6
+                },
+                {
+                  "text": "NA BRASA",
+                  "font": "assets/fonts/Anton-Regular.ttf",
+                  "size": 210,
+                  "color": "fire",
+                  "tracking": 0.02,
+                  "italic": false,
+                  "gap": -0.18,
+                  "delay": 3
+                }
+              ],
+              "cx": 0.5,
+              "cy": 0.215,
+              "start": 28,
+              "dur": 42,
+              "follow": 0,
+              "punch": true
+            }
+          ]
         }
       ],
       "title_y": 1300
@@ -476,13 +562,23 @@
         },
         {
           "file": "source/BROLL_NOITE.mov",
-          "_o_que": "B-ROLL fogo alto na grelha (camera lenta)",
+          "_o_que": "B-ROLL fogo subindo na carne: entra em camera lenta, PARA (congela 20 q) com a frase batendo, e segue lento",
           "segments": [
             [
-              10.55,
+              10.9,
+              11.55,
+              1.0,
+              0.5
+            ],
+            [
+              11.55,
+              11.56,
+              0.015
+            ],
+            [
+              11.56,
               11.85,
-              1.2,
-              0.6
+              0.5
             ]
           ],
           "reframe": {
@@ -490,14 +586,47 @@
             "x": 0.5,
             "y": 0.5
           },
-          "fix": "eq=contrast=1.12:saturation=1.05:gamma=1.12,colorbalance=rs=-0.04:gs=-0.01:bs=0.05:rm=0.02:bm=-0.02:rh=0.06:gh=0.02:bh=-0.05:pl=1,curves=all='0/0.012 0.16/0.16 0.5/0.52 0.84/0.88 1/0.985',vignette=angle=PI/5,cas=strength=0.4",
+          "fix": "split[ca][cb];[cb]curves=all='0/0 0.72/0 1/1',gblur=sigma=18[ch];[ca][ch]blend=all_mode=screen:all_opacity=0.22,eq=contrast=1.12:saturation=1.06:gamma=1.10,colorbalance=rs=-0.04:gs=-0.01:bs=0.05:rm=0.02:bm=-0.02:rh=0.06:gh=0.02:bh=-0.05:pl=1,curves=all='0/0.012 0.16/0.15 0.5/0.53 0.84/0.88 1/0.985',vignette=angle=PI/4.5,cas=strength=0.45,noise=alls=4:allf=t",
           "ambience_db": -60,
           "transition_out": {
             "type": "ramp_in",
             "in_frames": 5,
             "lift": 0.12
           },
-          "_broll": true
+          "_broll": true,
+          "texts": [
+            {
+              "_tipo": "frase de comida (estilo v13)",
+              "lines": [
+                {
+                  "text": "FEITO NO",
+                  "font": "assets/fonts/Anton-Regular.ttf",
+                  "size": 92,
+                  "color": "white",
+                  "tracking": 0.06,
+                  "italic": false,
+                  "_edge": 0.7,
+                  "_soft": 0.6
+                },
+                {
+                  "text": "CARVÃO",
+                  "font": "assets/fonts/Anton-Regular.ttf",
+                  "size": 210,
+                  "color": "fire",
+                  "tracking": 0.02,
+                  "italic": false,
+                  "gap": -0.18,
+                  "delay": 3
+                }
+              ],
+              "cx": 0.5,
+              "cy": 0.215,
+              "start": 27,
+              "dur": 42,
+              "follow": 0,
+              "punch": true
+            }
+          ]
         }
       ],
       "title_y": 1300
