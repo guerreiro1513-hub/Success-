@@ -329,3 +329,15 @@ um vídeo na TV (escolha minha); piada no estilo GTA nos três b-rolls; b-rolls 
 - **Mais cinema nos b-rolls:** rampa de entrada (1,6x → 0,5x) antes da câmera lenta, câmera avançando devagar
   (push-in 8%, continua no congelamento), vazamento de luz quente atravessando na entrada, aberração cromática
   leve nas bordas, além da lente, faixas pretas, halation e grão.
+
+# v22 — fachada mais rápida, grelha giratória nova, "RAINHA DO CHURRASCO" (30,5 s)
+- Fachada (capa da TV) de 2,7 s para 1,7 s: velocidade 1,8→1,2x, logo encaixa no quadro 12, nome da unidade
+  de 0,25 a 1,35 s.
+- Saiu o plano de cima (TV_NOVO_abertura, pedido do cliente); entrou a grelha giratória de perto
+  (TV_C130, vídeo novo do cliente, 0,05–1,30 s).
+- Costela girando (TV_C122): só 0–1,05 s, quando a grelha está de frente (depois ela vira de lado e não se vê
+  a carne), enquadrada à direita (x 0,66) para mostrar a costela.
+- Jardim: aviso do GTA "GORDURA" trocado por "RAINHA DO CHURRASCO" (barra dourada).
+- Hook: texto ainda 23 px à esquerda (o bloco encostava na margem direita do Reels); `max_w` 0,78 → centro
+  exato, alinhado com as estrelas (medido no quadro 45).
+- Ordem da TV: fachada → frangos (mergulho, mesmo take) → grelha giratória → costela girando → b-roll do frango.

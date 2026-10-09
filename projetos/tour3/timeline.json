@@ -132,7 +132,7 @@
           "follow": 0,
           "punch": true,
           "shade": 0.45,
-          "max_w": 0.88
+          "max_w": 0.78
         },
         {
           "_tipo": "hook 2 (missao do GTA: segura ate o fim)",
@@ -176,7 +176,7 @@
           "follow": 0,
           "punch": false,
           "shade": 0.45,
-          "max_w": 0.88
+          "max_w": 0.78
         }
       ]
     }
@@ -189,8 +189,8 @@
         "TROPICAL VILLE"
       ],
       "title_clip": 0,
-      "title_start": 0.6,
-      "title_dur": 1.6,
+      "title_start": 0.25,
+      "title_dur": 1.1,
       "clips": [
         {
           "file": "source/TV_C128a_fachada.mov",
@@ -198,9 +198,9 @@
           "segments": [
             [
               0.05,
-              2.58,
-              1.3,
-              0.75
+              2.45,
+              1.8,
+              1.2
             ]
           ],
           "reframe": {
@@ -225,8 +225,8 @@
           "hires": 2,
           "logo": {
             "file": "../../referencias/logo-brasao-recortado.png",
-            "land": 20,
-            "fly_frames": 16,
+            "land": 12,
+            "fly_frames": 10,
             "cx": 0.5,
             "cy": 0.225,
             "h": 0.14,
@@ -269,14 +269,14 @@
           }
         },
         {
-          "file": "source/TV_NOVO_abertura.mov",
-          "_o_que": "take novo (pedido do cliente) no lugar da fachada: vista de cima da unidade, letreiro e logo na fachada, churrasqueiro na grelha com fumaca. Trecho 3,2-4,97 s (o arquivo ja vem editado: 0-1,3 fachada, 1,4-3,0 grelha com papel aluminio).",
+          "file": "source/TV_C130_grelha_giratoria.mov",
+          "_o_que": "grelha giratoria de perto, frangos e carnes passando (video novo do cliente, iPhone 4K/60p)",
           "segments": [
             [
-              3.2,
-              4.97,
+              0.05,
               1.3,
-              1.0
+              1.3,
+              0.9
             ]
           ],
           "reframe": {
@@ -284,29 +284,28 @@
             "x": 0.5,
             "y": 0.5
           },
-          "fix": "eq=gamma=1.12:contrast=1.0:saturation=1.08,curves=all='0/0.03 0.15/0.21 0.5/0.56 1/1',colorbalance=rs=0.02:bs=-0.02:rm=0.02:bm=-0.02,cas=strength=0.55,unsharp=5:5:0.5:5:5:0.0",
+          "fix": "eq=gamma=1.02:contrast=1.04",
           "ambience_db": -60,
           "transition_out": {
             "type": "ramp_in",
             "in_frames": 5,
             "lift": 0.12
-          },
-          "pre": "hqdn3d=2:1.5:4:3,scale=iw*2:ih*2:flags=lanczos"
+          }
         },
         {
           "file": "source/TV_C122_costela.mov",
           "_o_que": "costela no giro (iPhone 4K/60p), camera indo pra esquerda e avancando",
           "segments": [
             [
-              0.3,
-              1.9,
-              1.4,
-              0.9
+              0.0,
+              1.05,
+              1.1,
+              0.8
             ]
           ],
           "reframe": {
             "zoom": 1.0,
-            "x": 0.5,
+            "x": 0.66,
             "y": 0.5
           },
           "fix": "eq=gamma=1.02:contrast=1.04",
@@ -793,19 +792,19 @@
             }
           ],
           "gta": {
-            "label": "GORDURA",
+            "label": "RAINHA DO CHURRASCO",
             "color": [
-              245,
-              170,
-              30
+              255,
+              196,
+              40
             ],
             "start": 45,
             "dur": 32,
             "y": 630,
             "from": 0.3,
-            "w": 600,
+            "w": 720,
             "h": 158,
-            "label_size": 72,
+            "label_size": 62,
             "bar": 30
           },
           "_fz": 35

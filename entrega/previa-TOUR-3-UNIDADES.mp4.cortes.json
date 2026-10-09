@@ -1,5 +1,5 @@
 {
-  "duracao": 32.233,
+  "duracao": 30.467,
   "fps": 30,
   "cortes": [
     {
@@ -13,84 +13,84 @@
       "unidade": "TROPICAL VILLE"
     },
     {
-      "t": 6.233,
+      "t": 5.2,
       "clip": "TV_C128b_frangos.mov",
       "unidade": "TROPICAL VILLE"
     },
     {
-      "t": 7.667,
-      "clip": "TV_NOVO_abertura.mov",
+      "t": 6.633,
+      "clip": "TV_C130_grelha_giratoria.mov",
       "unidade": "TROPICAL VILLE"
     },
     {
-      "t": 9.3,
+      "t": 7.867,
       "clip": "TV_C122_costela.mov",
       "unidade": "TROPICAL VILLE"
     },
     {
-      "t": 10.833,
+      "t": 9.067,
       "clip": "BROLL_DIA.mov",
       "unidade": "TROPICAL VILLE"
     },
     {
-      "t": 13.8,
+      "t": 12.033,
       "clip": "FL_IMG_1429.mov",
       "unidade": "FLORAIS"
     },
     {
-      "t": 15.6,
+      "t": 13.833,
       "clip": "FL_C164.mov",
       "unidade": "FLORAIS"
     },
     {
-      "t": 17.567,
+      "t": 15.8,
       "clip": "FL_C177.mov",
       "unidade": "FLORAIS"
     },
     {
-      "t": 19.7,
+      "t": 17.933,
       "clip": "PICANHA_60.mov",
       "unidade": "FLORAIS"
     },
     {
-      "t": 22.233,
+      "t": 20.467,
       "clip": "JA_C143a.mov",
       "unidade": "JARDIM ACLIMAÇÃO"
     },
     {
-      "t": 24.467,
+      "t": 22.7,
       "clip": "JA_C143b.mov",
       "unidade": "JARDIM ACLIMAÇÃO"
     },
     {
-      "t": 26.2,
+      "t": 24.433,
       "clip": "JA_1633_estab.mov",
       "unidade": "JARDIM ACLIMAÇÃO"
     },
     {
-      "t": 28.1,
+      "t": 26.333,
       "clip": "BROLL_NOITE.mov",
       "unidade": "JARDIM ACLIMAÇÃO"
     },
     {
-      "t": 30.667,
+      "t": 28.9,
       "clip": "VINHETA.mov",
       "unidade": "vinheta"
     }
   ],
   "transicoes_de_camera": [
     3.5,
-    6.233,
-    7.667,
-    9.3,
-    10.833,
-    13.8,
-    15.6,
-    17.567,
-    19.7,
-    22.233,
-    24.467,
-    26.2,
-    30.667
+    5.2,
+    6.633,
+    7.867,
+    9.067,
+    12.033,
+    13.833,
+    15.8,
+    17.933,
+    20.467,
+    22.7,
+    24.433,
+    28.9
   ]
 }
