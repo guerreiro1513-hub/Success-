@@ -88,6 +88,33 @@ _LENS = {}
 def apply_cinema(frames, cfg, scale):
     """Acabamento do SEGREDO nos b-rolls: centro nitido e bordas desfocadas (lente aberta) e faixas pretas."""
     H, W = frames[0].shape[:2]
+    n = len(frames)
+    push = cfg.get("push", 0)
+    if push:                                    # camera avancando devagar (continua durante o congelamento)
+        for j in range(n):
+            z = 1 + push * (j / max(1, n - 1)) ** 0.9
+            M = cv2.getRotationMatrix2D((W / 2, H * cfg.get("push_cy", 0.5)), 0, z)
+            frames[j] = cv2.warpAffine(frames[j], M, (W, H), flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_REFLECT)
+    ca = cfg.get("aberration", 0)
+    if ca:                                      # aberracao cromatica leve nas bordas (lente de cinema)
+        Mr = cv2.getRotationMatrix2D((W / 2, H / 2), 0, 1 + ca); Mb = cv2.getRotationMatrix2D((W / 2, H / 2), 0, 1 - ca)
+        for j in range(n):
+            f = frames[j]
+            r = cv2.warpAffine(f[..., 0], Mr, (W, H), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REFLECT)
+            b = cv2.warpAffine(f[..., 2], Mb, (W, H), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REFLECT)
+            frames[j] = np.dstack([r, f[..., 1], b])
+    lk = cfg.get("leak", 0)
+    if lk:                                      # vazamento de luz quente atravessando na entrada
+        yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
+        nl = cfg.get("leak_frames", 16)
+        for j in range(min(nl, n)):
+            p = j / nl
+            cx_ = W * (-0.3 + 1.6 * p); cy_ = H * (0.25 + 0.2 * p)
+            g = np.exp(-(((xx - cx_) / (W * 0.45)) ** 2 + ((yy - cy_) / (H * 0.35)) ** 2))
+            g = (g * lk * math.sin(math.pi * p))[..., None]
+            col = np.array([255, 150, 50.])
+            f = frames[j].astype(np.float32)
+            frames[j] = np.clip(255 - (255 - f) * (255 - col * g) / 255, 0, 255).astype(np.uint8)
     if cfg.get("lens", True):
         key = (W, H)
         if key not in _LENS:
@@ -101,6 +128,46 @@ def apply_cinema(frames, cfg, scale):
     bar = int(cfg.get("bars", 140) * scale)
     if bar:
         for f in frames: f[:bar] = 0; f[H - bar:] = 0
+
+
+def apply_gta(frames, cfg, scale):
+    """Aviso de status do GTA San Andreas: caixa preta entra pela esquerda, barra enche e o '+' pisca."""
+    H, W = frames[0].shape[:2]
+    st, du = cfg.get("start", 30), cfg.get("dur", 30)
+    bw, bh = int(cfg.get("w", 470) * scale), int(cfg.get("h", 118) * scale)
+    x0, y0 = int(cfg.get("x", SAFE["x0"] + 6) * scale), int(cfg.get("y", 640) * scale)
+    f_lab = _font("assets/fonts/Anton-Regular.ttf", cfg.get("label_size", 50) * scale, 400)
+    f_plus = _font("assets/fonts/Anton-Regular.ttf", cfg.get("label_size", 50) * 1.45 * scale, 400)
+    col = np.array(cfg.get("color", [196, 32, 36]), np.float32)
+    pad = int(20 * scale)
+    for j in range(len(frames)):
+        k = j - st
+        if k < 0 or k >= du: continue
+        e = ease_out(min(1, (k + 1) / 7))
+        a_all = min(1, (du - k) / 5)
+        dx = int(-(1 - e) * (bw + x0))
+        box = Image.new("RGBA", (bw, bh), (0, 0, 0, 0))
+        d = ImageDraw.Draw(box)
+        d.rounded_rectangle([0, 0, bw - 1, bh - 1], radius=int(10 * scale), fill=(8, 8, 10, 178))
+        d.text((pad + int(2 * scale), int(10 * scale) + 3), cfg["label"], font=f_lab, fill=(0, 0, 0, 255))   # sombra
+        d.text((pad, int(10 * scale)), cfg["label"], font=f_lab, fill=(255, 255, 255, 255))
+        fill = ease_out(min(1, max(0, (k - 5) / 14)))
+        by0, by1 = bh - pad - int(cfg.get("bar", 20) * scale), bh - pad
+        d.rectangle([pad, by0, bw - pad, by1], fill=tuple(int(c * 0.35) for c in col) + (255,))
+        d.rectangle([pad, by0, pad + int((bw - 2 * pad) * cfg.get("from", 0.25) + (bw - 2 * pad) * (1 - cfg.get("from", 0.25)) * fill), by1],
+                    fill=tuple(int(c) for c in col) + (255,))
+        if k >= 19:                                  # '+' acende quando a barra enche
+            q = min(1, (k - 19) / 4); blink = 1.0 if (k - 19) > 8 or (k // 2) % 2 == 0 else 0.4
+            pw = f_plus.getlength("+")
+            d.text((bw - pad - pw, int(-8 * scale)), "+", font=f_plus, fill=(90, 220, 90, int(255 * q * blink)))
+        arr = np.array(box, np.float32)
+        a = arr[..., 3:4] / 255 * a_all
+        xa, xb = max(0, x0 + dx), min(W, x0 + dx + bw)
+        if xb <= xa: continue
+        sx = xa - (x0 + dx)
+        reg = frames[j][y0:y0 + bh, xa:xb].astype(np.float32)
+        aa = a[:, sx:sx + (xb - xa)]
+        frames[j][y0:y0 + bh, xa:xb] = np.clip(reg * (1 - aa) + arr[:, sx:sx + (xb - xa), :3] * aa, 0, 255).astype(np.uint8)
 
 
 def apply_stars(frames, cfg, scale):
@@ -226,15 +293,15 @@ def apply_in(frames, tr, W, samples):
 
 # ---------------------------------------------------------------- efeito fachada
 _LOGO = {}
-def load_logo(path, depth):
-    """Logo RGBA com espessura (efeito placa 3D). O telefone e coberto (sem numero no video)."""
-    key = (path, depth)
+def load_logo(path, depth, cover_phone=True):
+    """Logo RGBA com espessura (efeito placa 3D). O telefone e coberto, a menos que keep_phone (v21: cliente quer o numero)."""
+    key = (path, depth, cover_phone)
     if key in _LOGO: return _LOGO[key]
     im = np.array(Image.open(P(path)).convert("RGBA")).astype(np.float32)
     h, w = im.shape[:2]
     # telefone fica na faixa de baixo, dentro do fundo preto do brasao
     y0, y1 = int(h * 0.835), int(h * 0.935); x0, x1 = int(w * 0.22), int(w * 0.80)
-    im[y0:y1, x0:x1, :3] = im[y0 - 6:y0 - 4, x0:x1, :3].mean((0, 1))
+    if cover_phone: im[y0:y1, x0:x1, :3] = im[y0 - 6:y0 - 4, x0:x1, :3].mean((0, 1))
     pad = depth + 4
     out = np.zeros((h + pad, w + pad, 4), np.float32)
     a = im[..., 3:4] / 255
@@ -279,7 +346,7 @@ def apply_logo(frames, cfg):
     pequeno quique e fica preso a ela seguindo a camera. Folhas da arvore passam na frente."""
     H, W = frames[0].shape[:2]
     land, F = cfg.get("land", 12), cfg.get("fly_frames", 10)
-    logo = load_logo(cfg["file"], max(2, int(cfg.get("depth", 10) * W / 1080)))
+    logo = load_logo(cfg["file"], max(2, int(cfg.get("depth", 10) * W / 1080)), not cfg.get("keep_phone"))
     lh, lw = logo.shape[:2]
     target_h = cfg.get("h", 0.14) * H
     base_s = target_h / lh
@@ -938,6 +1005,7 @@ def main():
                 apply_pop(fr, pp, sc * hr)
             if TEXT_MODE == "movimento" and c.get("labels_mov"): apply_labels(fr, c["labels_mov"], sc * hr)
             elif c.get("texts"): apply_texts(fr, c["texts"], sc * hr)
+            if c.get("gta"): apply_gta(fr, c["gta"], sc * hr)
         apply_out(fr, c.get("transition_out"), W * hr, samples)
         if hr != 1: fr = [cv2.resize(f, (W, H), interpolation=cv2.INTER_AREA) for f in fr]
         start = frame_no + len(pending) - min((prev_out or {}).get("overlap", 0), len(pending))

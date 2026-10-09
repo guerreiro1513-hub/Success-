@@ -312,3 +312,20 @@ b-rolls no estilo do SEGREDO (câmera lenta, cinema); transições da Tropical V
   dissolve 2, clarão no corte (`flash` 0,55) e o plano seguinte chega com zoom 1,45→1 em 11 quadros.
 - Novas funções no render.py: `apply_cinema` (lente + faixas), `apply_stars`, `shade` no `apply_texts`,
   `flash` nas transições.
+
+# v21 — fachada como capa da TV, aviso de status do GTA nos b-rolls, mais cinema (32,2 s)
+Pedido: hook 1 "reto" (estava torto) e entrada do "NOVA MISSÃO" mais natural; Tropical Ville começando no
+vídeo da fachada com o logo (sem cobrir o telefone do logo) e o nome da unidade com tempo para ler; só mais
+um vídeo na TV (escolha minha); piada no estilo GTA nos três b-rolls; b-rolls mais cinematográficos.
+- **Hook:** o bloco ficava ~45 px à esquerda das estrelas (a trava da margem direita do Reels, 160 px, empurrava
+  o texto largo). `max_w` 0,88 → texto e estrelas no mesmo eixo. "NOVA MISSÃO" sem o "estalo": as linhas sobem
+  e aparecem uma depois da outra (atrasos 0/5/9).
+- **Tropical Ville:** fachada (capa: logo voando com o WhatsApp à mostra — `keep_phone` — e o nome da unidade de
+  0,6 a 2,2 s) → mergulho nos frangos (mesmo take) → plano de cima que abria antes → **costela girando**
+  (TV_C122, o vídeo a mais) → b-roll do frango. Logo do Jardim também com número.
+- **Piada GTA (aviso de status do San Andreas):** caixa preta entra pela esquerda abaixo da frase, a barra enche
+  e o "+" verde pisca. Frango → VIDA (vermelho), Picanha → RESPEITO (azul), Costela → GORDURA (laranja).
+  A fonte do jogo (Pricedown) não deu para baixar (site bloqueado pelo proxy); feito em Anton.
+- **Mais cinema nos b-rolls:** rampa de entrada (1,6x → 0,5x) antes da câmera lenta, câmera avançando devagar
+  (push-in 8%, continua no congelamento), vazamento de luz quente atravessando na entrada, aberração cromática
+  leve nas bordas, além da lente, faixas pretas, halation e grão.
