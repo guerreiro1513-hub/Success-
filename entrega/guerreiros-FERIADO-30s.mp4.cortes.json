@@ -1,0 +1,81 @@
+{
+  "duracao": 29.467,
+  "fps": 30,
+  "cortes": [
+    {
+      "t": 0.0,
+      "src": "V1.mp4",
+      "o_que": "grelha de costela girando na fumaca (gancho)"
+    },
+    {
+      "t": 2.467,
+      "src": "F8.jpg",
+      "o_que": "costelas douradas na grelha"
+    },
+    {
+      "t": 3.767,
+      "src": "V2.mp4",
+      "o_que": "frangos girando"
+    },
+    {
+      "t": 5.067,
+      "src": "F7.jpg",
+      "o_que": "grelha cheia de costela"
+    },
+    {
+      "t": 6.367,
+      "src": "V3.mov",
+      "o_que": "sal grosso na costela"
+    },
+    {
+      "t": 7.667,
+      "src": "F4.jpg",
+      "o_que": "picanha e frangos"
+    },
+    {
+      "t": 8.967,
+      "src": "F3.jpg",
+      "o_que": "frangos dourados"
+    },
+    {
+      "t": 10.267,
+      "src": "F6.jpg",
+      "o_que": "pernil com a lona @guerreirosgrill"
+    },
+    {
+      "t": 11.567,
+      "src": "F2.jpg",
+      "o_que": "costela janela"
+    },
+    {
+      "t": 12.867,
+      "src": "F1.jpg",
+      "o_que": "peixe assado"
+    },
+    {
+      "t": 14.167,
+      "src": "F5.jpg",
+      "o_que": "grelha com carnes"
+    },
+    {
+      "t": 15.467,
+      "src": "V1.mp4",
+      "o_que": "costelas girando (reforco)"
+    },
+    {
+      "t": 18.067,
+      "src": "V2.mp4",
+      "o_que": "frangos de perto"
+    },
+    {
+      "t": 20.667,
+      "src": "V3.mov",
+      "o_que": "mao salgando"
+    },
+    {
+      "t": 23.267,
+      "src": "V1.mp4",
+      "o_que": "fecho sobre a grelha"
+    }
+  ]
+}
