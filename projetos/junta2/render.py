@@ -200,6 +200,95 @@ def captions(f, t, tl, s, words, fps):
                 put(f, g, cxw - g["w"] / 2, cy - g["h"] / 2 + (1 - p) * 10 * s, p * out, sc, col)
             x += (g["adv"] + space) * k
 
+# ---------------------------------------------------------------- legenda estilo "Captions" (referência do cliente)
+_W2 = {}
+def word2(text, path, size, tracking, s):
+    """Palavra branca, letras apertadas, com sombra difusa (sem contorno) e um halo claro para a entrada."""
+    key = (text, path, size, s)
+    if key in _W2: return _W2[key]
+    f = font(path, size * s); a, d = f.getmetrics(); pad = int(36 * s)
+    sp = f.size * tracking
+    adv = sum(f.getlength(ch) for ch in text) + sp * (len(text) - 1)
+    w, h = int(adv) + 2 * pad, a + d + 2 * pad
+    m = Image.new("L", (w, h), 0); dr = ImageDraw.Draw(m); x = pad
+    for ch in text:
+        dr.text((x, pad), ch, font=f, fill=255); x += f.getlength(ch) + sp
+    A = np.array(m, np.float32) / 255
+    shadow = np.maximum(np.roll(cv2.GaussianBlur(A, (0, 0), 2.5 * s), int(3 * s), 0) * 0.45,
+                        cv2.GaussianBlur(A, (0, 0), 14 * s) * 0.72)
+    glow = cv2.GaussianBlur(A, (0, 0), 10 * s)
+    out = {"A": A, "sh": shadow, "glow": glow, "w": w, "h": h, "pad": pad, "adv": adv, "asc": a}
+    _W2[key] = out
+    return out
+
+
+def put2(f, g, x, y, alpha, blur=0.0, glow=0.0, scale=1.0):
+    A, sh, gl = g["A"], g["sh"], g["glow"]
+    w, h = g["w"], g["h"]
+    if abs(scale - 1) > 1e-3:
+        w2, h2 = max(2, int(w * scale)), max(2, int(h * scale))
+        A, sh, gl = (cv2.resize(z, (w2, h2)) for z in (A, sh, gl))
+        x += (w - w2) / 2; y += (h - h2) / 2; w, h = w2, h2
+    if blur > 0.3: A = cv2.GaussianBlur(A, (0, 0), blur)
+    x, y = int(x), int(y); H, W = f.shape[:2]
+    xa, ya, xb, yb = max(0, x), max(0, y), min(W, x + w), min(H, y + h)
+    if xb <= xa or yb <= ya: return
+    sl = (slice(ya - y, yb - y), slice(xa - x, xb - x))
+    reg = f[ya:yb, xa:xb]
+    reg *= 1 - (sh[sl] * alpha)[..., None]
+    if glow > 0:
+        reg[:] = reg + (255 - reg) * (gl[sl] * glow * alpha)[..., None]
+    a = (A[sl] * alpha)[..., None]
+    reg[:] = reg * (1 - a) + 255 * a
+
+
+def captions2(f, t, tl, s, words, fps):
+    """Como na referência: minúsculas (nomes próprios mantidos), palavra-chave grande e as outras pequenas,
+    letras apertadas, 1-2 linhas centralizadas; cada palavra entra quando é falada: desfoque -> nítida com um
+    halo branco rápido, e fica."""
+    C = tl["captions"]; H, W = f.shape[:2]
+    keep = set(C.get("proper", []))
+    pages = C["pages"]
+    for pi, pg in enumerate(pages):
+        idx = [i for ln in pg["lines"] for i in ln]
+        a = words[idx[0]]["a"] - 0.05
+        b = words[idx[-1]]["b"] + pg.get("hold", 0.25)
+        if pi + 1 < len(pages):
+            b = min(b, words[pages[pi + 1]["lines"][0][0]]["a"] - 0.05)
+        if not (a <= t < b): continue
+        out = ease_io(min(1, (b - t) / 0.10))
+        big = set(pg.get("big", []))
+        lines, lh = [], []
+        for ln in pg["lines"]:
+            row = []
+            for i in ln:
+                raw = words[i]["w"]
+                txt = raw if i in keep else raw.lower()
+                row.append((i, word2(txt, C["font_big"] if i in big else C["font"],
+                                     C["size_big"] if i in big else C["size"], C["tracking"], s)))
+            lines.append(row)
+        # cabe na largura segura (encolhe a página inteira se precisar)
+        gap = C["space"] * s
+        widths = [sum(g["adv"] for _, g in r) + gap * (len(r) - 1) for r in lines]
+        k = min(1.0, (1080 - SAFE["x0"] - SAFE["x1"]) * s * 0.94 / max(widths))
+        heights = [max(g["asc"] for _, g in r) for r in lines]
+        tot_h = sum(heights) * k * 1.02
+        y_top = C["cy"] * H - tot_h / 2
+        cx0 = (SAFE["x0"] * s + W - SAFE["x1"] * s) / 2
+        for r, wd, hh in zip(lines, widths, heights):
+            base = y_top + hh * k                       # linha de base comum (tamanhos misturados)
+            x = cx0 - wd * k / 2
+            for i, g in r:
+                q = (t - (words[i]["a"] - 0.04)) * fps
+                if q >= 0:
+                    p = ease_out(q / 6)
+                    cxw = x + g["adv"] * k / 2
+                    yy = base - (g["asc"] + g["pad"]) * k - g["h"] * (1 - k) / 2   # topo da caixa (put2 escala pelo centro)
+                    put2(f, g, cxw - g["w"] / 2, yy + (1 - p) * 6 * s,
+                         p * out, blur=7 * s * (1 - p), glow=0.55 * max(0, 1 - q / 9), scale=k * (1.03 - 0.03 * p))
+                x += (g["adv"] + gap) * k
+            y_top += hh * k * 1.02
+
 
 def end_card(f, t, tl, s):
     E = tl["end_card"]
@@ -334,7 +423,7 @@ def main():
             if j >= lens[ci] - ov[ci] and ci < len(clips) - 1:
                 pend.append(f); continue
             t = n / fps
-            captions(f, t, tl, s, words, fps)
+            (captions2 if tl["captions"].get("style") == "captions_app" else captions)(f, t, tl, s, words, fps)
             end_card(f, t, tl, s)
             pe.stdin.write(np.clip(f, 0, 255).astype(np.uint8).tobytes()); n += 1
     pe.stdin.close(); pe.wait()
