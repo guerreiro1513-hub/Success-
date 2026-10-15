@@ -24,6 +24,11 @@ def syl(w): return max(1, len(re.findall(r"[aeiouáéíóúâêôãõà]+", w.lo
 
 # ---------------------------------------------------------------- tempo das palavras
 def word_times(tl, env, hop):
+    lead = tl["captions"].get("lead", 0.0)              # legenda aparece um pouco antes da voz (leitura confortável)
+    return [dict(w, a=max(0.0, w["a"] - lead), b=w["b"] - lead) for w in _word_times(tl, env, hop)]
+
+
+def _word_times(tl, env, hop):
     """Texto do cliente + trechos do detector de voz. Dentro de cada trecho as palavras são divididas por sílabas
     e cada fronteira é puxada para o vale de energia mais próximo (±90 ms), onde a palavra realmente troca."""
     words = []
@@ -419,6 +424,21 @@ def main():
     n = 0; pend = []
     for ci, c in enumerate(clips):
         for j, f in enumerate(reader(c, W, H, fps, tl["grade"])):
+            FW = tl["whip"] if tl["whip"].get("type") == "forward" else None
+            if FW and c.get("whip_out") and j >= lens[ci] - FW["out_frames"]:
+                # a câmera anda para a frente, acelerando, na direção da churrasqueira (puxa o ponto só um pouco)
+                K_ = FW["out_frames"]; q0, q1 = (j - (lens[ci] - K_)) / K_, (j - (lens[ci] - K_) + 1) / K_
+                st = lambda q: (1 + (FW["zoom"] - 1) * q ** 2, FW["pull"] * q ** 2)
+                f = dive_blur(f, st(q0), st(q1), FW["cx"], FW["cy"], max(2, int(smp * 0.6)))
+            if FW and ci and clips[ci - 1].get("whip_out"):
+                # o próximo plano continua andando para a frente e freia (mesmo sentido, sem 'voltar')
+                K_ = FW["in_frames"]; ze = FW["in_zoom"]
+                z = lambda q: 1 + (ze - 1) * (1 - (1 - min(1, q)) ** 2)
+                if j < K_:
+                    q0, q1 = j / K_, (j + 1) / K_
+                    f = dive_blur(f, (z(q0), 0.0), (z(q1), 0.0), 0.5, FW.get("in_cy", 0.5), max(2, int(smp * 0.6)) if j < 6 else 1)
+                else:
+                    f = dive_blur(f, (ze, 0.0), (ze, 0.0), 0.5, FW.get("in_cy", 0.5), 1)
             DV = tl["whip"] if tl["whip"].get("type") == "dive" else None
             if DV and c.get("whip_out") and j >= lens[ci] - DV["out_frames"]:   # entra na cena: mergulho até a churrasqueira
                 K_ = DV["out_frames"]; q0, q1 = (j - (lens[ci] - K_)) / K_, (j - (lens[ci] - K_) + 1) / K_
@@ -433,10 +453,10 @@ def main():
                 f = warp(f, compose(zoom_m(1 + (ZC - 1) * p_, W, H), part_matrix(MM, p_, W, H)))
             if MM is not None and ci and clips[ci - 1].get("whip_out") and j < KC and ZC > 1.001:
                 f = warp(f, zoom_m(1 + (ZC - 1) * (1 - ease_io((j + 1) / KC)), W, H))   # o zoom extra se desfaz devagar
-            elif MM is None and not DV and c.get("whip_out") and j >= lens[ci] - K:     # whip (modo antigo)
+            elif MM is None and not DV and not FW and c.get("whip_out") and j >= lens[ci] - K:     # whip (modo antigo)
                 p0, p1 = (j - (lens[ci] - K)) / K, (j - (lens[ci] - K) + 1) / K
                 f = shift_blur(f, D * ease_in(p0), D * ease_in(p1), smp)
-            if MM is None and not DV and ci and clips[ci - 1].get("whip_out") and j < K:
+            if MM is None and not DV and not FW and ci and clips[ci - 1].get("whip_out") and j < K:
                 p0, p1 = 1 - j / K, 1 - (j + 1) / K
                 f = shift_blur(f, -D * ease_in(p0), -D * ease_in(p1), smp)
             if ci and j < ov[ci - 1] and pend:                  # mistura dentro do borrão

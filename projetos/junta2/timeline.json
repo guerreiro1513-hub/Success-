@@ -18,7 +18,7 @@
       "in": 1.8,
       "out": 3.66,
       "whip_out": true,
-      "overlap": 2
+      "overlap": 6
     },
     {
       "src": "source/IMG_1878.mov",
@@ -28,16 +28,17 @@
     }
   ],
   "whip": {
-    "type": "dive",
-    "out_frames": 11,
-    "zoom": 2.6,
+    "type": "forward",
+    "out_frames": 12,
+    "zoom": 1.35,
+    "pull": 0.35,
     "cx": 0.21,
     "cy": 0.57,
-    "in_frames": 12,
-    "in_zoom": 1.45,
+    "in_frames": 36,
+    "in_zoom": 1.12,
     "in_cy": 0.55,
-    "whoosh": 0.22,
-    "_nota": "v6: 'entrando na cena' — a câmera mergulha na churrasqueira que aparece atrás dele (x 0,21 y 0,57) com rastro radial e sai do mergulho já de perto da churrasqueira (zoom 1,45 -> 1). Mistura de 2 quadros dentro do borrão."
+    "whoosh": 0.12,
+    "_nota": "v7: a câmera anda para a frente nos dois planos (zoom só aumenta): o fim da fala avança acelerando em direção à churrasqueira (1->1,35, puxando o ponto 35 %) e a churrasqueira continua avançando e freia (1->1,12 em 1,2 s). Mistura de 6 quadros no pico do movimento."
   },
   "_speech": "texto do cliente; tempos do detector de voz (silero VAD) no relógio do vídeo. 'Alto Posto' -> AUTO POSTO.",
   "speech": [
@@ -251,7 +252,8 @@
         ],
         "hold": 0.3
       }
-    ]
+    ],
+    "lead": 0.18
   },
   "end_card": {
     "start": 16.2,
