@@ -5,8 +5,9 @@
 - Fala: o CapCut do cliente (`source/NOVO2.mov`, 720p) é IMG_1885 quadros 0–279 + NOVO_1885 quadros 54–138
   (mesma tomada, conferido quadro a quadro). Reconstruído dos originais 4K com esses mesmos cortes: emenda
   invisível e imagem nítida (4K → 1080 lanczos + nitidez cas 0,4).
-- Transição: whip pan de 6 quadros + 2 de mistura, na mesma direção do pan das duas câmeras (imagem correndo para
-  a direita), com sopro sintetizado. Entra na churrasqueira abrindo (IMG_1878), fecho com logo, AUTO POSTO
+- Transição (v3): a câmera avança devagar (18 quadros, zoom ~1,2x) até o enquadramento exato do início da churrasqueira
+  (alinhamento automático pela tenda, SIFT + RANSAC) e mistura em 8 quadros; o zoom extra de cobertura se desfaz em
+  20 quadros. Parece um plano só. A fala termina em NOVO_1885 4,10 s (melhor ponto de alinhamento).
   FLORAIS e os dias.
 - Legenda (estilo atual): Poppins Black maiúscula, contorno escuro arredondado + sombra difusa, páginas de 1–3
   palavras; cada palavra entra quando é falada e a palavra falada fica dourada e maior (uma por vez).

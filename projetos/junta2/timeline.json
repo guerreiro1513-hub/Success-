@@ -1,39 +1,228 @@
 {
   "_projeto": "Aviso: Guerreiro's Grill no Auto Posto Florais, quinta a domingo e feriado (v2).",
   "fps": 30,
-  "output": {"file": "../../entrega/guerreiros-FLORAIS-QUI-A-DOM.mp4", "preview": "../../entrega/previa-FLORAIS-QUI-A-DOM.mp4"},
+  "output": {
+    "file": "../../entrega/guerreiros-FLORAIS-QUI-A-DOM.mp4",
+    "preview": "../../entrega/previa-FLORAIS-QUI-A-DOM.mp4"
+  },
   "grade": "eq=contrast=1.05:saturation=1.07,colorbalance=rh=0.02:bh=-0.02,cas=strength=0.4",
   "_clips": "O CapCut do cliente (NOVO2, 720p) = IMG_1885 quadros 0-279 + NOVO_1885 quadros 54-138 (mesma tomada; o quadro 279 de um é o 53 do outro). Reconstruído dos originais 4K com os mesmos cortes, emenda invisível. Depois whip pan na direção do movimento da câmera (as duas tomadas fazem pan com a imagem correndo para a direita) até a churrasqueira (IMG_1878).",
   "clips": [
-    {"src": "source/IMG_1885.mov", "in": 0.0, "out": 9.3333},
-    {"src": "source/NOVO_1885.mov", "in": 1.80, "out": 4.66, "whip_out": true, "overlap": 2},
-    {"src": "source/IMG_1878.mov", "in": 0.30, "out": 8.90, "vol": 1.4}
+    {
+      "src": "source/IMG_1885.mov",
+      "in": 0.0,
+      "out": 9.3333
+    },
+    {
+      "src": "source/NOVO_1885.mov",
+      "in": 1.8,
+      "out": 4.1,
+      "whip_out": true,
+      "overlap": 8
+    },
+    {
+      "src": "source/IMG_1878.mov",
+      "in": 0.3,
+      "out": 8.9,
+      "vol": 1.4
+    }
   ],
-  "whip": {"frames": 6, "amount": 0.55},
+  "whip": {
+    "type": "match",
+    "push_frames": 18,
+    "whoosh": 0.0,
+    "frames": 6,
+    "amount": 0.55,
+    "_nota": "v3: em vez do whip, a câmera avança devagar (18 quadros) até o enquadramento do início da churrasqueira (a tenda bate nos dois planos) e mistura em 12 quadros: parece um plano só.",
+    "settle_frames": 20
+  },
   "_speech": "texto do cliente; tempos do detector de voz (silero VAD) no relógio do vídeo. 'Alto Posto' -> AUTO POSTO.",
   "speech": [
-    {"text": "Olá meus consagrados, tudo bem?", "t": [0.02, 1.69]},
-    {"text": "Guerreiro's Grill, só para lembrar,", "t": [1.99, 3.52]},
-    {"text": "está aqui no Auto Posto Florais, quinta, sexta, sábado, domingo", "t": [3.97, 7.71]},
-    {"text": "e feriado.", "t": [8.07, 9.02]},
-    {"text": "Hoje é quinta-feira,", "t": [9.35, 10.08]},
-    {"text": "tem churrasco.", "t": [10.27, 10.62]},
-    {"text": "Um abraço!", "t": [10.62, 10.95]}
+    {
+      "text": "Olá meus consagrados, tudo bem?",
+      "t": [
+        0.02,
+        1.69
+      ]
+    },
+    {
+      "text": "Guerreiro's Grill, só para lembrar,",
+      "t": [
+        1.99,
+        3.52
+      ]
+    },
+    {
+      "text": "está aqui no Auto Posto Florais, quinta, sexta, sábado, domingo",
+      "t": [
+        3.97,
+        7.71
+      ]
+    },
+    {
+      "text": "e feriado.",
+      "t": [
+        8.07,
+        9.02
+      ]
+    },
+    {
+      "text": "Hoje é quinta-feira,",
+      "t": [
+        9.35,
+        10.08
+      ]
+    },
+    {
+      "text": "tem churrasco.",
+      "t": [
+        10.27,
+        10.62
+      ]
+    },
+    {
+      "text": "Um abraço!",
+      "t": [
+        10.62,
+        10.95
+      ]
+    }
   ],
   "captions": {
-    "font": "assets/fonts/Poppins-Black.ttf", "size": 84, "size_hot": 100, "cy": 0.68,
-    "white": [255, 255, 255], "gold": [255, 198, 38],
+    "font": "assets/fonts/Poppins-Black.ttf",
+    "size": 84,
+    "size_hot": 100,
+    "cy": 0.68,
+    "white": [
+      255,
+      255,
+      255
+    ],
+    "gold": [
+      255,
+      198,
+      38
+    ],
     "_pages": "indices das palavras (0 = Olá). hot = pagina inteira dourada e maior.",
     "pages": [
-      {"w": [0, 1]}, {"w": [2, 2]}, {"w": [3, 4]},
-      {"w": [5, 6], "hot": true}, {"w": [7, 9]},
-      {"w": [10, 12]}, {"w": [13, 15], "hot": true},
-      {"w": [16, 17]}, {"w": [18, 19]}, {"w": [20, 21]},
-      {"w": [22, 24]}, {"w": [25, 26], "hot": true, "hold": 0.15}, {"w": [27, 28], "hold": 0.8}
+      {
+        "w": [
+          0,
+          1
+        ]
+      },
+      {
+        "w": [
+          2,
+          2
+        ]
+      },
+      {
+        "w": [
+          3,
+          4
+        ]
+      },
+      {
+        "w": [
+          5,
+          6
+        ],
+        "hot": true
+      },
+      {
+        "w": [
+          7,
+          9
+        ]
+      },
+      {
+        "w": [
+          10,
+          12
+        ]
+      },
+      {
+        "w": [
+          13,
+          15
+        ],
+        "hot": true
+      },
+      {
+        "w": [
+          16,
+          17
+        ]
+      },
+      {
+        "w": [
+          18,
+          19
+        ]
+      },
+      {
+        "w": [
+          20,
+          21
+        ]
+      },
+      {
+        "w": [
+          22,
+          24
+        ]
+      },
+      {
+        "w": [
+          25,
+          26
+        ],
+        "hot": true,
+        "hold": 0.15
+      },
+      {
+        "w": [
+          27,
+          28
+        ],
+        "hold": 0.8
+      }
     ]
   },
-  "end_card": {"start": 17.9, "logo": "assets/logo-brasao-recortado.png", "logo_h": 0.17, "logo_cy": 0.27, "shade": 0.45,
-               "lines": [{"text": "AUTO POSTO FLORAIS", "font": "assets/fonts/Anton-Regular.ttf", "size": 130, "color": [255, 198, 38], "cy": 0.405},
-                         {"text": "QUI · SEX · SÁB · DOM · FERIADO", "font": "assets/fonts/Poppins-Bold.ttf", "size": 44, "color": [255, 255, 255], "cy": 0.46}]},
-  "audio": {"music": "assets/musica_C_groove.mp3", "music_db": -22}
+  "end_card": {
+    "start": 17.3,
+    "logo": "assets/logo-brasao-recortado.png",
+    "logo_h": 0.17,
+    "logo_cy": 0.27,
+    "shade": 0.45,
+    "lines": [
+      {
+        "text": "AUTO POSTO FLORAIS",
+        "font": "assets/fonts/Anton-Regular.ttf",
+        "size": 130,
+        "color": [
+          255,
+          198,
+          38
+        ],
+        "cy": 0.405
+      },
+      {
+        "text": "QUI · SEX · SÁB · DOM · FERIADO",
+        "font": "assets/fonts/Poppins-Bold.ttf",
+        "size": 44,
+        "color": [
+          255,
+          255,
+          255
+        ],
+        "cy": 0.46
+      }
+    ]
+  },
+  "audio": {
+    "music": "assets/musica_C_groove.mp3",
+    "music_db": -22
+  }
 }

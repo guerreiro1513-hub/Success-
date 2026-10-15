@@ -68,6 +68,59 @@ def shift_blur(img, d0, d1, samples):
     return acc / samples
 
 
+def grab(c, j, W, H, fps, grade):
+    t = c["in"] + j / fps
+    vf = f"{grade},scale={W}:{H}:force_original_aspect_ratio=increase:flags=lanczos,crop={W}:{H},format=rgb24"
+    raw = subprocess.run([FF, "-v", "error", "-ss", f"{t:.3f}", "-i", P(c["src"]), "-frames:v", "1", "-vf", vf,
+                          "-f", "rawvideo", "-"], capture_output=True, check=True).stdout
+    return np.frombuffer(raw, np.uint8).reshape(H, W, 3)
+
+
+def match_matrix(a, b):
+    """Similaridade que leva o plano A (fim) até o enquadramento do plano B (início): A ampliado por M = B."""
+    g1, g2 = cv2.cvtColor(a, cv2.COLOR_RGB2GRAY), cv2.cvtColor(b, cv2.COLOR_RGB2GRAY)
+    sift = cv2.SIFT_create(4000)
+    k1, d1 = sift.detectAndCompute(g1, None); k2, d2 = sift.detectAndCompute(g2, None)
+    good = [m for m, n in cv2.BFMatcher().knnMatch(d1, d2, k=2) if m.distance < 0.75 * n.distance]
+    src = np.float32([k1[m.queryIdx].pt for m in good]); dst = np.float32([k2[m.trainIdx].pt for m in good])
+    M, inl = cv2.estimateAffinePartial2D(src, dst, method=cv2.RANSAC, ransacReprojThreshold=4 * a.shape[1] / 540)
+    return M, int(inl.sum())
+
+
+def part_matrix(M, p, W, H):
+    """Fração p da similaridade M (escala, giro e deslocamento interpolados)."""
+    sc = math.hypot(M[0, 0], M[1, 0]); th = math.atan2(M[1, 0], M[0, 0])
+    c = np.array([W / 2, H / 2]); c2 = M[:, :2] @ c + M[:, 2]      # para onde vai o centro
+    s_ = 1 + (sc - 1) * p; th_ = th * p; cc = c + (c2 - c) * p
+    R = np.array([[s_ * math.cos(th_), -s_ * math.sin(th_)], [s_ * math.sin(th_), s_ * math.cos(th_)]])
+    return np.hstack([R, (cc - R @ c)[:, None]])
+
+
+def zoom_m(z, W, H):
+    return np.array([[z, 0, W / 2 * (1 - z)], [0, z, H / 2 * (1 - z)]])
+
+
+def compose(A, B):                                   # A depois de B
+    A3, B3 = np.vstack([A, [0, 0, 1]]), np.vstack([B, [0, 0, 1]])
+    return (A3 @ B3)[:2]
+
+
+def cover_zoom(M, W, H):
+    """Menor zoom (no centro) que, aplicado depois de M, não deixa borda vazia."""
+    z = 1.0
+    while z < 1.6:
+        T = np.vstack([compose(zoom_m(z, W, H), M), [0, 0, 1]]); Ti = np.linalg.inv(T)
+        pts = Ti @ np.array([[0, W, 0, W], [0, 0, H, H], [1, 1, 1, 1]], float)
+        if pts[0].min() >= 0 and pts[0].max() <= W and pts[1].min() >= 0 and pts[1].max() <= H: return z
+        z += 0.005
+    return z
+
+
+def warp(img, M):
+    H, W = img.shape[:2]
+    return cv2.warpAffine(img, M.astype(np.float32), (W, H), flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_REFLECT)
+
+
 # ---------------------------------------------------------------- tipografia
 def font(path, size):
     return ImageFont.truetype(P(path), max(8, int(size)))
@@ -210,7 +263,7 @@ def build_audio(tl, plan, total_s, out):
     tmp = out + ".v.wav"; wavfile.write(tmp, SR, (np.clip(A, -1, 1) * 32767).astype(np.int16))
     au = tl["audio"]
     wz = whoosh(); wi = int((tl["whip_at"] - 0.22) * SR)
-    Wz = np.zeros((n, 2), np.float32); Wz[wi:wi + len(wz)] = wz[:max(0, n - wi)] * 0.30
+    Wz = np.zeros((n, 2), np.float32); Wz[wi:wi + len(wz)] = wz[:max(0, n - wi)] * tl["whip"].get("whoosh", 0.30)
     wz_path = out + ".w.wav"; wavfile.write(wz_path, SR, (Wz * 32767).astype(np.int16))
     subprocess.run([FF, "-y", "-v", "error", "-i", tmp, "-stream_loop", "-1", "-i", P(au["music"]), "-i", wz_path,
                     "-filter_complex",
@@ -252,17 +305,29 @@ def main():
     enc += ["-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", "-shortest", out]
     pe = subprocess.Popen(enc, stdin=subprocess.PIPE)
     D = tl["whip"]["amount"] * W; K = tl["whip"]["frames"]; smp = 8 if preview else 14
+    MM = None; KP = tl["whip"].get("push_frames", 16); ZC = 1.0; KC = 1
+    if tl["whip"].get("type") == "match":               # fim da fala alinhado ao início da churrasqueira
+        a_ = grab(clips[whip], lens[whip] - 4, W, H, fps, tl["grade"])   # perto do fim (o último quadro fica além do -ss)
+        b_ = grab(clips[whip + 1], 0, W, H, fps, tl["grade"])
+        MM, ninl = match_matrix(a_, b_)
+        ZC = cover_zoom(MM, W, H); KC = tl["whip"].get("settle_frames", 20)
+        print(f"  alinhamento: {ninl} pontos, escala {math.hypot(MM[0, 0], MM[1, 0]):.3f}, zoom de cobertura {ZC:.3f}")
     n = 0; pend = []
     for ci, c in enumerate(clips):
         for j, f in enumerate(reader(c, W, H, fps, tl["grade"])):
-            if c.get("whip_out") and j >= lens[ci] - K:          # câmera acelera na direção do pan
+            if MM is not None and c.get("whip_out") and j >= lens[ci] - KP:   # câmera avança até o enquadramento do próximo
+                p_ = ease_io((j - (lens[ci] - KP) + 1) / KP)
+                f = warp(f, compose(zoom_m(1 + (ZC - 1) * p_, W, H), part_matrix(MM, p_, W, H)))
+            if MM is not None and ci and clips[ci - 1].get("whip_out") and j < KC and ZC > 1.001:
+                f = warp(f, zoom_m(1 + (ZC - 1) * (1 - ease_io((j + 1) / KC)), W, H))   # o zoom extra se desfaz devagar
+            elif MM is None and c.get("whip_out") and j >= lens[ci] - K:     # whip (modo antigo)
                 p0, p1 = (j - (lens[ci] - K)) / K, (j - (lens[ci] - K) + 1) / K
                 f = shift_blur(f, D * ease_in(p0), D * ease_in(p1), smp)
-            if ci and clips[ci - 1].get("whip_out") and j < K:  # chega do lado oposto e desacelera
+            if MM is None and ci and clips[ci - 1].get("whip_out") and j < K:
                 p0, p1 = 1 - j / K, 1 - (j + 1) / K
                 f = shift_blur(f, -D * ease_in(p0), -D * ease_in(p1), smp)
             if ci and j < ov[ci - 1] and pend:                  # mistura dentro do borrão
-                w_ = (j + 1) / (ov[ci - 1] + 1); f = pend.pop(0) * (1 - w_) + f * w_
+                w_ = ease_io((j + 1) / (ov[ci - 1] + 1)); f = pend.pop(0) * (1 - w_) + f * w_
             if j >= lens[ci] - ov[ci] and ci < len(clips) - 1:
                 pend.append(f); continue
             t = n / fps
