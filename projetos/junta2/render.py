@@ -306,7 +306,10 @@ def main():
     pe = subprocess.Popen(enc, stdin=subprocess.PIPE)
     D = tl["whip"]["amount"] * W; K = tl["whip"]["frames"]; smp = 8 if preview else 14
     MM = None; KP = tl["whip"].get("push_frames", 16); ZC = 1.0; KC = 1
-    if tl["whip"].get("type") == "match":               # fim da fala alinhado ao início da churrasqueira
+    if tl["whip"].get("type") == "push":                # corte direto: avanço curto + mistura rápida, sem alinhamento
+        MM = zoom_m(tl["whip"].get("push_zoom", 1.08), W, H); ZC = tl["whip"].get("in_zoom", 1.06)
+        KC = tl["whip"].get("settle_frames", 14)
+    elif tl["whip"].get("type") == "match":               # fim da fala alinhado ao início da churrasqueira
         a_ = grab(clips[whip], lens[whip] - 4, W, H, fps, tl["grade"])   # perto do fim (o último quadro fica além do -ss)
         b_ = grab(clips[whip + 1], 0, W, H, fps, tl["grade"])
         MM, ninl = match_matrix(a_, b_)

@@ -16,25 +16,27 @@
     {
       "src": "source/NOVO_1885.mov",
       "in": 1.8,
-      "out": 4.1,
+      "out": 3.66,
       "whip_out": true,
-      "overlap": 8
+      "overlap": 5
     },
     {
       "src": "source/IMG_1878.mov",
-      "in": 0.3,
+      "in": 2.2,
       "out": 8.9,
       "vol": 1.4
     }
   ],
   "whip": {
-    "type": "match",
-    "push_frames": 18,
+    "type": "push",
+    "push_frames": 10,
+    "push_zoom": 1.07,
+    "in_zoom": 1.07,
+    "settle_frames": 14,
     "whoosh": 0.0,
     "frames": 6,
     "amount": 0.55,
-    "_nota": "v3: em vez do whip, a câmera avança devagar (18 quadros) até o enquadramento do início da churrasqueira (a tenda bate nos dois planos) e mistura em 12 quadros: parece um plano só.",
-    "settle_frames": 20
+    "_nota": "v4: sem a caminhada. A fala acaba logo depois do 'um abraço'; a câmera avança de leve 10 quadros, mistura em 5 e já entra na churrasqueira de perto (IMG_1878 a partir de 2,2 s), que assenta do zoom 1,07 para 1."
   },
   "_speech": "texto do cliente; tempos do detector de voz (silero VAD) no relógio do vídeo. 'Alto Posto' -> AUTO POSTO.",
   "speech": [
@@ -186,12 +188,12 @@
           27,
           28
         ],
-        "hold": 0.8
+        "hold": 0.3
       }
     ]
   },
   "end_card": {
-    "start": 17.3,
+    "start": 16.2,
     "logo": "assets/logo-brasao-recortado.png",
     "logo_h": 0.17,
     "logo_cy": 0.27,
