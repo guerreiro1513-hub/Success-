@@ -17,6 +17,6 @@
   quando é falada: desfoque -> nítida com um halo branco rápido. Tempos: texto do cliente + detector de voz + vales
   de energia entre palavras. Sempre dentro da área segura.
 - Som (v8): voz normalizada; chiado da churrasqueira realçado (ganho 2,4x, passa-alta 150 Hz, +6 dB em 6 kHz);
-  trilha gaúcha original (`assets/trilha-gaucha-100bpm.wav`, do projeto PACU) baixa e constante (~−28 LUFS), sem subir
+  trilha gaúcha original (do projeto PACU; `assets/trilha-gaucha-loop.wav` repete só a parte com percussão, 15,0–20,4 s: o loop antigo voltava ao fade de entrada em 20,4 s e o final soava "bugado") baixa e constante (~−23 LUFS), sem subir
   na churrasqueira. Total −14 LUFS.
 - v1 (duas tomadas com dissolve e pílulas dos dias) em `work/timeline_v1.json` e no histórico do git.

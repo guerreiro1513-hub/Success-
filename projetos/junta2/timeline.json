@@ -299,8 +299,8 @@
     ]
   },
   "audio": {
-    "music": "assets/trilha-gaucha-100bpm.wav",
-    "music_db": -3,
-    "_nota": "trilha gaúcha original (sintetizada no projeto PACU), baixa e constante; o chiado da churrasqueira realçado (ganho + agudos)."
+    "music": "assets/trilha-gaucha-loop.wav",
+    "music_db": 2,
+    "_nota": "trilha gaúcha original (projeto PACU) emendada repetindo só a parte com percussão (15,0–20,4 s, 9 batidas) a cada volta (o loop antigo voltava ao silêncio em 20,4 s: era o 'som bugado' do final). Baixa e constante, +5 dB em relação à v8."
   }
 }
