@@ -18,7 +18,7 @@
       "in": 1.8,
       "out": 3.66,
       "whip_out": true,
-      "overlap": 5
+      "overlap": 2
     },
     {
       "src": "source/IMG_1878.mov",
@@ -28,15 +28,16 @@
     }
   ],
   "whip": {
-    "type": "push",
-    "push_frames": 10,
-    "push_zoom": 1.07,
-    "in_zoom": 1.07,
-    "settle_frames": 14,
-    "whoosh": 0.0,
-    "frames": 6,
-    "amount": 0.55,
-    "_nota": "v4: sem a caminhada. A fala acaba logo depois do 'um abraço'; a câmera avança de leve 10 quadros, mistura em 5 e já entra na churrasqueira de perto (IMG_1878 a partir de 2,2 s), que assenta do zoom 1,07 para 1."
+    "type": "dive",
+    "out_frames": 11,
+    "zoom": 2.6,
+    "cx": 0.21,
+    "cy": 0.57,
+    "in_frames": 12,
+    "in_zoom": 1.45,
+    "in_cy": 0.55,
+    "whoosh": 0.22,
+    "_nota": "v6: 'entrando na cena' — a câmera mergulha na churrasqueira que aparece atrás dele (x 0,21 y 0,57) com rastro radial e sai do mergulho já de perto da churrasqueira (zoom 1,45 -> 1). Mistura de 2 quadros dentro do borrão."
   },
   "_speech": "texto do cliente; tempos do detector de voz (silero VAD) no relógio do vídeo. 'Alto Posto' -> AUTO POSTO.",
   "speech": [

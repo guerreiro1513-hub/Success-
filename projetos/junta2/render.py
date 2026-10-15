@@ -59,6 +59,18 @@ def reader(c, W, H, fps, grade):
     p.wait()
 
 
+def dive_blur(img, a0, a1, cx, cy, samples):
+    """Mergulho da câmera até o ponto (cx, cy): amplia e traz o ponto para o centro, com rastro radial.
+    a0/a1 = (zoom, quanto o ponto já veio para o centro) no início e no fim do quadro."""
+    H, W = img.shape[:2]; acc = np.zeros_like(img)
+    for i in range(samples):
+        z, p = (a0[0] + (a1[0] - a0[0]) * (i + 0.5) / samples, a0[1] + (a1[1] - a0[1]) * (i + 0.5) / samples)
+        px, py = W * cx + (W / 2 - W * cx) * p, H * cy + (H / 2 - H * cy) * p
+        M = np.float32([[z, 0, px - z * W * cx], [0, z, py - z * H * cy]])
+        acc += cv2.warpAffine(img, M, (W, H), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REFLECT)
+    return acc / samples
+
+
 def shift_blur(img, d0, d1, samples):
     """Desloca na horizontal de d0 a d1 px com rastro (motion blur do whip pan)."""
     H, W = img.shape[:2]; acc = np.zeros_like(img)
@@ -393,7 +405,7 @@ def main():
             ["-preset", "slow", "-crf", "16", "-maxrate", "16M", "-bufsize", "24M", "-profile:v", "high", "-level", "4.2"])
     enc += ["-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", "-shortest", out]
     pe = subprocess.Popen(enc, stdin=subprocess.PIPE)
-    D = tl["whip"]["amount"] * W; K = tl["whip"]["frames"]; smp = 8 if preview else 14
+    D = tl["whip"].get("amount", 0.55) * W; K = tl["whip"].get("frames", 6); smp = 8 if preview else 14
     MM = None; KP = tl["whip"].get("push_frames", 16); ZC = 1.0; KC = 1
     if tl["whip"].get("type") == "push":                # corte direto: avanço curto + mistura rápida, sem alinhamento
         MM = zoom_m(tl["whip"].get("push_zoom", 1.08), W, H); ZC = tl["whip"].get("in_zoom", 1.06)
@@ -407,15 +419,24 @@ def main():
     n = 0; pend = []
     for ci, c in enumerate(clips):
         for j, f in enumerate(reader(c, W, H, fps, tl["grade"])):
+            DV = tl["whip"] if tl["whip"].get("type") == "dive" else None
+            if DV and c.get("whip_out") and j >= lens[ci] - DV["out_frames"]:   # entra na cena: mergulho até a churrasqueira
+                K_ = DV["out_frames"]; q0, q1 = (j - (lens[ci] - K_)) / K_, (j - (lens[ci] - K_) + 1) / K_
+                st = lambda q: (1 + (DV["zoom"] - 1) * ease_in(q), ease_in(q) ** 0.8)
+                f = dive_blur(f, st(q0), st(q1), DV["cx"], DV["cy"], smp)
+            if DV and ci and clips[ci - 1].get("whip_out") and j < DV["in_frames"]:   # sai do mergulho já dentro da cena
+                K_ = DV["in_frames"]; q0, q1 = 1 - j / K_, 1 - (j + 1) / K_
+                st = lambda q: (1 + (DV["in_zoom"] - 1) * ease_in(q), 1.0)
+                f = dive_blur(f, st(q0), st(q1), 0.5, DV.get("in_cy", 0.5), smp)
             if MM is not None and c.get("whip_out") and j >= lens[ci] - KP:   # câmera avança até o enquadramento do próximo
                 p_ = ease_io((j - (lens[ci] - KP) + 1) / KP)
                 f = warp(f, compose(zoom_m(1 + (ZC - 1) * p_, W, H), part_matrix(MM, p_, W, H)))
             if MM is not None and ci and clips[ci - 1].get("whip_out") and j < KC and ZC > 1.001:
                 f = warp(f, zoom_m(1 + (ZC - 1) * (1 - ease_io((j + 1) / KC)), W, H))   # o zoom extra se desfaz devagar
-            elif MM is None and c.get("whip_out") and j >= lens[ci] - K:     # whip (modo antigo)
+            elif MM is None and not DV and c.get("whip_out") and j >= lens[ci] - K:     # whip (modo antigo)
                 p0, p1 = (j - (lens[ci] - K)) / K, (j - (lens[ci] - K) + 1) / K
                 f = shift_blur(f, D * ease_in(p0), D * ease_in(p1), smp)
-            if MM is None and ci and clips[ci - 1].get("whip_out") and j < K:
+            if MM is None and not DV and ci and clips[ci - 1].get("whip_out") and j < K:
                 p0, p1 = 1 - j / K, 1 - (j + 1) / K
                 f = shift_blur(f, -D * ease_in(p0), -D * ease_in(p1), smp)
             if ci and j < ov[ci - 1] and pend:                  # mistura dentro do borrão

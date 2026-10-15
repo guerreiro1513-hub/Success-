@@ -5,9 +5,10 @@
 - Fala: o CapCut do cliente (`source/NOVO2.mov`, 720p) é IMG_1885 quadros 0–279 + NOVO_1885 quadros 54–138
   (mesma tomada, conferido quadro a quadro). Reconstruído dos originais 4K com esses mesmos cortes: emenda
   invisível e imagem nítida (4K → 1080 lanczos + nitidez cas 0,4).
-- Transição (v4): sem a caminhada. A fala termina logo depois do "um abraço" (NOVO_1885 3,66 s); a câmera avança
-  de leve (10 quadros, 1,07x), mistura em 5 quadros e entra direto na churrasqueira de perto (IMG_1878 a partir de
-  2,2 s), que assenta do zoom 1,07 para 1 em 14 quadros. 17,7 s no total.
+- Transição (v6, 'entrando na cena'): a fala termina logo depois do "um abraço" (NOVO_1885 3,66 s); a câmera
+  mergulha na churrasqueira que aparece atrás dele (x 0,21 y 0,57; zoom até 2,6x em 11 quadros, rastro radial) e sai
+  do mergulho já de perto da churrasqueira (IMG_1878 a partir de 2,2 s, zoom 1,45 -> 1 em 12 quadros), com sopro
+  suave. Sem corte aparente. 17,8 s no total.
   FLORAIS e os dias.
 - Legenda (v5, estilo da referência do cliente, `source/REF_LEGENDA.mp4`, app Captions): Inter Tight 600/700 (OFL),
   minúsculas (nomes próprios mantidos), letras apertadas (−3,5 %), palavra-chave grande (104) e as outras pequenas
