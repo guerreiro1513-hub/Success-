@@ -18,27 +18,39 @@
       "in": 1.8,
       "out": 3.66,
       "whip_out": true,
-      "overlap": 6
+      "overlap": 9,
+      "afade": 0.3
     },
     {
       "src": "source/IMG_1878.mov",
       "in": 2.2,
-      "out": 8.9,
-      "vol": 1.4
+      "out": 7.4,
+      "vol": 2.4,
+      "af": "highpass=f=150,equalizer=f=6000:t=q:w=1:g=6",
+      "afade": 0.3,
+      "overlap": 12
+    },
+    {
+      "src": "source/CHURRAS2.mov",
+      "in": 0.1,
+      "out": 9.2,
+      "vol": 2.4,
+      "af": "highpass=f=150,equalizer=f=6000:t=q:w=1:g=6",
+      "afade": 0.4
     }
   ],
   "whip": {
     "type": "forward",
-    "out_frames": 12,
-    "zoom": 1.35,
-    "pull": 0.35,
+    "out_frames": 16,
+    "zoom": 1.22,
+    "pull": 0.25,
     "cx": 0.21,
     "cy": 0.57,
-    "in_frames": 36,
-    "in_zoom": 1.12,
+    "in_frames": 45,
+    "in_zoom": 1.1,
     "in_cy": 0.55,
-    "whoosh": 0.12,
-    "_nota": "v7: a câmera anda para a frente nos dois planos (zoom só aumenta): o fim da fala avança acelerando em direção à churrasqueira (1->1,35, puxando o ponto 35 %) e a churrasqueira continua avançando e freia (1->1,12 em 1,2 s). Mistura de 6 quadros no pico do movimento."
+    "whoosh": 0.0,
+    "_nota": "v8: avanço mais suave e longo (16 quadros, 1->1,22x), mistura de 9 quadros, churrasqueira continua avançando e freia (1->1,10x em 1,5 s). Sem sopro."
   },
   "_speech": "texto do cliente; tempos do detector de voz (silero VAD) no relógio do vídeo. 'Alto Posto' -> AUTO POSTO.",
   "speech": [
@@ -256,7 +268,7 @@
     "lead": 0.18
   },
   "end_card": {
-    "start": 16.2,
+    "start": 22.19,
     "logo": "assets/logo-brasao-recortado.png",
     "logo_h": 0.17,
     "logo_cy": 0.27,
@@ -287,7 +299,8 @@
     ]
   },
   "audio": {
-    "music": "assets/musica_C_groove.mp3",
-    "music_db": -22
+    "music": "assets/trilha-gaucha-100bpm.wav",
+    "music_db": -3,
+    "_nota": "trilha gaúcha original (sintetizada no projeto PACU), baixa e constante; o chiado da churrasqueira realçado (ganho + agudos)."
   }
 }

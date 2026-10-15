@@ -5,9 +5,10 @@
 - Fala: o CapCut do cliente (`source/NOVO2.mov`, 720p) é IMG_1885 quadros 0–279 + NOVO_1885 quadros 54–138
   (mesma tomada, conferido quadro a quadro). Reconstruído dos originais 4K com esses mesmos cortes: emenda
   invisível e imagem nítida (4K → 1080 lanczos + nitidez cas 0,4).
-- Transição (v7): a câmera anda para a frente nos dois planos (o zoom só aumenta, nunca volta). O fim da fala avança
-  acelerando em direção à churrasqueira atrás dele (1 -> 1,35x em 12 quadros); mistura de 6 quadros no pico do
-  movimento; a churrasqueira de perto (IMG_1878 a partir de 2,2 s) continua avançando e freia (1 -> 1,12x em 1,2 s).
+- Transição (v8): avanço mais suave e longo (16 quadros, 1 -> 1,22x, puxando 25 % para a churrasqueira), mistura de
+  9 quadros e a churrasqueira continua avançando e freia (1 -> 1,10x em 1,5 s).
+- Churrasqueira mais longa (v8): IMG_1878 2,2–7,4 s + dissolve de 12 quadros + CHURRAS2 (close das carnes na fumaça,
+  enviado depois) 0,1–9,2 s. Total 24,8 s.
 - Legenda adiantada 0,18 s em relação à voz (lead).
   FLORAIS e os dias.
 - Legenda (v5, estilo da referência do cliente, `source/REF_LEGENDA.mp4`, app Captions): Inter Tight 600/700 (OFL),
@@ -15,5 +16,7 @@
   (64) na mesma linha de base, 1–2 linhas centralizadas, branca com sombra difusa e sem contorno. Cada palavra entra
   quando é falada: desfoque -> nítida com um halo branco rápido. Tempos: texto do cliente + detector de voz + vales
   de energia entre palavras. Sempre dentro da área segura.
-- Som: voz normalizada + trilha C (groove) a −22 dB com sidechain.
+- Som (v8): voz normalizada; chiado da churrasqueira realçado (ganho 2,4x, passa-alta 150 Hz, +6 dB em 6 kHz);
+  trilha gaúcha original (`assets/trilha-gaucha-100bpm.wav`, do projeto PACU) baixa e constante (~−28 LUFS), sem subir
+  na churrasqueira. Total −14 LUFS.
 - v1 (duas tomadas com dissolve e pílulas dos dias) em `work/timeline_v1.json` e no histórico do git.

@@ -340,8 +340,9 @@ def end_card(f, t, tl, s):
 
 
 # ---------------------------------------------------------------- áudio
-def pcm(src, a, b):
-    raw = subprocess.run([FF, "-v", "error", "-ss", f"{a:.3f}", "-t", f"{b - a:.3f}", "-i", P(src), "-vn", "-ac", "2",
+def pcm(src, a, b, af=None):
+    raw = subprocess.run([FF, "-v", "error", "-ss", f"{a:.3f}", "-t", f"{b - a:.3f}", "-i", P(src), "-vn"]
+                         + (["-af", af] if af else []) + ["-ac", "2",
                           "-ar", str(SR), "-f", "s16le", "-"], capture_output=True, check=True).stdout
     return np.frombuffer(raw, np.int16).reshape(-1, 2).astype(np.float32) / 32768
 
@@ -361,9 +362,9 @@ def whoosh(dur=0.45):
 def build_audio(tl, plan, total_s, out):
     n = int(total_s * SR); A = np.zeros((n, 2), np.float32)
     for c, start in plan:
-        x = pcm(c["src"], c["in"], c["out"]) * c.get("vol", 1.0)
+        x = pcm(c["src"], c["in"], c["out"], c.get("af")) * c.get("vol", 1.0)   # af: EQ do clipe (ex.: realçar o chiado)
         i = int(start * SR); m = min(len(x), n - i)
-        fd = int(0.012 * SR); x = x[:m].copy()
+        fd = int(c.get("afade", 0.012) * SR); x = x[:m].copy()
         x[:fd] *= np.linspace(0, 1, fd)[:, None]; x[-fd:] *= np.linspace(1, 0, fd)[:, None]
         A[i:i + m] += x
     tmp = out + ".v.wav"; wavfile.write(tmp, SR, (np.clip(A, -1, 1) * 32767).astype(np.int16))
@@ -373,11 +374,10 @@ def build_audio(tl, plan, total_s, out):
     wz_path = out + ".w.wav"; wavfile.write(wz_path, SR, (Wz * 32767).astype(np.int16))
     subprocess.run([FF, "-y", "-v", "error", "-i", tmp, "-stream_loop", "-1", "-i", P(au["music"]), "-i", wz_path,
                     "-filter_complex",
-                    "[0:a]highpass=f=80,loudnorm=I=-14:TP=-2:LRA=9,asplit[v][sc];"
-                    f"[1:a]aresample={SR},volume={au['music_db']}dB,afade=t=in:d=0.8[m0];"
-                    "[m0][sc]sidechaincompress=threshold=0.03:ratio=6:attack=15:release=350[m];"
+                    "[0:a]highpass=f=80,loudnorm=I=-14:TP=-2:LRA=9[v];"
+                    f"[1:a]aresample={SR},volume={au['music_db']}dB,afade=t=in:d=0.8[m];"   # trilha baixa e constante
                     f"[v][m][2:a]amix=inputs=3:duration=first:normalize=0,afade=t=out:st={total_s - 1.2}:d=1.2,"
-                    "alimiter=limit=0.89[a]",
+                    "alimiter=limit=0.80[a]",
                     "-map", "[a]", "-t", f"{total_s:.3f}", "-c:a", "pcm_s16le", out], check=True)
     os.remove(tmp); os.remove(wz_path)
 
