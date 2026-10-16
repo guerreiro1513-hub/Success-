@@ -5,7 +5,7 @@
     "file": "../../entrega/guerreiros-FLORAIS-QUI-A-DOM.mp4",
     "preview": "../../entrega/previa-FLORAIS-QUI-A-DOM.mp4"
   },
-  "grade": "eq=contrast=1.05:saturation=1.07,colorbalance=rh=0.02:bh=-0.02,cas=strength=0.4",
+  "grade": "eq=contrast=1.06:saturation=1.08,colorbalance=rh=0.02:bh=-0.02,cas=strength=0.55",
   "_clips": "O CapCut do cliente (NOVO2, 720p) = IMG_1885 quadros 0-279 + NOVO_1885 quadros 54-138 (mesma tomada; o quadro 279 de um é o 53 do outro). Reconstruído dos originais 4K com os mesmos cortes, emenda invisível. Depois whip pan na direção do movimento da câmera (as duas tomadas fazem pan com a imagem correndo para a direita) até a churrasqueira (IMG_1878).",
   "clips": [
     {
@@ -33,7 +33,7 @@
     {
       "src": "source/CHURRAS2.mov",
       "in": 0.1,
-      "out": 9.2,
+      "out": 6.4,
       "vol": 2.4,
       "af": "highpass=f=150,equalizer=f=6000:t=q:w=1:g=6",
       "afade": 0.4
@@ -268,7 +268,7 @@
     "lead": 0.18
   },
   "end_card": {
-    "start": 22.19,
+    "start": 19.4,
     "logo": "assets/logo-brasao-recortado.png",
     "logo_h": 0.17,
     "logo_cy": 0.27,
@@ -299,8 +299,8 @@
     ]
   },
   "audio": {
-    "music": "assets/trilha-gaucha-loop.wav",
-    "music_db": 2,
-    "_nota": "trilha gaúcha original (projeto PACU) emendada repetindo só a parte com percussão (15,0–20,4 s, 9 batidas) a cada volta (o loop antigo voltava ao silêncio em 20,4 s: era o 'som bugado' do final). Baixa e constante, +5 dB em relação à v8."
+    "music": null,
+    "fade_out": 0.8,
+    "_nota": "v10: sem música (pedido). Só a voz e o chiado da churrasqueira realçado."
   }
 }

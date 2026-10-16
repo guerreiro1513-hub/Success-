@@ -20,3 +20,9 @@
   trilha gaúcha original (do projeto PACU; `assets/trilha-gaucha-loop.wav` repete só a parte com percussão, 15,0–20,4 s: o loop antigo voltava ao fade de entrada em 20,4 s e o final soava "bugado") baixa e constante (~−23 LUFS), sem subir
   na churrasqueira. Total −14 LUFS.
 - v1 (duas tomadas com dissolve e pílulas dos dias) em `work/timeline_v1.json` e no histórico do git.
+
+## v10 (22,0 s)
+- Sem música (pedido do cliente): só a voz e o chiado realçado. Fade de 0,8 s no fim.
+- 22 s cravados: CHURRAS2 vai até 6,4 s (o trecho final dele tinha o barulho estranho); fecho a partir de 19,4 s.
+- Mais qualidade: nitidez cas 0,55, contraste/saturação um pouco maiores, master em CRF 14 (máx. 20 Mbps);
+  arquivo de envio a 10,3 Mbps (preset slower).

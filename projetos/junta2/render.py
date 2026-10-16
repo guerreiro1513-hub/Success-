@@ -372,12 +372,19 @@ def build_audio(tl, plan, total_s, out):
     wz = whoosh(); wi = int((tl["whip_at"] - 0.22) * SR)
     Wz = np.zeros((n, 2), np.float32); Wz[wi:wi + len(wz)] = wz[:max(0, n - wi)] * tl["whip"].get("whoosh", 0.30)
     wz_path = out + ".w.wav"; wavfile.write(wz_path, SR, (Wz * 32767).astype(np.int16))
-    subprocess.run([FF, "-y", "-v", "error", "-i", tmp, "-stream_loop", "-1", "-i", P(au["music"]), "-i", wz_path,
-                    "-filter_complex",
-                    "[0:a]highpass=f=80,loudnorm=I=-14:TP=-2:LRA=9[v];"
-                    f"[1:a]aresample={SR},volume={au['music_db']}dB,afade=t=in:d=0.8[m];"   # trilha baixa e constante
-                    f"[v][m][2:a]amix=inputs=3:duration=first:normalize=0,afade=t=out:st={total_s - 1.2}:d=1.2,"
-                    "alimiter=limit=0.70:level=0[a]",
+    fo = au.get("fade_out", 1.2)
+    if au.get("music"):
+        ins = ["-i", tmp, "-stream_loop", "-1", "-i", P(au["music"]), "-i", wz_path]
+        fc = ("[0:a]highpass=f=80,loudnorm=I=-14:TP=-2:LRA=9[v];"
+              f"[1:a]aresample={SR},volume={au['music_db']}dB,afade=t=in:d=0.8[m];"   # trilha baixa e constante
+              f"[v][m][2:a]amix=inputs=3:duration=first:normalize=0,afade=t=out:st={total_s - fo}:d={fo},"
+              "alimiter=limit=0.70:level=0[a]")
+    else:                                                  # sem música: só a voz e o som da churrasqueira
+        ins = ["-i", tmp, "-i", wz_path]
+        fc = ("[0:a]highpass=f=80,loudnorm=I=-14:TP=-2:LRA=9[v];"
+              f"[v][1:a]amix=inputs=2:duration=first:normalize=0,afade=t=out:st={total_s - fo}:d={fo},"
+              "alimiter=limit=0.70:level=0[a]")
+    subprocess.run([FF, "-y", "-v", "error"] + ins + ["-filter_complex", fc,
                     "-map", "[a]", "-t", f"{total_s:.3f}", "-c:a", "pcm_s16le", out], check=True)
     os.remove(tmp); os.remove(wz_path)
 
@@ -407,7 +414,7 @@ def main():
            "-i", wav, "-map", "0:v", "-map", "1:a", "-c:v", "libx264", "-pix_fmt", "yuv420p",
            "-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709"]
     enc += (["-preset", "veryfast", "-crf", "24"] if preview else
-            ["-preset", "slow", "-crf", "16", "-maxrate", "16M", "-bufsize", "24M", "-profile:v", "high", "-level", "4.2"])
+            ["-preset", "slow", "-crf", "14", "-maxrate", "20M", "-bufsize", "24M", "-profile:v", "high", "-level", "4.2"])
     enc += ["-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", "-shortest", out]
     pe = subprocess.Popen(enc, stdin=subprocess.PIPE)
     D = tl["whip"].get("amount", 0.55) * W; K = tl["whip"].get("frames", 6); smp = 8 if preview else 14
