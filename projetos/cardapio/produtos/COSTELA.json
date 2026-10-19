@@ -1,0 +1,70 @@
+{
+  "_conceito": "Costela: a carne ocupa a tela em macro (crosta e ossos), corta na batida para a órbita de quase 270° ao redor da peça na tábua (câmera real, estabilizada e em câmera lenta) e fecha no drop da trilha com o logo e o nome.",
+  "grade": "eq=contrast=1.10:saturation=1.04:gamma=0.94,colorbalance=rs=-0.02:bs=0.025:rm=0.01:rh=0.045:gh=0.015:bh=-0.035,curves=all='0/0 0.22/0.15 0.55/0.55 0.85/0.88 1/0.95',cas=strength=0.3",
+  "look": {
+    "focus_cy": 0.56,
+    "vignette": 0.66,
+    "top_dark": 0.62,
+    "top_dark_to": 0.36
+  },
+  "shots": [
+    {
+      "src": "work/COSTELA_orbita.mov",
+      "in": 5.2,
+      "dur": 2.0,
+      "zoom": [
+        1.55,
+        1.42
+      ],
+      "center": [
+        0.5,
+        0.52
+      ],
+      "amb_src": "source/COSTELA.mov",
+      "amb_in": 3.6,
+      "amb_speed": 0.65
+    },
+    {
+      "src": "work/COSTELA_orbita.mov",
+      "in": 0.2,
+      "dur": 11.0,
+      "zoom": [
+        1.0,
+        1.06
+      ],
+      "dissolve": 0,
+      "amb_src": "source/COSTELA.mov",
+      "amb_in": 0.3,
+      "amb_speed": 0.65
+    },
+    {
+      "src": "work/COSTELA_orbita.mov",
+      "in": 11.2,
+      "dur": 2.6,
+      "speed": 0.5,
+      "zoom": [
+        1.06,
+        1.12
+      ],
+      "dissolve": 4
+    }
+  ],
+  "end_card": {
+    "start": 13.0,
+    "logo": "assets/logo-brasao-recortado.png",
+    "logo_h": 0.16,
+    "logo_cy": 0.34,
+    "name": "Costela",
+    "name_size": 150,
+    "name_cy": 0.47,
+    "brand": "GUERREIROS GRILL",
+    "shade": 0.62
+  },
+  "audio": {
+    "music": "assets/musica_trailer.mp3",
+    "music_at": 1.0,
+    "music_db": -4,
+    "amb_db": -26,
+    "boom_db": -8
+  }
+}
