@@ -151,7 +151,9 @@ def main():
     mu = C["audio"]
     raw = subprocess.run([FF, "-v", "error", "-i", P(mu["music"]), "-ac", "2", "-ar", str(SR), "-f", "s16le", "-"], capture_output=True).stdout
     m = np.frombuffer(raw, np.int16).reshape(-1, 2).astype(np.float32) / 32768
-    i0 = int(mu["music_at"] * SR); m = m[:len(A) - i0]; A[i0:i0 + len(m)] += m * 10 ** (mu["music_db"] / 20)
+    i0 = int(mu["music_at"] * SR)
+    if i0 < 0: m = m[-i0:]; i0 = 0                       # negativo: começa a trilha mais adiante
+    m = m[:len(A) - i0]; A[i0:i0 + len(m)] += m * 10 ** (mu["music_db"] / 20)
     for sh, st in zip(C["shots"], starts):
         if sh.get("amb_src"):
             raw = subprocess.run([FF, "-v", "error", "-ss", str(sh["amb_in"]), "-t", f"{sh['dur'] / sh.get('amb_speed', 1):.3f}", "-i", P(sh["amb_src"]),

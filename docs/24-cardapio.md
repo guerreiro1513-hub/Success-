@@ -18,3 +18,16 @@ Paleta, maminha e frango têm meia-órbita/aproximação; fraldinha tem aproxima
 - Som: trilha "trailer" própria (Kairogen, já do cliente) com as batidas a cada 3 s e o drop no fecho, ambiente real
   baixo, impacto grave sintetizado no logo. −14,4 LUFS.
 - Sem IA na comida.
+
+## Fraldinha, Frango, Maminha, Paleta de cordeiro (só filmagem real)
+O teste de 360° com IA (Kairogen, frango) não rodou: a API não aceita arquivo local e o widget de envio não aparece no
+app do cliente. Nenhum crédito gasto. Os 4 foram feitos só com a filmagem real (prep.py: vidstab + câmera lenta 0,6x).
+- Cor "sol": os 4 vídeos foram gravados no sol forte → saturação 0,90, sombras levemente frias, sem empurrar laranja
+  (a cor da costela, gravada no nublado, deixava esses laranja demais).
+- Fraldinha (14,3 s, trilha trailer): abre colado na capa de gordura e vai abrindo (1,5 → 1,15x), depois contorna a
+  peça até o lado dos ossos; fecho no drop (12 s).
+- Frango (10,1 s, trilha groove): macro da pele dourada avançando, dissolve de 8 quadros para a volta no frango inteiro.
+- Maminha (9,3 s, trilha épica): detalhe da fibra e depois um plano contínuo chegando devagar na peça (1 → 1,18x).
+- Paleta de cordeiro (14,5 s, trilha trailer): macro do osso e da carne, órbita ao redor da paleta reenquadrada para
+  baixo (1,14–1,26x, topo bem escurecido) para tirar as pessoas em volta; fecho no drop.
+- Todos com o mesmo fecho da marca (logo real + nome do corte em Playfair itálico + GUERREIROS GRILL). −14 LUFS.
