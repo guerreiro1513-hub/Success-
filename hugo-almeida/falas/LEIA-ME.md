@@ -1,52 +1,66 @@
-# falas/ — os 4 blocos de fala do Hugo
+# falas/ — os blocos de fala do Hugo
 
-Enquanto esta pasta estiver vazia, cada bloco vira uma **cartela de placeholder**
-com a duração prevista. Assim que o arquivo aparecer, ele entra no lugar com a
-**duração real** e o resto da linha do tempo se reacomoda sozinho.
+## O que chegou
 
-## Nomes exatos
+Vieram **3 blocos, com 2 tomadas cada** (6 arquivos), não 4 blocos. Escolhi uma
+tomada de cada; as outras três ficaram em `tomadas-nao-usadas/`.
 
-| Arquivo | Bloco | Duração prevista | Entra em |
-|---|---|---|---|
-| `bloco1.mov` ou `.mp4` | FALA 1 | 10s | ~0:02 |
-| `bloco2.mov` ou `.mp4` | FALA 2 | 12s | ~0:14 |
-| `bloco3.mov` ou `.mp4` | FALA 3 | 11s | ~0:32 |
-| `bloco4.mov` ou `.mp4` | FALA 4 | 9s | ~0:46 |
+| Arquivo | Origem | Cenário | Trecho usado | Por que esta tomada |
+|---|---|---|---|---|
+| `bloco1.mov` | IMG_2072 (tomada 2) | em pé, corredor | 0,15 → 10,60s | a tomada 1 termina com ele saindo de quadro |
+| `bloco2.mov` | IMG_2115 (tomada 1) | sentado, ao lado da tela do escaneamento | 0,45 → 5,95s | a tomada 2 começa com ele de costas pra câmera |
+| `bloco3.mov` | IMG_2086 (tomada 1) | sentado, consultório | 0,15 → 10,40s | a tomada 2 termina com ele olhando pra baixo |
 
-Põe os arquivos aqui e roda:
+## ⚠️ A ordem dos blocos é um palpite
 
-```bash
-python3 render.py            # final
-python3 render.py --preview  # rápido, pra conferir
-```
+**Não consigo transcrever o áudio aqui** — o proxy bloqueia o download do
+modelo de reconhecimento de fala (`huggingface.co` responde 403). Então atribuí
+os blocos **pelo cenário**, não pelo que você fala:
 
-Só o bloco que mudou é re-renderizado — o resto sai do cache.
+- `bloco1` (em pé, corredor) → responde **"Quem é o Hugo?"** — parece a chegada
+- `bloco2` (ao lado da tela) → responde **"O que ele faz de diferente?"** —
+  casa com o B-roll de tecnologia que vem logo depois
+- `bloco3` (sentado, calmo) → responde **"Pra quem é o tratamento?"**
 
-## O que o render faz sozinho com a fala real
+**Se a ordem estiver errada, é só renomear os arquivos** (`bloco1.mov` ↔
+`bloco3.mov`, por exemplo) e rodar `python3 render.py`. Leva segundos: só os
+blocos trocados são re-renderizados.
 
-- Reenquadra pra 1080×1920 sem distorcer (lê o metadado de rotação do iPhone).
-- Mesmo balanço de branco e mesmo look dos B-roll.
-- Áudio: corta grave abaixo de 85 Hz, redução de ruído leve (`afftdn`, sem
-  robotizar) e **normaliza em −16 LUFS** — é o que faz os 4 blocos ficarem no
-  mesmo volume mesmo se você gravar em dias diferentes.
-- A música abaixa sozinha embaixo da fala (ducking por sidechain).
+## O 4º bloco não existe
 
-## Como gravar pra encaixar
+O roteiro previa 4 falas. Como vieram 3, o CTA deixou de ser fala e virou o
+**fecho em B-roll**: um plano novo da recepção (`S8`) com "Agende sua avaliação
+/ WhatsApp" por cima. Faz par com a fachada da abertura.
 
-- Vertical **1080×1920 ou 4K vertical**, **30fps** (não misture 60fps).
-- Hugo levemente fora de eixo, olhando pro entrevistador ou pra câmera — mas
-  **o mesmo** nos 4 blocos.
-- Microfone de lapela ou celular a menos de 40 cm.
-- **Grave o dobro** de cada bloco. É melhor escolher do que aceitar.
-- Deixe 1s de silêncio antes e depois de cada take (o corte precisa de ar).
-- Mesma roupa, mesma luz, mesmo fundo nos 4 — eles vão aparecer intercalados,
-  qualquer diferença salta.
+Se você gravar o 4º bloco, me manda que eu devolvo a fala e mantenho ou não o
+fecho — o `timeline.json` aceita os dois.
+
+## O que o render fez com o áudio
+
+O áudio chegou a **−36 LUFS** (muito baixo — parece mic do celular, não lapela).
+Subir 20 dB sobe o chiado junto, então: corte abaixo de 85 Hz, redução de ruído
+`afftdn` em nr=16 e **loudnorm de duas passadas** em −16 LUFS por bloco.
+
+Resultado: −16,7 / −16,3 / −16,2 LUFS. Antes, com loudnorm de uma passada, a
+diferença entre blocos era de 1,2 LU — degrau audível no corte.
+
+## O que o render fez com a cor
+
+O balanço de branco foi resolvido **contra o tom de pele**, não contra a sala.
+Corrigindo pela parede, o rosto saía **verde** (R−G de −0,06 nos blocos 2 e 3).
+Agora: R−G de +0,083 a +0,098, dentro da faixa natural.
 
 ## Legenda
 
-Se existir `bloco1.srt` (idem 2, 3, 4), a legenda é queimada sincronizada,
-branca com contorno preto fino, máx. 2 linhas, dentro da margem segura.
+Se existir `bloco1.srt` (idem 2 e 3), é queimada sincronizada, branca com
+contorno preto fino, dentro da margem segura.
 
-**Eu não consigo transcrever o áudio aqui** — não tenho reconhecimento de fala
-neste ambiente. O .srt você gera no CapCut (legenda automática → exportar SRT)
-ou escreve na mão. Se me mandar o texto com os tempos, eu monto o arquivo.
+Como eu não transcrevo aqui, o .srt sai do CapCut (legenda automática →
+exportar SRT) ou você me manda o texto com os tempos que eu monto o arquivo.
+
+## Pra gravar o que faltar
+
+- Vertical, **30fps**, mesma roupa e mesma luz.
+- **Mic de lapela de verdade, colado** — o nível atual está 20 dB baixo demais.
+- 1s de silêncio antes e depois de cada take.
+- Grave o dobro.

@@ -137,8 +137,9 @@ def card_faltando(arquivo, caminho, w, h):
 # difusa, porque serif de haste fina some em fundo movimentado.
 TIPO = dict(marcador=("InstrumentSans-Bold", 34, 8.0),
             pergunta=("InstrumentSerif-Regular", 116),
-            apoio=("InstrumentSans-Regular", 34))
+            apoio=("InstrumentSans-Bold", 31))
 TEAL = (126, 214, 197)
+TEAL_CLARO = (196, 242, 231)      # linha de apoio: precisa vencer jaleco branco
 OSSO = (255, 255, 255)
 
 
@@ -181,7 +182,7 @@ def png_texto(spec, base, w, h, seg):
 
     Devolve (caminho_veu, caminho_texto, y_do_bloco).
     """
-    from PIL import Image, ImageDraw, ImageFont
+    from PIL import Image, ImageDraw, ImageFont, ImageChops
     def fo(nome, tam):
         for c in (os.path.join(FONTES, nome + ".ttf"), FALLBACK_FONTE):
             if os.path.exists(c):
@@ -205,6 +206,7 @@ def png_texto(spec, base, w, h, seg):
     d = ImageDraw.Draw(cam)
     estilo = spec.get("estilo", "pergunta")
     linhas = spec["linhas"]
+    baixo = spec.get("posicao") == "baixo"
     y = seg["topo"] + int(70 * esc)
 
     if spec.get("marcador"):
@@ -229,7 +231,7 @@ def png_texto(spec, base, w, h, seg):
             tr = 4.0 * esc
             y += int(16 * esc)
             t = linhas[1].upper()
-            _tracked(d, (w - _larg_tracked(d, t, fa, tr)) / 2, y, t, fa, TEAL + (245,), tr)
+            _tracked(d, (w - _larg_tracked(d, t, fa, tr)) / 2, y, t, fa, TEAL_CLARO + (255,), tr)
     else:                                   # nome: serifa + função em caixa alta
         fq = fo(TIPO["pergunta"][0], int(TIPO["pergunta"][1] * esc))
         bb = d.textbbox((0, 0), linhas[0], font=fq)
@@ -239,8 +241,12 @@ def png_texto(spec, base, w, h, seg):
             fa = fo(TIPO["apoio"][0], int(TIPO["apoio"][1] * esc))
             tr = 4.5 * esc
             t = linhas[1].upper()
-            _tracked(d, (w - _larg_tracked(d, t, fa, tr)) / 2, y, t, fa, TEAL + (240,), tr)
+            _tracked(d, (w - _larg_tracked(d, t, fa, tr)) / 2, y, t, fa, TEAL_CLARO + (255,), tr)
 
+    if baixo:
+        alt_bloco = y - (seg["topo"] + int(70 * esc))
+        desloc = (h - seg["base"] - int(70 * esc)) - alt_bloco - (seg["topo"] + int(70 * esc))
+        cam = ImageChops.offset(cam, 0, int(desloc))
     cam = _sombra(cam, int(22 * esc) or 1, 155, (0, int(7 * esc)))
     cam_txt = base + "_txt.png"
     cam.save(cam_txt)
@@ -330,7 +336,7 @@ def render_broll(s, cfg, W, H, fps, idx, preview):
         for q in png:
             entradas += ["-loop", "1", "-framerate", str(fps), "-t", f"{dur:.3f}", "-i", q]
         ini, fim = janela_texto(s, dur)
-        mapa = ["-filter_complex", filtro_texto(fc_v, 1, 2, ini, fim, H), "-map", "[vo]"]
+        mapa = ["-filter_complex", filtro_texto(fc_v, 1, 2, ini, fim, H, s["texto"].get("posicao") == "baixo"), "-map", "[vo]"]
     else:
         mapa = ["-vf", fc_v, "-map", "0:v"]
 
@@ -351,14 +357,14 @@ def render_broll(s, cfg, W, H, fps, idx, preview):
     return saida, dur
 
 
-def filtro_texto(fc_v, i_veu, i_txt, ini, fim, h):
+def filtro_texto(fc_v, i_veu, i_txt, ini, fim, h, baixo=False):
     """Véu parado + texto entrando com fade e uma subida curta.
 
     A subida é de 26px num quadro de 1920 e dura 0,5s com ease-out cúbico:
     o suficiente pra o olho registrar que o texto chegou, curto o suficiente
     pra não virar animação de template.
     """
-    dy = 26 * h / 1920.0
+    dy = (26 if not baixo else -26) * h / 1920.0
     fi, fo_ = 0.30, 0.30
     sai = max(ini + 0.4, fim - fo_)
     return (
@@ -393,6 +399,25 @@ def sobrepor_texto(s, idx, W, H, cfg):
     return png_texto(s["texto"], base, W, H, cfg["seguranca_instagram"])
 
 
+def loudnorm_2p(src, ini, dur, af_pre, alvo, tp=-1.5, lra=9):
+    """loudnorm de duas passadas: a de uma passada erra o alvo em 1 a 2 LU,
+    e com três blocos gravados em dias diferentes isso vira degrau audível."""
+    r = subprocess.run(
+        ["ffmpeg", "-hide_banner", "-nostats", "-ss", f"{ini:.3f}", "-t", f"{dur:.3f}",
+         "-i", src, "-af", f"{af_pre},loudnorm=I={alvo}:TP={tp}:LRA={lra}:print_format=json",
+         "-f", "null", "-"], capture_output=True, text=True)
+    try:
+        bruto = r.stderr[r.stderr.rindex("{"):r.stderr.rindex("}") + 1]
+        m = json.loads(bruto)
+        return (f"{af_pre},loudnorm=I={alvo}:TP={tp}:LRA={lra}"
+                f":measured_I={m['input_i']}:measured_TP={m['input_tp']}"
+                f":measured_LRA={m['input_lra']}:measured_thresh={m['input_thresh']}"
+                f":offset={m['target_offset']}:linear=true")
+    except Exception:
+        print("     (medição falhou, usando loudnorm de uma passada)")
+        return f"{af_pre},loudnorm=I={alvo}:TP={tp}:LRA={lra}"
+
+
 def acha_fala(bloco):
     for ext in (".mov", ".mp4", ".MOV", ".MP4", ".m4v"):
         p = os.path.join(RAIZ, "falas", f"bloco{bloco}{ext}")
@@ -422,7 +447,7 @@ def render_fala(s, cfg, W, H, fps, idx, preview):
             for q in png_t:
                 entradas += ["-loop", "1", "-framerate", str(fps), "-t", f"{dur:.3f}", "-i", q]
             ini, fim = janela_texto(s, dur)
-            mapa = ["-filter_complex", filtro_texto(vf, 2, 3, ini, fim, H), "-map", "[vo]"]
+            mapa = ["-filter_complex", filtro_texto(vf, 2, 3, ini, fim, H, s["texto"].get("posicao") == "baixo"), "-map", "[vo]"]
         else:
             mapa = ["-vf", vf, "-map", "0:v"]
         ff(entradas + mapa + ["-map", "1:a", "-t", f"{dur:.3f}", "-c:v", "libx264",
@@ -432,7 +457,9 @@ def render_fala(s, cfg, W, H, fps, idx, preview):
         return saida, dur, False
 
     # ---- vídeo real da fala
-    dur = duracao(src)
+    bruto = duracao(src)
+    ini_src = s.get("in", 0.0)
+    dur = min(s.get("dur_fonte", bruto - ini_src), bruto - ini_src)
     r = subprocess.run(["ffmpeg", "-hide_banner", "-i", src], capture_output=True, text=True)
     sw = sh = None
     for ln in r.stderr.splitlines():
@@ -460,19 +487,20 @@ def render_fala(s, cfg, W, H, fps, idx, preview):
                   f"Alignment=2,MarginV={lg['margem_base']//2},MarginL=60,MarginR=60")
         fc_v += (f",subtitles='{srt}':fontsdir='{FONTES}':force_style='{estilo}'")
 
-    entradas = ["-i", src]
+    entradas = ["-ss", f"{ini_src:.3f}", "-t", f"{dur:.3f}", "-i", src]
     png = sobrepor_texto(s, idx, W, H, cfg)
     if png:
         for q in png:
             entradas += ["-loop", "1", "-framerate", str(fps), "-t", f"{dur:.3f}", "-i", q]
         ini, fim = janela_texto(s, dur)
-        mapa = ["-filter_complex", filtro_texto(fc_v, 1, 2, ini, fim, H), "-map", "[vo]"]
+        mapa = ["-filter_complex", filtro_texto(fc_v, 1, 2, ini, fim, H, s["texto"].get("posicao") == "baixo"), "-map", "[vo]"]
     else:
         mapa = ["-vf", fc_v, "-map", "0:v"]
 
-    af = (f"highpass=f=85,afftdn=nr=10:nf=-30,"
-          f"loudnorm=I={a['fala_lufs']}:TP=-1.5:LRA=9")
-    ff(entradas + mapa + ["-map", "0:a", "-af", af, "-c:v", "libx264",
+    # o áudio veio a -36 LUFS; subir 20 dB sobe o ruído junto, daí o nr mais firme
+    af = loudnorm_2p(src, ini_src, dur, "highpass=f=85,afftdn=nr=16:nf=-30",
+                     a["fala_lufs"])
+    ff(entradas + mapa + ["-map", "0:a", "-af", af, "-t", f"{dur:.3f}", "-c:v", "libx264",
        "-crf", "28" if preview else "16", "-preset", "veryfast" if preview else "medium",
        "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2", saida])
     grava_chave(saida, h)
@@ -559,10 +587,13 @@ def build(preview, reaproveitar):
     vb = (["-crf", "28", "-preset", "veryfast"] if preview else
           ["-crf", "18", "-preset", "slow", "-maxrate", "16M", "-bufsize", "32M",
            "-profile:v", "high", "-level", "4.1"])
+    mix = os.path.join(CACHE, "mix.wav")
     ff(["-i", corpo, "-i", mus, "-filter_complex",
-        f"[0:a][1:a]amix=inputs=2:normalize=0:dropout_transition=0[x];"
-        f"[x]loudnorm=I={cfg['audio']['master_lufs']}:TP=-1.3:LRA=11,"
-        f"afade=t=out:st={max(0,total-0.8):.2f}:d=0.8[a]",
+        "[0:a][1:a]amix=inputs=2:normalize=0:dropout_transition=0[x]",
+        "-map", "[x]", "-t", f"{total:.3f}", "-c:a", "pcm_s16le", mix])
+    af_master = loudnorm_2p(mix, 0.0, total, "anull", cfg["audio"]["master_lufs"], tp=-1.3, lra=11)
+    ff(["-i", corpo, "-i", mix, "-filter_complex",
+        f"[1:a]{af_master},afade=t=out:st={max(0,total-0.8):.2f}:d=0.8[a]",
         "-map", "0:v", "-map", "[a]", "-c:v", "libx264"] + vb +
        ["-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k", "-ar", "48000",
         "-movflags", "+faststart", "-t", f"{total:.3f}", final])

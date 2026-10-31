@@ -9,6 +9,10 @@ entrarem em `falas/`, a linha do tempo se reacomoda sozinha.
 
 ## Estado agora
 
+As **3 falas entraram**. O vídeo tem 42,5s e está montado de ponta a ponta.
+Falta a trilha (`musica/`), a legenda (`.srt`) e a regravação da fachada.
+
+
 | | |
 |---|---|
 | `output/hugo-almeida_FINAL.mp4` | **1080×1920, CRF 18, pico 16 Mbps** — é este que vai pro Instagram |
@@ -25,7 +29,7 @@ python3 render.py --preview   # rascunho rápido
 
 | TC | Bloco | Fonte | Dur | Texto na tela |
 |---|---|---|---|---|
-| 0:00 | FACHADA | `broll/01_fachada.mov` | 2,14s | "Quem é o Hugo?" (últimos 1,5s) |
+| 0:00 | FACHADA | `broll/01_fachada.mov` | 2,14s | `01` "Quem é o Hugo?" |
 | 0:02 | **FALA 1** | `falas/bloco1` | 10s* | "Hugo Almeida / Ortodontista · Cuiabá" (3s iniciais) |
 | 0:12 | RECEPÇÃO | `broll/02_recepcao.mov` | 2,5s | "O que ele faz de diferente?" |
 | 0:15 | **FALA 2** | `falas/bloco2` | 12s* | — |

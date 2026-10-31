@@ -1,6 +1,6 @@
 {
   "projeto": "Hugo Almeida · ortodontista · Cuiabá-MT — vídeo fixado do perfil",
-  "versao": "v2-estilo-referencia",
+  "versao": "v3-falas-reais",
   "formato": {
     "w": 1080,
     "h": 1920,
@@ -68,16 +68,26 @@
       "id": "F1",
       "tipo": "fala",
       "bloco": 1,
-      "dur_prevista": 10.0,
       "texto": {
         "estilo": "nome",
+        "posicao": "baixo",
         "linhas": [
           "Hugo Almeida",
           "Ortodontista · Cuiabá"
         ],
-        "entra": 0.5,
-        "dura": 3.2
-      }
+        "entra": 0.8,
+        "dura": 3.4
+      },
+      "in": 0.15,
+      "dur_fonte": 10.45,
+      "enquadre": {
+        "zoom": 1.3,
+        "cx": 0.5,
+        "cy": 0.46
+      },
+      "wb": "colorchannelmixer=rr=0.9656:gg=1.0013:bb=1.0890,eq=brightness=-0.1473",
+      "nota": "Em pé, corredor. Tomada 2 de 2 — a outra termina com ele saindo de quadro. Enquadre 1,30x porque o plano original é largo demais pra Reels. Balanço resolvido contra o TOM DE PELE, não contra a sala: corrigir pela parede deixava o rosto verde (R-G -0.06).",
+      "dur_prevista": 10.45
     },
     {
       "id": "S2",
@@ -108,7 +118,16 @@
       "id": "F2",
       "tipo": "fala",
       "bloco": 2,
-      "dur_prevista": 12.0
+      "in": 0.45,
+      "dur_fonte": 5.5,
+      "enquadre": {
+        "zoom": 1.0,
+        "cx": 0.5,
+        "cy": 0.5
+      },
+      "wb": "colorchannelmixer=rr=1.0506:gg=0.9852:bb=0.9973,eq=brightness=-0.1591",
+      "nota": "Sentado ao lado da tela do escaneamento. Entra em 0,45s (antes ele olha pra baixo) e sai em 5,95s (depois ele vira pra tela). Quadro cheio, já é plano médio. Balanço resolvido contra o TOM DE PELE, não contra a sala: corrigir pela parede deixava o rosto verde (R-G -0.06).",
+      "dur_prevista": 5.5
     },
     {
       "id": "S3",
@@ -173,7 +192,16 @@
       "id": "F3",
       "tipo": "fala",
       "bloco": 3,
-      "dur_prevista": 11.0
+      "in": 0.15,
+      "dur_fonte": 10.25,
+      "enquadre": {
+        "zoom": 1.25,
+        "cx": 0.5,
+        "cy": 0.47
+      },
+      "wb": "colorchannelmixer=rr=1.0277:gg=0.9883:bb=1.0342,eq=brightness=-0.0969",
+      "nota": "Sentado no consultório, prateleira de modelos ao fundo. Tomada 1 de 2. Balanço resolvido contra o TOM DE PELE, não contra a sala: corrigir pela parede deixava o rosto verde (R-G -0.06).",
+      "dur_prevista": 10.25
     },
     {
       "id": "S6",
@@ -235,18 +263,30 @@
       "nota": "+7° endireita a bancada. O enquadramento desce e vai pra direita pra tirar a pessoa sentada que aparece no alto à esquerda."
     },
     {
-      "id": "F4",
-      "tipo": "fala",
-      "bloco": 4,
-      "dur_prevista": 9.0,
+      "id": "S8",
+      "tipo": "broll",
+      "rotulo": "FECHO · RECEPÇÃO",
+      "origem": "broll/02_recepcao.mov",
+      "in": 0.15,
+      "dur_fonte": 2.6,
+      "rotacao": 0.0,
+      "enquadre": {
+        "zoom": 1.04,
+        "cx": 0.5,
+        "cy": 0.5
+      },
+      "punch": 1.03,
+      "wb": "colorchannelmixer=rr=0.9440:gg=1.0076:bb=1.1125",
       "texto": {
         "estilo": "cta",
+        "posicao": "baixo",
         "linhas": [
           "Agende sua avaliação",
           "WhatsApp"
         ],
-        "entra_do_fim": 2.4
-      }
+        "entra": 0.45
+      },
+      "nota": "Fecho na recepção — o trecho largo com o sofá e o balcão, que não é usado no S2. Faz par com a fachada da abertura e segura o CTA."
     }
   ],
   "nota_ritmo": "Da referência (20 planos, mediana 1,90s, de 0,47s a 3,0s) veio o princípio de que o ritmo NÃO é métrico. B-roll aqui: 2,14 · 2,20 · 1,20 · 2,10 · 2,40 · 1,60 · 0,70 · 1,40 — mediana 1,85s, desvio 0,56.",
@@ -256,5 +296,10 @@
     "marcadores": "01 a 04 — numeração de capítulo. Não afirma nada sobre a clínica, só organiza.",
     "entrada": "fade 0,30s + subida de 26px com ease-out cúbico em 0,5s. O véu não se move.",
     "legibilidade": "Véu de 880px no topo com alfa 165 e sombra difusa de raio 22 — serifa de haste fina some em fundo movimentado sem isso."
+  },
+  "cor_falas": {
+    "metodo": "Laço fechado sobre o recorte do rosto, passando pela cadeia inteira (wb + look). Alvo: R-G +0.115, G-B +0.055, luma 0.425 — pele bem exposta.",
+    "resultado": "bloco1 R-G +0.090 · bloco2 +0.103 · bloco3 +0.094 · luma 0.423 a 0.429",
+    "antes": "R-G 0.000 / -0.059 / -0.063 — os dois últimos estavam com o rosto verde."
   }
 }
