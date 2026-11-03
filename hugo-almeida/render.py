@@ -457,9 +457,12 @@ def render_fala(s, cfg, W, H, fps, idx, preview):
         return saida, dur, False
 
     # ---- vídeo real da fala
+    # Nada de aparar fala: as bordas saem da medição de energia do áudio
+    # (ver falas/LEIA-ME.md). O corte só tira silêncio, nunca palavra.
     bruto = duracao(src)
     ini_src = s.get("in", 0.0)
     dur = min(s.get("dur_fonte", bruto - ini_src), bruto - ini_src)
+
     r = subprocess.run(["ffmpeg", "-hide_banner", "-i", src], capture_output=True, text=True)
     sw = sh = None
     for ln in r.stderr.splitlines():
@@ -471,13 +474,78 @@ def render_fala(s, cfg, W, H, fps, idx, preview):
     if ("rotation of -90" in r.stderr or "rotation of 90" in r.stderr) and sw > sh:
         sw, sh = sh, sw
 
-    enq = s.get("enquadre", {})
-    cadeia, _ = cadeia_enquadre(sw, sh, s.get("rotacao", 0.0), enq.get("zoom", 1.0),
-                                enq.get("cx", 0.5), enq.get("cy", 0.5), W, H)
-    vf = ([s["wb"]] if s.get("wb") else []) + cadeia
-    vf += [f"scale={W}:{H}:flags=bicubic", cfg["look"]["comum"], f"fps={fps}", "format=yuv420p"]
-    fc_v = ",".join(vf)
+    def cadeia_fala():
+        enq = s.get("enquadre", {})
+        cad, _ = cadeia_enquadre(sw, sh, s.get("rotacao", 0.0), enq.get("zoom", 1.0),
+                                 enq.get("cx", 0.5), enq.get("cy", 0.5), W, H)
+        v = ([s["wb"]] if s.get("wb") else []) + cad
+        v += [f"scale={W}:{H}:flags=bicubic", cfg["look"]["comum"], f"fps={fps}",
+              "format=yuv420p"]
+        return ",".join(v)
 
+    crf = "28" if preview else "16"
+    pre = "veryfast" if preview else "medium"
+
+    # ---- cortes de B-roll POR CIMA da fala (o áudio não para)
+    cortes = sorted(s.get("cortes", []), key=lambda c: c["em"])
+    pedacos, t = [], 0.0
+    for ci, c in enumerate(cortes):
+        em, cd = c["em"], c["dur"]
+        if em > t + 0.05:                       # trecho de fala antes do corte
+            p = os.path.join(CACHE, f"parte{idx:02d}_f{ci}.mp4")
+            ff(["-ss", f"{ini_src + t:.3f}", "-t", f"{em - t:.3f}", "-i", src,
+                "-vf", cadeia_fala(), "-an", "-t", f"{em - t:.3f}",
+                "-c:v", "libx264", "-crf", crf, "-preset", pre, p])
+            pedacos.append(p)
+        bsrc = os.path.join(RAIZ, c["origem"])
+        rb = subprocess.run(["ffmpeg", "-hide_banner", "-i", bsrc], capture_output=True, text=True)
+        bw = bh = None
+        for ln in rb.stderr.splitlines():
+            if "Video:" in ln:
+                for tk in ln.split(","):
+                    tk = tk.strip().split(" ")[0]
+                    if "x" in tk and tk.replace("x", "").isdigit():
+                        bw, bh = map(int, tk.split("x")); break
+        if ("rotation of -90" in rb.stderr or "rotation of 90" in rb.stderr) and bw > bh:
+            bw, bh = bh, bw
+        enq = c.get("enquadre", {})
+        cad, _ = cadeia_enquadre(bw, bh, c.get("rotacao", 0.0), enq.get("zoom", 1.0),
+                                 enq.get("cx", 0.5), enq.get("cy", 0.5), W, H)
+        vb = ([c["wb"]] if c.get("wb") else []) + cad
+        pu = c.get("punch", 1.0)
+        if pu > 1.001:
+            nf = max(2, int(round(cd * fps)))
+            vb += [f"fps={fps}", f"scale={W*2}:{H*2}:flags=bicubic",
+                   f"zoompan=z='1+{pu-1:.4f}*on/{nf-1}':x='iw/2-(iw/zoom/2)':"
+                   f"y='ih/2-(ih/zoom/2)':d=1:s={W}x{H}:fps={fps}"]
+        else:
+            vb.append(f"scale={W}:{H}:flags=bicubic")
+        vb += [cfg["look"]["comum"], f"fps={fps}", "format=yuv420p"]
+        p = os.path.join(CACHE, f"parte{idx:02d}_c{ci}.mp4")
+        ff(["-ss", f"{c['in']:.3f}", "-t", f"{cd:.3f}", "-i", bsrc,
+            "-vf", ",".join(vb), "-an", "-t", f"{cd:.3f}",
+            "-c:v", "libx264", "-crf", crf, "-preset", pre, p])
+        pedacos.append(p)
+        t = em + cd
+    if dur > t + 0.05:                          # resto da fala depois do último corte
+        p = os.path.join(CACHE, f"parte{idx:02d}_f{len(cortes)}.mp4")
+        ff(["-ss", f"{ini_src + t:.3f}", "-t", f"{dur - t:.3f}", "-i", src,
+            "-vf", cadeia_fala(), "-an", "-t", f"{dur - t:.3f}",
+            "-c:v", "libx264", "-crf", crf, "-preset", pre, p])
+        pedacos.append(p)
+
+    if len(pedacos) == 1:
+        mudo = pedacos[0]
+    else:
+        lst = os.path.join(CACHE, f"parte{idx:02d}_lista.txt")
+        with open(lst, "w") as fh:
+            for q in pedacos:
+                fh.write(f"file '{q}'\n")
+        mudo = os.path.join(CACHE, f"parte{idx:02d}_mudo.mp4")
+        ff(["-f", "concat", "-safe", "0", "-i", lst, "-c", "copy", mudo])
+
+    # ---- legenda e texto por cima do vídeo já montado
+    fc_v = "null"
     srt = os.path.join(RAIZ, "falas", f"bloco{s['bloco']}.srt")
     if os.path.exists(srt):
         lg = cfg["legendas"]
@@ -485,24 +553,26 @@ def render_fala(s, cfg, W, H, fps, idx, preview):
                   f"PrimaryColour=&H00FFFFFF,OutlineColour=&H00000000,"
                   f"Outline={lg['contorno']//2},Shadow=0,BorderStyle=1,"
                   f"Alignment=2,MarginV={lg['margem_base']//2},MarginL=60,MarginR=60")
-        fc_v += (f",subtitles='{srt}':fontsdir='{FONTES}':force_style='{estilo}'")
+        fc_v = f"subtitles='{srt}':fontsdir='{FONTES}':force_style='{estilo}'"
 
-    entradas = ["-ss", f"{ini_src:.3f}", "-t", f"{dur:.3f}", "-i", src]
+    entradas = ["-i", mudo]
     png = sobrepor_texto(s, idx, W, H, cfg)
     if png:
         for q in png:
             entradas += ["-loop", "1", "-framerate", str(fps), "-t", f"{dur:.3f}", "-i", q]
         ini, fim = janela_texto(s, dur)
-        mapa = ["-filter_complex", filtro_texto(fc_v, 1, 2, ini, fim, H, s["texto"].get("posicao") == "baixo"), "-map", "[vo]"]
+        mapa = ["-filter_complex",
+                filtro_texto(fc_v, 1, 2, ini, fim, H,
+                             s["texto"].get("posicao") == "baixo"), "-map", "[vo]"]
     else:
         mapa = ["-vf", fc_v, "-map", "0:v"]
 
-    # o áudio veio a -36 LUFS; subir 20 dB sobe o ruído junto, daí o nr mais firme
     af = loudnorm_2p(src, ini_src, dur, "highpass=f=85,afftdn=nr=16:nf=-30",
                      a["fala_lufs"])
-    ff(entradas + mapa + ["-map", "0:a", "-af", af, "-t", f"{dur:.3f}", "-c:v", "libx264",
-       "-crf", "28" if preview else "16", "-preset", "veryfast" if preview else "medium",
-       "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2", saida])
+    ff(entradas + ["-ss", f"{ini_src:.3f}", "-t", f"{dur:.3f}", "-i", src] + mapa +
+       [f"-map", f"{3 if png else 1}:a", "-af", af, "-t", f"{dur:.3f}",
+        "-c:v", "libx264", "-crf", crf, "-preset", pre,
+        "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2", saida])
     grava_chave(saida, h)
     return saida, dur, True
 

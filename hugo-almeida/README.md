@@ -27,6 +27,12 @@ python3 render.py --preview   # rascunho rápido
 
 ## Linha do tempo
 
+**A fala nunca é cortada.** As bordas de cada bloco vieram da medição de energia
+do áudio, não do olho: a fala do bloco 2 começa em 0,00s e as dos blocos 1 e 3
+vão até o último frame do arquivo. O B-roll entra **por cima** da voz (campo
+`cortes` no `timeline.json`), nunca no lugar dela.
+
+
 | TC | Bloco | Fonte | Dur | Texto na tela |
 |---|---|---|---|---|
 | 0:00 | FACHADA | `broll/01_fachada.mov` | 2,14s | `01` "Quem é o Hugo?" |

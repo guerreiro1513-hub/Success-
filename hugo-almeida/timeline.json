@@ -1,6 +1,6 @@
 {
   "projeto": "Hugo Almeida · ortodontista · Cuiabá-MT — vídeo fixado do perfil",
-  "versao": "v3-falas-reais",
+  "versao": "v4-cortes-sobre-a-fala",
   "formato": {
     "w": 1080,
     "h": 1920,
@@ -78,90 +78,32 @@
         "entra": 0.8,
         "dura": 3.4
       },
-      "in": 0.15,
-      "dur_fonte": 10.45,
+      "in": 0.55,
+      "dur_fonte": 10.22,
       "enquadre": {
         "zoom": 1.3,
         "cx": 0.5,
         "cy": 0.46
       },
       "wb": "colorchannelmixer=rr=0.9656:gg=1.0013:bb=1.0890,eq=brightness=-0.1473",
-      "nota": "Em pé, corredor. Tomada 2 de 2 — a outra termina com ele saindo de quadro. Enquadre 1,30x porque o plano original é largo demais pra Reels. Balanço resolvido contra o TOM DE PELE, não contra a sala: corrigir pela parede deixava o rosto verde (R-G -0.06).",
-      "dur_prevista": 10.45
-    },
-    {
-      "id": "S2",
-      "tipo": "broll",
-      "rotulo": "RECEPÇÃO",
-      "origem": "broll/02_recepcao.mov",
-      "in": 2.6,
-      "dur_fonte": 2.2,
-      "rotacao": 0.0,
-      "enquadre": {
-        "zoom": 1.06,
-        "cx": 0.5,
-        "cy": 0.5
-      },
-      "punch": 1.04,
-      "wb": "colorchannelmixer=rr=0.9440:gg=1.0076:bb=1.1125",
-      "texto": {
-        "estilo": "pergunta",
-        "marcador": "02",
-        "linhas": [
-          "O que ele faz de diferente?"
-        ],
-        "entra": 0.3
-      },
-      "nota": "Balcão com a placa Clínica Midori, o lustre e a parede ripada. Começa em 2,60s pra pular a porta e a área solta do início."
-    },
-    {
-      "id": "F2",
-      "tipo": "fala",
-      "bloco": 2,
-      "in": 0.45,
-      "dur_fonte": 5.5,
-      "enquadre": {
-        "zoom": 1.0,
-        "cx": 0.5,
-        "cy": 0.5
-      },
-      "wb": "colorchannelmixer=rr=1.0506:gg=0.9852:bb=0.9973,eq=brightness=-0.1591",
-      "nota": "Sentado ao lado da tela do escaneamento. Entra em 0,45s (antes ele olha pra baixo) e sai em 5,95s (depois ele vira pra tela). Quadro cheio, já é plano médio. Balanço resolvido contra o TOM DE PELE, não contra a sala: corrigir pela parede deixava o rosto verde (R-G -0.06).",
-      "dur_prevista": 5.5
-    },
-    {
-      "id": "S3",
-      "tipo": "broll",
-      "rotulo": "TECNOLOGIA · SCANNER",
-      "origem": "broll/03_tecnologia-scanner.mov",
-      "in": 0.5,
-      "dur_fonte": 1.2,
-      "rotacao": 0.0,
-      "enquadre": {
-        "zoom": 1.55,
-        "cx": 0.36,
-        "cy": 0.52
-      },
-      "punch": 1.03,
-      "wb": "colorchannelmixer=rr=0.9770:gg=0.9991:bb=1.0865",
-      "nota": "Reenquadrado à esquerda pra esconder o jaleco que ocupa a direita e a cabeça no canto inferior."
-    },
-    {
-      "id": "S4",
-      "tipo": "broll",
-      "rotulo": "TECNOLOGIA · ALINHADOR",
-      "origem": "broll/04_tecnologia-alinhador.mov",
-      "in": 1.6,
-      "dur_fonte": 2.1,
-      "rotacao": 0.0,
-      "enquadre": {
-        "zoom": 1.1,
-        "cx": 0.54,
-        "cy": 0.55
-      },
-      "punch": 1.02,
-      "wb": "colorchannelmixer=rr=0.9419:gg=1.0124:bb=1.0651",
-      "nota": "O melhor clipe do material. Entra em 1,60s: antes disso aparece a cabeça do paciente embaixo e um rosto com máscara no topo. Sai em 3,60s, antes do jaleco cobrir a lente."
+      "nota": "Bordas medidas pela energia do áudio, não no olho: a fala deste bloco ocupa o arquivo quase inteiro. Os 'cortes' são B-roll POR CIMA — o áudio não para em nenhum deles.",
+      "dur_prevista": 10.22,
+      "cortes": [
+        {
+          "origem": "broll/02_recepcao.mov",
+          "in": 2.6,
+          "dur": 2.2,
+          "rotacao": 0.0,
+          "enquadre": {
+            "zoom": 1.06,
+            "cx": 0.5,
+            "cy": 0.5
+          },
+          "punch": 1.04,
+          "wb": "colorchannelmixer=rr=0.9440:gg=1.0076:bb=1.1125",
+          "em": 5.6
+        }
+      ]
     },
     {
       "id": "S5",
@@ -180,62 +122,128 @@
       "wb": "colorchannelmixer=rr=0.9826:gg=1.0037:bb=1.0164",
       "texto": {
         "estilo": "pergunta",
-        "marcador": "03",
+        "marcador": "02",
         "linhas": [
-          "Pra quem é o tratamento?"
+          "O que ele faz de diferente?"
         ],
         "entra": 0.3
       },
       "nota": "−3° endireita a prateleira; o enquadramento sobe pra tirar o teto. Termina em 3,10s, antes de a câmera chegar na imagem religiosa."
     },
     {
+      "id": "F2",
+      "tipo": "fala",
+      "bloco": 2,
+      "in": 0.0,
+      "dur_fonte": 6.69,
+      "enquadre": {
+        "zoom": 1.0,
+        "cx": 0.5,
+        "cy": 0.5
+      },
+      "wb": "colorchannelmixer=rr=1.0506:gg=0.9852:bb=0.9973,eq=brightness=-0.1591",
+      "nota": "Bordas medidas pela energia do áudio, não no olho: a fala deste bloco ocupa o arquivo quase inteiro. Os 'cortes' são B-roll POR CIMA — o áudio não para em nenhum deles.",
+      "dur_prevista": 6.69,
+      "cortes": [
+        {
+          "origem": "broll/03_tecnologia-scanner.mov",
+          "in": 0.5,
+          "dur": 1.8,
+          "rotacao": 0.0,
+          "enquadre": {
+            "zoom": 1.55,
+            "cx": 0.36,
+            "cy": 0.52
+          },
+          "punch": 1.03,
+          "wb": "colorchannelmixer=rr=0.9770:gg=0.9991:bb=1.0865",
+          "em": 3.1
+        }
+      ]
+    },
+    {
+      "id": "S4b",
+      "tipo": "broll",
+      "rotulo": "TECNOLOGIA · ALINHADOR",
+      "origem": "broll/04_tecnologia-alinhador.mov",
+      "in": 1.6,
+      "dur_fonte": 2.1,
+      "rotacao": 0.0,
+      "enquadre": {
+        "zoom": 1.1,
+        "cx": 0.54,
+        "cy": 0.55
+      },
+      "punch": 1.02,
+      "wb": "colorchannelmixer=rr=0.9419:gg=1.0124:bb=1.0651",
+      "nota": "Ponte antes do bloco 3. O plano das mãos com o alinhador também entra como corte dentro da fala.",
+      "texto": {
+        "estilo": "pergunta",
+        "marcador": "03",
+        "linhas": [
+          "Pra quem é o tratamento?"
+        ],
+        "entra": 0.3
+      }
+    },
+    {
       "id": "F3",
       "tipo": "fala",
       "bloco": 3,
-      "in": 0.15,
-      "dur_fonte": 10.25,
+      "in": 0.25,
+      "dur_fonte": 10.27,
       "enquadre": {
         "zoom": 1.25,
         "cx": 0.5,
         "cy": 0.47
       },
       "wb": "colorchannelmixer=rr=1.0277:gg=0.9883:bb=1.0342,eq=brightness=-0.0969",
-      "nota": "Sentado no consultório, prateleira de modelos ao fundo. Tomada 1 de 2. Balanço resolvido contra o TOM DE PELE, não contra a sala: corrigir pela parede deixava o rosto verde (R-G -0.06).",
-      "dur_prevista": 10.25
-    },
-    {
-      "id": "S6",
-      "tipo": "broll",
-      "rotulo": "PRATELEIRA · PRÊMIO",
-      "origem": "broll/06_prateleira-premio.mov",
-      "in": 0.8,
-      "dur_fonte": 1.6,
-      "rotacao": 0.0,
-      "enquadre": {
-        "zoom": 1.3,
-        "cx": 0.56,
-        "cy": 0.55
-      },
-      "punch": 1.03,
-      "wb": "colorchannelmixer=rr=0.8805:gg=1.0258:bb=1.1803",
-      "nota": "Prêmio e modelos na prateleira. Enquadrado largo de propósito: a placa aparece como objeto, sem close na marca escrita nela."
-    },
-    {
-      "id": "S6b",
-      "tipo": "broll",
-      "rotulo": "MODELO · DETALHE",
-      "origem": "broll/06_prateleira-premio.mov",
-      "in": 2.45,
-      "dur_fonte": 0.7,
-      "rotacao": 0.0,
-      "enquadre": {
-        "zoom": 2.0,
-        "cx": 0.55,
-        "cy": 0.62
-      },
-      "punch": 1.0,
-      "wb": "colorchannelmixer=rr=0.8805:gg=1.0258:bb=1.1803",
-      "nota": "Plano de pontuação de 0,70s. A referência usa cortes de 0,47 a 1,0s pra quebrar o ritmo; sem eles a montagem fica metronômica."
+      "nota": "Bordas medidas pela energia do áudio, não no olho: a fala deste bloco ocupa o arquivo quase inteiro. Os 'cortes' são B-roll POR CIMA — o áudio não para em nenhum deles.",
+      "dur_prevista": 10.27,
+      "cortes": [
+        {
+          "origem": "broll/06_prateleira-premio.mov",
+          "in": 0.8,
+          "dur": 1.4,
+          "rotacao": 0.0,
+          "enquadre": {
+            "zoom": 1.3,
+            "cx": 0.56,
+            "cy": 0.55
+          },
+          "punch": 1.03,
+          "wb": "colorchannelmixer=rr=0.8805:gg=1.0258:bb=1.1803",
+          "em": 3.9
+        },
+        {
+          "origem": "broll/06_prateleira-premio.mov",
+          "in": 2.45,
+          "dur": 0.7,
+          "rotacao": 0.0,
+          "enquadre": {
+            "zoom": 2.0,
+            "cx": 0.55,
+            "cy": 0.62
+          },
+          "punch": 1.0,
+          "wb": "colorchannelmixer=rr=0.8805:gg=1.0258:bb=1.1803",
+          "em": 5.3
+        },
+        {
+          "origem": "broll/04_tecnologia-alinhador.mov",
+          "in": 1.6,
+          "dur": 1.9,
+          "rotacao": 0.0,
+          "enquadre": {
+            "zoom": 1.1,
+            "cx": 0.54,
+            "cy": 0.55
+          },
+          "punch": 1.02,
+          "wb": "colorchannelmixer=rr=0.9419:gg=1.0124:bb=1.0651",
+          "em": 7.6
+        }
+      ]
     },
     {
       "id": "S7",
@@ -301,5 +309,6 @@
     "metodo": "Laço fechado sobre o recorte do rosto, passando pela cadeia inteira (wb + look). Alvo: R-G +0.115, G-B +0.055, luma 0.425 — pele bem exposta.",
     "resultado": "bloco1 R-G +0.090 · bloco2 +0.103 · bloco3 +0.094 · luma 0.423 a 0.429",
     "antes": "R-G 0.000 / -0.059 / -0.063 — os dois últimos estavam com o rosto verde."
-  }
+  },
+  "nota_estrutura": "Pergunta em B-roll -> bloco de fala inteiro, com B-roll POR CIMA da voz. A fala nunca é interrompida; o que muda é só a imagem. É assim que a referência monta."
 }
