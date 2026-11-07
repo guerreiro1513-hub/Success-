@@ -1,6 +1,6 @@
 {
   "projeto": "Hugo Almeida · ortodontista · Cuiabá-MT — vídeo fixado do perfil",
-  "versao": "v4-cortes-sobre-a-fala",
+  "versao": "v5-nome-e-acabamento",
   "formato": {
     "w": 1080,
     "h": 1920,
@@ -54,14 +54,6 @@
       },
       "punch": 1.0,
       "wb": "colorchannelmixer=rr=1.0967:gg=0.9841:bb=0.9083",
-      "texto": {
-        "estilo": "pergunta",
-        "marcador": "01",
-        "linhas": [
-          "Quem é o Hugo?"
-        ],
-        "entra_do_fim": 1.6
-      },
       "nota": "LIMITE DA GRAVACAO: a placa inteira so existe nos primeiros ~1,9s — depois a camera anda e ela sai pela direita; nenhum reenquadramento 4K resolve. Por isso o plano tem 2,14s e nao os 3,5s previstos. Giro de -3° (o maximo sem apertar mais o corte). O balanco de branco foi medido ignorando o ceu (14% do quadro), senao a parede cinza vira rosa. Na regravacao: plano parado ou pan MUITO lento, 5s, placa inteira."
     },
     {
@@ -70,13 +62,11 @@
       "bloco": 1,
       "texto": {
         "estilo": "nome",
-        "posicao": "baixo",
-        "linhas": [
-          "Hugo Almeida",
-          "Ortodontista · Cuiabá"
-        ],
-        "entra": 0.8,
-        "dura": 3.4
+        "prenome": "Hugo",
+        "sobrenome": "Almeida",
+        "papel": "Ortodontista · Cuiabá",
+        "entra": 1.0,
+        "dura": 3.6
       },
       "in": 0.55,
       "dur_fonte": 10.22,
@@ -120,14 +110,6 @@
       },
       "punch": 1.03,
       "wb": "colorchannelmixer=rr=0.9826:gg=1.0037:bb=1.0164",
-      "texto": {
-        "estilo": "pergunta",
-        "marcador": "02",
-        "linhas": [
-          "O que ele faz de diferente?"
-        ],
-        "entra": 0.3
-      },
       "nota": "−3° endireita a prateleira; o enquadramento sobe pra tirar o teto. Termina em 3,10s, antes de a câmera chegar na imagem religiosa."
     },
     {
@@ -176,15 +158,7 @@
       },
       "punch": 1.02,
       "wb": "colorchannelmixer=rr=0.9419:gg=1.0124:bb=1.0651",
-      "nota": "Ponte antes do bloco 3. O plano das mãos com o alinhador também entra como corte dentro da fala.",
-      "texto": {
-        "estilo": "pergunta",
-        "marcador": "03",
-        "linhas": [
-          "Pra quem é o tratamento?"
-        ],
-        "entra": 0.3
-      }
+      "nota": "Ponte antes do bloco 3. O plano das mãos com o alinhador também entra como corte dentro da fala."
     },
     {
       "id": "F3",
@@ -260,14 +234,6 @@
       },
       "punch": 1.02,
       "wb": "colorchannelmixer=rr=0.9847:gg=0.9998:bb=1.0504",
-      "texto": {
-        "estilo": "pergunta",
-        "marcador": "04",
-        "linhas": [
-          "Como começar?"
-        ],
-        "entra": 0.25
-      },
       "nota": "+7° endireita a bancada. O enquadramento desce e vai pra direita pra tirar a pessoa sentada que aparece no alto à esquerda."
     },
     {
@@ -289,10 +255,10 @@
         "estilo": "cta",
         "posicao": "baixo",
         "linhas": [
-          "Agende sua avaliação",
-          "WhatsApp"
+          "WhatsApp na legenda"
         ],
-        "entra": 0.45
+        "seta": true,
+        "entra": 0.5
       },
       "nota": "Fecho na recepção — o trecho largo com o sofá e o balcão, que não é usado no S2. Faz par com a fachada da abertura e segura o CTA."
     }
@@ -310,5 +276,9 @@
     "resultado": "bloco1 R-G +0.090 · bloco2 +0.103 · bloco3 +0.094 · luma 0.423 a 0.429",
     "antes": "R-G 0.000 / -0.059 / -0.063 — os dois últimos estavam com o rosto verde."
   },
-  "nota_estrutura": "Pergunta em B-roll -> bloco de fala inteiro, com B-roll POR CIMA da voz. A fala nunca é interrompida; o que muda é só a imagem. É assim que a referência monta."
+  "nota_estrutura": "Pergunta em B-roll -> bloco de fala inteiro, com B-roll POR CIMA da voz. A fala nunca é interrompida; o que muda é só a imagem. É assim que a referência monta.",
+  "texto": {
+    "politica": "Só o nome e o CTA. As perguntas de capítulo saíram — a referência não tem e a spec manda remover. Sem linha de CRO: o número não foi informado.",
+    "marca": "#8FD3BE (mint da placa)"
+  }
 }

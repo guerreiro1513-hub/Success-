@@ -138,7 +138,7 @@ def card_faltando(arquivo, caminho, w, h):
 TIPO = dict(marcador=("InstrumentSans-Bold", 34, 8.0),
             pergunta=("InstrumentSerif-Regular", 116),
             apoio=("InstrumentSans-Bold", 31))
-TEAL = (126, 214, 197)
+TEAL = (143, 211, 190)        # #8FD3BE — mint da placa da clínica
 TEAL_CLARO = (196, 242, 231)      # linha de apoio: precisa vencer jaleco branco
 OSSO = (255, 255, 255)
 
@@ -243,6 +243,12 @@ def png_texto(spec, base, w, h, seg):
             t = linhas[1].upper()
             _tracked(d, (w - _larg_tracked(d, t, fa, tr)) / 2, y, t, fa, TEAL_CLARO + (255,), tr)
 
+    if spec.get("seta"):
+        cx, cy = w / 2, y + int(26 * esc)
+        lado = int(15 * esc)
+        d.polygon([(cx - lado, cy), (cx + lado, cy), (cx, cy + lado)], fill=TEAL + (255,))
+        y += int(50 * esc)
+
     if baixo:
         alt_bloco = y - (seg["topo"] + int(70 * esc))
         desloc = (h - seg["base"] - int(70 * esc)) - alt_bloco - (seg["topo"] + int(70 * esc))
@@ -333,10 +339,16 @@ def render_broll(s, cfg, W, H, fps, idx, preview):
 
     png = sobrepor_texto(s, idx, W, H, cfg)
     if png:
-        for q in png:
-            entradas += ["-loop", "1", "-framerate", str(fps), "-t", f"{dur:.3f}", "-i", q]
         ini, fim = janela_texto(s, dur)
-        mapa = ["-filter_complex", filtro_texto(fc_v, 1, 2, ini, fim, H, s["texto"].get("posicao") == "baixo"), "-map", "[vo]"]
+        t_png = (fim - ini + 0.4) if s["texto"].get("estilo") == "nome" else dur
+        for q in png:
+            entradas += ["-loop", "1", "-framerate", str(fps), "-t", f"{t_png:.3f}", "-i", q]
+        if s["texto"].get("estilo") == "nome":
+            fc = filtro_nome(fc_v, 1, ini, fim, W, H)
+        else:
+            fc = filtro_texto(fc_v, 1, 2, ini, fim, H,
+                              s["texto"].get("posicao") == "baixo")
+        mapa = ["-filter_complex", fc, "-map", "[vo]"]
     else:
         mapa = ["-vf", fc_v, "-map", "0:v"]
 
@@ -355,6 +367,90 @@ def render_broll(s, cfg, W, H, fps, idx, preview):
        "-preset", "veryfast" if preview else "medium", saida])
     grava_chave(saida, h)
     return saida, dur
+
+
+def png_nome(spec, base, w, h, seg):
+    """Lower-third no estilo da referência: filete mint, função em caixa alta
+    com tracking largo, prenome leve e sobrenome em bold. Uma camada por linha,
+    porque a revelação entra com atrasos diferentes."""
+    from PIL import Image, ImageDraw, ImageFont
+    def fo(nome, tam):
+        for c in (os.path.join(FONTES, nome + ".ttf"), FALLBACK_FONTE):
+            if os.path.exists(c):
+                return ImageFont.truetype(c, tam)
+        return ImageFont.load_default()
+
+    esc = h / 1920.0
+    x0 = int(80 * esc)
+    prenome, sobrenome = spec["prenome"].upper(), spec["sobrenome"].upper()
+    papel = spec.get("papel", "").upper()
+
+    f_pre = fo("InstrumentSans-Regular", int(56 * esc))
+    f_sob = fo("InstrumentSans-Bold", int(98 * esc))
+    f_pap = fo("InstrumentSans-Regular", int(28 * esc))
+
+    # empilhado de baixo pra cima: filete, função, prenome, sobrenome
+    y_sob = h - seg["base"] - int(150 * esc)
+    y_pre = y_sob - int(76 * esc)
+    y_pap = y_pre - int(52 * esc)
+    y_fil = y_pap - int(30 * esc)
+
+    camadas = [(prenome,  f_pre, 11.0 * esc, (255, 255, 255, 210), y_pre, False),
+               (sobrenome, f_sob,  2.5 * esc, (255, 255, 255, 255), y_sob, False),
+               (papel,     f_pap,  7.5 * esc, TEAL + (255,),        y_pap, True)]
+
+    # véu: o lower-third entra sobre jaleco branco, sem isso a mint desaparece
+    veu = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    vd = ImageDraw.Draw(veu)
+    alt = int(900 * esc)
+    for i in range(alt):
+        vd.line([(0, h - 1 - i), (w, h - 1 - i)],
+                fill=(8, 12, 16, int(225 * (1 - i / alt) ** 1.5)))
+    cam_veu = f"{base}_veu.png"
+    veu.save(cam_veu)
+    caminhos = [cam_veu]
+    for i, (txt, f, tr, cor, y, com_filete) in enumerate(camadas):
+        img = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+        if txt:
+            d = ImageDraw.Draw(img)
+            if com_filete:
+                d.line([(x0, y_fil), (x0 + int(64 * esc), y_fil)],
+                       fill=TEAL + (255,), width=max(2, int(2 * esc)))
+            x = x0
+            for c in txt:
+                d.text((x, y), c, font=f, fill=cor)
+                x += d.textlength(c, font=f) + tr
+            img = _sombra(img, int(20 * esc) or 1, 170, (0, int(5 * esc)))
+        cam = f"{base}_n{i}.png"
+        img.save(cam)
+        caminhos.append(cam)
+    return caminhos
+
+
+def filtro_nome(fc_v, idx0, ini, fim, w, h, atrasos=(0.10, 0.0, 0.26)):
+    """Revelação por máscara esquerda->direita, uma por linha, sobrenome na
+    frente — é o que a referência faz. Cada camada entra como stream curto
+    deslocado no tempo, pra o `geq` (caro) rodar só na janela visível."""
+    REV, F = 0.50, 90.0 * w / 1080.0
+    partes = [f"[0:v]{fc_v}[v0]"]
+    # entrada idx0 = véu, sem máscara: só aparece e some
+    partes.append(f"[{idx0}:v]format=rgba,setpts=PTS+{ini:.3f}/TB,"
+                  f"fade=t=in:st={ini:.2f}:d=0.35:alpha=1,"
+                  f"fade=t=out:st={max(ini, fim - 0.35):.2f}:d=0.35:alpha=1[veu]")
+    partes.append(f"[v0][veu]overlay=0:0:format=yuv420:eof_action=pass[vv]")
+    ent = "vv"
+    idx0 += 1
+    for k, atr in enumerate(atrasos):
+        i0 = ini + atr
+        prog = f"clip((T-{i0:.2f})/{REV},0,1)"
+        alfa = (f"alpha(X,Y)*clip(((-{F:.0f})+{prog}*({w}+{F:.0f})-X)/{F:.0f},0,1)"
+                f"*clip(({fim:.2f}-T)/0.35,0,1)")
+        partes.append(f"[{idx0+k}:v]format=rgba,setpts=PTS+{ini:.3f}/TB,"
+                      f"geq=r='r(X,Y)':g='g(X,Y)':b='b(X,Y)':a='{alfa}'[m{k}]")
+        partes.append(f"[{ent}][m{k}]overlay=0:0:format=yuv420:eof_action=pass[v{k+1}]")
+        ent = f"v{k+1}"
+    partes[-1] = partes[-1].replace(f"[v{len(atrasos)}]", "[vo]")
+    return ";".join(partes)
 
 
 def filtro_texto(fc_v, i_veu, i_txt, ini, fim, h, baixo=False):
@@ -396,6 +492,8 @@ def sobrepor_texto(s, idx, W, H, cfg):
     if not s.get("texto"):
         return None
     base = os.path.join(GRAF, f"texto_{idx:02d}")
+    if s["texto"].get("estilo") == "nome":
+        return png_nome(s["texto"], base, W, H, cfg["seguranca_instagram"])
     return png_texto(s["texto"], base, W, H, cfg["seguranca_instagram"])
 
 
@@ -558,19 +656,23 @@ def render_fala(s, cfg, W, H, fps, idx, preview):
     entradas = ["-i", mudo]
     png = sobrepor_texto(s, idx, W, H, cfg)
     if png:
-        for q in png:
-            entradas += ["-loop", "1", "-framerate", str(fps), "-t", f"{dur:.3f}", "-i", q]
         ini, fim = janela_texto(s, dur)
-        mapa = ["-filter_complex",
-                filtro_texto(fc_v, 1, 2, ini, fim, H,
-                             s["texto"].get("posicao") == "baixo"), "-map", "[vo]"]
+        t_png = (fim - ini + 0.4) if s["texto"].get("estilo") == "nome" else dur
+        for q in png:
+            entradas += ["-loop", "1", "-framerate", str(fps), "-t", f"{t_png:.3f}", "-i", q]
+        if s["texto"].get("estilo") == "nome":
+            fc = filtro_nome(fc_v, 1, ini, fim, W, H)
+        else:
+            fc = filtro_texto(fc_v, 1, 2, ini, fim, H,
+                              s["texto"].get("posicao") == "baixo")
+        mapa = ["-filter_complex", fc, "-map", "[vo]"]
     else:
         mapa = ["-vf", fc_v, "-map", "0:v"]
 
     af = loudnorm_2p(src, ini_src, dur, "highpass=f=85,afftdn=nr=16:nf=-30",
                      a["fala_lufs"])
     ff(entradas + ["-ss", f"{ini_src:.3f}", "-t", f"{dur:.3f}", "-i", src] + mapa +
-       [f"-map", f"{3 if png else 1}:a", "-af", af, "-t", f"{dur:.3f}",
+       ["-map", f"{(len(png) + 1) if png else 1}:a", "-af", af, "-t", f"{dur:.3f}",
         "-c:v", "libx264", "-crf", crf, "-preset", pre,
         "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2", saida])
     grava_chave(saida, h)
