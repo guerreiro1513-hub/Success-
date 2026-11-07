@@ -1,0 +1,5 @@
+plano 1: 1822 entra em 1.63 s  (primeiro plano)
+plano 2: 1881 entra em 4.77 s  (diferença com o anterior 30.1)
+plano 3: 1818 entra em 4.03 s  (diferença com o anterior 34.6)
+plano 4: 1822 entra em 3.23 s  (diferença com o anterior 48.8)
+plano 5: 1881 entra em 1.60 s  (diferença com o anterior 43.2)
