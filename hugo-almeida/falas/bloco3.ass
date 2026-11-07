@@ -1,0 +1,23 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Fala,Instrument Sans,62,&H00FFFFFF,&H00000000,&HA0000000,-1,0,0,0,100,100,0,0,1,0,3,2,110,110,680,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.24,0:00:00.90,Fala,,0,0,0,,{\fad(120,80)}Quer fazer o seu
+Dialogue: 0,0:00:00.82,0:00:02.56,Fala,,0,0,0,,{\fad(120,80)}tratamento ortodôntico comigo
+Dialogue: 0,0:00:02.48,0:00:03.49,Fala,,0,0,0,,{\fad(120,80)}com toda a {\c&H00BED38F}segurança{\c&H00FFFFFF&}?
+Dialogue: 0,0:00:03.41,0:00:04.65,Fala,,0,0,0,,{\fad(120,80)}Entre em contato com
+Dialogue: 0,0:00:04.57,0:00:05.46,Fala,,0,0,0,,{\fad(120,80)}o número do {\c&H00BED38F}WhatsApp{\c&H00FFFFFF&}
+Dialogue: 0,0:00:05.38,0:00:06.16,Fala,,0,0,0,,{\fad(120,80)}que está aqui na
+Dialogue: 0,0:00:06.08,0:00:06.86,Fala,,0,0,0,,{\fad(120,80)}legenda que eu e
+Dialogue: 0,0:00:06.78,0:00:08.21,Fala,,0,0,0,,{\fad(120,80)}minha equipe estamos te
+Dialogue: 0,0:00:08.13,0:00:09.87,Fala,,0,0,0,,{\fad(120,80)}aguardando aqui no consultório.
+Dialogue: 0,0:00:09.79,0:00:10.27,Fala,,0,0,0,,{\fad(120,80)}Um abraço!

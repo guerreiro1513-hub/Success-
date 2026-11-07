@@ -1,0 +1,27 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Fala,Instrument Sans,62,&H00FFFFFF,&H00000000,&HA0000000,-1,0,0,0,100,100,0,0,1,0,3,2,110,110,680,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.24,0:00:00.97,Fala,,0,0,0,,{\fad(120,80)}Olá, sou o Dr.
+Dialogue: 0,0:00:00.89,0:00:01.43,Fala,,0,0,0,,{\fad(120,80)}Hugo Almeida,
+Dialogue: 0,0:00:01.35,0:00:02.38,Fala,,0,0,0,,{\fad(120,80)}ortodontista com mais de
+Dialogue: 0,0:00:02.30,0:00:03.40,Fala,,0,0,0,,{\fad(120,80)}{\c&H00BED38F}25 anos{\c&H00FFFFFF&} de experiência
+Dialogue: 0,0:00:03.32,0:00:04.34,Fala,,0,0,0,,{\fad(120,80)}em tratamentos ortodônticos
+Dialogue: 0,0:00:04.26,0:00:04.71,Fala,,0,0,0,,{\fad(120,80)}de {\c&H00BED38F}adultos{\c&H00FFFFFF&},
+Dialogue: 0,0:00:04.63,0:00:05.36,Fala,,0,0,0,,{\fad(120,80)}{\c&H00BED38F}crianças{\c&H00FFFFFF&}, desde os casos
+Dialogue: 0,0:00:05.28,0:00:06.23,Fala,,0,0,0,,{\fad(120,80)}mais simples aos mais
+Dialogue: 0,0:00:06.15,0:00:07.07,Fala,,0,0,0,,{\fad(120,80)}complexos. Estou aqui hoje
+Dialogue: 0,0:00:06.99,0:00:08.06,Fala,,0,0,0,,{\fad(120,80)}para te mostrar como
+Dialogue: 0,0:00:07.98,0:00:08.53,Fala,,0,0,0,,{\fad(120,80)}é um pouco da
+Dialogue: 0,0:00:08.45,0:00:09.18,Fala,,0,0,0,,{\fad(120,80)}nossa rotina e a
+Dialogue: 0,0:00:09.10,0:00:09.93,Fala,,0,0,0,,{\fad(120,80)}nossa {\c&H00BED38F}consulta inicial{\c&H00FFFFFF&}.
+Dialogue: 0,0:00:09.85,0:00:10.22,Fala,,0,0,0,,{\fad(120,80)}Vem comigo!

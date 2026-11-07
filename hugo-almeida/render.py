@@ -643,15 +643,13 @@ def render_fala(s, cfg, W, H, fps, idx, preview):
         ff(["-f", "concat", "-safe", "0", "-i", lst, "-c", "copy", mudo])
 
     # ---- legenda e texto por cima do vídeo já montado
+    # legenda: .ass tem cor por palavra-chave, o .srt não teria
     fc_v = "null"
-    srt = os.path.join(RAIZ, "falas", f"bloco{s['bloco']}.srt")
-    if os.path.exists(srt):
-        lg = cfg["legendas"]
-        estilo = (f"FontName={lg['fonte']},FontSize={lg['tamanho']//2},"
-                  f"PrimaryColour=&H00FFFFFF,OutlineColour=&H00000000,"
-                  f"Outline={lg['contorno']//2},Shadow=0,BorderStyle=1,"
-                  f"Alignment=2,MarginV={lg['margem_base']//2},MarginL=60,MarginR=60")
-        fc_v = f"subtitles='{srt}':fontsdir='{FONTES}':force_style='{estilo}'"
+    leg = os.path.join(RAIZ, "falas", f"bloco{s['bloco']}.ass")
+    if not os.path.exists(leg):
+        leg = os.path.join(RAIZ, "falas", f"bloco{s['bloco']}.srt")
+    if os.path.exists(leg):
+        fc_v = f"ass='{leg}':fontsdir='{FONTES}'"
 
     entradas = ["-i", mudo]
     png = sobrepor_texto(s, idx, W, H, cfg)

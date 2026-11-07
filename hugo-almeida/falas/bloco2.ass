@@ -1,0 +1,28 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Fala,Instrument Sans,62,&H00FFFFFF,&H00000000,&HA0000000,-1,0,0,0,100,100,0,0,1,0,3,2,110,110,680,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:00.39,Fala,,0,0,0,,{\fad(120,80)}Na {\c&H00BED38F}consulta inicial{\c&H00FFFFFF&},
+Dialogue: 0,0:00:00.31,0:00:00.66,Fala,,0,0,0,,{\fad(120,80)}você vai me contar
+Dialogue: 0,0:00:00.57,0:00:00.92,Fala,,0,0,0,,{\fad(120,80)}quais são todas as
+Dialogue: 0,0:00:00.79,0:00:01.14,Fala,,0,0,0,,{\fad(120,80)}suas queixas,
+Dialogue: 0,0:00:00.92,0:00:01.44,Fala,,0,0,0,,{\fad(120,80)}faremos o exame clínico
+Dialogue: 0,0:00:01.36,0:00:01.88,Fala,,0,0,0,,{\fad(120,80)}detalhado com escaneamento
+Dialogue: 0,0:00:01.80,0:00:02.58,Fala,,0,0,0,,{\fad(120,80)}intraoral, tiraremos algumas
+Dialogue: 0,0:00:02.50,0:00:03.07,Fala,,0,0,0,,{\fad(120,80)}fotos e solicitaremos alguns
+Dialogue: 0,0:00:02.99,0:00:03.51,Fala,,0,0,0,,{\fad(120,80)}exames complementares como
+Dialogue: 0,0:00:03.43,0:00:03.86,Fala,,0,0,0,,{\fad(120,80)}as {\c&H00BED38F}radiografias{\c&H00FFFFFF&} e será
+Dialogue: 0,0:00:03.78,0:00:04.38,Fala,,0,0,0,,{\fad(120,80)}remarcada uma {\c&H00BED38F}segunda consulta{\c&H00FFFFFF&}
+Dialogue: 0,0:00:04.30,0:00:04.78,Fala,,0,0,0,,{\fad(120,80)}para esclarecermos todas
+Dialogue: 0,0:00:04.70,0:00:05.35,Fala,,0,0,0,,{\fad(120,80)}as dúvidas e tipos
+Dialogue: 0,0:00:05.27,0:00:05.70,Fala,,0,0,0,,{\fad(120,80)}de tratamentos que podem
+Dialogue: 0,0:00:05.62,0:00:05.97,Fala,,0,0,0,,{\fad(120,80)}ser realizados.
