@@ -11,24 +11,21 @@ ROOT = os.path.dirname(os.path.abspath(__file__)); P = lambda p: os.path.join(RO
 W, H, FPS, SR = 1080, 1920, 30, 48000
 OUT = P("../../entrega/guerreiros-3-UNIDADES-SO-CARNES.mp4")
 CHIADO = P("../../entrega/guerreiros-FLORAIS-QUI-A-DOM.mp4"); CH_ST, CH_D = 11.6, 8.9   # trecho só de chiado
-# A = Jardim Aclimação, B = Tropical Ville, D = vídeo novo (frango no rolete), E = IMG_1663 (4K girando), F = frangos tenda
-A, B, D, E, F = "source/A.mov", "source/B.mov", "source/D.mov", "source/E.mov", "source/F.mov"
+# A = Jardim Aclimação, B = Tropical Ville, D = vídeo novo (frango no rolete), E = IMG_1663 (4K girando), F = frangos tenda, G = vídeo do feriado (carnes)
+A, B, D, E, F, G = "source/A.mov", "source/B.mov", "source/D.mov", "source/E.mov", "source/F.mov", "source/G.mov"
 FIT = f"scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H}"
 ZOOM_D = f"crop=540:960:90:0,scale={W}:{H}:flags=lanczos,cas=0.35"      # corta a legenda queimada (y≈0,77)
 BASE = "eq=contrast=1.06:saturation=1.06"
 # (fonte, início, segundos, enquadramento, cor)
-SHOTS = [(E, 0.4, 1.8, FIT, BASE),
-         (B, 2.4, 1.6, FIT, BASE),
-         (D, 5.6, 1.35, FIT, "eq=contrast=1.04:saturation=0.92"),
-         (A, 7.6, 1.6, FIT, BASE),
-         (D, 7.6, 1.4, ZOOM_D, "eq=contrast=1.04:saturation=0.92"),
-         (B, 13.0, 1.6, FIT, BASE),
-         (E, 5.2, 1.6, FIT, BASE),
-         (D, 9.25, 1.5, ZOOM_D, "eq=contrast=1.04:saturation=0.92"),
-         (A, 15.6, 1.6, FIT, BASE),
-         (F, 1.0, 1.6, FIT, BASE),
-         (B, 18.4, 1.7, FIT, BASE),
-         (E, 2.4, 2.6, FIT, BASE)]
+SHOTS = [(E, 0.4, 2.2, FIT, BASE),                                  # costela/cupim girando (4K)
+         (G, 3.0, 2.0, FIT, BASE),                                  # rolete com carnes
+         (A, 7.6, 1.6, FIT, BASE),                                  # grelha girando
+         (B, 12.4, 1.8, FIT, BASE),                                 # costela na grelha
+         (G, 7.0, 1.4, FIT, BASE),                                  # panceta
+         (D, 5.6, 1.35, FIT, "eq=contrast=1.04:saturation=0.92"),   # o ÚNICO plano de frango
+         (B, 5.0, 1.4, FIT, BASE),                                  # grelha girando aberta
+         (B, 18.4, 1.9, FIT, BASE),                                 # costelinha
+         (G, 15.4, 2.3, FIT, BASE)]                                 # carne girando no sol, fecha escurecendo
 
 def frames(src, st, n, vf, grade):
     raw = subprocess.run(["ffmpeg", "-v", "error", "-ss", f"{st:.3f}", "-i", P(src), "-frames:v", str(n), "-vf",
