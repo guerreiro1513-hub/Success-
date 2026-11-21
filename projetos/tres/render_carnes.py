@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """3 unidades — versão SÓ CARNES: nenhum texto, nenhum logo. Só planos de churrasqueira com cor natural
 (sem os clipes do Florais/ESCALA, que tinham outra coloração). Som = trilha gaúcha baixa + o melhor chiado do estoque
-(chiado realçado do Florais, entregue antes) + chiado da Tropical Ville por baixo. 1080x1920, 30 fps.
+(chiado realçado do Florais, entregue antes). 1080x1920, 30 fps.
     python3 render_carnes.py
 """
 import os, subprocess
@@ -11,7 +11,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__)); P = lambda p: os.path.join(RO
 W, H, FPS, SR = 1080, 1920, 30, 48000
 OUT = P("../../entrega/guerreiros-3-UNIDADES-SO-CARNES.mp4")
 GAUCHO, GAUCHO_GAIN = P("assets/trilha-gaucha-loop.wav"), 0.55     # trilha abaixo do chiado
-CHIADO = P("../../entrega/guerreiros-FLORAIS-QUI-A-DOM.mp4"); CH_ST, CH_D = 11.6, 8.9   # trecho só de chiado
+CHIADO = P("../../entrega/guerreiros-FLORAIS-QUI-A-DOM.mp4"); CH_ST, CH_D = 11.6, 7.6   # trecho só de chiado (para antes do fecho do Florais, 19,4 s)
 # A = Jardim Aclimação, B = Tropical Ville, D = vídeo novo (frango no rolete), E = IMG_1663 (4K girando), F = frangos tenda, G = vídeo do feriado (carnes), K = costela na grade (copy_A4FD)
 A, B, D, E, F, G, K = "source/A.mov", "source/B.mov", "source/D.mov", "source/E.mov", "source/F.mov", "source/G.mov", "source/H.mov"
 FIT = f"scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H}"
@@ -67,15 +67,14 @@ def loop(x, N, xf):
 
 N = int(T * SR)
 top = loop(pcm(CHIADO, CH_ST, CH_D), N, int(1.0 * SR))
-bed = pcm(B); bed = bed[:N] if len(bed) >= N else loop(bed, N, int(1.0 * SR))
 rms = lambda v: np.sqrt(np.mean(v ** 2)) + 1e-9
-mix = top / rms(top) + 0.35 * bed / rms(bed)                     # chiado realçado na frente, brasa da Tropical por baixo
+mix = top / rms(top)   # só o chiado realçado; o áudio da Tropical saiu (era ronco grave de motor/vento que subia no fim)
 mix *= 0.1 / rms(mix)
 gau = loop(pcm(GAUCHO, 15.0, 30.0), N, int(0.5 * SR))  # só a parte com percussão (0–13 s é nota longa e em 13 s muda: era o som estranho)
 mix += GAUCHO_GAIN * 0.1 * gau / rms(gau)
 fi, fo = int(0.25 * SR), int(0.7 * SR); mix[:fi] *= np.linspace(0, 1, fi)[:, None]; mix[-fo:] *= np.linspace(1, 0, fo)[:, None]
 wavfile.write(P("work/audio_carnes.wav"), SR, (np.clip(mix, -1, 1) * 32767).astype(np.int16))
 subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", P("work/video_carnes.mp4"), "-i", P("work/audio_carnes.wav"), "-map", "0:v", "-map", "1:a",
-                "-c:v", "copy", "-af", "highpass=f=70,loudnorm=I=-15:TP=-1.5:LRA=11", "-c:a", "aac", "-b:a", "192k",
+                "-c:v", "copy", "-af", "highpass=f=120,loudnorm=I=-15:TP=-1.5:LRA=11", "-c:a", "aac", "-b:a", "192k",
                 "-movflags", "+faststart", "-shortest", OUT], check=True)
 print(OUT, f"{T:.2f} s")
