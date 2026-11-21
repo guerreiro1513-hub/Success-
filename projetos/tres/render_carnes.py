@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """3 unidades — versão SÓ CARNES: nenhum texto, nenhum logo. Só planos de churrasqueira com cor natural
-(sem os clipes do Florais/ESCALA, que tinham outra coloração). Som = o melhor chiado do estoque
+(sem os clipes do Florais/ESCALA, que tinham outra coloração). Som = trilha gaúcha baixa + o melhor chiado do estoque
 (chiado realçado do Florais, entregue antes) + chiado da Tropical Ville por baixo. 1080x1920, 30 fps.
     python3 render_carnes.py
 """
@@ -10,9 +10,10 @@ from scipy.io import wavfile
 ROOT = os.path.dirname(os.path.abspath(__file__)); P = lambda p: os.path.join(ROOT, p)
 W, H, FPS, SR = 1080, 1920, 30, 48000
 OUT = P("../../entrega/guerreiros-3-UNIDADES-SO-CARNES.mp4")
+GAUCHO, GAUCHO_GAIN = P("assets/trilha-gaucha-loop.wav"), 0.55     # trilha abaixo do chiado
 CHIADO = P("../../entrega/guerreiros-FLORAIS-QUI-A-DOM.mp4"); CH_ST, CH_D = 11.6, 8.9   # trecho só de chiado
-# A = Jardim Aclimação, B = Tropical Ville, D = vídeo novo (frango no rolete), E = IMG_1663 (4K girando), F = frangos tenda, G = vídeo do feriado (carnes)
-A, B, D, E, F, G = "source/A.mov", "source/B.mov", "source/D.mov", "source/E.mov", "source/F.mov", "source/G.mov"
+# A = Jardim Aclimação, B = Tropical Ville, D = vídeo novo (frango no rolete), E = IMG_1663 (4K girando), F = frangos tenda, G = vídeo do feriado (carnes), K = costela na grade (copy_A4FD)
+A, B, D, E, F, G, K = "source/A.mov", "source/B.mov", "source/D.mov", "source/E.mov", "source/F.mov", "source/G.mov", "source/H.mov"
 FIT = f"scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H}"
 ZOOM_D = f"crop=540:960:90:0,scale={W}:{H}:flags=lanczos,cas=0.35"      # corta a legenda queimada (y≈0,77)
 BASE = "eq=contrast=1.06:saturation=1.06"
@@ -23,7 +24,7 @@ SHOTS = [(E, 0.4, 2.2, FIT, BASE),                                  # costela/cu
          (B, 12.4, 1.8, FIT, BASE),                                 # costela na grelha
          (G, 7.0, 1.4, FIT, BASE),                                  # panceta
          (D, 5.6, 1.35, FIT, "eq=contrast=1.04:saturation=0.92"),   # o ÚNICO plano de frango
-         (B, 5.0, 1.4, FIT, BASE),                                  # grelha girando aberta
+         (K, 6.6, 1.4, FIT, BASE),                                  # costela na grade girando (troca do plano com frango)
          (B, 18.4, 1.9, FIT, BASE),                                 # costelinha
          (G, 15.4, 2.3, FIT, BASE)]                                 # carne girando no sol, fecha escurecendo
 
@@ -70,6 +71,8 @@ bed = pcm(B); bed = bed[:N] if len(bed) >= N else loop(bed, N, int(1.0 * SR))
 rms = lambda v: np.sqrt(np.mean(v ** 2)) + 1e-9
 mix = top / rms(top) + 0.35 * bed / rms(bed)                     # chiado realçado na frente, brasa da Tropical por baixo
 mix *= 0.1 / rms(mix)
+gau = loop(pcm(GAUCHO), N, int(0.5 * SR))                       # trilha gaúcha original (projeto PACU), sem direitos de terceiros
+mix += GAUCHO_GAIN * 0.1 * gau / rms(gau)
 fi, fo = int(0.25 * SR), int(0.7 * SR); mix[:fi] *= np.linspace(0, 1, fi)[:, None]; mix[-fo:] *= np.linspace(1, 0, fo)[:, None]
 wavfile.write(P("work/audio_carnes.wav"), SR, (np.clip(mix, -1, 1) * 32767).astype(np.int16))
 subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", P("work/video_carnes.mp4"), "-i", P("work/audio_carnes.wav"), "-map", "0:v", "-map", "1:a",
