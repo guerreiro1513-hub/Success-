@@ -71,7 +71,7 @@ bed = pcm(B); bed = bed[:N] if len(bed) >= N else loop(bed, N, int(1.0 * SR))
 rms = lambda v: np.sqrt(np.mean(v ** 2)) + 1e-9
 mix = top / rms(top) + 0.35 * bed / rms(bed)                     # chiado realçado na frente, brasa da Tropical por baixo
 mix *= 0.1 / rms(mix)
-gau = loop(pcm(GAUCHO), N, int(0.5 * SR))                       # trilha gaúcha original (projeto PACU), sem direitos de terceiros
+gau = loop(pcm(GAUCHO, 15.0, 30.0), N, int(0.5 * SR))  # só a parte com percussão (0–13 s é nota longa e em 13 s muda: era o som estranho)
 mix += GAUCHO_GAIN * 0.1 * gau / rms(gau)
 fi, fo = int(0.25 * SR), int(0.7 * SR); mix[:fi] *= np.linspace(0, 1, fi)[:, None]; mix[-fo:] *= np.linspace(1, 0, fo)[:, None]
 wavfile.write(P("work/audio_carnes.wav"), SR, (np.clip(mix, -1, 1) * 32767).astype(np.int16))
