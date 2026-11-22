@@ -17,7 +17,7 @@ def loud(f):
     return float(I), float(TP)
 
 NOMES = {"V1": "V1 (pai dançando, 2024)", "V2": "V2 (latão, 2024)", "HB": "Tropical Ville (hoje)", "HA": "Jardim Aclimação (hoje)",
-         "HC": "Florais (hoje)", "HD": "Fabrício hoje (rolete)", "HE": "IMG_1663 (hoje, 4K)", "HG": "carnes no rolete (hoje)", "HK": "costela na grade (hoje)", "V3": "V3 (Fabrício, costela crua, 2025)", "V4": "V4 (Fabrício na churrasqueira de casa)"}
+         "HC": "Florais (hoje)", "HD": "Fabrício hoje (rolete)", "HE": "IMG_1663 (hoje, 4K)", "HG": "carnes no rolete (hoje)", "HK": "costela na grade (hoje)", "V3": "V3 (Fabrício, costela crua, 2025)", "V4": "V4 (Fabrício na churrasqueira de casa)", "FA1": "fachada 1 (vídeo novo)", "FA2": "fachada 2 (IMG_1429)"}
 rows = []
 for i, s in enumerate(E["segments"], 1):
     k = s["kind"]
@@ -29,8 +29,8 @@ for i, s in enumerate(E["segments"], 1):
     else: src = "logo"
     rows.append(f'| {i} | {s["ini"]:.2f}–{s["fim"]:.2f} | {s["b0"]}–{s["b1"]} | {k} | {src} |')
 open(P("edl.md"), "w").write("# EDL — A nossa história\n\n"
-    f'Grade: {E["bpm"]} BPM (batida {beat:.4f} s). Música do começo ao fim: vídeo 0 s = {23.395-beat:.3f} s da gravação de "Time" '
-    f'(b1 "And you run", b33 "The sun is the same…" = {33*beat:.2f} s, b113 "the song is over" = {113*beat:.2f} s). Duração {E["total"]:.2f} s.\n\n'
+    f'Grade: {E["bpm"]} BPM (batida {beat:.4f} s). Música do começo ao fim: vídeo 0 s = {23.395+beat:.3f} s da gravação de "Time" ("And you run…") '
+    f'(b32 "The sun is the same…" = {32*beat:.2f} s, b112 "the song is over" = {112*beat:.2f} s). Duração {E["total"]:.2f} s.\n\n'
     "| # | tempo (s) | batidas | tipo | fonte |\n|---|---|---|---|---|\n" + "\n".join(rows) + "\n")
 
 p = probe(OUT); v = [s for s in p["streams"] if s.get("width")][0]; a = [s for s in p["streams"] if s.get("sample_rate")][0]
