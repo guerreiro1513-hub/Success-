@@ -82,8 +82,8 @@ SEG = [
     (87, 91, "clip", dict(src="HE", t0=0.4, vf="HE", mem=0)),
     (91, 95, "clip", dict(src="HK", t0=6.6, vf="HK", mem=0)),
     (95, 99, "clip", dict(src="HG", t0=3.0, vf="HG", mem=0)),
-    (99, 103, "clip", dict(src="HC", t0=16.8, vf="HCf", mem=0)),
-    (103, 107, "clip", dict(src="HG", t0=15.4, vf="HG", mem=0)),
+    (99, 103, "clip", dict(src="HC", t0=18.15, vf="HCf", mem=0)),
+    (103, 107, "clip", dict(src="HG", t0=15.55, vf="HG", mem=0)),
     (107, 111, "clip", dict(src="HA", t0=8.0, vf="HA", mem=0)),
     (111, 123, "clip", dict(src="HD", t0=0.2, vf="HD", mem=0, push=0.07, fps_src=60)),   # FECHAMENTO em câmera lenta, sem logo
 ]
