@@ -4,7 +4,7 @@ import os, json, subprocess, re
 ROOT = os.path.dirname(os.path.abspath(__file__)); P = lambda p: os.path.join(ROOT, p)
 E = json.load(open(P("work/edl.json")))
 OUT = P("../../entrega/guerreiros-grill_historia_20261122.mp4")
-PREV = P("../../entrega/guerreiros-grill_historia_20261122_PREVIA-COM-MUSICA-NAO-POSTAR.mp4")
+PREV = P("../../entrega/guerreiros-grill_historia_20261122_COM-MUSICA.mp4")
 FPS = 30; beat = E["beat"]
 
 def probe(f):
@@ -29,8 +29,8 @@ for i, s in enumerate(E["segments"], 1):
     else: src = "logo"
     rows.append(f'| {i} | {s["ini"]:.2f}–{s["fim"]:.2f} | {s["b0"]}–{s["b1"]} | {k} | {src} |')
 open(P("edl.md"), "w").write("# EDL — A nossa história\n\n"
-    f'Grade: {E["bpm"]} BPM (batida {beat:.4f} s). Trecho de referência de "Time" começa em {E["M0"]:.2f} s '
-    f'("The sun is the same…" na batida 60 = {60*beat:.2f} s). Duração {E["total"]:.2f} s.\n\n'
+    f'Grade: {E["bpm"]} BPM (batida {beat:.4f} s). Música do começo ao fim: vídeo 0 s = {23.395-beat:.3f} s da gravação de "Time" '
+    f'(b1 "And you run", b33 "The sun is the same…" = {33*beat:.2f} s, b113 "the song is over" = {113*beat:.2f} s). Duração {E["total"]:.2f} s.\n\n'
     "| # | tempo (s) | batidas | tipo | fonte |\n|---|---|---|---|---|\n" + "\n".join(rows) + "\n")
 
 p = probe(OUT); v = [s for s in p["streams"] if s.get("width")][0]; a = [s for s in p["streams"] if s.get("sample_rate")][0]
@@ -40,6 +40,6 @@ on = sum(1 for c in cuts if abs(c / beat - round(c / beat)) * beat <= 1 / FPS + 
 Ip, TPp = loud(PREV); Io, TPo = loud(OUT)
 print(f'Q1 {v["codec_name"]} {v["profile"]} {v["width"]}x{v["height"]} {v["r_frame_rate"]} {v["pix_fmt"]} | {a["codec_name"]} {a["sample_rate"]} Hz {a["channels"]}ch')
 print(f'Q2 duração {dur:.2f} s')
-print(f'Q8 prévia c/ música {Ip} LUFS TP {TPp} | final sem música {Io} LUFS TP {TPo}')
+print(f'Q8 com música {Ip} LUFS TP {TPp} | final sem música {Io} LUFS TP {TPo}')
 print(f'Q9 cortes na batida (±1 quadro): {on}/{len(cuts)}')
 print(f'tamanho final {int(p["format"]["size"])/1e6:.1f} MB, {int(p["format"]["bit_rate"])/1e6:.1f} Mbps')
