@@ -17,7 +17,7 @@ def loud(f):
     return float(I), float(TP)
 
 NOMES = {"V1": "V1 (pai dançando, 2024)", "V2": "V2 (latão, 2024)", "HB": "Tropical Ville (hoje)", "HA": "Jardim Aclimação (hoje)",
-         "HC": "Florais (hoje)", "HD": "Fabrício hoje (rolete)", "HE": "IMG_1663 (hoje, 4K)", "HG": "carnes no rolete (hoje)", "HK": "costela na grade (hoje)"}
+         "HC": "Florais (hoje)", "HD": "Fabrício hoje (rolete)", "HE": "IMG_1663 (hoje, 4K)", "HG": "carnes no rolete (hoje)", "HK": "costela na grade (hoje)", "V3": "V3 (Fabrício, costela crua, 2025)", "V4": "V4 (Fabrício na churrasqueira de casa)"}
 rows = []
 for i, s in enumerate(E["segments"], 1):
     k = s["kind"]

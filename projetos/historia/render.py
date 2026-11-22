@@ -28,9 +28,9 @@ CLIP_PHASE = 0.296                                       # 1ª batida (tempo for
 def fb(b): return int(round(b * BEAT * FPS))             # batida -> quadro
 
 S = {k: P_("source/" + v) for k, v in dict(V1="V1.mov", V2="V2.mp4", HB="HOJE_B.mov", HA="HOJE_A.mov", HC="HOJE_C.mp4",
-                                            HD="HOJE_D.mov", HE="HOJE_E.mov", HG="HOJE_G.mov", HK="HOJE_K.mov",
+                                            HD="HOJE_D.mov", HE="HOJE_E.mov", HG="HOJE_G.mov", HK="HOJE_K.mov", V3="V3.mov", V4="V4.mov",
                                             MUS="MUSICA_REF.mp4").items()}
-FOTO = {i: P_(f"source/F{i}.jpg") for i in range(1, 7)}
+FOTO = {i: P_(f"source/F{i}.jpg") for i in range(1, 10)}
 CHIADO = P_("../../entrega/guerreiros-FLORAIS-QUI-A-DOM.mp4")
 MUS_LEN = 19.0                                           # a música do trecho de referência para em 19 s
 
@@ -43,6 +43,7 @@ VF = {
     "V2": "crop=iw:ih*0.80:0:ih*0.20," + OLD + FILL + SHARP + BASE,    # corta o logo queimado (canto superior esq.)
     "HB": FILL + BASE, "HA": FILL + BASE, "HG": FILL + BASE, "HK": FILL + BASE,
     "HE": FILL + BASE,
+    "V3": FILL + BASE, "V4": "hqdn3d=1:1:3:3," + FILL + ",cas=0.45" + BASE,
     "HD": "crop=iw*0.75:ih*0.74:iw*0.125:0," + FILL + ",cas=0.4" + BASE + ",eq=saturation=0.92",   # corta a legenda queimada
     "HC": "crop=iw:ih*0.68:0:ih*0.32," + FILL + BASE + ",eq=saturation=0.88",   # Florais: corta a legenda queimada e
     "HCf": FILL + BASE + ",eq=saturation=0.88",                                  # tira o excesso de saturação do original
@@ -50,50 +51,50 @@ VF = {
 
 # ---- linha do tempo (em batidas) --------------------------------------------------------------
 SEG = [
-    (0, 4, "clip", dict(src="HE", t0=0.4, vf="HE", mem=0)),                        # GANCHO: hoje (4K, carne girando)
-    (4, 6, "rewind", dict(src="HE", t0=0.45, t1=4.0, vf="HE")),                   # rebobina 4x
-    (6, 10, "clip", dict(src="V2", t0=0.6, vf="V2", mem=1)),                       # O COMEÇO: latão (2024)
-    (10, 14, "clip", dict(src="V2", t0=37.0, vf="V2", mem=1)),
-    (14, 18, "clip", dict(src="V2", t0=8.3, vf="V2", mem=1)),
-    (18, 22, "clip", dict(src="V1", t0=19.2, vf="V1", mem=1)),
-    (22, 26, "clip", dict(src="V1", t0=0.3, vf="V1", mem=1)),                      # A ALEGRIA DO PAI
-    (26, 30, "clip", dict(src="V1", t0=3.2, vf="V1", mem=1)),
-    (30, 34, "clip", dict(src="V1", t0=13.0, vf="V1", mem=1)),
-    (34, 40, "album", dict(f=5, z=(1.0, 1.08), pan=(0.0, -0.02), rot=-2.0)),       # A FAMÍLIA
-    (40, 44, "foto", dict(f=4, mode="cover", focus=(0.50, 0.42), z=(1.08, 1.0), pan=(0.02, 0.0))),   # OS CLIENTES
-    (44, 48, "foto", dict(f=1, mode="fit", z=(1.0, 1.08), pan=(0.03, 0.0))),
-    (48, 57, "wall", dict()),
-    (57, 60, "foto", dict(f=2, mode="fit", z=(1.0, 1.08), pan=(0.04, 0.0), mem=(1, 0))),             # A VIRADA latão -> inox
-    (60, 64, "clip", dict(src="HA", t0=0.6, vf="HA", mem=0)),                      # HOJE  ("The sun is the same…")
-    (64, 68, "clip", dict(src="HC", t0=21.2, vf="HC", mem=0)),
-    (68, 72, "clip", dict(src="HB", t0=18.4, vf="HB", mem=0)),
-    (72, 74, "split", dict(l=("V2", 2.5), r=("HB", 4.6))),
-    (74, 77, "clip", dict(src="HG", t0=3.0, vf="HG", mem=0)),
-    (77, 80, "clip", dict(src="HK", t0=6.6, vf="HK", mem=0)),
-    (80, 83, "clip", dict(src="HA", t0=8.0, vf="HA", mem=0)),
-    (83, 86, "clip", dict(src="HG", t0=15.6, vf="HG", mem=0)),
-    (86, 89, "clip", dict(src="HC", t0=13.0, vf="HCf", mem=0)),
-    (89, 92, "clip", dict(src="HB", t0=5.2, vf="HB", mem=0)),
-    (92, 98, "clip", dict(src="HD", t0=0.2, vf="HD", mem=0, push=0.06)),          # FECHAMENTO: o Fabrício hoje
-    (98, 102, "end", dict()),
+    (0, 4, "clip", dict(src="V2", t0=0.6, vf="V2", mem=1)),                        # ABRE DIRETO NA LATÃO (2024)
+    (4, 8, "clip", dict(src="V2", t0=37.0, vf="V2", mem=1)),
+    (8, 11, "foto", dict(f=9, mode="cover", focus=(0.5, 0.45), z=(1.0, 1.08), pan=(0.0, -0.02))),     # Fabrício na latão
+    (11, 14, "clip", dict(src="V2", t0=8.3, vf="V2", mem=1)),
+    (14, 17, "clip", dict(src="V1", t0=19.2, vf="V1", mem=1)),
+    (17, 21, "clip", dict(src="V1", t0=0.3, vf="V1", mem=1)),                      # A ALEGRIA DO PAI
+    (21, 25, "clip", dict(src="V4", t0=15.0, vf="V4", mem=0.7)),
+    (25, 29, "clip", dict(src="V1", t0=13.0, vf="V1", mem=1)),
+    (29, 32, "clip", dict(src="V3", t0=8.6, vf="V3", mem=0.7)),
+    (32, 35, "clip", dict(src="V4", t0=25.6, vf="V4", mem=0.7)),
+    (35, 38, "clip", dict(src="V1", t0=24.3, vf="V1", mem=1)),
+    (38, 44, "album", dict(f=5, z=(1.0, 1.08), pan=(0.0, -0.02), rot=-2.0)),       # A FAMÍLIA
+    (44, 48, "foto", dict(f=4, mode="cover", focus=(0.50, 0.42), z=(1.08, 1.0), pan=(0.02, 0.0))),   # OS CLIENTES
+    (48, 52, "foto", dict(f=8, mode="fit", z=(1.0, 1.08), pan=(-0.03, 0.0))),
+    (52, 55, "foto", dict(f=7, mode="cover", focus=(0.45, 0.5), z=(1.08, 1.0), pan=(0.02, 0.0))),
+    (55, 64, "wall", dict()),
+    (64, 68, "foto", dict(f=2, mode="fit", z=(1.0, 1.08), pan=(0.04, 0.0), mem=(1, 0))),             # A VIRADA latão -> inox
+    (68, 72, "clip", dict(src="HA", t0=0.6, vf="HA", mem=0)),                      # HOJE
+    (72, 76, "clip", dict(src="HC", t0=21.2, vf="HC", mem=0)),
+    (76, 79, "clip", dict(src="HB", t0=18.4, vf="HB", mem=0)),
+    (79, 82, "clip", dict(src="HG", t0=3.0, vf="HG", mem=0)),
+    (82, 85, "clip", dict(src="HK", t0=6.6, vf="HK", mem=0)),
+    (85, 88, "clip", dict(src="HE", t0=0.4, vf="HE", mem=0)),
+    (88, 91, "clip", dict(src="HA", t0=8.0, vf="HA", mem=0)),
+    (91, 94, "clip", dict(src="HC", t0=13.0, vf="HCf", mem=0)),
+    (94, 100, "clip", dict(src="HD", t0=0.2, vf="HD", mem=0, push=0.06)),         # FECHAMENTO: o Fabrício hoje
+    (100, 106, "end", dict()),                                                     # logo animado
 ]
-BURNS = [22, 60, 92]                                      # film-burn âmbar de 6 quadros nas trocas de capítulo
-TRANS_BEAT = 60; M0 = TRANS_BEAT * BEAT - CLIP_PHASE
+BURNS = [17, 68, 94]                                      # film-burn âmbar de 6 quadros nas trocas de capítulo
+TRANS_BEAT = 68; M0 = TRANS_BEAT * BEAT - CLIP_PHASE
 TOTAL_B = SEG[-1][1]; NF = fb(TOTAL_B)
 
 # ---- textos (verbatim do roteiro); palavras entre * ficam na cor da marca ----------------------
 TXT = [  # (texto, ano, b_in, b_out, tipo)
-    ("Hoje: *3 *unidades.", None, 0.25, 4.6, "wipe"),
-    ("Uma churrasqueira de *latão.", "2024.", 6.3, 13.5, "std"),
-    ("Mas tinha uma coisa que *ninguém tirava dele:", None, 22.25, 29.6, "std"),
-    ("a alegria.", None, 30.0, 34.0, "pop"),
-    ("A *família inteira na churrasqueira.", None, 34.25, 39.8, "std"),
-    ("Cada *cliente virou foto.", None, 40.15, 43.8, "std"),
-    ("E cada foto virou *amizade.", None, 44.1, 48.0, "std"),
-    ("*3 *unidades em Cuiabá.", "2026.", 60.25, 67.8, "std"),
-    ("Obrigado por fazer parte da *nossa *história.", None, 92.25, 97.8, "std"),
+    ("Uma churrasqueira de *latão.", "2024.", 0.15, 7.6, "std"),
+    ("Mas tinha uma coisa que *ninguém tirava dele:", None, 17.25, 24.6, "std"),
+    ("a alegria.", None, 25.0, 29.0, "pop"),
+    ("A *família inteira na churrasqueira.", None, 38.25, 43.8, "std"),
+    ("Cada *cliente virou foto.", None, 44.15, 47.8, "std"),
+    ("E cada foto virou *amizade.", None, 48.1, 52.0, "std"),
+    ("*3 *unidades em Cuiabá.", "2026.", 68.25, 75.8, "std"),
+    ("Obrigado por fazer parte da *nossa *história.", None, 94.25, 99.8, "std"),
 ]
-T11 = ("Jardim Aclimação · Tropical Ville · Florais", 61.0, 67.8)
+T11 = ("Jardim Aclimação · Tropical Ville · Florais", 69.0, 75.8)
 
 def eo(t): t = min(1, max(0, t)); return 1 - (1 - t) ** 3
 def expo(t): t = min(1, max(0, t)); return 1 - 2 ** (-10 * t) if t < 1 else 1.0
@@ -317,9 +318,9 @@ def crop34(img, focus=(0.5, 0.45)):
     else: cw, ch = iw, iw * 4 / 3
     cx = min(max(focus[0] * iw, cw / 2), iw - cw / 2); cy = min(max(focus[1] * ih, ch / 2), ih - ch / 2)
     return img[int(cy - ch / 2):int(cy + ch / 2), int(cx - cw / 2):int(cx + cw / 2)]
-WALL_SRC = [(photo(4), (0.5, 0.4)), (still("V2", 2.0), (0.5, 0.5)), (photo(5), (0.5, 0.5)), (still("V1", 1.0), (0.5, 0.4)),
-            (photo(3), (0.3, 0.4)), (still("V2", 38.0), (0.5, 0.5)), (photo(1), (0.68, 0.45)), (still("V1", 25.0), (0.5, 0.35)),
-            (photo(6), (0.55, 0.6)), (still("V2", 9.0), (0.5, 0.55)), (still("V1", 13.5), (0.5, 0.4)), (photo(2), (0.75, 0.45))]
+WALL_SRC = [(photo(4), (0.5, 0.4)), (photo(8), (0.45, 0.45)), (photo(5), (0.5, 0.5)), (photo(7), (0.4, 0.5)),
+            (photo(3), (0.3, 0.4)), (still("V2", 38.0), (0.5, 0.5)), (photo(1), (0.68, 0.45)), (photo(9), (0.5, 0.5)),
+            (photo(6), (0.55, 0.6)), (still("V1", 1.0), (0.5, 0.4)), (still("V4", 15.0), (0.5, 0.4)), (photo(2), (0.75, 0.45))]
 SLOTS = [(0, 0), (2, 1), (1, 3), (0, 2), (2, 3), (1, 0), (0, 3), (2, 0), (1, 1), (0, 1), (2, 2), (1, 2)]   # F2 por último, no meio
 wr = np.random.default_rng(11)
 WALL = []
@@ -382,13 +383,34 @@ for b0, b1, kind, p in SEG:
             fm = look(f.copy(), g, 1.0); f = look(f, g, 0.0); f[:, :540] = fm[:, :540]; f[:, 537:543] = 255
             mem = 0
         elif kind == "end":
-            f = np.zeros((H, W, 3), np.float32); f[:] = BRAND_BG
             if j == 0:
-                lg = Image.open(P_("assets/logo.png")).convert("RGBA"); lw = 600; lh = int(lg.height * lw / lg.width)
-                LG = np.array(lg.resize((lw, lh), Image.LANCZOS), np.float32)
-            a = eo(j / 8); x0, y0 = W // 2 - lw // 2, 860 - lh // 2
-            reg = f[y0:y0 + lh, x0:x0 + lw]; al = LG[..., 3:4] / 255 * a; reg[:] = reg * (1 - al) + LG[..., :3] * al
-            comp(f, ENDL, W / 2 - ENDL["w"] / 2, y0 + lh + 90, eo((j - 6) / 8))
+                lg = Image.open(P_("assets/logo_clean.png")).convert("RGBA"); lw = 640; lh = int(lg.height * lw / lg.width)
+                LGi = np.array(lg.resize((lw, lh), Image.LANCZOS), np.float32); LGA = LGi[..., 3] / 255; LGB = cv2.GaussianBlur(LGA, (0, 0), 6)
+                BGF = cv2.GaussianBlur(cv2.resize(last_frame, (W // 4, H // 4)), (0, 0), 6); BGF = cv2.resize(BGF, (W, H))
+                er = np.random.default_rng(5); EMB = [(er.uniform(80, W - 80), er.uniform(H * 0.55, H * 1.1), er.uniform(60, 220), er.uniform(2, 6), er.uniform(0, 6.28)) for _ in range(70)]
+                GLOW = np.exp(-(((xx - W / 2) / 420) ** 2 + ((yy - 860) / 420) ** 2))
+            tt = j / FPS
+            f = BGF * (0.32 - 0.12 * eo(tt / 2.0)) + np.float32(BRAND_BG) * 0.0
+            f += (GLOW * (0.35 + 0.08 * math.sin(tt * 7)) * eo(tt / 0.5))[..., None] * np.array([200, 60, 20], np.float32)
+            for ex, ey, sp, rr, ph in EMB:                                       # brasas subindo
+                y_ = ey - sp * tt * 2.2; x_ = ex + 18 * math.sin(tt * 3 + ph)
+                if 0 < y_ < H:
+                    fl = 0.5 + 0.5 * math.sin(tt * 12 + ph); r_ = int(rr)
+                    cv2.circle(f, (int(x_), int(y_)), r_, (255 * fl, 140 * fl, 40 * fl), -1, lineType=cv2.LINE_AA)
+            k = tt / 0.55; sc = 1.35 - 0.35 * backout(k, 1.4); al = min(1, tt / 0.18)
+            A_ = LGA * (1 - max(0, 1 - k)) + LGB * max(0, 1 - k)                  # entra desfocado -> nítido
+            w_, h_ = int(lw * sc), int(lh * sc)
+            rgbS = cv2.resize(LGi[..., :3], (w_, h_)); aS = cv2.resize(A_, (w_, h_)) * al
+            sw = (tt - 0.75) / 0.55                                              # brilho diagonal passando
+            if 0 < sw < 1:
+                gx = np.arange(w_)[None, :] + np.arange(h_)[:, None] * 0.5
+                band = np.exp(-((gx - (-0.3 + 1.6 * sw) * (w_ + h_ * 0.5)) / 40) ** 2) * 0.55
+                rgbS = rgbS + (255 - rgbS) * band[..., None]
+            x0, y0 = W // 2 - w_ // 2, 860 - h_ // 2
+            xa, ya, xb, yb = max(0, x0), max(0, y0), min(W, x0 + w_), min(H, y0 + h_)
+            sh_ = cv2.GaussianBlur(aS, (0, 0), 18) * 0.7
+            reg = f[ya:yb, xa:xb]; sl = (slice(ya - y0, yb - y0), slice(xa - x0, xb - x0))
+            reg *= (1 - sh_[sl])[..., None]; reg[:] = reg * (1 - aS[sl][..., None]) + rgbS[sl] * aS[sl][..., None]
         if kind != "split" and kind != "end":
             f = look(f, g, mem)
         if g in burn_frames or any(abs(g - c) <= 3 for c in burn_frames):
@@ -399,6 +421,7 @@ for b0, b1, kind, p in SEG:
         draw_texts(f, t)
         fo = (g - (NF - 12)) / 12                                             # fade pro preto 0,4 s
         if fo > 0: f *= 1 - min(1, fo)
+        if kind != "end": last_frame = f.copy()
         enc.stdin.write(np.clip(f, 0, 255).astype(np.uint8).tobytes())
 enc.stdin.close(); enc.wait()
 T = NF / FPS
@@ -416,13 +439,14 @@ noise = r2.standard_normal(m).astype(np.float32); spec = np.fft.rfft(noise); fr 
 spec *= np.exp(-((fr - 2500) / 2200) ** 2); swish = np.fft.irfft(spec, m)
 chirp = np.sin(2 * np.pi * np.cumsum(np.linspace(300, 2600, m)) / SR) * 0.35
 rw = (swish / np.abs(swish).max() + chirp) * np.sin(np.pi * tt / tt[-1]) ** 0.5
-sfx[a0:a1] += (rw / np.sqrt(np.mean(rw ** 2)) * db(-18) * 0.25)[:, None]
+# sem rebobinar nesta versão
+# sfx[a0:a1] += (rw / np.sqrt(np.mean(rw ** 2)) * db(-18) * 0.25)[:, None]
 # chiado da churrasqueira no bloco 1, −24 dB
-c0, c1 = int(6 * BEAT * SR), int(22 * BEAT * SR); ch = pcm(CHIADO, 11.6, (c1 - c0) / SR + 0.1)[: c1 - c0]
+c0, c1 = int(0 * BEAT * SR), int(17 * BEAT * SR); ch = pcm(CHIADO, 11.6, (c1 - c0) / SR + 0.1)[: c1 - c0]
 env = np.minimum(1, np.minimum(np.arange(c1 - c0), (c1 - c0) - np.arange(c1 - c0)) / (0.4 * SR))[:, None]
 sfx[c0:c1] += ch / np.sqrt(np.mean(ch ** 2)) * db(-24) * 0.25 * env
 # obturador nas 3 primeiras fotos de cliente, −22 dB
-for b in (40, 44, 48):
+for b in (44, 48, 52):
     s0 = int(b * BEAT * SR); cl = np.zeros(int(0.12 * SR), np.float32)
     for off, amp in ((0, 1.0), (int(0.055 * SR), 0.7)):
         burst = r2.standard_normal(int(0.012 * SR)) * np.exp(-np.arange(int(0.012 * SR)) / (0.003 * SR)); cl[off:off + len(burst)] += burst * amp
@@ -441,6 +465,6 @@ subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", P_("work/video.mp4"), "-i",
                 *enc_a, "-movflags", "+faststart", "-shortest", OUT], check=True)
 subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", P_("work/video.mp4"), "-i", P_("work/previa.wav"), "-map", "0:v", "-map", "1:a", *vcopy,
                 "-af", "loudnorm=I=-14:TP=-1.5:LRA=11", *enc_a, "-movflags", "+faststart", "-shortest", OUT_PREV], check=True)
-tc = (fb(72) + fb(74)) / 2 / FPS
+tc = (fb(25) + 6) / FPS
 subprocess.run(["ffmpeg", "-y", "-v", "error", "-ss", f"{tc:.3f}", "-i", P_("work/video.mp4"), "-frames:v", "1", COVER], check=True)
 print("ok", T, "s | M0 =", round(M0, 3))
