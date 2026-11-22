@@ -1,6 +1,6 @@
 # EDL — A nossa história
 
-Grade: 135.5 BPM (batida 0.4428 s). Música do começo ao fim: vídeo 0 s = 23.838 s da gravação de "Time" ("And you run…") (b32 "The sun is the same…" = 14.17 s, b112 "the song is over" = 49.59 s). Duração 53.57 s.
+Grade: 135.5 BPM (batida 0.4428 s). Música do começo ao fim: vídeo 0 s = 23.838 s da gravação de "Time" ("And you run…") (b32 "The sun is the same…" = 14.17 s, b112 "the song is over" = 49.59 s). Duração 54.47 s.
 
 | # | tempo (s) | batidas | tipo | fonte |
 |---|---|---|---|---|
@@ -16,17 +16,17 @@ Grade: 135.5 BPM (batida 0.4428 s). Música do começo ao fim: vídeo 0 s = 23.8
 | 10 | 16.40–19.03 | 37–43 | album | F5 |
 | 11 | 19.03–20.80 | 43–47 | foto | F4 |
 | 12 | 20.80–22.57 | 47–51 | foto | F8 |
-| 13 | 22.57–26.13 | 51–59 | wall | mural: F1–F6 + 6 quadros de V1/V2 |
-| 14 | 26.13–27.90 | 59–63 | foto | F2 |
-| 15 | 27.90–30.57 | 63–69 | clip | Jardim Aclimação (hoje) 0.60s |
-| 16 | 30.57–33.67 | 69–76 | clip | fachada 2 (IMG_1429) 0.20s |
-| 17 | 33.67–34.97 | 76–79 | clip | fachada 1 (vídeo novo) 0.00s |
-| 18 | 34.97–36.77 | 79–83 | clip | Tropical Ville (hoje) 18.40s |
-| 19 | 36.77–38.53 | 83–87 | clip | IMG_1663 (hoje, 4K) 0.40s |
-| 20 | 38.53–40.30 | 87–91 | clip | fachada 1 (vídeo novo) 18.40s |
-| 21 | 40.30–42.07 | 91–95 | clip | carnes no rolete (hoje) 3.00s |
-| 22 | 42.07–43.83 | 95–99 | clip | Florais (hoje) 16.80s |
-| 23 | 43.83–45.60 | 99–103 | clip | fachada 1 (vídeo novo) 21.00s |
-| 24 | 45.60–47.37 | 103–107 | clip | Jardim Aclimação (hoje) 8.00s |
-| 25 | 47.37–50.03 | 107–113 | clip | Fabrício hoje (rolete) 0.20s |
-| 26 | 50.03–53.57 | 113–121 | end | logo |
+| 13 | 22.57–24.37 | 51–55 | foto | F7 |
+| 14 | 24.37–27.90 | 55–63 | wall | mural: F1–F6 + 6 quadros de V1/V2 |
+| 15 | 27.90–29.67 | 63–67 | foto | F2 |
+| 16 | 29.67–32.33 | 67–73 | clip | Jardim Aclimação (hoje) 0.60s |
+| 17 | 32.33–35.43 | 73–80 | clip | fachada 2 (IMG_1429) 0.20s |
+| 18 | 35.43–36.77 | 80–83 | clip | fachada 1 (vídeo novo) 0.00s |
+| 19 | 36.77–38.53 | 83–87 | clip | Tropical Ville (hoje) 18.40s |
+| 20 | 38.53–40.30 | 87–91 | clip | IMG_1663 (hoje, 4K) 0.40s |
+| 21 | 40.30–42.07 | 91–95 | clip | costela na grade (hoje) 6.60s |
+| 22 | 42.07–43.83 | 95–99 | clip | carnes no rolete (hoje) 3.00s |
+| 23 | 43.83–45.60 | 99–103 | clip | Florais (hoje) 16.80s |
+| 24 | 45.60–47.37 | 103–107 | clip | carnes no rolete (hoje) 15.40s |
+| 25 | 47.37–49.17 | 107–111 | clip | Jardim Aclimação (hoje) 8.00s |
+| 26 | 49.17–54.47 | 111–123 | clip | Fabrício hoje (rolete) 0.20s |
