@@ -3,8 +3,8 @@
 import os, json, subprocess, re
 ROOT = os.path.dirname(os.path.abspath(__file__)); P = lambda p: os.path.join(ROOT, p)
 E = json.load(open(P("work/edl.json")))
-OUT = P("../../entrega/guerreiros-grill_historia_20261121.mp4")
-PREV = P("../../entrega/guerreiros-grill_historia_20261121_PREVIA-COM-MUSICA-NAO-POSTAR.mp4")
+OUT = P("../../entrega/guerreiros-grill_historia_20261122.mp4")
+PREV = P("../../entrega/guerreiros-grill_historia_20261122_PREVIA-COM-MUSICA-NAO-POSTAR.mp4")
 FPS = 30; beat = E["beat"]
 
 def probe(f):
@@ -17,7 +17,7 @@ def loud(f):
     return float(I), float(TP)
 
 NOMES = {"V1": "V1 (pai dançando, 2024)", "V2": "V2 (latão, 2024)", "HB": "Tropical Ville (hoje)", "HA": "Jardim Aclimação (hoje)",
-         "HC": "Florais (hoje)"}
+         "HC": "Florais (hoje)", "HD": "Fabrício hoje (rolete)", "HE": "IMG_1663 (hoje, 4K)", "HG": "carnes no rolete (hoje)", "HK": "costela na grade (hoje)"}
 rows = []
 for i, s in enumerate(E["segments"], 1):
     k = s["kind"]
@@ -30,7 +30,7 @@ for i, s in enumerate(E["segments"], 1):
     rows.append(f'| {i} | {s["ini"]:.2f}–{s["fim"]:.2f} | {s["b0"]}–{s["b1"]} | {k} | {src} |')
 open(P("edl.md"), "w").write("# EDL — A nossa história\n\n"
     f'Grade: {E["bpm"]} BPM (batida {beat:.4f} s). Trecho de referência de "Time" começa em {E["M0"]:.2f} s '
-    f'("The sun is the same…" na batida 68 = {68*beat:.2f} s). Duração {E["total"]:.2f} s.\n\n'
+    f'("The sun is the same…" na batida 60 = {60*beat:.2f} s). Duração {E["total"]:.2f} s.\n\n'
     "| # | tempo (s) | batidas | tipo | fonte |\n|---|---|---|---|---|\n" + "\n".join(rows) + "\n")
 
 p = probe(OUT); v = [s for s in p["streams"] if s.get("width")][0]; a = [s for s in p["streams"] if s.get("sample_rate")][0]
