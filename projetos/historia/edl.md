@@ -26,7 +26,7 @@ Grade: 135.5 BPM (batida 0.4428 s). Música do começo ao fim: vídeo 0 s = 23.8
 | 20 | 38.53–40.30 | 87–91 | clip | IMG_1663 (hoje, 4K) 0.40s |
 | 21 | 40.30–42.07 | 91–95 | clip | costela na grade (hoje) 6.60s |
 | 22 | 42.07–43.83 | 95–99 | clip | carnes no rolete (hoje) 3.00s |
-| 23 | 43.83–45.60 | 99–103 | clip | Florais (hoje) 16.80s |
-| 24 | 45.60–47.37 | 103–107 | clip | carnes no rolete (hoje) 15.40s |
+| 23 | 43.83–45.60 | 99–103 | clip | Florais (hoje) 18.15s |
+| 24 | 45.60–47.37 | 103–107 | clip | carnes no rolete (hoje) 15.55s |
 | 25 | 47.37–49.17 | 107–111 | clip | Jardim Aclimação (hoje) 8.00s |
 | 26 | 49.17–54.47 | 111–123 | clip | Fabrício hoje (rolete) 0.20s |
