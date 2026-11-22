@@ -72,22 +72,22 @@ SEG = [
     (37, 43, "album", dict(f=5, z=(1.0, 1.08), pan=(0.0, -0.02), rot=-2.0)),       # A FAMÍLIA
     (43, 47, "foto", dict(f=4, mode="cover", focus=(0.50, 0.42), z=(1.08, 1.0), pan=(0.02, 0.0))),   # OS CLIENTES
     (47, 51, "foto", dict(f=8, mode="fit", z=(1.0, 1.08), pan=(-0.03, 0.0))),
-    (51, 59, "wall", dict()),
-    (59, 63, "foto", dict(f=2, mode="fit", z=(1.0, 1.08), pan=(0.04, 0.0), mem=(1, 0))),             # A VIRADA latão -> inox
-    (63, 69, "clip", dict(src="HA", t0=0.6, vf="HA", mem=0)),                      # HOJE ("Every year is getting shorter")
-    (69, 76, "clip", dict(src="FA2", t0=0.2, vf="FA2", mem=0)),                    # fachada (tenda com as churrasqueiras)
-    (76, 79, "clip", dict(src="FA1", t0=0.0, vf="FA1", mem=0, inpaint="tudo")),       # fachada (vista de cima)
-    (79, 83, "clip", dict(src="HB", t0=18.4, vf="HB", mem=0)),
-    (83, 87, "clip", dict(src="HE", t0=0.4, vf="HE", mem=0)),
-    (87, 91, "clip", dict(src="FA1", t0=18.4, vf="FA1", mem=0, inpaint="tudo")),   # corte na tábua
-    (91, 95, "clip", dict(src="HG", t0=3.0, vf="HG", mem=0)),
-    (95, 99, "clip", dict(src="HC", t0=16.8, vf="HCf", mem=0)),
-    (99, 103, "clip", dict(src="FA1", t0=21.0, vf="FA1", mem=0)),                  # grelha cheia na unidade
-    (103, 107, "clip", dict(src="HA", t0=8.0, vf="HA", mem=0)),
-    (107, 113, "clip", dict(src="HD", t0=0.2, vf="HD", mem=0, push=0.06)),        # FECHAMENTO: o Fabrício hoje
-    (113, 121, "end", dict()),                                                     # logo animado ("the song is over")
+    (51, 55, "foto", dict(f=7, mode="cover", focus=(0.45, 0.5), z=(1.08, 1.0), pan=(0.02, 0.0))),   # Fabrício e cliente com a costela
+    (55, 63, "wall", dict()),
+    (63, 67, "foto", dict(f=2, mode="fit", z=(1.0, 1.08), pan=(0.04, 0.0), mem=(1, 0))),             # A VIRADA latão -> inox
+    (67, 73, "clip", dict(src="HA", t0=0.6, vf="HA", mem=0)),                      # HOJE: 2026, 3 unidades
+    (73, 80, "clip", dict(src="FA2", t0=0.2, vf="FA2", mem=0)),                    # fachada (tenda com as churrasqueiras)
+    (80, 83, "clip", dict(src="FA1", t0=0.0, vf="FA1", mem=0, inpaint="tudo")),   # fachada (vista de cima)
+    (83, 87, "clip", dict(src="HB", t0=18.4, vf="HB", mem=0)),
+    (87, 91, "clip", dict(src="HE", t0=0.4, vf="HE", mem=0)),
+    (91, 95, "clip", dict(src="HK", t0=6.6, vf="HK", mem=0)),
+    (95, 99, "clip", dict(src="HG", t0=3.0, vf="HG", mem=0)),
+    (99, 103, "clip", dict(src="HC", t0=16.8, vf="HCf", mem=0)),
+    (103, 107, "clip", dict(src="HG", t0=15.4, vf="HG", mem=0)),
+    (107, 111, "clip", dict(src="HA", t0=8.0, vf="HA", mem=0)),
+    (111, 123, "clip", dict(src="HD", t0=0.2, vf="HD", mem=0, push=0.07, fps_src=60)),   # FECHAMENTO em câmera lenta, sem logo
 ]
-BURNS = [17, 63, 107]                                     # film-burn âmbar de 6 quadros nas trocas de capítulo
+BURNS = [17, 67, 111]                                     # film-burn âmbar de 6 quadros nas trocas de capítulo
 TRANS_BEAT = 1; M0 = TRANS_BEAT * BEAT - CLIP_PHASE
 TOTAL_B = SEG[-1][1]; NF = fb(TOTAL_B)
 
@@ -99,10 +99,10 @@ TXT = [  # (texto, ano, b_in, b_out, tipo)
     ("A *família inteira na churrasqueira.", None, 37.25, 42.8, "std"),
     ("Cada *cliente virou foto.", None, 43.15, 46.8, "std"),
     ("E cada foto virou *amizade.", None, 47.1, 51.0, "std"),
-    ("*3 *unidades em Cuiabá.", "2026.", 63.25, 71.8, "std"),
-    ("Obrigado por fazer parte da *nossa *história.", None, 107.25, 112.8, "std"),
+    ("*3 *unidades em Cuiabá.", "2026.", 67.25, 75.8, "std"),
+    ("Obrigado por fazer parte da *nossa *história.", None, 111.25, 119.5, "std"),
 ]
-T11 = ("Jardim Aclimação · Tropical Ville · Florais", 64.0, 71.8)
+T11 = ("Jardim Aclimação · Tropical Ville · Florais", 68.0, 75.8)
 
 def eo(t): t = min(1, max(0, t)); return 1 - (1 - t) ** 3
 def expo(t): t = min(1, max(0, t)); return 1 - 2 ** (-10 * t) if t < 1 else 1.0
@@ -252,9 +252,9 @@ def burn(f, d):
     f[:] = 255 - (255 - f) * (1 - g[..., None] * amber / 255)                 # screen
 
 # ---- fontes de imagem -------------------------------------------------------------------------
-def decode(src, t0, n, vf, step=1):
+def decode(src, t0, n, vf, step=1, fps=FPS):
     raw = subprocess.run(["ffmpeg", "-v", "error", "-ss", f"{t0:.3f}", "-i", S[src], "-frames:v", str(n * step), "-vf",
-                          f"fps={FPS},{VF[vf]},format=rgb24", "-an", "-f", "rawvideo", "-"], capture_output=True, check=True).stdout
+                          f"fps={fps},{VF[vf]},format=rgb24", "-an", "-f", "rawvideo", "-"], capture_output=True, check=True).stdout
     fr = list(np.frombuffer(raw, np.uint8).reshape(-1, H, W, 3))
     while len(fr) < n * step: fr.append(fr[-1])
     return fr[: n * step]
@@ -358,7 +358,7 @@ for b0, b1, kind, p in SEG:
     edl.append(dict(b0=b0, b1=b1, ini=round(F0 / FPS, 3), fim=round(F1 / FPS, 3), kind=kind, **{("src_" + k if k in ("t0", "t1") else k): v for k, v in p.items() if k != "vf"}))
     frames = None
     if kind == "clip":
-        frames = decode(p["src"], p["t0"], n, p["vf"])
+        frames = decode(p["src"], p["t0"], n, p["vf"], fps=p.get("fps_src", FPS))   # fps_src=60 -> câmera lenta 0,5x real
         if p.get("inpaint"):                                     # apaga o selo @guerreirosgrill (fixo na tela) do vídeo
             MK = np.zeros((H, W), np.uint8)
             cv2.circle(MK, (968, 504), 40, 255, -1)
@@ -432,7 +432,7 @@ for b0, b1, kind, p in SEG:
         if kind == "split":
             comp(f, LAB["2024"], 270 - LAB["2024"]["w"] / 2, 300 + 30, 1.0); comp(f, LAB["2026"], 810 - LAB["2026"]["w"] / 2, 300 + 30, 1.0)
         draw_texts(f, t)
-        fo = (g - (NF - 12)) / 12                                             # fade pro preto 0,4 s
+        fo = (g - (NF - 36)) / 36                                             # fade pro preto 1,2 s (final lento)
         if fo > 0: f *= 1 - min(1, fo)
         if kind != "end": last_frame = f.copy()
         enc.stdin.write(np.clip(f, 0, 255).astype(np.uint8).tobytes())
@@ -458,13 +458,18 @@ rw = (swish / np.abs(swish).max() + chirp) * np.sin(np.pi * tt / tt[-1]) ** 0.5
 c0, c1 = int(0 * BEAT * SR), int(17 * BEAT * SR); ch = pcm(CHIADO, 11.6, (c1 - c0) / SR + 0.1)[: c1 - c0]
 env = np.minimum(1, np.minimum(np.arange(c1 - c0), (c1 - c0) - np.arange(c1 - c0)) / (0.4 * SR))[:, None]
 sfx[c0:c1] += ch / np.sqrt(np.mean(ch ** 2)) * db(-24) * 0.25 * env
-# obturador nas 3 primeiras fotos de cliente, −22 dB
-for b in (43, 47, 51):
-    s0 = int(b * BEAT * SR); cl = np.zeros(int(0.12 * SR), np.float32)
-    for off, amp in ((0, 1.0), (int(0.055 * SR), 0.7)):
-        burst = r2.standard_normal(int(0.012 * SR)) * np.exp(-np.arange(int(0.012 * SR)) / (0.003 * SR)); cl[off:off + len(burst)] += burst * amp
-    sfx[s0:s0 + len(cl)] += (cl * db(-22) * 0.5)[:, None]
-fo = int(0.4 * SR); sfx[-fo:] *= np.linspace(1, 0, fo)[:, None]
+# som de foto (obturador) em todas as fotos: clique do espelho + cortina + "chk" mecânico
+def shutter(amp):
+    m = int(0.16 * SR); cl = np.zeros(m, np.float32); t_ = np.arange(m) / SR
+    for off, a_, dec, f0 in ((0.000, 1.0, 0.004, 3200), (0.018, 0.55, 0.006, 1800), (0.075, 0.8, 0.005, 2600), (0.092, 0.35, 0.010, 900)):
+        o = int(off * SR); k = np.arange(m - o) / SR
+        cl[o:] += a_ * np.exp(-k / dec) * (r2.standard_normal(m - o) * 0.7 + np.sin(2 * np.pi * f0 * k) * 0.6)
+    return cl / np.abs(cl).max() * amp
+FOTO_BEATS = [5, 37, 43, 47, 51, 63] + [55 + 0.5 * i for i in range(12)]          # fotos inteiras + cada foto do mural
+for b in FOTO_BEATS:
+    s0 = int(b * BEAT * SR); cl = shutter(0.45 if b == int(b) and b not in range(55, 61) else 0.28)
+    e = min(N, s0 + len(cl)); sfx[s0:e] += cl[: e - s0, None]
+fo = int(1.2 * SR); sfx[-fo:] *= np.linspace(1, 0, fo)[:, None]
 wavfile.write(P_("work/sfx.wav"), SR, (np.clip(sfx, -1, 1) * 32767).astype(np.int16))
 # versão COM MÚSICA: "Time" do começo ao fim, já no talo (gravação enviada pelo cliente), + chiado e cliques por baixo
 mus = pcm(MUS_FILE, MUS_S0, T + 0.2)[:N]
