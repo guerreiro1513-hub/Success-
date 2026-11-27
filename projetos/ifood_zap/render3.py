@@ -20,7 +20,8 @@ GRADE = "eq=contrast=1.06:saturation=1.0"
 CROP = {"ROL": "crop=iw*0.75:ih*0.74:iw*0.125:0,"}          # tira a legenda queimada do vídeo do rolete
 
 # ---- falas (inteiras) e transcrição ------------------------------------------------------------
-INTRO = 0.5
+INTRO = 0.0
+LAG = 0.12                                             # legenda entra no instante em que a palavra soa
 CL = [("HOOK", 0.00, 4.05), ("VO", 0.25, 8.40), ("L1", 0.55, 8.56), ("L2", 0.00, 7.60)]   # L1 e L2: o mesmo take, emendados
 T0 = {}; t = INTRO
 for k, a, b in CL: T0[k] = t; t += b - a
@@ -40,7 +41,7 @@ def word_times(src, a, b, text):
     """distribui as palavras pelo tempo em que há voz (pula os silêncios), proporcional às sílabas."""
     x = pcm(SRC[src], a, b - a, sr=16000); bb = sosfilt(butter(4, [250, 3500], btype="band", fs=16000, output="sos"), x)
     hop = 160; e = np.array([10 * np.log10(np.mean(bb[i:i + 320] ** 2) + 1e-12) for i in range(0, len(bb) - 320, hop)])
-    e = np.convolve(e, np.ones(5) / 5, "same"); thr = np.median(e) + 3.5; v = (e > thr).astype(float)
+    e = np.convolve(e, np.ones(5) / 5, "same"); thr = np.median(e) + 6.0; v = (e > thr).astype(float)
     cum = np.concatenate([[0], np.cumsum(v)]); tot_v = cum[-1]
     ws = text.split(); ss = [sil(w) for w in ws]; tot = sum(ss); out = []; acc = 0
     for w, s in zip(ws, ss):
@@ -61,7 +62,7 @@ for k, a, b in CL:
     for w, tw in (hook_times() if k == "HOOK" else word_times(k, a, b, TXT[k])):
         hl = w.startswith("*"); w = w.lstrip("*")
         if grp == 3 or (WORDS and grp and WORDS[-1][0].endswith((",", ".", "!", ":"))): gid += 1; grp = 0
-        WORDS.append((w, hl, T0[k] + tw, gid)); grp += 1
+        WORDS.append((w, hl, T0[k] + tw + LAG, gid)); grp += 1
     gid += 1
 GEND = {}
 for i, (w, hl, tt, g) in enumerate(WORDS):
@@ -148,7 +149,7 @@ def zoom(f, z, cy=0.42):
 fi = lambda t: int(round(t * FPS))
 
 # plano de quadros: (t0, t1, fonte, início, velocidade, zooms)
-PLAN = [(0.00, 0.17, "FER", 0.5, 1.0), (0.17, 0.34, "ROL", 0.1, 1.0), (0.34, INTRO, "GUAR", 1.8, 1.0)]   # flashes de abertura
+PLAN = []
 PLAN.append((T0["HOOK"], T0["VO"], "HOOK", 0.0, 1.0))
 for a, b, src, st, avail in BROLL:
     PLAN.append((a, b, src, st, max(0.6, min(1.0, avail / (b - a)))))
@@ -219,15 +220,14 @@ def add(name, t, gain, maxlen=None):
     m = max(0, min(len(x), N - p0)); fx[p0:p0 + m] += x[:m] * gain
 tt = np.arange(int(1.0 * SR)) / SR; BOOM = (np.sin(2 * np.pi * (48 + 50 * np.exp(-tt * 14)) * tt) * np.exp(-tt * 3.8)).astype(np.float32)
 def boom(t, gain): p0 = int(t * SR); m = min(len(BOOM), N - p0); fx[p0:p0 + m] += BOOM[:m] * gain
-for x_ in (0.0, 0.17, 0.34): add("whooshfast", x_ - 0.05, 0.30, 0.3)              # flashes da abertura
-boom(INTRO, 0.55)
+boom(0.0, 0.45)
 for pt, pz, pd in PUNCH: boom(pt, 0.30); add("lens", pt, 0.22)                   # impacto em cada zoom
-for c in [p[0] for p in PLAN[4:]] + [END0]:
+for c in [p[0] for p in PLAN[1:]] + [END0]:
     if abs(c - T0["L2"]) > 0.01: add("whooshfast", c - 0.12, 0.35)               # whoosh nos cortes
 for w, hl, ti, _ in WORDS:
     if hl: add("lens", ti, 0.07, 0.07)                                             # clique leve nas palavras de destaque
 add("riser", END0 - 4.0, 0.22); boom(END0, 0.5); add("film", END0, 0.15, 0.5)
-mix = voz + mus * env + fx
+mix = voz + fx                                           # sem trilha: era ela o 'som estranho cantando atrás'
 fo = int(0.4 * SR); mix[-fo:] *= np.linspace(1, 0, fo)
 wavfile.write(P("work/audio3.wav"), SR, (np.clip(mix, -1, 1) * 32767).astype(np.int16))
 subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", P("work/video3.mp4"), "-i", P("work/audio3.wav"), "-map", "0:v", "-map", "1:a",
