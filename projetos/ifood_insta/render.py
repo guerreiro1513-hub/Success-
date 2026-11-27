@@ -13,7 +13,8 @@ W, H, FPS, SR = 1080, 1920, 30, 48000
 SRC = dict(HOOK=P("source/HOOK.mov"), VO=P("source/VO.mov"), A=P("work/A_join.mov"), CTA=P("source/CTA.mov"),
            GUAR=P("source/GUAR.mov"), ROL=P("source/ROL.mov"), FER=P("source/FER.mov"))
 PHONE_REC = P("source/IFOOD_REC.mp4")                       # gravação de tela do iFood (quando chegar)
-OUT = P("../../entrega/guerreirosgrill_ifood_reels_v1.mp4")
+BLUR = os.environ.get("BG_BLUR") == "1"
+OUT = P("../../entrega/guerreirosgrill_ifood_reels_v3" + ("_desfoque" if BLUR else "") + ".mp4")
 GOLD = np.array([232, 178, 58], np.float32); GOLD2 = np.array([255, 214, 120], np.float32); WHITE = np.array([255, 255, 255], np.float32)
 BGc = np.array([20, 16, 12], np.float32)
 F_BIG = "/usr/share/fonts/opentype/inter/Inter-ExtraBold.otf"; F_IT = P("../tour3/assets/fonts/Montserrat-Italic.ttf")
@@ -229,6 +230,18 @@ def hblur(f, k):
     if k < 3: return f
     if k not in KH: KH[k] = np.full((1, k), 1 / k, np.float32)
     return cv2.filter2D(f, -1, KH[k], borderType=cv2.BORDER_REFLECT)
+_SEG = None; _MPREV = [None]
+def portrait(f, g):
+    global _SEG
+    if _SEG is None:
+        import mediapipe as mp; _SEG = mp.solutions.selfie_segmentation.SelfieSegmentation(model_selection=0)
+    small = cv2.resize(f.astype(np.uint8), (432, 768), interpolation=cv2.INTER_AREA)
+    m = _SEG.process(small).segmentation_mask.astype(np.float32)
+    if _MPREV[0] is not None and _MPREV[0].shape == m.shape: m = 0.55 * m + 0.45 * _MPREV[0]   # suaviza entre quadros (sem tremer)
+    _MPREV[0] = m
+    m = cv2.resize(np.clip((m - 0.3) / 0.4, 0, 1), (W, H)); m = cv2.GaussianBlur(m, (0, 0), 7)[..., None]
+    bl = cv2.resize(cv2.GaussianBlur(cv2.resize(f, (W // 2, H // 2)), (0, 0), 4.5), (W, H))
+    return f * m + bl * (1 - m)
 def zoom(f, z, cy=0.40):
     return f if abs(z - 1) < 1e-3 else cv2.warpAffine(f, cv2.getRotationMatrix2D((W / 2, H * cy), 0, z), (W, H), borderMode=cv2.BORDER_REFLECT)
 fi = lambda t: int(round(t * FPS))
@@ -238,11 +251,12 @@ VO0, VO1 = T0["VO"], T0["A"]
 PLAN = [(T0["HOOK"], T0["VO"], "HOOK", 0.0, 1.0),
         (VO0, tc, "ROL", 2.55, max(0.6, min(1.0, 2.0 / (tc - VO0)))),                 # "Vamos iniciar no iFood…"
         (tc, tf, "FER", 0.0, max(0.6, min(1.0, 1.88 / (tf - tc)))),                   # "a nossa costela"
-        (tf, VO1, "ROL", 0.0, max(0.6, min(1.0, 2.4 / (VO1 - tf)))),                  # "frango no rolete e todas as guarnições"
-        (T0["A"], T0["CTA"], "A", 0.0, 1.0), (T0["CTA"], CTA_END, "CTA", 0.30, 1.0)]
-ENTRIES = [T0["A"], T0["CTA"]]                                          # cada vez que ele volta: entrada com cara de gancho
+        (tf, tg - 0.35, "ROL", 0.0, max(0.6, min(1.0, 2.4 / (tg - 0.35 - tf)))),      # "frango no rolete"
+        (tg - 0.35, T0["A"] + 1.0, "GUAR", 0.0, 1.0),                                 # "e todas as guarnições" (segue sob "Só que isso,")
+        (T0["A"] + 1.0, T0["CTA"], "A", 1.0, 1.0), (T0["CTA"], CTA_END, "CTA", 0.30, 1.0)]
+ENTRIES = [T0["A"] + 1.0, T0["CTA"]]                                          # cada vez que ele volta: entrada com cara de gancho
 PUNCH = [(0.0, 1.06, 0.30), (wt("HOOK", "novidade"), 1.10, 0.2), (wt("HOOK", "ifood"), 1.14, 0.2),
-         (T0["A"], 1.14, 0.25), (wt("A", "início"), 1.10, 0.2), (STACKS[[s for s in SID_LIST if STACKS[s]["words"][0]["w"].lower() == "em"][0]]["t0"], 1.12, 0.2),
+         (T0["A"] + 1.0, 1.14, 0.25), (wt("A", "início"), 1.10, 0.2), (STACKS[[s for s in SID_LIST if STACKS[s]["words"][0]["w"].lower() == "em"][0]]["t0"], 1.12, 0.2),
          (T0["CTA"], 1.14, 0.25), (wt("CTA", "ifood"), 1.12, 0.2)]
 PUNCH = sorted(PUNCH)
 CUTS = [fi(p[0]) for p in PLAN[1:]] + ([fi(CTA_END)] if True else [])
@@ -257,6 +271,7 @@ for t0, t1, src, st, spd in PLAN:
     for j, fr in enumerate(frs):
         t = g / FPS; f = fr.astype(np.float32)
         if src in ("HOOK", "A", "CTA"):
+            if BLUR: f = portrait(f, g)
             z = 1.0
             for pt, pz, pd in PUNCH:
                 if t0 - 0.01 <= pt < t1 and t >= pt:
@@ -290,7 +305,26 @@ def phone_frame(screen, ang_y, ang_x, scale, cx, cy, al, bg):
     warped = cv2.warpPerspective(ph, M, (W, H)); wm = cv2.warpPerspective(m.astype(np.float32) / 255, M, (W, H)) * al
     shadow = cv2.GaussianBlur(np.roll(wm, 40, axis=0), (0, 0), 40) * 0.6
     out = bg * (1 - shadow[..., None]); return out * (1 - wm[..., None]) + warped * wm[..., None]
-NOVO = mask("NOVO NO IFOOD", F_BIG, 96, None, -2); HORA = mask("LINK ABAIXO", F_BIG, 64, None, 2)
+NOVO = mask("NOVO NO IFOOD", F_BIG, 96, None, -2); HORA = None
+def link_pill():
+    from PIL import ImageFilter
+    pw, ph_ = 640, 132; img = Image.new("RGBA", (pw + 120, ph_ + 120), (0, 0, 0, 0)); d = ImageDraw.Draw(img)
+    glow = Image.new("RGBA", img.size, (0, 0, 0, 0)); ImageDraw.Draw(glow).rounded_rectangle((60, 60, 60 + pw, 60 + ph_), 66, fill=(255, 196, 70, 200))
+    img = Image.alpha_composite(img, glow.filter(ImageFilter.GaussianBlur(26)))
+    grad = Image.new("RGBA", (pw, ph_)); gp = grad.load()
+    for yy in range(ph_):
+        c = tuple(int(a * (1 - yy / ph_) + b * (yy / ph_)) for a, b in ((255, 222, 128), (226, 160, 40), (60, 40, 10))) + (255,)
+        for xx in range(pw): gp[xx, yy] = c
+    m = Image.new("L", (pw, ph_), 0); ImageDraw.Draw(m).rounded_rectangle((0, 0, pw - 1, ph_ - 1), 66, fill=255)
+    img.paste(grad, (60, 60), m); d = ImageDraw.Draw(img)
+    d.rounded_rectangle((64, 64, 56 + pw, 64 + ph_ * 0.42), 60, fill=(255, 255, 255, 46))
+    f_ = ImageFont.truetype(F_BIG, 66); txt = "LINK ABAIXO"; tw_ = f_.getlength(txt); x0 = 60 + (pw - tw_ - 70) / 2
+    d.text((x0, 60 + ph_ / 2 - 40), txt, font=f_, fill=(28, 18, 6, 255))
+    ax = x0 + tw_ + 30; ay = 60 + ph_ / 2
+    d.line((ax + 20, ay - 26, ax + 20, ay + 18), fill=(28, 18, 6, 255), width=10)
+    d.polygon([(ax, ay + 4), (ax + 40, ay + 4), (ax + 20, ay + 32)], fill=(28, 18, 6, 255))
+    return np.array(img, np.float32)
+LINKP = link_pill()
 if HAS_PHONE:
     n = fi(END0) - fi(CTA_END); rec = decode(None, 0.0, n, 1.0, path=PHONE_REC) if False else None
     raw = subprocess.run(["ffmpeg", "-v", "error", "-i", PHONE_REC, "-frames:v", str(n), "-vf", f"fps={FPS},scale=1180:2556,format=rgb24", "-an", "-f", "rawvideo", "-"],
@@ -301,20 +335,16 @@ if HAS_PHONE:
     for j in range(n):
         t = g / FPS; k = j / FPS
         bg = cv2.GaussianBlur(bgv[j].astype(np.float32), (0, 0), 6 + 6 * eo(k / 0.5)) * (1 - 0.35 * eo(k / 0.5))
-        e = back(k / 0.7, 1.3); ang = 40 * (1 - e) - 13 * math.sin(k * 1.2); sc = 0.50 + 0.32 * e
-        f = phone_frame(rec[j].astype(np.float32), ang, 6 * (1 - e) + 3 * math.sin(k * 0.8), sc, W / 2, 1010 + 300 * (1 - eo(k / 0.6)), min(1, k / 0.2), bg)
+        e = back(k / 0.7, 1.3); ang = 40 * (1 - e) - 13 * math.sin(k * 1.2); sc = 0.46 + 0.28 * e
+        f = phone_frame(rec[j].astype(np.float32), ang, 6 * (1 - e) + 3 * math.sin(k * 0.8), sc, W / 2, 905 + 300 * (1 - eo(k / 0.6)), min(1, k / 0.2), bg)
         if j < 3: f = f * 0.4 + 255 * 0.6 * (1 - j / 3)
         kb = (k - 0.45) / 0.16                                          # selo verdadeiro: a loja é nova no iFood
         if kb > 0:
             sc_ = 1.4 - 0.4 * back(kb); put(f, NOVO, W / 2 - NOVO['w'] * sc_ / 2, 210 - NOVO['h'] * sc_ / 2, min(1, kb * 2), sc_, gold=True, chroma=20 * (1 - eo(kb)))
-        kh = (k - 0.8) / 0.16
+        kh = (k - 0.8) / 0.18
         if kh > 0:
-            yy0 = 1640 + int(8 * math.sin(k * 7)); sp_ = 1.25 - 0.25 * back(kh); hw = int((HORA['w'] / 2 - 10) * sp_)
-            cv2.rectangle(f, (W // 2 - hw, int(yy0 - 58 * sp_)), (W // 2 + hw, int(yy0 + 58 * sp_)), (232, 30, 50), -1)
-            put(f, HORA, W / 2 - HORA['w'] * sp_ / 2, yy0 - HORA['h'] * sp_ / 2, min(1, kh * 2), sp_, white_flat=True)
-            for ii in range(2):                                         # setas pulsando pra baixo
-                ay = int(yy0 + 95 + ii * 42 + 10 * math.sin(k * 7 - ii)); al_ = min(1, kh) * (0.9 - 0.35 * ii)
-                tri = np.array([[W // 2 - 34, ay], [W // 2 + 34, ay], [W // 2, ay + 30]], np.int32); ov = f.copy(); cv2.fillPoly(ov, [tri], (255, 255, 255)); f[:] = f * (1 - al_) + ov * al_
+            sp_ = (1.3 - 0.3 * back(kh)) * (1 + 0.03 * math.sin(k * 6)); yy0 = 1490 + int(10 * abs(math.sin(k * 3.2)))
+            Lp = cv2.resize(LINKP, None, fx=sp_, fy=sp_); paste(f, Lp, int(W / 2 - Lp.shape[1] / 2), int(yy0 - Lp.shape[0] / 2), min(1, kh * 2))
         enc.stdin.write(np.clip(f, 0, 255).astype(np.uint8).tobytes()); g += 1; last = f.copy()
 # cartão final
 END_T = [mask("Peça agora pelo iFood", F_BIG, 70, None, -1), mask("LINK ABAIXO", F_BIG, 130, None, -3)]
