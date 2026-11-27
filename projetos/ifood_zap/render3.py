@@ -231,7 +231,15 @@ for c in [p[0] for p in PLAN[1:]] + [END0]:
 for w, hl, ti, _ in WORDS:
     if hl: add("lens", ti, 0.07, 0.07)                                             # clique leve nas palavras de destaque
 add("riser", END0 - 4.0, 0.22); boom(END0, 0.5); add("film", END0, 0.15, 0.5)
-mix = voz + fx                                           # sem trilha: era ela o 'som estranho cantando atrás'
+# música gaúcha enviada pelo cliente: trecho cheio 7,2–22,0 s em loop com cruzamento, por baixo da voz
+seg = pcm(P("source/MUSICA_GAUCHA.mp4"), 7.2, 14.8); xf = int(0.8 * SR); mus = np.zeros(N, np.float32); pos = 0
+while pos < N:
+    x = seg.copy(); x[:xf] *= np.linspace(0, 1, xf) if pos else 1; x[-xf:] *= np.linspace(1, 0, xf)
+    m = min(len(x), N - pos); mus[pos:pos + m] += x[:m]; pos += len(x) - xf
+mus = mus / rms(mus) * 0.25
+env = np.full(N, 10 ** (-17 / 20)); env[int(END0 * SR):] = 10 ** (-9 / 20); env = np.convolve(env, np.ones(int(0.3 * SR)) / int(0.3 * SR), "same")
+fi_ = int(0.3 * SR); env[:fi_] *= np.linspace(0, 1, fi_)
+mix = voz + mus * env + fx
 fo = int(0.4 * SR); mix[-fo:] *= np.linspace(1, 0, fo)
 wavfile.write(P("work/audio3.wav"), SR, (np.clip(mix, -1, 1) * 32767).astype(np.int16))
 subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", P("work/video3.mp4"), "-i", P("work/audio3.wav"), "-map", "0:v", "-map", "1:a",
