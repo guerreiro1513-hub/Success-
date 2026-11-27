@@ -294,7 +294,7 @@ for t0, t1, src, st, spd in PLAN:
         last = f.copy(); enc.stdin.write(np.clip(f, 0, 255).astype(np.uint8).tobytes()); g += 1
 
 # ---- celular 3D com a tela do iFood (se a gravação existir) ------------------------------------
-def phone_frame(screen, ang_y, ang_x, scale, cx, cy, al, bg):
+def phone_frame(screen, ang_y, ang_x, scale, cx, cy, al, bg, ang_z=0.0):
     """tela num celular com bordas arredondadas, girado em 3D (perspectiva), com sombra."""
     sh, sw = 1500, int(1500 * 1180 / 2556); scr = cv2.resize(screen, (sw, sh), interpolation=cv2.INTER_AREA)
     bez = 26; ph = np.zeros((sh + 2 * bez, sw + 2 * bez, 3), np.float32); ph[:] = (18, 18, 20); ph[bez:-bez, bez:-bez] = scr
@@ -304,7 +304,8 @@ def phone_frame(screen, ang_y, ang_x, scale, cx, cy, al, bg):
     hh, ww = ph.shape[:2]; pts = np.float32([[-ww / 2, -hh / 2, 0], [ww / 2, -hh / 2, 0], [ww / 2, hh / 2, 0], [-ww / 2, hh / 2, 0]]) * scale
     ay, ax = math.radians(ang_y), math.radians(ang_x)
     Ry = np.array([[math.cos(ay), 0, math.sin(ay)], [0, 1, 0], [-math.sin(ay), 0, math.cos(ay)]]); Rx = np.array([[1, 0, 0], [0, math.cos(ax), -math.sin(ax)], [0, math.sin(ax), math.cos(ax)]])
-    p3 = pts @ (Rx @ Ry).T; foc = 2200.0; p2 = np.float32([[cx + foc * p[0] / (foc + p[2]), cy + foc * p[1] / (foc + p[2])] for p in p3])
+    az = math.radians(ang_z); Rz = np.array([[math.cos(az), -math.sin(az), 0], [math.sin(az), math.cos(az), 0], [0, 0, 1]])
+    p3 = pts @ (Rz @ Rx @ Ry).T; foc = 2200.0; p2 = np.float32([[cx + foc * p[0] / (foc + p[2]), cy + foc * p[1] / (foc + p[2])] for p in p3])
     M = cv2.getPerspectiveTransform(np.float32([[0, 0], [ww, 0], [ww, hh], [0, hh]]), p2)
     warped = cv2.warpPerspective(ph, M, (W, H)); wm = cv2.warpPerspective(m.astype(np.float32) / 255, M, (W, H)) * al
     shadow = cv2.GaussianBlur(np.roll(wm, 40, axis=0), (0, 0), 40) * 0.6
@@ -340,15 +341,15 @@ if HAS_PHONE:
     for j in range(n):
         t = g / FPS; k = j / FPS
         bg = cv2.GaussianBlur(bgv[j].astype(np.float32), (0, 0), 6 + 6 * eo(k / 0.5)) * (1 - 0.35 * eo(k / 0.5))
-        e = back(k / 0.7, 1.3); ang = 40 * (1 - e) - 13 * math.sin(k * 1.2); sc = 0.43 + 0.25 * e
-        f = phone_frame(rec[j].astype(np.float32), ang, 6 * (1 - e) + 3 * math.sin(k * 0.8), sc, W / 2, 860 + 300 * (1 - eo(k / 0.6)), min(1, k / 0.2), bg)
+        e = back(k / 0.7, 1.3); ang = -55 * (1 - e) - 26 - 4 * math.sin(k * 1.1); sc = 0.44 + 0.20 * e
+        f = phone_frame(rec[j].astype(np.float32), ang, 8 * (1 - e) + 5 + 2 * math.sin(k * 0.8), sc, W * 0.36 - 160 * (1 - eo(k / 0.6)), 960 + 250 * (1 - eo(k / 0.6)), min(1, k / 0.2), bg, ang_z=11 * e + 3 * math.sin(k * 0.9))
         if j < 3: f = f * 0.4 + 255 * 0.6 * (1 - j / 3)
         kb = (k - 0.45) / 0.16                                          # selo verdadeiro: a loja é nova no iFood
         if kb > 0 and False:
             sc_ = 1.4 - 0.4 * back(kb); put(f, NOVO, W / 2 - NOVO['w'] * sc_ / 2, 210 - NOVO['h'] * sc_ / 2, min(1, kb * 2), sc_, gold=True, chroma=20 * (1 - eo(kb)))
         kh = (k - 0.8) / 0.18
         if kh > 0:
-            sp_ = (1.3 - 0.3 * back(kh)) * (1 + 0.03 * math.sin(k * 6)); yy0 = 1530 + int(10 * abs(math.sin(k * 3.2)))
+            sp_ = (1.3 - 0.3 * back(kh)) * (1 + 0.03 * math.sin(k * 6)); yy0 = 330 + int(10 * abs(math.sin(k * 3.2)))
             Lp = cv2.resize(LINKP, None, fx=sp_, fy=sp_); paste(f, Lp, int(W / 2 - Lp.shape[1] / 2), int(yy0 - Lp.shape[0] / 2), min(1, kh * 2))
         enc.stdin.write(np.clip(f, 0, 255).astype(np.uint8).tobytes()); g += 1; last = f.copy()
 # cartão final
