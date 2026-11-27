@@ -1,0 +1,105 @@
+{
+  "_projeto": "Se você sentiu esse cheiro... — Guerreiro's Grill, unidade Jardim Aclimação. Sem fala.",
+  "output": {
+    "w": 1080,
+    "h": 1920,
+    "fps": 30,
+    "file": "../../entrega/guerreiros-CHEIRO-JARDIM.mp4",
+    "preview_file": "../../entrega/previa-CHEIRO-JARDIM.mp4",
+    "preview_scale": 0.5
+  },
+  "_fonte": "IMG_1630 veio em duas partes; juntas formam o take de ~20 s. Ordem certa: B_9d74 (fachada -> entrada -> grelha) e depois A_4db7 (grelha e frangos de perto). A rotacao -90 dos metadados e respeitada (autorotate do ffmpeg).",
+  "sources": [
+    "source/B_9d74.mov",
+    "source/A_4db7.mov"
+  ],
+  "segments": [
+    {
+      "name": "A",
+      "_o_que": "fachada + entrada",
+      "start": 2.0,
+      "end": 6.0
+    },
+    {
+      "name": "B",
+      "_o_que": "churrasqueira, carnes girando",
+      "start": 7.0,
+      "end": 14.0
+    },
+    {
+      "name": "C",
+      "_o_que": "close na carne",
+      "start": 14.0,
+      "end": 20.0
+    }
+  ],
+  "transition": {
+    "_nota": "entre trechos com salto de tempo: clarao rapido (4 quadros)",
+    "flash_frames": 4,
+    "flash": 0.35
+  },
+  "grade": "eq=contrast=1.08:saturation=1.10:gamma=1.02,colorbalance=rs=-0.01:bs=0.015:rh=0.035:gh=0.01:bh=-0.035,curves=all='0/0 0.18/0.16 0.5/0.52 0.82/0.86 1/0.97',vignette=angle=PI/6,cas=strength=0.35",
+  "texts": [
+    {
+      "_o_que": "gancho",
+      "start": 0.25,
+      "end": 3.6,
+      "cy": 0.3,
+      "lines": [
+        {
+          "text": "Se você sentiu",
+          "font": "assets/fonts/Montserrat.ttf",
+          "weight": 700,
+          "size": 70,
+          "color": "white"
+        },
+        {
+          "text": "ESSE CHEIRO...",
+          "font": "assets/fonts/Anton-Regular.ttf",
+          "size": 170,
+          "color": "fire"
+        }
+      ]
+    },
+    {
+      "_o_que": "virada",
+      "start": 5.2,
+      "end": 8.6,
+      "cy": 0.28,
+      "lines": [
+        {
+          "text": "...é churrasco do",
+          "font": "assets/fonts/Montserrat.ttf",
+          "weight": 700,
+          "size": 64,
+          "color": "white"
+        },
+        {
+          "text": "GUERREIRO'S GRILL",
+          "font": "assets/fonts/Anton-Regular.ttf",
+          "size": 135,
+          "color": "fire"
+        }
+      ]
+    }
+  ],
+  "end_card": {
+    "_o_que": "fecho: logo com o numero + unidade",
+    "start": 14.2,
+    "logo": "assets/logo-brasao-recortado.png",
+    "logo_h": 0.17,
+    "logo_cy": 0.27,
+    "label": "UNIDADE",
+    "name": "JARDIM ACLIMAÇÃO",
+    "text_cy": 0.405,
+    "shade": 0.45
+  },
+  "audio": {
+    "music": "assets/musica_B_hiphop.mp3",
+    "music_start": 0.0,
+    "music_db": -2,
+    "ambience_db": -20,
+    "fade_out": 1.2,
+    "target_lufs": -14
+  }
+}

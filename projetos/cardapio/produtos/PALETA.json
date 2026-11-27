@@ -1,0 +1,77 @@
+{
+  "_conceito": "Paleta de cordeiro: macro no osso e na carne desmanchando, depois a órbita ao redor da paleta na tábua; fecho no drop.",
+  "grade": "eq=contrast=1.09:saturation=0.90:gamma=0.97,colorbalance=rs=-0.035:gs=-0.005:bs=0.04:rm=-0.015:bm=0.015:rh=0.0:bh=0.005,curves=all='0/0 0.22/0.16 0.55/0.54 0.85/0.86 1/0.94',cas=strength=0.3",
+  "look": {
+    "focus_cy": 0.6,
+    "vignette": 0.7,
+    "top_dark": 0.8,
+    "top_dark_to": 0.42
+  },
+  "shots": [
+    {
+      "src": "work/PALETA_orbita.mov",
+      "in": 6.0,
+      "dur": 3.0,
+      "zoom": [
+        1.5,
+        1.38
+      ],
+      "center": [
+        0.5,
+        0.55
+      ],
+      "amb_src": "source/PALETA_CORDEIRO.mov",
+      "amb_in": 3.9,
+      "amb_speed": 0.6
+    },
+    {
+      "src": "work/PALETA_orbita.mov",
+      "in": 0.0,
+      "dur": 9.0,
+      "zoom": [
+        1.14,
+        1.2
+      ],
+      "amb_src": "source/PALETA_CORDEIRO.mov",
+      "amb_in": 0.3,
+      "amb_speed": 0.6,
+      "center": [
+        0.5,
+        0.62
+      ]
+    },
+    {
+      "src": "work/PALETA_orbita.mov",
+      "in": 9.0,
+      "dur": 2.6,
+      "speed": 0.5,
+      "zoom": [
+        1.2,
+        1.26
+      ],
+      "dissolve": 4,
+      "center": [
+        0.5,
+        0.62
+      ]
+    }
+  ],
+  "end_card": {
+    "start": 12.0,
+    "logo": "assets/logo-brasao-recortado.png",
+    "logo_h": 0.16,
+    "logo_cy": 0.34,
+    "name": "Paleta de Cordeiro",
+    "name_size": 100,
+    "name_cy": 0.47,
+    "brand": "GUERREIROS GRILL",
+    "shade": 0.62
+  },
+  "audio": {
+    "music": "assets/musica_trailer.mp3",
+    "music_at": 0.0,
+    "music_db": -4,
+    "amb_db": -26,
+    "boom_db": -8
+  }
+}

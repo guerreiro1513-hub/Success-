@@ -1,0 +1,306 @@
+{
+  "_projeto": "Aviso: Guerreiro's Grill no Auto Posto Florais, quinta a domingo e feriado (v2).",
+  "fps": 30,
+  "output": {
+    "file": "../../entrega/guerreiros-FLORAIS-QUI-A-DOM.mp4",
+    "preview": "../../entrega/previa-FLORAIS-QUI-A-DOM.mp4"
+  },
+  "grade": "eq=contrast=1.06:saturation=1.08,colorbalance=rh=0.02:bh=-0.02,cas=strength=0.55",
+  "_clips": "O CapCut do cliente (NOVO2, 720p) = IMG_1885 quadros 0-279 + NOVO_1885 quadros 54-138 (mesma tomada; o quadro 279 de um é o 53 do outro). Reconstruído dos originais 4K com os mesmos cortes, emenda invisível. Depois whip pan na direção do movimento da câmera (as duas tomadas fazem pan com a imagem correndo para a direita) até a churrasqueira (IMG_1878).",
+  "clips": [
+    {
+      "src": "source/IMG_1885.mov",
+      "in": 0.0,
+      "out": 9.3333
+    },
+    {
+      "src": "source/NOVO_1885.mov",
+      "in": 1.8,
+      "out": 3.66,
+      "whip_out": true,
+      "overlap": 9,
+      "afade": 0.3
+    },
+    {
+      "src": "source/IMG_1878.mov",
+      "in": 2.2,
+      "out": 7.4,
+      "vol": 2.4,
+      "af": "highpass=f=150,equalizer=f=6000:t=q:w=1:g=6",
+      "afade": 0.3,
+      "overlap": 12
+    },
+    {
+      "src": "source/CHURRAS2.mov",
+      "in": 0.1,
+      "out": 6.4,
+      "vol": 2.4,
+      "af": "highpass=f=150,equalizer=f=6000:t=q:w=1:g=6",
+      "afade": 0.4
+    }
+  ],
+  "whip": {
+    "type": "forward",
+    "out_frames": 16,
+    "zoom": 1.22,
+    "pull": 0.25,
+    "cx": 0.21,
+    "cy": 0.57,
+    "in_frames": 45,
+    "in_zoom": 1.1,
+    "in_cy": 0.55,
+    "whoosh": 0.0,
+    "_nota": "v8: avanço mais suave e longo (16 quadros, 1->1,22x), mistura de 9 quadros, churrasqueira continua avançando e freia (1->1,10x em 1,5 s). Sem sopro."
+  },
+  "_speech": "texto do cliente; tempos do detector de voz (silero VAD) no relógio do vídeo. 'Alto Posto' -> AUTO POSTO.",
+  "speech": [
+    {
+      "text": "Olá meus consagrados, tudo bem?",
+      "t": [
+        0.02,
+        1.69
+      ]
+    },
+    {
+      "text": "Guerreiro's Grill, só para lembrar,",
+      "t": [
+        1.99,
+        3.52
+      ]
+    },
+    {
+      "text": "está aqui no Auto Posto Florais, quinta, sexta, sábado, domingo",
+      "t": [
+        3.97,
+        7.71
+      ]
+    },
+    {
+      "text": "e feriado.",
+      "t": [
+        8.07,
+        9.02
+      ]
+    },
+    {
+      "text": "Hoje é quinta-feira,",
+      "t": [
+        9.35,
+        10.08
+      ]
+    },
+    {
+      "text": "tem churrasco.",
+      "t": [
+        10.27,
+        10.62
+      ]
+    },
+    {
+      "text": "Um abraço!",
+      "t": [
+        10.62,
+        10.95
+      ]
+    }
+  ],
+  "captions": {
+    "style": "captions_app",
+    "font": "assets/fonts/InterTight-600.ttf",
+    "font_big": "assets/fonts/InterTight-700.ttf",
+    "size": 64,
+    "size_big": 104,
+    "tracking": -0.035,
+    "space": 16,
+    "cy": 0.63,
+    "proper": [
+      5,
+      6,
+      13,
+      14,
+      15
+    ],
+    "_pages": "lines = indices das palavras por linha (0 = Olá); big = palavras grandes. Estilo da referência (app Captions).",
+    "pages": [
+      {
+        "lines": [
+          [
+            0,
+            1
+          ],
+          [
+            2
+          ]
+        ],
+        "big": [
+          2
+        ]
+      },
+      {
+        "lines": [
+          [
+            3,
+            4
+          ]
+        ],
+        "big": [
+          4
+        ]
+      },
+      {
+        "lines": [
+          [
+            5,
+            6
+          ]
+        ],
+        "big": [
+          5,
+          6
+        ]
+      },
+      {
+        "lines": [
+          [
+            7,
+            8,
+            9
+          ]
+        ],
+        "big": [
+          9
+        ]
+      },
+      {
+        "lines": [
+          [
+            10,
+            11,
+            12
+          ]
+        ],
+        "big": [
+          11
+        ]
+      },
+      {
+        "lines": [
+          [
+            13,
+            14
+          ],
+          [
+            15
+          ]
+        ],
+        "big": [
+          15
+        ]
+      },
+      {
+        "lines": [
+          [
+            16,
+            17
+          ],
+          [
+            18,
+            19
+          ]
+        ],
+        "big": [
+          16,
+          17,
+          18,
+          19
+        ]
+      },
+      {
+        "lines": [
+          [
+            20,
+            21
+          ]
+        ],
+        "big": [
+          21
+        ]
+      },
+      {
+        "lines": [
+          [
+            22,
+            23
+          ],
+          [
+            24
+          ]
+        ],
+        "big": [
+          24
+        ]
+      },
+      {
+        "lines": [
+          [
+            25,
+            26
+          ]
+        ],
+        "big": [
+          26
+        ],
+        "hold": 0.15
+      },
+      {
+        "lines": [
+          [
+            27,
+            28
+          ]
+        ],
+        "big": [
+          28
+        ],
+        "hold": 0.3
+      }
+    ],
+    "lead": 0.18
+  },
+  "end_card": {
+    "start": 19.4,
+    "logo": "assets/logo-brasao-recortado.png",
+    "logo_h": 0.17,
+    "logo_cy": 0.27,
+    "shade": 0.45,
+    "lines": [
+      {
+        "text": "AUTO POSTO FLORAIS",
+        "font": "assets/fonts/Anton-Regular.ttf",
+        "size": 130,
+        "color": [
+          255,
+          198,
+          38
+        ],
+        "cy": 0.405
+      },
+      {
+        "text": "QUI · SEX · SÁB · DOM · FERIADO",
+        "font": "assets/fonts/Poppins-Bold.ttf",
+        "size": 44,
+        "color": [
+          255,
+          255,
+          255
+        ],
+        "cy": 0.46
+      }
+    ]
+  },
+  "audio": {
+    "music": null,
+    "fade_out": 0.8,
+    "_nota": "v10: sem música (pedido). Só a voz e o chiado da churrasqueira realçado."
+  }
+}

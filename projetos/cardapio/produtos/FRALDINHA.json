@@ -1,0 +1,69 @@
+{
+  "_conceito": "Fraldinha: começa colado na capa de gordura e vai abrindo (revela a peça inteira), depois a câmera contorna a peça até o lado dos ossos; fecho no drop.",
+  "grade": "eq=contrast=1.09:saturation=0.90:gamma=0.97,colorbalance=rs=-0.035:gs=-0.005:bs=0.04:rm=-0.015:bm=0.015:rh=0.0:bh=0.005,curves=all='0/0 0.22/0.16 0.55/0.54 0.85/0.86 1/0.94',cas=strength=0.3",
+  "look": {
+    "focus_cy": 0.56,
+    "vignette": 0.66,
+    "top_dark": 0.62,
+    "top_dark_to": 0.36
+  },
+  "shots": [
+    {
+      "src": "work/FRALDINHA_orbita.mov",
+      "in": 0.0,
+      "dur": 3.0,
+      "zoom": [
+        1.5,
+        1.15
+      ],
+      "center": [
+        0.5,
+        0.5
+      ],
+      "amb_src": "source/FRALDINHA.mov",
+      "amb_in": 0.0,
+      "amb_speed": 0.6
+    },
+    {
+      "src": "work/FRALDINHA_orbita.mov",
+      "in": 3.0,
+      "dur": 9.0,
+      "zoom": [
+        1.0,
+        1.06
+      ],
+      "amb_src": "source/FRALDINHA.mov",
+      "amb_in": 1.8,
+      "amb_speed": 0.6
+    },
+    {
+      "src": "work/FRALDINHA_orbita.mov",
+      "in": 12.0,
+      "dur": 2.4,
+      "speed": 0.5,
+      "zoom": [
+        1.06,
+        1.12
+      ],
+      "dissolve": 4
+    }
+  ],
+  "end_card": {
+    "start": 12.0,
+    "logo": "assets/logo-brasao-recortado.png",
+    "logo_h": 0.16,
+    "logo_cy": 0.34,
+    "name": "Fraldinha",
+    "name_size": 150,
+    "name_cy": 0.47,
+    "brand": "GUERREIROS GRILL",
+    "shade": 0.62
+  },
+  "audio": {
+    "music": "assets/musica_trailer.mp3",
+    "music_at": 0.0,
+    "music_db": -4,
+    "amb_db": -26,
+    "boom_db": -8
+  }
+}

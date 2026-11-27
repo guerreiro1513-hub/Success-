@@ -1,0 +1,870 @@
+{
+  "_como_usar": "Troque arquivos, cortes, ordem e textos aqui e rode: python3 render.py --preview (baixa resolucao) ou python3 render.py (final 1080x1920). Tempos em segundos do arquivo original. 'segments' = [inicio, fim, velocidade]: 1 = normal, 0.5 = camera lenta 2x, 2 = acelerado 2x. 'dir' do whip = direcao (graus) em que a IMAGEM se move na tela: 0 = direita, 90 = baixo, 180 = esquerda, 270 = cima.",
+  "output": {
+    "w": 1080,
+    "h": 1920,
+    "fps": 30,
+    "file": "../../entrega/guerreiros-TOUR-3-UNIDADES.mp4",
+    "preview_file": "../../entrega/previa-TOUR-3-UNIDADES.mp4",
+    "preview_scale": 0.5,
+    "entrada_file": "../../entrega/teste-ENTRADA-GTA.mp4"
+  },
+  "look": {
+    "_nota": "cor base da marca, aplicada em todos os clipes depois do ajuste individual",
+    "filters": "eq=contrast=1.06:saturation=1.04,curves=r='0/0 0.5/0.51 1/1':b='0/0.01 0.5/0.49 1/0.97',vignette=angle=PI/7"
+  },
+  "typography": {
+    "font_name": "assets/fonts/Montserrat.ttf",
+    "font_label": "assets/fonts/Montserrat.ttf",
+    "label_weight": 500,
+    "name_size": 150,
+    "label_size": 42,
+    "label_tracking": 0.42,
+    "name_tracking": 0.0,
+    "color": [
+      246,
+      239,
+      226
+    ],
+    "accent": [
+      255,
+      170,
+      50
+    ],
+    "x": 84,
+    "y": 1300,
+    "name_weight": 900,
+    "right_margin": 150,
+    "hot": true
+  },
+  "opening": {
+    "enabled": true,
+    "_nota": "entrada do GTA (referencia 1), vertical em tela cheia",
+    "clip": {
+      "file": "referencias/REF1_abertura_aerea.mp4",
+      "segments": [
+        [
+          0.8,
+          2.0,
+          1.5
+        ],
+        [
+          2.0,
+          6.0,
+          2.2
+        ],
+        [
+          6.0,
+          7.4,
+          1.6
+        ]
+      ],
+      "reframe": {
+        "zoom": 1.0,
+        "x": 0.5,
+        "y": 0.5
+      },
+      "fix": "unsharp=7:7:0.9:5:5:0.0,noise=alls=3:allf=t",
+      "ambience_db": -60,
+      "audio_speed": true,
+      "transition_out": {
+        "type": "zoom",
+        "frames": 8,
+        "amount": 0.45,
+        "cx": 0.5,
+        "cy": 0.55,
+        "in_cx": 0.5,
+        "in_cy": 0.5,
+        "in_frames": 6
+      },
+      "_nota": "entrada do GTA em tela cheia vertical (pedido do cliente): faixa central da imagem (fora das marcas do TikTok), limpa e ampliada. Corta antes do salto para a rua (sem personagens). prep_abertura.py fica como alternativa (janela horizontal).",
+      "pre": "hqdn3d=2:1.5:3:3",
+      "stars": {
+        "n": 5,
+        "r": 44,
+        "cx": 0.5,
+        "cy": 0.165,
+        "start": 2,
+        "every": 3,
+        "dur": 52
+      },
+      "texts": [
+        {
+          "_tipo": "hook 1 (piada do GTA: nivel de procurado)",
+          "lines": [
+            {
+              "text": "O CHURRASCO",
+              "font": "assets/fonts/Anton-Regular.ttf",
+              "size": 88,
+              "color": "white",
+              "tracking": 0.06,
+              "italic": false,
+              "_edge": 0.7,
+              "_soft": 0.6
+            },
+            {
+              "text": "MAIS PROCURADO",
+              "font": "assets/fonts/Anton-Regular.ttf",
+              "size": 170,
+              "color": "fire",
+              "tracking": 0.02,
+              "italic": false,
+              "gap": -0.16,
+              "delay": 4
+            },
+            {
+              "text": "DE CUIABÁ",
+              "font": "assets/fonts/Anton-Regular.ttf",
+              "size": 88,
+              "color": "white",
+              "tracking": 0.06,
+              "italic": false,
+              "_edge": 0.7,
+              "_soft": 0.6,
+              "gap": -0.06,
+              "delay": 8
+            }
+          ],
+          "cx": 0.5,
+          "cy": 0.3,
+          "start": 6,
+          "dur": 48,
+          "follow": 0,
+          "punch": true,
+          "shade": 0.45,
+          "max_w": 0.78
+        },
+        {
+          "_tipo": "hook 2 (missao do GTA: segura ate o fim)",
+          "lines": [
+            {
+              "text": "NOVA MISSÃO:",
+              "font": "assets/fonts/Anton-Regular.ttf",
+              "size": 88,
+              "color": "white",
+              "tracking": 0.06,
+              "italic": false,
+              "_edge": 0.7,
+              "_soft": 0.6,
+              "delay": 0
+            },
+            {
+              "text": "COMER NAS",
+              "font": "assets/fonts/Anton-Regular.ttf",
+              "size": 150,
+              "color": "fire",
+              "tracking": 0.02,
+              "italic": false,
+              "gap": -0.14,
+              "delay": 5
+            },
+            {
+              "text": "3 UNIDADES",
+              "font": "assets/fonts/Anton-Regular.ttf",
+              "size": 150,
+              "color": "fire",
+              "tracking": 0.02,
+              "italic": false,
+              "gap": -0.22,
+              "delay": 9
+            }
+          ],
+          "cx": 0.5,
+          "cy": 0.27,
+          "start": 56,
+          "dur": 48,
+          "follow": 0,
+          "punch": false,
+          "shade": 0.45,
+          "max_w": 0.78
+        }
+      ]
+    }
+  },
+  "locations": [
+    {
+      "name": "TROPICAL VILLE",
+      "title": [
+        "UNIDADE",
+        "TROPICAL VILLE"
+      ],
+      "title_clip": 0,
+      "title_start": 0.25,
+      "title_dur": 1.5,
+      "clips": [
+        {
+          "file": "source/TV_C128a_fachada.mov",
+          "_o_que": "fachada antiga (volta a pedido do cliente): o logo cai e acende no telhado e a camera mergulha na churrasqueira ate os frangos (mesma gravacao do C128b)",
+          "segments": [
+            [
+              0.05,
+              2.45,
+              1.5,
+              1.0
+            ]
+          ],
+          "reframe": {
+            "zoom": 1.0,
+            "x": 0.5,
+            "y": 0.5
+          },
+          "fix": "colorbalance=rh=-0.05:gh=0.10:bh=-0.06:gm=0.03,eq=gamma=0.97",
+          "ambience_db": -60,
+          "transition_out": {
+            "type": "match_zoom",
+            "frames": 9,
+            "amount": 2.2,
+            "cx": 0.27,
+            "cy": 0.8,
+            "overlap": 2,
+            "in_frames": 11,
+            "in_amount": 1.45,
+            "flash": 0.55,
+            "_nota": "mergulho na churrasqueira da fachada e sai nos frangos (mesmo take)"
+          },
+          "hires": 2,
+          "logo": {
+            "file": "../../referencias/logo-brasao-recortado.png",
+            "land": 12,
+            "fly_frames": 10,
+            "cx": 0.5,
+            "cy": 0.225,
+            "h": 0.14,
+            "depth": 12,
+            "track_y": [
+              0.17,
+              0.42
+            ],
+            "occlude_green": true,
+            "_nota": "efeito fachada da referencia 2: o logo chega voando e vira um letreiro em cima da fachada, preso a ela",
+            "fly_scale": 1.6,
+            "fly_rot": 10,
+            "fly_dx": 0.0,
+            "fly_dy": -0.45,
+            "keep_phone": true
+          }
+        },
+        {
+          "file": "source/TV_C128b_frangos.mov",
+          "_o_que": "frangos girando; avanca e depois a camera abre pra direita (fim vira o whip)",
+          "segments": [
+            [
+              0.05,
+              1.5,
+              1.6,
+              0.8
+            ]
+          ],
+          "reframe": {
+            "zoom": 1.06,
+            "x": 0.62,
+            "y": 0.62
+          },
+          "fix": "eq=gamma=1.10",
+          "ambience_db": -60,
+          "transition_out": {
+            "type": "ramp_in",
+            "in_frames": 5,
+            "lift": 0.12
+          }
+        },
+        {
+          "file": "source/TV_C130_grelha_giratoria.mov",
+          "_o_que": "grelha giratoria de perto, frangos e carnes passando (video novo do cliente, iPhone 4K/60p)",
+          "segments": [
+            [
+              0.05,
+              1.3,
+              1.3,
+              0.9
+            ]
+          ],
+          "reframe": {
+            "zoom": 1.0,
+            "x": 0.5,
+            "y": 0.5
+          },
+          "fix": "eq=gamma=1.02:contrast=1.04",
+          "ambience_db": -60,
+          "transition_out": {
+            "type": "ramp_in",
+            "in_frames": 5,
+            "lift": 0.12
+          }
+        },
+        {
+          "reframe": {
+            "zoom": 1.0,
+            "x": 0.5,
+            "y": 0.5
+          },
+          "ambience_db": -60,
+          "transition_out": {
+            "type": "ramp_in",
+            "in_frames": 5,
+            "lift": 0.12
+          },
+          "_broll": true,
+          "file": "source/BROLL_DIA.mov",
+          "segments": [
+            [
+              5.45,
+              5.75,
+              1.6,
+              0.5
+            ],
+            [
+              5.75,
+              6.28,
+              0.5
+            ],
+            [
+              6.28,
+              6.29,
+              0.0086
+            ],
+            [
+              6.29,
+              6.7,
+              0.5
+            ]
+          ],
+          "fix": "format=gbrp,split[ca][cb];[cb]curves=all='0/0 0.78/0 1/1',gblur=sigma=22,colorchannelmixer=rr=1:gg=0.5:bb=0.3[ch];[ca][ch]blend=all_mode=screen:all_opacity=0.22,eq=contrast=1.08:saturation=1.03:gamma=0.98,colorbalance=rs=0.01:bs=-0.01:rm=0.015:bm=-0.015:rh=0.03:gh=0.01:bh=-0.03,curves=all='0/0 0.15/0.11 0.5/0.49 0.85/0.87 1/0.97',vignette=angle=PI/6,cas=strength=0.25,format=yuv420p,noise=alls=5:allf=t",
+          "_o_que": "B-ROLL tesoura abrindo o frango assado (video de dia)",
+          "cinema": {
+            "lens": true,
+            "bars": 140,
+            "push": 0.08,
+            "push_cy": 0.55,
+            "aberration": 0.0022,
+            "leak": 0.55,
+            "leak_frames": 16
+          },
+          "texts": [
+            {
+              "_tipo": "creditos estilo GTA San Andreas (gotico dourado + nomes cinza-azulados)",
+              "lines": [
+                {
+                  "text": "frango",
+                  "font": "assets/fonts/PirataOne-Regular.ttf",
+                  "size": 125,
+                  "color": "sa_gold",
+                  "tracking": 0.0,
+                  "italic": false,
+                  "align": "left",
+                  "gap": -0.12,
+                  "delay": 0,
+                  "_edge": 1.0,
+                  "_edge_r": 5,
+                  "_soft": 0.5
+                },
+                {
+                  "text": "na brasa",
+                  "font": "assets/fonts/PirataOne-Regular.ttf",
+                  "size": 125,
+                  "color": "sa_gold",
+                  "tracking": 0.0,
+                  "italic": false,
+                  "align": "left",
+                  "gap": -0.3,
+                  "delay": 4,
+                  "_edge": 1.0,
+                  "_edge_r": 5,
+                  "_soft": 0.5
+                }
+              ],
+              "cx": 0.0,
+              "cy": 0.23,
+              "start": 37,
+              "dur": 59,
+              "follow": 0,
+              "punch": false
+            }
+          ],
+          "_fz": 41,
+          "gta": {
+            "style": "sa",
+            "label": "VIDA",
+            "color": [
+              200,
+              34,
+              38
+            ],
+            "start": 49,
+            "dur": 49,
+            "y": 560,
+            "x": 76,
+            "w": 460,
+            "h": 150,
+            "label_size": 60,
+            "bar": 24,
+            "from": 0.3
+          }
+        }
+      ],
+      "title_y": 1300
+    },
+    {
+      "name": "FLORAIS",
+      "title": [
+        "UNIDADE",
+        "FLORAIS"
+      ],
+      "title_clip": 0,
+      "title_start": 0.35,
+      "title_dur": 1.8,
+      "clips": [
+        {
+          "file": "source/FL_IMG_1429.mov",
+          "_o_que": "vista aberta: tendas com o banner, churrasqueiras na rua",
+          "segments": [
+            [
+              1.15,
+              3.29,
+              1.15,
+              0.9
+            ]
+          ],
+          "reframe": {
+            "zoom": 1.06,
+            "x": 0.5,
+            "y": 0.55
+          },
+          "fix": "eq=gamma=0.97:contrast=1.05:saturation=1.03,colorbalance=rs=0.03:bs=-0.04:rm=0.03:bm=-0.03:rh=0.01:bh=-0.02",
+          "ambience_db": -32,
+          "transition_out": {
+            "type": "ramp_in",
+            "in_frames": 5,
+            "lift": 0.12
+          }
+        },
+        {
+          "file": "source/FL_C164.mov",
+          "_o_que": "camera baixa ao lado da churrasqueira, fumaca, avanca sobre a carne",
+          "segments": [
+            [
+              0.05,
+              2.3,
+              2.2,
+              0.8
+            ]
+          ],
+          "reframe": {
+            "zoom": 1.0,
+            "x": 0.5,
+            "y": 0.5
+          },
+          "fix": "eq=gamma=1.0:contrast=1.06",
+          "ambience_db": -32,
+          "transition_out": {
+            "type": "ramp_in",
+            "in_frames": 5,
+            "lift": 0.12
+          }
+        },
+        {
+          "file": "source/FL_C177.mov",
+          "_o_que": "close dos frangos na grelha, avancando",
+          "segments": [
+            [
+              0.05,
+              2.39,
+              2.0,
+              0.8
+            ]
+          ],
+          "reframe": {
+            "zoom": 1.0,
+            "x": 0.5,
+            "y": 0.5
+          },
+          "fix": "eq=gamma=1.05",
+          "ambience_db": -32,
+          "transition_out": {
+            "type": "ramp_in",
+            "in_frames": 5,
+            "lift": 0.12
+          }
+        },
+        {
+          "reframe": {
+            "zoom": 1.15,
+            "x": 0.0,
+            "y": 0.5
+          },
+          "ambience_db": -60,
+          "transition_out": {
+            "type": "ramp_in",
+            "in_frames": 5,
+            "lift": 0.12
+          },
+          "_broll": true,
+          "file": "work/PICANHA_60.mov",
+          "segments": [
+            [
+              0.25,
+              0.75,
+              0.5
+            ],
+            [
+              0.75,
+              0.76,
+              0.0086
+            ],
+            [
+              0.76,
+              1.2,
+              0.5
+            ]
+          ],
+          "fix": "format=gbrp,split[ca][cb];[cb]curves=all='0/0 0.78/0 1/1',gblur=sigma=22,colorchannelmixer=rr=1:gg=0.5:bb=0.3[ch];[ca][ch]blend=all_mode=screen:all_opacity=0.22,eq=contrast=1.06:saturation=1.03:gamma=1.06,colorbalance=rs=0.01:bs=-0.01:rm=0.015:bm=-0.015:rh=0.03:gh=0.01:bh=-0.03,curves=all='0/0 0.12/0.10 0.5/0.52 0.85/0.89 1/0.98',vignette=angle=PI/7,cas=strength=0.25,format=yuv420p,noise=alls=5:allf=t",
+          "_o_que": "B-ROLL picanha: o assador desce a fatia na tabua com a picanha fatiada na frente (BROLL_NOITE 13,12 s, 30p interpolado para 60)",
+          "cinema": {
+            "lens": true,
+            "bars": 140,
+            "push": 0.08,
+            "push_cy": 0.55,
+            "aberration": 0.0022,
+            "leak": 0.55,
+            "leak_frames": 16
+          },
+          "texts": [
+            {
+              "_tipo": "creditos estilo GTA San Andreas (gotico dourado + nomes cinza-azulados)",
+              "lines": [
+                {
+                  "text": "picanha",
+                  "font": "assets/fonts/PirataOne-Regular.ttf",
+                  "size": 125,
+                  "color": "sa_gold",
+                  "tracking": 0.0,
+                  "italic": false,
+                  "align": "left",
+                  "gap": -0.12,
+                  "delay": 0,
+                  "_edge": 1.0,
+                  "_edge_r": 5,
+                  "_soft": 0.5
+                },
+                {
+                  "text": "suculenta",
+                  "font": "assets/fonts/PirataOne-Regular.ttf",
+                  "size": 125,
+                  "color": "sa_gold",
+                  "tracking": 0.0,
+                  "italic": false,
+                  "align": "left",
+                  "gap": -0.3,
+                  "delay": 4,
+                  "_edge": 1.0,
+                  "_edge_r": 5,
+                  "_soft": 0.5
+                }
+              ],
+              "cx": 0.0,
+              "cy": 0.23,
+              "start": 26,
+              "dur": 59,
+              "follow": 0,
+              "punch": false
+            }
+          ],
+          "_fz": 30,
+          "gta": {
+            "style": "sa",
+            "label": "RESPEITO",
+            "color": [
+              80,
+              150,
+              235
+            ],
+            "start": 38,
+            "dur": 49,
+            "y": 560,
+            "x": 76,
+            "w": 460,
+            "h": 150,
+            "label_size": 60,
+            "bar": 24,
+            "from": 0.3
+          }
+        }
+      ],
+      "title_y": 1300
+    },
+    {
+      "name": "JARDIM ACLIMAÇÃO",
+      "title": [
+        "UNIDADE",
+        "JARDIM ACLIMAÇÃO"
+      ],
+      "title_clip": 0,
+      "title_start": 0.35,
+      "title_dur": 1.8,
+      "clips": [
+        {
+          "file": "source/JA_C143a.mov",
+          "_o_que": "tenda e churrasqueiras, camera avancando (estabelecimento)",
+          "segments": [
+            [
+              0.05,
+              2.38,
+              1.35,
+              0.75
+            ]
+          ],
+          "reframe": {
+            "zoom": 1.0,
+            "x": 0.5,
+            "y": 0.5
+          },
+          "hires": 2,
+          "fix": "colorbalance=rh=-0.05:gh=0.10:bh=-0.06:gm=0.03,eq=gamma=0.97",
+          "ambience_db": -32,
+          "transition_out": {
+            "type": "match_zoom",
+            "frames": 9,
+            "amount": 2.2,
+            "cx": 0.74,
+            "cy": 0.5,
+            "overlap": 2,
+            "in_frames": 11,
+            "in_amount": 1.45,
+            "_nota": "mesmo mergulho da Tropical Ville: da tenda a camera entra na churrasqueira da direita e sai no close da costela (C143b)",
+            "flash": 0.55
+          },
+          "logo": {
+            "file": "../../referencias/logo-brasao-recortado.png",
+            "land": 22,
+            "fly_frames": 16,
+            "cx": 0.55,
+            "cy": 0.205,
+            "h": 0.13,
+            "depth": 12,
+            "track_y": [
+              0.05,
+              0.38
+            ],
+            "occlude_green": false,
+            "fly_scale": 1.6,
+            "fly_rot": 10,
+            "fly_dx": 0.0,
+            "fly_dy": -0.45,
+            "keep_phone": true
+          }
+        },
+        {
+          "file": "source/JA_C143b.mov",
+          "_o_que": "costela na grelha, camera avancando e passando (imagem corre pra esquerda e sobe)",
+          "segments": [
+            [
+              0.05,
+              1.95,
+              2.0,
+              0.8
+            ]
+          ],
+          "reframe": {
+            "zoom": 1.0,
+            "x": 0.5,
+            "y": 0.5
+          },
+          "fix": "eq=gamma=1.03",
+          "ambience_db": -32,
+          "transition_out": {
+            "type": "ramp_in",
+            "in_frames": 5,
+            "lift": 0.12
+          }
+        },
+        {
+          "file": "work/JA_1633_estab.mov",
+          "_o_que": "espetos (IMG_1633 4,0-7,9 s) ESTABILIZADO com vidstab (prep: ver docs); usa o trecho de perto ate o meio, sem a parte aberta e torta do fim",
+          "segments": [
+            [
+              0.1,
+              2.5,
+              1.4,
+              1.0
+            ]
+          ],
+          "reframe": {
+            "zoom": 1.08,
+            "x": 0.5,
+            "y": 0.45
+          },
+          "fix": "eq=contrast=1.12:gamma=0.95:saturation=1.08,curves=all='0/0 0.25/0.21 0.75/0.78 1/1'",
+          "ambience_db": -32,
+          "transition_out": {
+            "type": "cut",
+            "overlap": 8
+          }
+        },
+        {
+          "reframe": {
+            "zoom": 1.0,
+            "x": 0.5,
+            "y": 0.5
+          },
+          "ambience_db": -60,
+          "transition_out": {
+            "type": "ramp_in",
+            "in_frames": 5,
+            "lift": 0.12
+          },
+          "_broll": true,
+          "file": "source/BROLL_NOITE.mov",
+          "segments": [
+            [
+              8.5,
+              8.75,
+              1.6,
+              0.5
+            ],
+            [
+              8.75,
+              9.22,
+              0.5
+            ],
+            [
+              9.22,
+              9.23,
+              0.0086
+            ],
+            [
+              9.23,
+              9.75,
+              0.5
+            ]
+          ],
+          "fix": "format=gbrp,split[ca][cb];[cb]curves=all='0/0 0.78/0 1/1',gblur=sigma=22,colorchannelmixer=rr=1:gg=0.5:bb=0.3[ch];[ca][ch]blend=all_mode=screen:all_opacity=0.22,eq=contrast=1.06:saturation=1.03:gamma=1.06,colorbalance=rs=0.01:bs=-0.01:rm=0.015:bm=-0.015:rh=0.03:gh=0.01:bh=-0.03,curves=all='0/0 0.12/0.10 0.5/0.52 0.85/0.89 1/0.98',vignette=angle=PI/7,cas=strength=0.25,format=yuv420p,noise=alls=5:allf=t",
+          "_o_que": "B-ROLL faca na costela (BROLL_NOITE)",
+          "cinema": {
+            "lens": true,
+            "bars": 140,
+            "push": 0.08,
+            "push_cy": 0.55,
+            "aberration": 0.0022,
+            "leak": 0.55,
+            "leak_frames": 16
+          },
+          "texts": [
+            {
+              "_tipo": "creditos estilo GTA San Andreas (gotico dourado + nomes cinza-azulados)",
+              "lines": [
+                {
+                  "text": "costela",
+                  "font": "assets/fonts/PirataOne-Regular.ttf",
+                  "size": 125,
+                  "color": "sa_gold",
+                  "tracking": 0.0,
+                  "italic": false,
+                  "align": "left",
+                  "gap": -0.12,
+                  "delay": 0,
+                  "_edge": 1.0,
+                  "_edge_r": 5,
+                  "_soft": 0.5
+                },
+                {
+                  "text": "macia",
+                  "font": "assets/fonts/PirataOne-Regular.ttf",
+                  "size": 125,
+                  "color": "sa_gold",
+                  "tracking": 0.0,
+                  "italic": false,
+                  "align": "left",
+                  "gap": -0.3,
+                  "delay": 4,
+                  "_edge": 1.0,
+                  "_edge_r": 5,
+                  "_soft": 0.5
+                }
+              ],
+              "cx": 0.0,
+              "cy": 0.23,
+              "start": 31,
+              "dur": 59,
+              "follow": 0,
+              "punch": false
+            }
+          ],
+          "_fz": 35,
+          "gta": {
+            "style": "sa",
+            "label": "RAINHA DO CHURRASCO",
+            "color": [
+              255,
+              196,
+              40
+            ],
+            "start": 43,
+            "dur": 49,
+            "y": 560,
+            "x": 76,
+            "w": 640,
+            "h": 150,
+            "label_size": 60,
+            "bar": 24,
+            "from": 0.3
+          }
+        }
+      ],
+      "title_y": 1300
+    }
+  ],
+  "ending": {
+    "lines": [
+      "GUERREIRO'S GRILL",
+      "3 UNIDADES · CUIABÁ"
+    ],
+    "dur": 2.0,
+    "_nota": "ultimo plano do Jardim dissolve (8 q) na vinheta da marca; assinatura embaixo do brasao",
+    "darken": 0.5,
+    "style": "none",
+    "final_clip": {
+      "file": "source/VINHETA.mov",
+      "segments": [
+        [
+          0.0,
+          1.57,
+          1.0
+        ]
+      ],
+      "reframe": {
+        "zoom": 1.0,
+        "x": 0.5,
+        "y": 0.5
+      },
+      "ambience_db": -60,
+      "transition_out": {
+        "type": "cut"
+      },
+      "no_look": true,
+      "block": {
+        "lines": [
+          "MISSÃO CUMPRIDA",
+          "GUERREIRO'S GRILL"
+        ],
+        "start": 0.1,
+        "dur": 1.4,
+        "y": 1300
+      }
+    }
+  },
+  "sound": {
+    "whoosh_db": -120,
+    "end_hit_db": -120,
+    "music": {
+      "file": "source/MUSICA_GTA_SA.mp4",
+      "start": 6.35,
+      "gain_db": 4.5,
+      "bed_db": -120,
+      "fade_out": 1.8,
+      "_nota": "tema do GTA San Andreas (enviado pelo cliente). A batida (9,85 s da faixa) cai no corte para a fachada (3,5 s)."
+    }
+  },
+  "_ritmo": "v6 = edicao da ref. 3 (T TECH) como molde: plano de abertura de cada unidade segura ~2 s com o logo montando (como a fachada da ref.); cada plano de detalhe dura ~1,05 s e ENTRA em rampa (comeca rapido com borrao de movimento real e desacelera ate camera lenta), corte seco com leve clarao, sem whip; nomes em letreiro preso no cenario. v7: sem limite de 20 s — cada clipe usado quase inteiro (do inicio ao fim util), mesma rampa de entrada.",
+  "_tipografia": "v11: volta ao sistema de texto da v7 a pedido do cliente — UMA fonte (Montserrat), UM lugar (embaixo a esquerda, x 84, y 1300, faixa de sombra), UM formato (linha pequena espacada + linha grande ExtraBold, regua dourada) para titulos e frases; abertura igual a v7. v13: frases de comida com estilo proprio (Anton, centralizadas no alto, branco + degrade de brasa, entrada em estalo); titulos das unidades continuam no sistema da v12 (embaixo a esquerda).",
+  "_estrutura": "v21: hook do GTA centralizado; TV comeca na fachada (logo com numero + nome), depois abertura antiga, costela no giro, frangos e b-roll; b-rolls com aviso de status do GTA SA (VIDA/RESPEITO/GORDURA) e mais cinema."
+}
