@@ -14,7 +14,8 @@ SRC = dict(HOOK=P("source/HOOK.mov"), VO=P("source/VO.mov"), A=P("work/A_join.mo
            GUAR=P("source/GUAR.mov"), ROL=P("source/ROL.mov"), FER=P("source/FER.mov"))
 PHONE_REC = P("source/IFOOD_REC.mp4")                       # gravação de tela do iFood (quando chegar)
 BLUR = os.environ.get("BG_BLUR") == "1"
-OUT = P("../../entrega/guerreirosgrill_ifood_reels_v3" + ("_desfoque" if BLUR else "") + ".mp4")
+TIGHT = os.environ.get("TIGHT") == "1"
+OUT = P("../../entrega/guerreirosgrill_ifood_reels_v5" + ("_fechado" if TIGHT else "") + ".mp4")
 GOLD = np.array([232, 178, 58], np.float32); GOLD2 = np.array([255, 214, 120], np.float32); WHITE = np.array([255, 255, 255], np.float32)
 BGc = np.array([20, 16, 12], np.float32)
 F_BIG = "/usr/share/fonts/opentype/inter/Inter-ExtraBold.otf"; F_IT = P("../tour3/assets/fonts/Montserrat-Italic.ttf")
@@ -274,6 +275,7 @@ for t0, t1, src, st, spd in PLAN:
         t = g / FPS; f = fr.astype(np.float32)
         if src in ("HOOK", "A", "CTA"):
             if BLUR: f = portrait(f, g)
+            if TIGHT and src == "HOOK": f = zoom(f, 1.28, 0.30)          # começo mais perto (corta pernas/chinelo)
             z = 1.0
             for pt, pz, pd in PUNCH:
                 if t0 - 0.01 <= pt < t1 and t >= pt:
@@ -319,7 +321,8 @@ def link_pill():
         for xx in range(pw): gp[xx, yy] = c
     m = Image.new("L", (pw, ph_), 0); ImageDraw.Draw(m).rounded_rectangle((0, 0, pw - 1, ph_ - 1), 66, fill=255)
     img.paste(grad, (60, 60), m); d = ImageDraw.Draw(img)
-    d.rounded_rectangle((64, 64, 56 + pw, 64 + ph_ * 0.42), 60, fill=(255, 255, 255, 46))
+    hl_ = Image.new("RGBA", img.size, (0, 0, 0, 0)); ImageDraw.Draw(hl_).rounded_rectangle((64, 64, 56 + pw, 64 + ph_ * 0.42), 60, fill=(255, 255, 255, 46))
+    img = Image.alpha_composite(img, hl_); d = ImageDraw.Draw(img)
     f_ = ImageFont.truetype(F_BIG, 66); txt = "LINK ABAIXO"; tw_ = f_.getlength(txt); x0 = 60 + (pw - tw_ - 70) / 2
     d.text((x0, 60 + ph_ / 2 - 40), txt, font=f_, fill=(28, 18, 6, 255))
     ax = x0 + tw_ + 30; ay = 60 + ph_ / 2
@@ -337,15 +340,15 @@ if HAS_PHONE:
     for j in range(n):
         t = g / FPS; k = j / FPS
         bg = cv2.GaussianBlur(bgv[j].astype(np.float32), (0, 0), 6 + 6 * eo(k / 0.5)) * (1 - 0.35 * eo(k / 0.5))
-        e = back(k / 0.7, 1.3); ang = 40 * (1 - e) - 13 * math.sin(k * 1.2); sc = 0.46 + 0.28 * e
-        f = phone_frame(rec[j].astype(np.float32), ang, 6 * (1 - e) + 3 * math.sin(k * 0.8), sc, W / 2, 905 + 300 * (1 - eo(k / 0.6)), min(1, k / 0.2), bg)
+        e = back(k / 0.7, 1.3); ang = 40 * (1 - e) - 13 * math.sin(k * 1.2); sc = 0.43 + 0.25 * e
+        f = phone_frame(rec[j].astype(np.float32), ang, 6 * (1 - e) + 3 * math.sin(k * 0.8), sc, W / 2, 860 + 300 * (1 - eo(k / 0.6)), min(1, k / 0.2), bg)
         if j < 3: f = f * 0.4 + 255 * 0.6 * (1 - j / 3)
         kb = (k - 0.45) / 0.16                                          # selo verdadeiro: a loja é nova no iFood
-        if kb > 0:
+        if kb > 0 and False:
             sc_ = 1.4 - 0.4 * back(kb); put(f, NOVO, W / 2 - NOVO['w'] * sc_ / 2, 210 - NOVO['h'] * sc_ / 2, min(1, kb * 2), sc_, gold=True, chroma=20 * (1 - eo(kb)))
         kh = (k - 0.8) / 0.18
         if kh > 0:
-            sp_ = (1.3 - 0.3 * back(kh)) * (1 + 0.03 * math.sin(k * 6)); yy0 = 1490 + int(10 * abs(math.sin(k * 3.2)))
+            sp_ = (1.3 - 0.3 * back(kh)) * (1 + 0.03 * math.sin(k * 6)); yy0 = 1530 + int(10 * abs(math.sin(k * 3.2)))
             Lp = cv2.resize(LINKP, None, fx=sp_, fy=sp_); paste(f, Lp, int(W / 2 - Lp.shape[1] / 2), int(yy0 - Lp.shape[0] / 2), min(1, kh * 2))
         enc.stdin.write(np.clip(f, 0, 255).astype(np.uint8).tobytes()); g += 1; last = f.copy()
 # cartão final
