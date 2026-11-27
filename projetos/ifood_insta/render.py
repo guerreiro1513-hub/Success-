@@ -341,8 +341,8 @@ if HAS_PHONE:
     for j in range(n):
         t = g / FPS; k = j / FPS
         bg = cv2.GaussianBlur(bgv[j].astype(np.float32), (0, 0), 6 + 6 * eo(k / 0.5)) * (1 - 0.35 * eo(k / 0.5))
-        e = back(k / 0.7, 1.3); ang = -55 * (1 - e); sc = 0.44 + 0.20 * e
-        f = phone_frame(rec[j].astype(np.float32), ang, 8 * (1 - e), sc, W * 0.36 - 160 * (1 - eo(k / 0.6)), 960 + 250 * (1 - eo(k / 0.6)), min(1, k / 0.2), bg, ang_z=11 * e)
+        e = back(k / 0.7, 1.2); ang = 0.0; sc = 0.10 + 0.52 * e                  # sai da mão dele e cresce, reto
+        f = phone_frame(rec[j].astype(np.float32), ang, 0.0, sc, 115 + (300 - 115) * eo(k / 0.7), 1065 + (980 - 1065) * eo(k / 0.7), min(1, k / 0.12), bg, ang_z=0.0)
         if j < 3: f = f * 0.4 + 255 * 0.6 * (1 - j / 3)
         kb = (k - 0.45) / 0.16                                          # selo verdadeiro: a loja é nova no iFood
         if kb > 0 and False:
