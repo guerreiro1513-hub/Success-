@@ -20,10 +20,11 @@ BGc = np.array([20, 16, 12], np.float32)
 F_BIG = "/usr/share/fonts/opentype/inter/Inter-ExtraBold.otf"; F_IT = P("../tour3/assets/fonts/Montserrat-Italic.ttf")
 FILL = f"scale={W}:{H}:force_original_aspect_ratio=increase:flags=lanczos,crop={W}:{H}"
 GRADE = "eq=contrast=1.06:saturation=1.0"
+GRADE_A = "cas=0.5,eq=contrast=1.09:saturation=1.05:gamma=0.97,colorbalance=rs=0.02:bs=-0.02:rh=0.03:bh=-0.02"   # falas: mais nítido e cinematográfico
 CROP = {"ROL": "crop=iw*0.75:ih*0.74:iw*0.125:0,"}
 
 # ---- falas inteiras --------------------------------------------------------------------------
-CL = [("HOOK", 0.00, 4.35), ("VO", 0.25, 8.40), ("A", 0.00, 17.40), ("CTA", 0.30, 4.65)]
+CL = [("HOOK", 0.00, 4.35), ("VO", 0.25, 8.40), ("A", 0.00, 17.53), ("CTA", 0.30, 4.65)]
 T0 = {}; t = 0.0
 for k, a, b in CL: T0[k] = t; t += b - a
 CTA_END = t
@@ -170,6 +171,7 @@ def layout_stack(ws):
 STACK_Y = 1060                                                         # área do meio-baixo (não cobre o rosto)
 for s in SID_LIST:
     items, hgt = layout_stack(STACKS[s]["words"]); STACKS[s]["items"] = items; STACKS[s]["y0"] = min(STACK_Y, 1540 - hgt)
+    if STACKS[s]["t0"] > T0["A"] + 15: STACKS[s]["y0"] = 1330          # "Em breve!" final mais baixo: não cobre o joinha
 
 def draw_stacks(f, t):
     for s in SID_LIST:
@@ -221,7 +223,7 @@ def paste(f, L, x0, y0, al):
 def decode(src, st, n, speed=1.0, path=None):
     need = int(math.ceil(n * speed)) + 2
     raw = subprocess.run(["ffmpeg", "-v", "error", "-ss", f"{st:.3f}", "-i", path or SRC[src], "-frames:v", str(need), "-vf",
-                          f"fps={FPS},{CROP.get(src, '')}{FILL},{GRADE},format=rgb24", "-an", "-f", "rawvideo", "-"], capture_output=True, check=True).stdout
+                          f"fps={FPS},{CROP.get(src, '')}{FILL},{GRADE_A if src in ('HOOK', 'A', 'CTA') else GRADE},format=rgb24", "-an", "-f", "rawvideo", "-"], capture_output=True, check=True).stdout
     fr = list(np.frombuffer(raw, np.uint8).reshape(-1, H, W, 3))
     while len(fr) < need: fr.append(fr[-1])
     return [fr[min(len(fr) - 1, int(j * speed))] for j in range(n)]
@@ -260,7 +262,7 @@ PUNCH = [(0.0, 1.06, 0.30), (wt("HOOK", "novidade"), 1.10, 0.2), (wt("HOOK", "if
          (T0["CTA"], 1.14, 0.25), (wt("CTA", "ifood"), 1.12, 0.2)]
 PUNCH = sorted(PUNCH)
 CUTS = [fi(p[0]) for p in PLAN[1:]] + ([fi(CTA_END)] if True else [])
-yy_, xx_ = np.mgrid[0:H, 0:W]; VIG = (1 - 0.22 * np.clip((np.hypot((xx_ - W / 2) / W, (yy_ - H / 2) / H) - 0.25) * 1.6, 0, 1))[..., None].astype(np.float32)
+yy_, xx_ = np.mgrid[0:H, 0:W]; VIG = (1 - 0.30 * np.clip((np.hypot((xx_ - W / 2) / W, (yy_ - H / 2) / H) - 0.25) * 1.6, 0, 1))[..., None].astype(np.float32)
 
 os.makedirs(P("work"), exist_ok=True)
 enc = subprocess.Popen(["ffmpeg", "-y", "-v", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-",
