@@ -20,8 +20,8 @@ GOLD = np.array([232, 178, 58], np.float32); GOLD2 = np.array([255, 214, 120], n
 BGc = np.array([20, 16, 12], np.float32)
 F_BIG = "/usr/share/fonts/opentype/inter/Inter-ExtraBold.otf"; F_IT = P("../tour3/assets/fonts/Montserrat-Italic.ttf")
 FILL = f"scale={W}:{H}:force_original_aspect_ratio=increase:flags=lanczos,crop={W}:{H}"
-GRADE = "eq=contrast=1.06:saturation=1.0"
-GRADE_A = "cas=0.5,eq=contrast=1.09:saturation=1.05:gamma=0.97,colorbalance=rs=0.02:bs=-0.02:rh=0.03:bh=-0.02"   # falas: mais nítido e cinematográfico
+GRADE = "null"
+GRADE_A = "null"   # falas: mais nítido e cinematográfico
 CROP = {"ROL": "crop=iw*0.75:ih*0.74:iw*0.125:0,"}
 
 # ---- falas inteiras --------------------------------------------------------------------------
@@ -35,7 +35,7 @@ END0 = CTA_END + PHONE_LEN; T_END = END0 + 1.8
 # marcação: |…| = bloco de texto empilhado; ^GRANDE, _pequena (dentro do bloco); *destaque (legenda de baixo)
 TXT = {
     "HOOK": "|^Cuiabá,| |_chegou ^novidade, _hein!| |^Guerreiro's ^Grill| |_agora _está _no ^iFood.|",
-    "VO": "Vamos iniciar no *iFood com o que você já conhece, a nossa *costela e o nosso *frango no *rolete e todas as *guarnições.",
+    "VO": "A gente começa com o que vocês já conhecem: a *costela, o *frango no *rolete e, é claro, todas as *guarnições.",
     "A": ("Só que isso, pessoal, |_é _só _o ^início.| |^Em ^breve| nós teremos todos os nossos portfólios de carnes no *iFood também. "
           "Aí nós estamos falando de |^joelho _de _porco,| |^paleta _de _cordeiro,| |^panceta, ^maminha,| |^maminha _com ^bacon,| "
           "|^fraldinha,| todo o nosso portfólio vai para o *iFood também. |^Em ^breve!|"),
@@ -263,7 +263,7 @@ PUNCH = [(0.0, 1.06, 0.30), (wt("HOOK", "novidade"), 1.10, 0.2), (wt("HOOK", "if
          (T0["CTA"], 1.14, 0.25), (wt("CTA", "ifood"), 1.12, 0.2)]
 PUNCH = sorted(PUNCH)
 CUTS = [fi(p[0]) for p in PLAN[1:]] + ([fi(CTA_END)] if True else [])
-yy_, xx_ = np.mgrid[0:H, 0:W]; VIG = (1 - 0.30 * np.clip((np.hypot((xx_ - W / 2) / W, (yy_ - H / 2) / H) - 0.25) * 1.6, 0, 1))[..., None].astype(np.float32)
+yy_, xx_ = np.mgrid[0:H, 0:W]; VIG = (1 - 0.0 * np.clip((np.hypot((xx_ - W / 2) / W, (yy_ - H / 2) / H) - 0.25) * 1.6, 0, 1))[..., None].astype(np.float32)
 
 os.makedirs(P("work"), exist_ok=True)
 enc = subprocess.Popen(["ffmpeg", "-y", "-v", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-",
@@ -341,8 +341,8 @@ if HAS_PHONE:
     for j in range(n):
         t = g / FPS; k = j / FPS
         bg = cv2.GaussianBlur(bgv[j].astype(np.float32), (0, 0), 6 + 6 * eo(k / 0.5)) * (1 - 0.35 * eo(k / 0.5))
-        e = back(k / 0.7, 1.3); ang = -55 * (1 - e) - 26 - 4 * math.sin(k * 1.1); sc = 0.44 + 0.20 * e
-        f = phone_frame(rec[j].astype(np.float32), ang, 8 * (1 - e) + 5 + 2 * math.sin(k * 0.8), sc, W * 0.36 - 160 * (1 - eo(k / 0.6)), 960 + 250 * (1 - eo(k / 0.6)), min(1, k / 0.2), bg, ang_z=11 * e + 3 * math.sin(k * 0.9))
+        e = back(k / 0.7, 1.3); ang = -55 * (1 - e); sc = 0.44 + 0.20 * e
+        f = phone_frame(rec[j].astype(np.float32), ang, 8 * (1 - e), sc, W * 0.36 - 160 * (1 - eo(k / 0.6)), 960 + 250 * (1 - eo(k / 0.6)), min(1, k / 0.2), bg, ang_z=11 * e)
         if j < 3: f = f * 0.4 + 255 * 0.6 * (1 - j / 3)
         kb = (k - 0.45) / 0.16                                          # selo verdadeiro: a loja é nova no iFood
         if kb > 0 and False:
@@ -371,6 +371,9 @@ N = int(T_END * SR); rms = lambda v: np.sqrt(np.mean(v ** 2)) + 1e-9
 voz = np.zeros(N, np.float32)
 for k, a, b in CL:
     af = "highpass=f=80,acompressor=threshold=-22dB:ratio=2.5:attack=15:release=200"
+    if k == "VO":
+        af = ("highpass=f=100,equalizer=f=280:t=q:w=1.2:g=-4,equalizer=f=3000:t=q:w=1.5:g=2,"
+              "agate=threshold=0.02:ratio=3:attack=3:release=70:range=0.3,acompressor=threshold=-22dB:ratio=3:attack=10:release=150")
     if k == "VO_OLD":
         af = ("highpass=f=120,equalizer=f=320:t=q:w=1.1:g=-6,equalizer=f=650:t=q:w=1.4:g=-3,equalizer=f=3200:t=q:w=1.4:g=3,"
               "agate=threshold=0.025:ratio=4:attack=4:release=90:range=0.25,acompressor=threshold=-22dB:ratio=3:attack=10:release=150")
