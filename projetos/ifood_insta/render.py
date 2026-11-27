@@ -313,7 +313,7 @@ def link_pill():
     img = Image.alpha_composite(img, glow.filter(ImageFilter.GaussianBlur(26)))
     grad = Image.new("RGBA", (pw, ph_)); gp = grad.load()
     for yy in range(ph_):
-        c = tuple(int(a * (1 - yy / ph_) + b * (yy / ph_)) for a, b in ((255, 222, 128), (226, 160, 40), (60, 40, 10))) + (255,)
+        c = tuple(int(a * (1 - yy / ph_) + b * (yy / ph_)) for a, b in zip((255, 222, 128), (226, 160, 40))) + (255,)
         for xx in range(pw): gp[xx, yy] = c
     m = Image.new("L", (pw, ph_), 0); ImageDraw.Draw(m).rounded_rectangle((0, 0, pw - 1, ph_ - 1), 66, fill=255)
     img.paste(grad, (60, 60), m); d = ImageDraw.Draw(img)
