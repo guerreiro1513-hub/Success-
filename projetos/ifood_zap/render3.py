@@ -22,7 +22,7 @@ CROP = {"ROL": "crop=iw*0.75:ih*0.74:iw*0.125:0,"}          # tira a legenda que
 # ---- falas (inteiras) e transcrição ------------------------------------------------------------
 INTRO = 0.0
 LAG = 0.12                                             # legenda entra no instante em que a palavra soa
-CL = [("HOOK", 0.00, 4.05), ("VO", 0.25, 8.40), ("L1", 0.55, 8.56), ("L2", 0.00, 7.60)]   # L1 e L2: o mesmo take, emendados
+CL = [("HOOK", 0.00, 4.35), ("VO", 0.25, 8.40), ("L1", 0.55, 8.56), ("L2", 0.00, 7.60)]   # L1 e L2: o mesmo take, emendados
 T0 = {}; t = INTRO
 for k, a, b in CL: T0[k] = t; t += b - a
 END0 = t; T_END = END0 + 2.0
