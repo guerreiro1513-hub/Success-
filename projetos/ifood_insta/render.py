@@ -10,7 +10,7 @@ from scipy.io import wavfile
 from scipy.signal import butter, sosfilt
 ROOT = os.path.dirname(os.path.abspath(__file__)); P = lambda p: os.path.join(ROOT, p)
 W, H, FPS, SR = 1080, 1920, 30, 48000
-SRC = dict(HOOK=P("source/HOOK.mov"), VO=P("source/VO.mov"), A=P("work/A_join.mov"), CTA=P("source/CTA.mov"),
+SRC = dict(HOOK=P("source/HOOK.mov"), VO=P("source/VO2.mov"), A=P("work/A_join.mov"), CTA=P("source/CTA.mov"),
            GUAR=P("source/GUAR.mov"), ROL=P("source/ROL.mov"), FER=P("source/FER.mov"))
 PHONE_REC = P("source/IFOOD_REC.mp4")                       # gravação de tela do iFood (quando chegar)
 BLUR = os.environ.get("BG_BLUR") == "1"
@@ -25,7 +25,7 @@ GRADE_A = "cas=0.5,eq=contrast=1.09:saturation=1.05:gamma=0.97,colorbalance=rs=0
 CROP = {"ROL": "crop=iw*0.75:ih*0.74:iw*0.125:0,"}
 
 # ---- falas inteiras --------------------------------------------------------------------------
-CL = [("HOOK", 0.00, 4.35), ("VO", 0.25, 8.40), ("A", 0.00, 17.53), ("CTA", 0.30, 4.65)]
+CL = [("HOOK", 0.00, 4.35), ("VO", 0.00, 6.05), ("A", 0.00, 17.53), ("CTA", 0.30, 4.65)]
 T0 = {}; t = 0.0
 for k, a, b in CL: T0[k] = t; t += b - a
 CTA_END = t
@@ -370,7 +370,7 @@ N = int(T_END * SR); rms = lambda v: np.sqrt(np.mean(v ** 2)) + 1e-9
 voz = np.zeros(N, np.float32)
 for k, a, b in CL:
     af = "highpass=f=80,acompressor=threshold=-22dB:ratio=2.5:attack=15:release=200"
-    if k == "VO":
+    if k == "VO_OLD":
         af = ("highpass=f=120,equalizer=f=320:t=q:w=1.1:g=-6,equalizer=f=650:t=q:w=1.4:g=-3,equalizer=f=3200:t=q:w=1.4:g=3,"
               "agate=threshold=0.025:ratio=4:attack=4:release=90:range=0.25,acompressor=threshold=-22dB:ratio=3:attack=10:release=150")
     x = pcm(SRC[k], a, b - a, af=af); fd = int(0.015 * SR); x[:fd] *= np.linspace(0, 1, fd); x[-fd:] *= np.linspace(1, 0, fd)
