@@ -205,7 +205,11 @@ N = int(T_END * SR); rms = lambda v: np.sqrt(np.mean(v ** 2)) + 1e-9
 voz = np.zeros(N, np.float32)
 for k, a, b in CL:
     src = k if k in ("HOOK", "VO", "L1", "L2") else k
-    x = pcm(SRC[src], a, b - a, af="highpass=f=80,acompressor=threshold=-22dB:ratio=2.5:attack=15:release=200")
+    af = "highpass=f=80,acompressor=threshold=-22dB:ratio=2.5:attack=15:release=200"
+    if k == "VO":   # narração gravada sem lapela (som de banheiro): tira o "oco" e corta a cauda de eco entre as palavras
+        af = ("highpass=f=120,equalizer=f=320:t=q:w=1.1:g=-6,equalizer=f=650:t=q:w=1.4:g=-3,equalizer=f=3200:t=q:w=1.4:g=3,"
+              "agate=threshold=0.025:ratio=4:attack=4:release=90:range=0.25,acompressor=threshold=-22dB:ratio=3:attack=10:release=150")
+    x = pcm(SRC[src], a, b - a, af=af)
     fd = int(0.015 * SR); x[:fd] *= np.linspace(0, 1, fd); x[-fd:] *= np.linspace(1, 0, fd)
     p0 = int(T0[k] * SR); m = min(len(x), N - p0); voz[p0:p0 + m] += x[:m]
 voz *= 0.25 / rms(voz[np.abs(voz) > 2e-3])
